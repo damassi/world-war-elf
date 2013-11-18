@@ -1,0 +1,61 @@
+{
+  "name": "wordfly-holiday-game-2013",
+  "version": "0.0.1",
+  "description": "",
+  "dependencies": {
+    "sails": "git://github.com/damassi/sails.git",
+    "grunt": "0.4.1",
+    "sails-disk": "~0.9.0",
+    "ejs": "0.8.4",
+    "optimist": "0.3.4",
+    "sails-mongo": "~0.9.5",
+    "bcrypt": "~0.7.7",
+    "node-monkey": "~0.2.8",
+    "coffeeify": "~0.5.2",
+    "fileupload": "~0.2.4"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "debug": "node debug app.js"
+  },
+  "main": "app.js",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "coffee-script": "~1.6.3",
+    "chai": "~1.7.2",
+    "grunt-contrib-clean": "~0.4.0a",
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-contrib-concat": "~0.1.2",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-sass": "~0.3.0",
+    "underscore": "~1.5.1",
+    "backbone": "~1.0.0",
+    "handlebars": "~1.0.12",
+    "coffee-trace": "~1.3.4",
+    "source-map-support": "~0.2.3",
+    "coffee-script-mapped": "~0.1.5",
+    "grunt-coffeelint": "0.0.7",
+    "grunt-nodemon": "~0.1.1",
+    "grunt-regarde": "~0.1.1",
+    "load-grunt-tasks": "~0.2.0",
+    "grunt-concurrent": "~0.4.1",
+    "grunt-node-inspector": "~0.1.1",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-browserify2": "~0.1.8",
+    "uglify-js": "~2.4.2",
+    "handleify": "~0.1.2",
+    "grunt-beep": "~0.3.0",
+    "grunt-simple-mocha": "~0.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://dev-vs-gitlab1/wordfly/holiday-game-2013"
+  },
+  "contributors": [
+    {
+      "name": "Christopher Pappas",
+      "email": "christopher.pappas@popagency.com"
+    }
+  ],
+  "readmeFilename": "README.md"
+}

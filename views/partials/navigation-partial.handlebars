@@ -1,0 +1,26 @@
+
+<ul class='primary-nav'>
+
+    {{#each sails.config.navigation.schema}}
+
+        {{#isPathEqualHelper ../path href}}
+            <li class='expand'>
+        {{else}}
+            <li>
+        {{/isPathEqualHelper}}
+            <a href='{{href}}'>{{{label}}}</a>
+
+            {{#if subnav}}
+                <div class='dropdown'>
+                    <ul>
+                        {{#each subnav}}
+                            <li>
+                                <a href='{{href}}'>{{{label}}}</a>
+                            </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            {{/if}}
+        </li>
+    {{/each}}
+</ul>
