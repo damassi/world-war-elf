@@ -1,12 +1,13 @@
 /**
- * Application Bootstrapper
+ * Primary app controller which kicks off initialition and SocketIO connections
  *
- * @author
- * @since
+ * @author christopher.pappas@popagency.com
+ * @since  11.18.13
  */
 
 var AppModel  = require('./models/AppModel')
 var AppRouter = require('./routers/AppRouter')
+var SocketIO  = require('./utils/SocketIO')
 
 
 var AppController = {
@@ -38,6 +39,8 @@ var AppController = {
     this.appRouter = new AppRouter({
       appController: this
     })
+
+    SocketIO.initialize()
   }
 
 }
