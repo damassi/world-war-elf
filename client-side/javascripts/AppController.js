@@ -41,6 +41,48 @@ var AppController = {
     })
 
     SocketIO.initialize()
+  },
+
+
+  //--------------------------------------
+  //+ PUBLIC METHODS / GETTERS / SETTERS
+  //--------------------------------------
+
+  /**
+   * Cleans up currently displayed views
+   * @return {void}
+   */
+  cleanUpViews: function (view) {
+    if (_.isUndefined( view ) || _.isNull( view ))
+      return
+
+    view.hide({
+      animated: true,
+      remove: true
+    })
+  },
+
+
+  //--------------------------------------
+  //+ EVENT HANDLERS
+  //--------------------------------------
+
+  /**
+   * Handler for view change events
+   * @param  {AppModel} model
+   * @return {void}
+   */
+  _onViewChange: function (model) {
+    var view         = model.changed.view
+      , previousView = model._previousAttributes.view
+
+    this.cleanUpViews( previousView )
+
+    this.$contentContainer.append( view.render().el )
+
+    view.show({
+      animated: true
+    })
   }
 
 }

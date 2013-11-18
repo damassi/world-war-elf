@@ -5,7 +5,8 @@
 
 body
 	background-color: #000000
-	font-family: $primary_font
+	color: #fff
+	font-family: $font-primary
 	overflow: hidden
 
 img
@@ -14,12 +15,19 @@ img
 %base-container-size
 	height: 100%
 	width: 100%
+	position: relative
 
 #container
-	@extend %base-container-size
-	margin: 0 auto
-	overflow: hidden
+
 
 #container-content
-	@extend %base-container-size
+	margin: auto
 	position: absolute
+	top: 0
+	left: 0
+	right: 0
+	bottom: 0
+	width: 960px
+	height: 600px
+	color: #fff
+	border: 1px solid white
