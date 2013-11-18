@@ -12,7 +12,6 @@
 module.exports = function( grunt ) {
 
   var handleify = require('handleify');
-  var coffeeify = require('coffeeify');
   var uglify    = require("uglify-js");
 
 
@@ -45,7 +44,6 @@ module.exports = function( grunt ) {
 
         // Precompile Handlebars templates
         beforeHook: function( bundle ) {
-          //bundle.transform( coffeeify )
           bundle.transform( handleify )
         },
 
@@ -232,7 +230,7 @@ module.exports = function( grunt ) {
           ignoredFiles: [
             'README.md',
             'node_modules/*',
-            'assets/*',
+            'client-side/*',
             'views/*',
             '/.tmp/*',
             '/.git/*',
