@@ -16,7 +16,6 @@ module.exports.views = {
   engine      : 'handlebars',
   layout      : 'default-layout',
   partialsDir : '/views/partials/',
-  helpers     :  viewHelpers,
-
+  helpers     :  viewHelpers
 
 };
