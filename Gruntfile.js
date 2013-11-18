@@ -96,6 +96,9 @@ module.exports = function( grunt ) {
     },
 
 
+    //
+    // Launch server watcher as well as client-side watchers
+    //
 
     'concurrent': {
       dev: {
@@ -188,26 +191,6 @@ module.exports = function( grunt ) {
 
 
     //
-    // Check for errors in CoffeeScript files
-    //
-
-    'coffeelint': {
-      app: ['<%= sources %>/test/**/*.coffee'],
-      options: {
-        no_tabs: {
-          value: false,
-          level: 'ignore'
-        },
-        indentation: {
-          value: false,
-          level: 'ignore'
-        }
-      }
-    },
-
-
-
-    //
     // Add the livereload server
     //
 
@@ -248,6 +231,7 @@ module.exports = function( grunt ) {
     },
 
 
+
     //
     // Compile sass files to css
     //
@@ -286,7 +270,7 @@ module.exports = function( grunt ) {
 
       dist: {
         options: {
-          debugInfo: false
+          debugInfo: false,
           style: "compressed",
         },
 
@@ -296,26 +280,6 @@ module.exports = function( grunt ) {
         }]
       }
     },
-
-
-
-    //
-    // Mocha spec runner for server-side files
-    //
-
-    'simplemocha': {
-      options: {
-        ui: 'bdd',
-        reporter: 'spec',
-        compilers: 'coffee:coffee-script',
-        bail: true
-      },
-
-      all: {
-        src: ['test/**/*.coffee']
-      }
-    },
-
 
 
     //
@@ -379,8 +343,6 @@ module.exports = function( grunt ) {
 
   grunt.registerTask( 'default', [
     'compileAssets',
-    'coffeelint',
-    'simplemocha',
     'watch'
   ])
 
@@ -393,11 +355,6 @@ module.exports = function( grunt ) {
     'sass:compile',
     'sass:vendor',
     'concat:vendor'
-  ])
-
-  grunt.registerTask( 'tests', [
-    'coffeelint',
-    'simplemocha'
   ])
 
 
