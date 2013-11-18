@@ -11,10 +11,6 @@
     "sails-mongo": "~0.9.5",
     "node-monkey": "~0.2.8"
   },
-  "scripts": {
-    "start": "node app.js",
-    "debug": "node debug app.js"
-  },
   "main": "app.js",
   "devDependencies": {
     "grunt": "~0.4.1",

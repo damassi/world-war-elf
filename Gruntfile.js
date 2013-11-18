@@ -256,7 +256,7 @@ module.exports = function( grunt ) {
 
       compile: {
         options: {
-          compass: true,
+          compass: false,
           style: "expanded",
           debugInfo: true
         },
@@ -271,7 +271,7 @@ module.exports = function( grunt ) {
 
       vendor: {
         options: {
-          compass: true,
+          compass: false,
           style: "expanded",
           debugInfo: false
         },
@@ -286,8 +286,8 @@ module.exports = function( grunt ) {
 
       dist: {
         options: {
-          style: "compressed",
           debugInfo: false
+          style: "compressed",
         },
 
         files: [{
