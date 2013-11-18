@@ -1,0 +1,25 @@
+
+// Base Layout Styles
+// ---------------------------------------+
+//
+
+body
+	background-color: #000000
+	font-family: $primary_font
+	overflow: hidden
+
+img
+	pointer-events: none
+
+%base-container-size
+	height: 100%
+	width: 100%
+
+#container
+	@extend %base-container-size
+	margin: 0 auto
+	overflow: hidden
+
+#container-content
+	@extend %base-container-size
+	position: absolute

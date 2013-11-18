@@ -1,0 +1,30 @@
+
+// Mixins
+// ---------------------------------------+
+//
+
+// Vendor Prefixing
+=vendor-prefix-property($property, $value)
+	@each $vendor in $vendors
+		@if $vendor == spec
+			#{$property}: #{$value}
+		@else
+			-#{$vendor}-#{$property}: #{$value}
+
+=vendor-prefix-value($property, $value)
+	@each $vendor in $vendors
+		@if $vendor == spec
+			#{$property}: #{$value}
+		@else
+			#{$property}: -#{$vendor}-#{$value}
+
+=vendor-prefix-all($property, $value)
+	@each $vendor in $vendors
+		@if $vendor == spec
+			#{$property}: #{$value}
+		@else
+			-#{$vendor}-#{$property}: -#{$vendor}-#{$value}
+
+=bg-gradient( $endColor, $startColor )
+	background: $startColor
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$startColor), color-stop(0%,$endColor), color-stop(100%,$startColor)) /* Chrome,Safari4+ */
