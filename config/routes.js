@@ -12,8 +12,12 @@
 module.exports.routes = {
 
   '/': {
-    view: 'home/index'
-  }
+    view: 'landing/index'
+  },
+
+  '/gameplay': {
+    view: 'landing/index'
+  },
 
 };
 

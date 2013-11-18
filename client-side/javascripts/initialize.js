@@ -11,5 +11,8 @@ var AppController = require('./AppController');
 $(function() {
 
   AppController.initialize()
-  Backbone.history.start()
+
+  Backbone.history.start({
+    pushState: true
+  })
 })

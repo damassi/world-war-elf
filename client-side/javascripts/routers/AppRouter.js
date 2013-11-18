@@ -29,7 +29,8 @@ var AppRouter = Backbone.Router.extend({
    * @type {Object}
    */
   routes: {
-    ''    : 'landingRoute'
+    ''          : 'landingRoute',
+    'gameplay'  : 'gameplayRoute'
   },
 
 
@@ -44,6 +45,11 @@ var AppRouter = Backbone.Router.extend({
 
   landingRoute: function (options) {
     console.log('home!')
+  },
+
+
+  gameplayRoute: function (options) {
+    console.log('gameplay!')
   }
 
 })

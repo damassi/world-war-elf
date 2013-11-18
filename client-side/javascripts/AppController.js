@@ -12,6 +12,7 @@ var SocketIO  = require('./utils/SocketIO')
 
 var AppController = {
 
+
   /**
    * @type {AppModel}
    */
