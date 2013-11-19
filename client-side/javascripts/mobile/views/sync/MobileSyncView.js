@@ -13,7 +13,13 @@ var template = require('./mobile-sync-template.hbs')
 
 var MobileSyncView = View.extend({
 
-  template: template
+  template: template,
+
+  render: function (options) {
+    this._super()
+
+    return this
+  }
 
 })
 

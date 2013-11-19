@@ -5,13 +5,15 @@
  * @since  11.18.13
  */
 
-var AppEvent    = require('./events/AppEvent')
-var AppModel    = require('./models/AppModel')
-var AppRouter   = require('./routers/AppRouter')
-var SocketIO    = require('./utils/SocketIO')
-var PubSub      = require('./utils/PubSub')
-var LandingView = require('./views/landing/LandingView')
-var SyncView    = require('./views/sync/SyncView')
+var AppEvent           = require('./events/AppEvent')
+var AppModel           = require('./models/AppModel')
+var AppRouter          = require('./routers/AppRouter')
+var SocketIO           = require('./utils/SocketIO')
+var PubSub             = require('./utils/PubSub')
+var LandingView        = require('./views/landing/LandingView')
+var SyncView           = require('./views/sync/SyncView')
+var MobileGamePlayView = require('./mobile/views/gameplay/MobileGamePlayView')
+var MobileSyncView     = require('./mobile/views/sync/MobileSyncView')
 
 
 var AppController = {
@@ -39,10 +41,13 @@ var AppController = {
 
     this.$contentContainer = $('#content-container')
 
-    this.appModel = new AppModel()
-
+    this.appModel    = new AppModel()
     this.landingView = new LandingView()
     this.syncView    = new SyncView()
+
+    //this.mobileModel        = new MobileModel()
+    this.mobileSyncView     = new MobileSyncView()
+    this.mobileGamePlayView = new MobileGamePlayView()
 
     this.delegateEvents()
 
@@ -65,7 +70,7 @@ var AppController = {
 
 
   //+ PUBLIC METHODS / GETTERS / SETTERS
-  //--------------------------------------
+  // ------------------------------------------------------------
 
 
   cleanUpViews: function (view) {
@@ -82,7 +87,7 @@ var AppController = {
 
 
   //+ EVENT HANDLERS
-  //--------------------------------------
+  // ------------------------------------------------------------
 
 
   _onSocketIOConnected: function (event) {

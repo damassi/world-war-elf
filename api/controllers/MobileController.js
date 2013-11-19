@@ -17,9 +17,7 @@ module.exports = {
       , socket = req.socket
       , io     = sails.io
 
-    res.view({
-      layout: 'mobile-layout',
-    })
+    res.view()
 
     setTimeout(function() {
       io.sockets.emit( 'message', {

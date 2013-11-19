@@ -9,10 +9,7 @@ var PubSub             = require('../utils/PubSub')
 var SocketIO           = require('../utils/SocketIO')
 var AppEvent           = require('../events/AppEvent')
 var MobileModel        = require('./models/MobileModel')
-var MobileRouter       = require('./routers/MobileRouter')
-var MobileSyncView     = require('./views/sync/MobileSyncView')
-var MobileGamePlayView = require('./views/gameplay/MobileGamePlayView')
-var MobileSyncView     = require('./views/sync/MobileSyncView')
+
 
 
 var MobileController = {
@@ -32,15 +29,6 @@ var MobileController = {
 
   initialize: function (options) {
     _.bindAll(this)
-
-    this.mobileModel = new MobileModel()
-
-    this.mobileSyncView     = new MobileSyncView()
-    this.mobileGamePlayView = new MobileGamePlayView()
-
-    this.mobileRouter = new MobileRouter({
-      mobileController: this
-    })
 
     SocketIO.initialize()
 

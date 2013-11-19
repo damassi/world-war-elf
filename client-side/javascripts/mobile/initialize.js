@@ -11,8 +11,4 @@ $(function() {
 
   MobileController.initialize()
 
-  Backbone.history.start({
-    pushState: true
-  })
-
 })
