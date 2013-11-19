@@ -5,9 +5,11 @@
  * @since  11.18.13
  */
 
+var AppEvent  = require('./events/AppEvent')
 var AppModel  = require('./models/AppModel')
 var AppRouter = require('./routers/AppRouter')
 var SocketIO  = require('./utils/SocketIO')
+var PubSub    = require('./utils/PubSub')
 
 
 var AppController = {
@@ -30,10 +32,12 @@ var AppController = {
   views: null,
 
 
+
   /**
    * Initialize the game by instantiating components and connecting to websocket
    * @return {void}
    */
+
   initialize: function() {
     this.appModel = new AppModel()
 
@@ -42,17 +46,22 @@ var AppController = {
     })
 
     SocketIO.initialize()
+
+    PubSub.on( AppEvent.SOCKET_IO_CONNECTED, this._onSocketIOConnected )
   },
+
 
 
   //--------------------------------------
   //+ PUBLIC METHODS / GETTERS / SETTERS
   //--------------------------------------
 
+
   /**
    * Cleans up currently displayed views
    * @return {void}
    */
+
   cleanUpViews: function (view) {
     if (_.isUndefined( view ) || _.isNull( view ))
       return
@@ -64,15 +73,22 @@ var AppController = {
   },
 
 
+
   //--------------------------------------
   //+ EVENT HANDLERS
   //--------------------------------------
+
+
+  _onSocketIOConnected: function (event) {
+
+  },
 
   /**
    * Handler for view change events
    * @param  {AppModel} model
    * @return {void}
    */
+
   _onViewChange: function (model) {
     var view         = model.changed.view
       , previousView = model._previousAttributes.view
