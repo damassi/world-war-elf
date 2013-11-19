@@ -8,6 +8,7 @@
 
 var AppRouter = Backbone.Router.extend({
 
+
   /**
    * Ref to primary Application controller
    * @type {AppController}
