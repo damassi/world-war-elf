@@ -5,16 +5,9 @@
  * @description	:: A set of functions called `actions`.
  */
 
+var SocketEvent = require('../../events/SocketEvent')
+
 module.exports = {
-
-
-
-
-  /**
-   * Overrides for the settings in `config/controllers.js`
-   * (specific to ApiController)
-   */
-  _config: {},
 
 
   'generate-code': function (req, res, next) {
@@ -31,7 +24,7 @@ module.exports = {
       , socket = req.socket
       , io     = sails.io
 
-    io.sockets.emit( 'message', {
+    io.sockets.emit( SocketEvent.SYNCED, {
       mobile: true,
       status: 'Mobile client id ' + syncCode + ' connected'
     })

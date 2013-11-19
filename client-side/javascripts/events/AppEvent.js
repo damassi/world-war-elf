@@ -7,8 +7,10 @@
 
 var AppEvent = {
 
-  SOCKET_IO_CONNECTED : 'onSocketIOConnected',
-  SOCKET_IO_MESSAGE   : 'onSocketIOMessage'
+  SOCKET_IO_CONNECTED     : 'onSocketIOConnected',
+  SOCKET_IO_MESSAGE       : 'onSocketIOMessage',
+
+  MOBILE_CLIENT_SYNCED : 'onMobileClientSynced'
 
 }
 

@@ -38,9 +38,11 @@ var SyncView = View.extend({
   },
 
 
+
   addEventListeners: function () {
-    PubSub.on( AppEvent.SOCKET_IO_MESSAGE, this._onSocketIOMessage )
+    PubSub.on( AppEvent.MOBILE_CLIENT_SYNCED, this._onMobileClientSynched )
   },
+
 
 
   requestSyncId: function () {
@@ -54,9 +56,11 @@ var SyncView = View.extend({
   },
 
 
-  _onSocketIOMessage: function (event) {
-    this.$el.find(".client-msg").html( event.message.status )
+
+  _onMobileClientSynched: function (event) {
     console.log( event.message )
+
+    this.$el.find(".client-msg").html( event.message.status )
   }
 
 

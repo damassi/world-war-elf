@@ -9,8 +9,8 @@
  * @since  11.18.13
  */
 
+var SocketEvent = require('../../../events/SocketEvent')
 var AppEvent = require('../events/AppEvent')
-var Event    = require('../events/Event')
 var PubSub   = require('./PubSub')
 
 
@@ -30,8 +30,9 @@ var SocketIO = {
 
 
   delegateEvents: function () {
-    window.socket.on( 'connect', this._onConnect )
-    window.socket.on( 'message', this._onMessage )
+    window.socket.on( SocketEvent.CONNECT, this._onConnect )
+    window.socket.on( SocketEvent.MESSAGE, this._onMessage )
+    window.socket.on( SocketEvent.SYNCED, this._onSynced )
   },
 
 
@@ -46,6 +47,14 @@ var SocketIO = {
 
   _onMessage: function (message) {
     PubSub.trigger( AppEvent.SOCKET_IO_MESSAGE, {
+      message: message
+    })
+  },
+
+
+
+  _onSynced: function (message) {
+    PubSub.trigger( AppEvent.MOBILE_CLIENT_SYNCED, {
       message: message
     })
   }

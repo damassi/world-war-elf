@@ -15,12 +15,17 @@ var template = require('./mobile-sync-template.hbs')
 var MobileSyncView = View.extend({
 
 
+  /**
+   * @type {Function}
+   */
   template: template,
+
 
 
   events: {
     'click .btn-submit': '_onSubmitBtnClick'
   },
+
 
 
   render: function (options) {
@@ -30,6 +35,7 @@ var MobileSyncView = View.extend({
 
     return this
   },
+
 
 
   _onSubmitBtnClick: function (event) {

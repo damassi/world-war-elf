@@ -12,6 +12,7 @@ var SocketIO           = require('./utils/SocketIO')
 var PubSub             = require('./utils/PubSub')
 var LandingView        = require('./views/landing/LandingView')
 var SyncView           = require('./views/sync/SyncView')
+var MobileModel        = require('./mobile/models/MobileModel')
 var MobileGamePlayView = require('./mobile/views/gameplay/MobileGamePlayView')
 var MobileSyncView     = require('./mobile/views/sync/MobileSyncView')
 
@@ -45,7 +46,7 @@ var AppController = {
     this.landingView = new LandingView()
     this.syncView    = new SyncView()
 
-    //this.mobileModel        = new MobileModel()
+    this.mobileModel        = new MobileModel()
     this.mobileSyncView     = new MobileSyncView()
     this.mobileGamePlayView = new MobileGamePlayView()
 
