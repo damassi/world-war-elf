@@ -25,6 +25,7 @@ var AppRouter = Backbone.Router.extend({
    */
   views: null,
 
+
   /**
    * @type {Object}
    */
@@ -40,11 +41,18 @@ var AppRouter = Backbone.Router.extend({
     this.appController = options.appController
     this.appModel      = this.appController.appModel
     this.views         = this.appController.views
+
+    console.log( this.appModel  )
   },
 
 
   landingRoute: function (options) {
-    console.log('home!')
+    var view = this.appController.landingView
+
+    this.appModel.set({
+      view: view
+    })
+
   },
 
 

@@ -5,10 +5,8 @@
  * @since  10.10.13
  */
 
-var AppConfig = require('../config/AppConfig')
 var AppEvent  = require('../events/AppEvent')
 var PubSub    = require('../utils/PubSub')
-var Utils     = require('../utils/Utils')
 
 
 var View = Backbone.View.extend({

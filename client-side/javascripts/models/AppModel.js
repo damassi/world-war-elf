@@ -7,6 +7,12 @@
 
 var AppModel = Backbone.Model.extend({
 
+  defaults: {
+
+    view : null
+
+  }
+
 })
 
 module.exports = AppModel

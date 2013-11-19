@@ -5,11 +5,12 @@
  * @since  11.18.13
  */
 
-var AppEvent  = require('./events/AppEvent')
-var AppModel  = require('./models/AppModel')
-var AppRouter = require('./routers/AppRouter')
-var SocketIO  = require('./utils/SocketIO')
-var PubSub    = require('./utils/PubSub')
+var AppEvent    = require('./events/AppEvent')
+var AppModel    = require('./models/AppModel')
+var AppRouter   = require('./routers/AppRouter')
+var SocketIO    = require('./utils/SocketIO')
+var PubSub      = require('./utils/PubSub')
+var LandingView = require('./views/landing/LandingView')
 
 
 var AppController = {
@@ -38,8 +39,15 @@ var AppController = {
    * @return {void}
    */
 
-  initialize: function() {
+  initialize: function () {
+    _.bindAll(this)
+
+    this.$contentContainer = $('#content-container')
+
     this.appModel = new AppModel()
+    this.landingView = new LandingView()
+
+    this.delegateEvents()
 
     this.appRouter = new AppRouter({
       appController: this
@@ -48,6 +56,17 @@ var AppController = {
     SocketIO.initialize()
 
     PubSub.on( AppEvent.SOCKET_IO_CONNECTED, this._onSocketIOConnected )
+  },
+
+
+
+  /**
+   * Binds app-level events
+   * @return {void}
+   */
+
+  delegateEvents: function () {
+    this.appModel.on( 'change:view', this._onViewChange )
   },
 
 
@@ -97,6 +116,7 @@ var AppController = {
    */
 
   _onViewChange: function (model) {
+
     var view         = model.changed.view
       , previousView = model._previousAttributes.view
 
