@@ -13,18 +13,33 @@ module.exports = {
    */
   index: function (req, res) {
 
-    var socket = req.socket;
-    var io = sails.io;
+    res.view({
+      layout: 'mobile-layout',
+    })
+
+  },
+
+
+  gameplay: function (req, res) {
+
+    var gameId = req.param('id')
+      , socket = req.socket
+      , io     = sails.io
 
     res.view({
-      layout: 'mobile-layout'
+      gameId: gameId,
+      layout: 'mobile-layout',
+      view: 'mobile/gameplay'
     })
 
     setTimeout(function() {
       io.sockets.emit( 'message', {
-        connected: 'Sending socket message from server'
+        mobile: true,
+        status: 'Mobile client id ' + gameId + ' connected'
       })
-    }, 1000)
+    },
+      1000
+    )
   }
 
 };

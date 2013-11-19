@@ -88,9 +88,9 @@ var AppController = {
 
 
 
-  _onViewChange: function (model) {
-    var view         = model.changed.view
-      , previousView = model._previousAttributes.view
+  _onViewChange: function (appModel) {
+    var view         = appModel.changed.view
+      , previousView = appModel._previousAttributes.view
 
     this.cleanUpViews( previousView )
 

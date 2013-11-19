@@ -14,6 +14,11 @@ module.exports.routes = {
     action: 'index'
   },
 
+  '/gameplay/:id': {
+    controller: 'DesktopController',
+    action: 'gameplay'
+  },
+
 
   /**
    * In order to override the default desktop layout we have to render the response from
@@ -24,6 +29,11 @@ module.exports.routes = {
   '/mobile': {
     controller: 'MobileController',
     action: 'index'
+  },
+
+  '/mobile/gameplay/:id': {
+    controller: 'MobileController',
+    action: 'gameplay'
   }
 
 };

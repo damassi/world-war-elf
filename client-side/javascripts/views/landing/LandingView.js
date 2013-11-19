@@ -24,6 +24,8 @@ var LandingView = View.extend({
   render: function (options) {
     this._super()
 
+    this.addEventListeners()
+
     return this
   },
 
@@ -34,7 +36,8 @@ var LandingView = View.extend({
 
 
   _onSocketIOMessage: function (event) {
-    console.log( 'message' )
+    this.$el.find(".client").html( event.message.status )
+    console.log( event.message )
   }
 
 
