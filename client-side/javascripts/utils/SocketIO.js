@@ -22,7 +22,7 @@ var SocketIO = {
 
     options = options || {}
 
-    window.socket = io.connect('http://localhost')
+    window.socket = io.connect()
 
     this.delegateEvents()
   },
@@ -35,7 +35,7 @@ var SocketIO = {
 
 
   _onConnect: function (socket) {
-    console.log( 'Socket connected', socket )
+    console.log( 'Socket.IO connected' )
 
     PubSub.trigger( AppEvent.SOCKET_IO_CONNECTED )
   },

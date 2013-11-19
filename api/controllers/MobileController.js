@@ -22,7 +22,7 @@ module.exports = {
 
     setTimeout(function() {
       io.sockets.emit( 'message', {
-        time: new Date()
+        connected: 'Sending socket message from server'
       })
     }, 1000)
   }
