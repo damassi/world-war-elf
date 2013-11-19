@@ -20,7 +20,6 @@ var SyncView = View.extend({
   template: template,
 
 
-
   render: function (options) {
     this._super()
 

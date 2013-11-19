@@ -13,23 +13,12 @@ module.exports = {
    */
   index: function (req, res) {
 
-    res.view({
-      layout: 'mobile-layout',
-    })
-
-  },
-
-
-  gameplay: function (req, res) {
-
     var gameId = req.param('id')
       , socket = req.socket
       , io     = sails.io
 
     res.view({
-      gameId: gameId,
       layout: 'mobile-layout',
-      view: 'mobile/gameplay'
     })
 
     setTimeout(function() {
@@ -40,6 +29,20 @@ module.exports = {
     },
       1000
     )
+
+
+  },
+
+
+  gameplay: function (req, res) {
+
+
+
+    res.view({
+      gameId: gameId,
+      layout: 'mobile-layout',
+      view: 'mobile/gameplay'
+    })
   }
 
 };
