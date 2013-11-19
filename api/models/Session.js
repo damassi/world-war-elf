@@ -11,12 +11,9 @@ module.exports = {
   attributes: {
 
   	sessionId: {
-      type: 'string',
+      type: 'STRING',
       required: true
-    },
-
-    clients: {}
+    }
 
   }
-
-};
+}

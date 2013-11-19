@@ -46,6 +46,8 @@ var SocketIO = {
 
 
   _onMessage: function (message) {
+    console.log( message )
+
     PubSub.trigger( AppEvent.SOCKET_IO_MESSAGE, {
       message: message
     })

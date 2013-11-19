@@ -16,16 +16,7 @@ module.exports = {
       , socket = req.socket
       , io     = sails.io
 
-    var sessionProps = {
-      sessionId: syncCode,
-      clients: [{
-        desktop: true,
-        sessionId: syncCode,
-        socket: socket
-      }]
-    }
-
-    Session.create( sessionProps, function groupCreated (err, session) {
+    Session.create({ sessionId: syncCode }, function groupCreated (err, session) {
       if (err) {
         io.sockets.emit( SocketEvent.MESSAGE, {
           message: 'Error creating Session group'
@@ -57,6 +48,7 @@ module.exports = {
 
       io.sockets.emit( SocketEvent.SYNCED, {
         mobile: true,
+        sessionId: syncCode,
         status: 'Mobile client id ' + syncCode + ' connected'
       })
 
