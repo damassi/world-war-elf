@@ -7,6 +7,8 @@
 
 var AppEvent = {
 
+  SOCKET_IO_CONNECTED: 'onSocketIOConnected'
+
 }
 
 module.exports = AppEvent

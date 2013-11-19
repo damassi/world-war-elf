@@ -9,7 +9,9 @@
  * @since  11.18.13
  */
 
-var Event = require('../events/Event')
+var AppEvent = require('../events/AppEvent')
+var Event    = require('../events/Event')
+var PubSub   = require('./PubSub')
 
 
 var SocketIO = {
@@ -19,6 +21,8 @@ var SocketIO = {
 
   initialize: function (options) {
     _.bindAll(this)
+
+    options = options || {}
 
     this.socket = io.connect()
 
@@ -34,6 +38,8 @@ var SocketIO = {
 
   _onConnect: function (event) {
     console.log( 'Socket connected' )
+
+    PubSub.trigger( AppEvent.SOCKET_IO_CONNECTED )
   },
 
 

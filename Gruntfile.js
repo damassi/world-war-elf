@@ -323,7 +323,7 @@ module.exports = function( grunt ) {
 
       javascripts: {
         files: '<%= frontend %>/javascripts/**/*',
-        tasks: ['browserify2:compile']
+        tasks: ['browserify2:compile', 'browserify2:mobile']
       },
 
       styles: {

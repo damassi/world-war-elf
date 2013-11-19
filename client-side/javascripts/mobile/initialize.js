@@ -5,6 +5,10 @@
  * @since  11.18.13
  */
 
+var MobileController = require('./MobileController')
+
 $(function() {
-  console.log("working on mobile")
+
+  MobileController.initialize()
+
 })
