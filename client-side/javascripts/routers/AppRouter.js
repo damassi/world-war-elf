@@ -31,7 +31,7 @@ var AppRouter = Backbone.Router.extend({
     ''             : 'landingRoute',
     'sync'         : 'syncRoute',
 
-    'mobile/sync'       : 'mobileSyncRoute'
+    'mobile/sync'  : 'mobileSyncRoute'
   },
 
 
@@ -80,7 +80,6 @@ var AppRouter = Backbone.Router.extend({
 
 
   mobileSyncRoute: function (options) {
-    console.log("mobile sync route..")
     var view = this.appController.mobileSyncView
 
     this.appModel.set({
