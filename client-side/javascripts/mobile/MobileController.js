@@ -22,11 +22,13 @@ var MobileController = {
   },
 
 
+
   _onSocketIOConnected: function (event) {
     window.addEventListener( 'deviceorientation', this._onDeviceOrientationChange )
 
     PubSub.on( AppEvent.SOCKET_IO_MESSAGE, this._onSocketIOMessage )
   },
+
 
 
   _onDeviceOrientationChange: function (event) {
@@ -36,6 +38,7 @@ var MobileController = {
       z: event.alpha,
     })
   },
+
 
 
   _onSocketIOMessage: function (event) {

@@ -18,22 +18,14 @@ var View = Backbone.View.extend({
 	className: 'view',
 
 
-	/**
-	 * Initialize the view
-	 * @param  {Object} options
-	 * @return {void}
-	 */
+
 	initialize: function (options) {
 		_.extend( this, options || {} )
 		_.bindAll( this )
 	},
 
 
-	/**
-	 * Renders the view
-	 * @param  {*} data
-	 * @return {View}
-	 */
+
 	render: function (data) {
 		if (! this.template)
 			return
@@ -54,15 +46,10 @@ var View = Backbone.View.extend({
 
 
 
-	//--------------------------------------
 	//+ PUBLIC METHODS
 	//--------------------------------------
 
-	/**
-	 * Fires from AppController on view change
-	 * @param  {Object} options
-	 * @return {void}
-	 */
+
 	show: function (options) {
 		options = options || {}
 
@@ -70,11 +57,7 @@ var View = Backbone.View.extend({
 	},
 
 
-	/**
-	 * Fires from AppController on view change
-	 * @param  {Object} options
-	 * @return {void}
-	 */
+
 	hide: function (options) {
 		options = options || {}
 
@@ -83,12 +66,12 @@ var View = Backbone.View.extend({
 	},
 
 
-	//--------------------------------------
+
 	//+ EVENT HANDLERS
 	//--------------------------------------
 
 
-	//--------------------------------------
+
 	//+ PRIVATE METHODS
 	//--------------------------------------
 

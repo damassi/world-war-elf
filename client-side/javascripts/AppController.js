@@ -27,17 +27,11 @@ var AppController = {
   appRouter: null,
 
   /**
-   * An array of each game view
    * @type {Array}
    */
   views: null,
 
 
-
-  /**
-   * Initialize the game by instantiating components and connecting to websocket
-   * @return {void}
-   */
 
   initialize: function () {
     _.bindAll(this)
@@ -60,26 +54,16 @@ var AppController = {
 
 
 
-  /**
-   * Binds app-level events
-   * @return {void}
-   */
-
   delegateEvents: function () {
     this.appModel.on( 'change:view', this._onViewChange )
   },
 
 
 
-  //--------------------------------------
+
   //+ PUBLIC METHODS / GETTERS / SETTERS
   //--------------------------------------
 
-
-  /**
-   * Cleans up currently displayed views
-   * @return {void}
-   */
 
   cleanUpViews: function (view) {
     if (_.isUndefined( view ) || _.isNull( view ))
@@ -93,27 +77,16 @@ var AppController = {
 
 
 
-  //--------------------------------------
+
   //+ EVENT HANDLERS
   //--------------------------------------
 
-
-  /**
-   * Handler for when socket.io connects to node server. Dispatched from PubSub
-   * @param  {Event} event
-   * @return {void}
-   */
 
   _onSocketIOConnected: function (event) {
 
   },
 
 
-  /**
-   * Handler for view change events
-   * @param  {AppModel} model
-   * @return {void}
-   */
 
   _onViewChange: function (model) {
     var view         = model.changed.view

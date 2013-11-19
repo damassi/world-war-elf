@@ -13,6 +13,7 @@ var template = require('./landing-template.hbs')
 
 var LandingView = View.extend({
 
+
   /**
    * @type {Function}
    */
@@ -33,8 +34,9 @@ var LandingView = View.extend({
 
 
   _onSocketIOMessage: function (event) {
-    console.log( 'message', event )
+    console.log( 'message' )
   }
+
 
 })
 

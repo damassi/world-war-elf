@@ -28,10 +28,12 @@ var SocketIO = {
   },
 
 
+
   delegateEvents: function () {
     window.socket.on( 'connect', this._onConnect )
     window.socket.on( 'message', this._onMessage )
   },
+
 
 
   _onConnect: function (socket) {
@@ -39,6 +41,7 @@ var SocketIO = {
 
     PubSub.trigger( AppEvent.SOCKET_IO_CONNECTED )
   },
+
 
 
   _onMessage: function (message) {
