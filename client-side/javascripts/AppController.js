@@ -79,9 +79,16 @@ var AppController = {
   //--------------------------------------
 
 
+  /**
+   * Handler for when socket.io connects to node server. Dispatched from PubSub
+   * @param  {Event} event
+   * @return {void}
+   */
+
   _onSocketIOConnected: function (event) {
 
   },
+
 
   /**
    * Handler for view change events
