@@ -16,7 +16,6 @@ module.exports = {
     res.view({
       layout: 'mobile-layout'
     })
-
   }
 
 };

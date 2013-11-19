@@ -26,9 +26,6 @@ var AppRouter = Backbone.Router.extend({
   views: null,
 
 
-  /**
-   * @type {Object}
-   */
   routes: {
     ''          : 'landingRoute',
     'gameplay'  : 'gameplayRoute'
@@ -41,8 +38,6 @@ var AppRouter = Backbone.Router.extend({
     this.appController = options.appController
     this.appModel      = this.appController.appModel
     this.views         = this.appController.views
-
-    console.log( this.appModel  )
   },
 
 

@@ -116,7 +116,6 @@ var AppController = {
    */
 
   _onViewChange: function (model) {
-
     var view         = model.changed.view
       , previousView = model._previousAttributes.view
 

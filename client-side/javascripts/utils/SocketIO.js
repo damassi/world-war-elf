@@ -24,15 +24,15 @@ var SocketIO = {
 
     options = options || {}
 
-    this.socket = io.connect()
+    window.socket = io.connect()
 
     this.delegateEvents()
   },
 
 
   delegateEvents: function () {
-    this.socket.on( Event.CONNECT, this._onConnect )
-    this.socket.on( Event.MESSAGE, this._onMessage )
+    window.socket.on( Event.CONNECT, this._onConnect )
+    window.socket.on( Event.MESSAGE, this._onMessage )
   },
 
 
@@ -45,6 +45,10 @@ var SocketIO = {
 
   _onMessage: function (message) {
     console.log( 'New comet message received :: ', message )
+
+    PubSub.trigger( AppEvent.SOCKET_IO_MESSAGE, {
+      message: message
+    })
   }
 
 }

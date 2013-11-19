@@ -28,7 +28,7 @@ var MobileController = {
 
 
   _onDeviceOrientationChange: function (event) {
-    SocketIO.socket.emit( 'orientation', {
+    window.socket.emit( 'orientation', {
       x: event.beta,
       y: event.gamma,
       z: event.alpha,
