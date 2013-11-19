@@ -47,13 +47,13 @@ module.exports = {
       }
 
       io.sockets.emit( SocketEvent.SYNCED, {
-        mobile: true,
+        connected: true,
         sessionId: syncCode,
         status: 'Mobile client id ' + syncCode + ' connected'
       })
 
       res.json({
-        connected: true,
+        status: 200,
         syncCode: syncCode
       })
     })

@@ -20,9 +20,16 @@ var SyncView = View.extend({
    */
   template: template,
 
-
+  /**
+   * @type {$}
+   */
   $syncMsg: null,
+
+  /**
+   * @type {$}
+   */
   $clientMsg: null,
+
 
 
   render: function (options) {
@@ -48,23 +55,21 @@ var SyncView = View.extend({
   requestSyncId: function () {
     var self = this
 
-    // var codeReq = $.getJSON( AppConfig.ENDPOINTS.generateCode )
+    window.socket.get( AppConfig.ENDPOINTS.generateCode, {},
 
-    // codeReq.success( function (data) {
-    //   self.$syncMsg.html( 'Please enter this code in your mobile phone: ' + data.syncCode )
-    // })
-
-    window.socket.get( AppConfig.ENDPOINTS.generateCode, {}, function (data) {
-      self.$syncMsg.html( 'Please enter this code in your mobile phone: ' + data.syncCode )
+    function onResponse (response) {
+      self.$syncMsg.html( 'Please enter this code in your mobile phone: ' + response.syncCode )
     })
   },
 
 
 
-  _onMobileClientSynched: function (event) {
-    console.log( event.message )
+  _onMobileClientSynched: function (message) {
+    if (message.connected) {
+      window.location.href = '#/play'
+    }
 
-    this.$el.find(".client-msg").html( event.message.status )
+    this.$el.find(".client-msg").html( message.status )
   }
 
 

@@ -48,17 +48,13 @@ var SocketIO = {
   _onMessage: function (message) {
     console.log( message )
 
-    PubSub.trigger( AppEvent.SOCKET_IO_MESSAGE, {
-      message: message
-    })
+    PubSub.trigger( AppEvent.SOCKET_IO_MESSAGE, message )
   },
 
 
 
   _onSynced: function (message) {
-    PubSub.trigger( AppEvent.MOBILE_CLIENT_SYNCED, {
-      message: message
-    })
+    PubSub.trigger( AppEvent.MOBILE_CLIENT_SYNCED, message )
   }
 
 }

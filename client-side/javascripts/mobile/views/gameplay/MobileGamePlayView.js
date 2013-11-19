@@ -13,7 +13,13 @@ var template = require('./mobile-gameplay-template.hbs')
 
 var MobileGamePlayView = View.extend({
 
-  template: template
+  template: template,
+
+  render: function (options) {
+    this._super()
+
+    return this
+  }
 
 })
 

@@ -46,7 +46,8 @@ var MobileSyncView = View.extend({
     },
 
     function onResponse (response) {
-      console.log( response )
+      if (response.status === 200 )
+        window.location.href = '#/mobile/play'
     })
   }
 

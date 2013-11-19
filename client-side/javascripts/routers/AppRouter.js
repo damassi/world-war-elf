@@ -29,10 +29,18 @@ var AppRouter = Backbone.Router.extend({
 
 
   routes: {
-    ''             : 'landingRoute',
-    'sync'         : 'syncRoute',
 
-    'mobile/sync'  : 'mobileSyncRoute'
+    // Desktop Routes
+
+    ''       : 'landingRoute',
+    'sync'   : 'syncRoute',
+    'play'   : 'gamePlayRoute',
+
+
+    // Mobile Routes
+
+    'mobile/sync' : 'mobileSyncRoute',
+    'mobile/play' : 'mobileGamePlayRoute'
   },
 
 
@@ -69,8 +77,12 @@ var AppRouter = Backbone.Router.extend({
 
 
 
-  gameplayRoute: function (options) {
-    console.log('gameplay!')
+  gamePlayRoute: function (options) {
+    var view = this.appController.gamePlayView
+
+    this.appModel.set({
+      view: view
+    })
   },
 
 
@@ -92,7 +104,12 @@ var AppRouter = Backbone.Router.extend({
 
 
   mobileGamePlayRoute: function (options) {
-    console.log('gameplay!')
+    var view = this.appController.mobileGamePlayView
+
+    this.appModel.set({
+      view: view
+    })
+
   }
 
 
