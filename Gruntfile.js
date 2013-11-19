@@ -42,7 +42,6 @@ module.exports = function( grunt ) {
         entry: [ '<%= frontend %>/javascripts/initialize.js'],
         compile: '<%= output %>/assets/javascripts/app.js',
 
-        // Precompile Handlebars templates
         beforeHook: function( bundle ) {
           bundle.transform( handleify )
         },
@@ -54,7 +53,6 @@ module.exports = function( grunt ) {
         entry: [ '<%= frontend %>/javascripts/mobile/initialize.js'],
         compile: '<%= output %>/assets/javascripts/app-mobile.js',
 
-        // Precompile Handlebars templates
         beforeHook: function( bundle ) {
           bundle.transform( handleify )
         },
@@ -67,12 +65,10 @@ module.exports = function( grunt ) {
         compile: '<%= output %>/assets/javascripts/app.js',
         debug: false,
 
-        // Precompile Handlebars templates
         beforeHook: function( bundle ) {
           bundle.transform( handleify )
         },
 
-        // Minify sources
         afterHook: function(src){
           var result = uglify.minify(src, {fromString: true});
           return result.code;
