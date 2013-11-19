@@ -48,9 +48,13 @@ var SyncView = View.extend({
   requestSyncId: function () {
     var self = this
 
-    var codeReq = $.getJSON( AppConfig.ENDPOINTS.generateCode )
+    // var codeReq = $.getJSON( AppConfig.ENDPOINTS.generateCode )
 
-    codeReq.success( function (data) {
+    // codeReq.success( function (data) {
+    //   self.$syncMsg.html( 'Please enter this code in your mobile phone: ' + data.syncCode )
+    // })
+
+    window.socket.get( AppConfig.ENDPOINTS.generateCode, {}, function (data) {
       self.$syncMsg.html( 'Please enter this code in your mobile phone: ' + data.syncCode )
     })
   },

@@ -39,22 +39,14 @@ var MobileSyncView = View.extend({
 
 
   _onSubmitBtnClick: function (event) {
-    var data = {
-      syncCode: this.$syncInput.val()
-    }
+    var syncCode = this.$syncInput.val()
 
-    var sync = $.ajax({
-      url: AppConfig.ENDPOINTS.sync,
-      method: "POST",
-      data: data
-    })
+    window.socket.post( AppConfig.ENDPOINTS.sync, {
+      syncCode: syncCode
+    },
 
-    sync.success(function (data) {
-      console.log( data )
-    })
-
-    sync.error(function (error) {
-      console.log( error.status )
+    function onResponse (response) {
+      console.log( response )
     })
   }
 

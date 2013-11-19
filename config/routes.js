@@ -17,12 +17,6 @@ module.exports.routes = {
     view: 'desktop/index'
   },
 
-
-  // '/m': {
-  //   controller: 'MobileController',
-  //   action: 'index'
-  // },
-
   '/mobile/:id': {
     controller: 'MobileController',
     action: 'index'
