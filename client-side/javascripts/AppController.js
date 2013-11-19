@@ -11,6 +11,7 @@ var AppRouter   = require('./routers/AppRouter')
 var SocketIO    = require('./utils/SocketIO')
 var PubSub      = require('./utils/PubSub')
 var LandingView = require('./views/landing/LandingView')
+var SyncView    = require('./views/sync/SyncView')
 
 
 var AppController = {
@@ -39,7 +40,9 @@ var AppController = {
     this.$contentContainer = $('#content-container')
 
     this.appModel = new AppModel()
+
     this.landingView = new LandingView()
+    this.syncView    = new SyncView()
 
     this.delegateEvents()
 

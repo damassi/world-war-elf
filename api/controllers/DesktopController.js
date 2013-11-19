@@ -12,6 +12,13 @@ module.exports = {
 
   index: function (req, res) {
 
+    res.view()
+  },
+
+
+
+  sync: function (req, res) {
+
     // Generate unique game id and store it in a session for gameplay
     var gameId = Math.random().toString(36).substring(12)
 

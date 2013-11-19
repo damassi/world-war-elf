@@ -24,20 +24,7 @@ var LandingView = View.extend({
   render: function (options) {
     this._super()
 
-    this.addEventListeners()
-
     return this
-  },
-
-
-  addEventListeners: function () {
-    PubSub.on( AppEvent.SOCKET_IO_MESSAGE, this._onSocketIOMessage )
-  },
-
-
-  _onSocketIOMessage: function (event) {
-    this.$el.find(".client").html( event.message.status )
-    console.log( event.message )
   }
 
 

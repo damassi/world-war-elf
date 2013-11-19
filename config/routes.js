@@ -14,9 +14,9 @@ module.exports.routes = {
     action: 'index'
   },
 
-  '/gameplay/:id': {
+  '/desktop/sync/': {
     controller: 'DesktopController',
-    action: 'gameplay'
+    action: 'sync'
   },
 
 
