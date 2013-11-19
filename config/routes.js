@@ -10,24 +10,22 @@ module.exports.routes = {
 
 
   '/': {
-    controller: 'DesktopController',
-    action: 'index'
+    view: 'desktop/index'
   },
 
-  '/desktop/sync/': {
-    controller: 'DesktopController',
-    action: 'sync'
+  '/:route': {
+    view: 'desktop/index'
   },
 
 
-  '/mobile*': {
+  // '/m': {
+  //   controller: 'MobileController',
+  //   action: 'index'
+  // },
+
+  '/mobile/:id': {
     controller: 'MobileController',
     action: 'index'
-  },
-
-  '/mobile/gameplay/:id': {
-    controller: 'MobileController',
-    action: 'gameplay'
   }
 
 };

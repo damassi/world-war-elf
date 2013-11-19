@@ -13,6 +13,8 @@ module.exports = {
    */
   index: function (req, res) {
 
+    console.log( req.params)
+
     var gameId = req.param('id')
       , socket = req.socket
       , io     = sails.io
@@ -29,18 +31,6 @@ module.exports = {
     )
 
 
-  },
-
-
-  gameplay: function (req, res) {
-
-
-
-    res.view({
-      gameId: gameId,
-      layout: 'mobile-layout',
-      view: 'mobile/gameplay'
-    })
   }
 
 };

@@ -12,7 +12,7 @@ $(function() {
   AppController.initialize()
 
   Backbone.history.start({
-    pushState: true
+    pushState: false
   })
 
 })

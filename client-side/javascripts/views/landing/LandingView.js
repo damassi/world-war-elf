@@ -13,6 +13,10 @@ var template = require('./landing-template.hbs')
 
 var LandingView = View.extend({
 
+  /**
+   * @type {String}
+   */
+  id: 'landing',
 
   /**
    * @type {Function}
