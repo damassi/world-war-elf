@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{{title}}}</title>
+
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <link rel='shortcut icon' href='/assets/favicon.ico' type='image/x-icon'/ >
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/assets/styles/app.css" />
+
+    <!-- Scripts -->
+    <script src="/assets/javascripts/vendor.js"></script>
+    <script src="/assets/javascripts/app-mobile.js"></script>
+
+  </head>
+
+  <body>
+
+    <div id='container'>
+        <div id='container-content'>
+            {{{body}}}
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="/assets/javascripts/socket.io.js"></script>
+    <script type="text/javascript" src="/assets/javascripts/sails.io.js"></script>
+
+    </body>
+</html>

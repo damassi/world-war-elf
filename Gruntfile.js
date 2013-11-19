@@ -50,6 +50,18 @@ module.exports = function( grunt ) {
         debug: true
       },
 
+      mobile: {
+        entry: [ '<%= frontend %>/javascripts/mobile/initialize.js'],
+        compile: '<%= output %>/assets/javascripts/app-mobile.js',
+
+        // Precompile Handlebars templates
+        beforeHook: function( bundle ) {
+          bundle.transform( handleify )
+        },
+
+        debug: true
+      },
+
       dist: {
         entry: [ '<%= frontend %>/javascripts/initialize.js'],
         compile: '<%= output %>/assets/javascripts/app.js',
@@ -360,6 +372,7 @@ module.exports = function( grunt ) {
     'copy:sails',
     'copy:webfonts',
     'browserify2:compile',
+    'browserify2:mobile',
     'sass:compile',
     'sass:vendor',
     'concat:vendor'
