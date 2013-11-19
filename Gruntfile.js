@@ -370,7 +370,7 @@ module.exports = function( grunt ) {
     'browserify2:compile',
     'browserify2:mobile',
     'sass:compile',
-    'sass:vendor',
+    //'sass:vendor',
     'concat:vendor'
   ])
 

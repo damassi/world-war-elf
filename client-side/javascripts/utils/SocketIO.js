@@ -16,36 +16,32 @@ var PubSub   = require('./PubSub')
 
 var SocketIO = {
 
-  socket: null,
-
 
   initialize: function (options) {
     _.bindAll(this)
 
     options = options || {}
 
-    window.socket = io.connect()
+    window.socket = io.connect('http://localhost')
 
     this.delegateEvents()
   },
 
 
   delegateEvents: function () {
-    window.socket.on( Event.CONNECT, this._onConnect )
-    window.socket.on( Event.MESSAGE, this._onMessage )
+    window.socket.on( 'connect', this._onConnect )
+    window.socket.on( 'message', this._onMessage )
   },
 
 
-  _onConnect: function (event) {
-    console.log( 'Socket connected' )
+  _onConnect: function (socket) {
+    console.log( 'Socket connected', socket )
 
     PubSub.trigger( AppEvent.SOCKET_IO_CONNECTED )
   },
 
 
   _onMessage: function (message) {
-    console.log( 'New comet message received :: ', message )
-
     PubSub.trigger( AppEvent.SOCKET_IO_MESSAGE, {
       message: message
     })
