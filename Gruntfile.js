@@ -121,14 +121,22 @@ module.exports = function( grunt ) {
     'copy': {
 
       images: {
-        files: [{
-          expand: true,
-          cwd: '<%= frontend %>/images/',
-          src: [
-            '**'
-          ],
-          dest: '<%= output %>/assets/images/'
-        }]
+        files: [
+          {
+            expand: true,
+            cwd: '<%= frontend %>/',
+            src: ['favicon.ico'],
+            dest: '<%= output %>/assets/'
+          },
+          {
+            expand: true,
+            cwd: '<%= frontend %>/images/',
+            src: [
+              '**'
+            ],
+            dest: '<%= output %>/assets/images/'
+          }
+        ]
       },
 
       sails: {
@@ -172,7 +180,7 @@ module.exports = function( grunt ) {
       output: {
         files: [{
           expand: true,
-          cwd: '<%= output %>/public/assets',
+          cwd: '<%= output %>/',
           src: ['**']
         }]
       },
