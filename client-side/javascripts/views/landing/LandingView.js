@@ -25,10 +25,22 @@ var LandingView = View.extend({
 
 
 
+  events: {
+    'click': '_onClick'
+  },
+
+
+
   render: function (options) {
     this._super()
 
     return this
+  },
+
+
+
+  _onClick: function (event) {
+    window.location.href = '#/sync'
   }
 
 

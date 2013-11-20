@@ -46,11 +46,11 @@ module.exports = {
         return next('Session not found!')
       }
 
-      io.sockets.emit( SocketEvent.SYNCED, {
+      io.sockets.in(syncCode).emit( SocketEvent.SYNCED, {
         connected: true,
         sessionId: syncCode,
         status: 'Mobile client id ' + syncCode + ' connected'
-      })
+      });
 
       res.json({
         status: 200,
