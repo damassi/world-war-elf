@@ -2,8 +2,9 @@
 
 module.exports = {
 
-  CONNECT : 'connect',
-  MESSAGE : 'message',
-  SYNCED  : 'synced'
+  CONNECT    : 'connect',
+  DISCONNECT : 'disconnect',
+  MESSAGE    : 'message',
+  SYNCED     : 'synced'
 
 }

@@ -9,7 +9,7 @@
  * @since  11.18.13
  */
 
-var SocketEvent = require('../../../events/SocketEvent')
+var SocketEvent = require('../../../shared/events/SocketEvent')
 var AppEvent = require('../events/AppEvent')
 var PubSub   = require('./PubSub')
 
@@ -31,6 +31,7 @@ var SocketIO = {
 
   delegateEvents: function () {
     window.socket.on( SocketEvent.CONNECT, this._onConnect )
+    window.socket.on( SocketEvent.DISCONNECT, this._onDisconnect )
     window.socket.on( SocketEvent.MESSAGE, this._onMessage )
     window.socket.on( SocketEvent.SYNCED, this._onSynced )
   },
@@ -41,6 +42,12 @@ var SocketIO = {
     console.log( 'Socket.IO connected' )
 
     PubSub.trigger( AppEvent.SOCKET_IO_CONNECTED )
+  },
+
+
+
+  _onDisconnect: function (socket) {
+    console.log( 'socket disconnected', socket )
   },
 
 

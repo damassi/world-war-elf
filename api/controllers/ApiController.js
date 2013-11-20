@@ -36,8 +36,7 @@ module.exports = {
       res.json({
         syncCode: syncCode
       })
-
-     })
+    })
   },
 
 
@@ -70,6 +69,4 @@ module.exports = {
       })
     })
   }
-
-
 };

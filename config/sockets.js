@@ -23,7 +23,7 @@ module.exports.sockets = {
 
   // This custom onDisconnect function will be run each time a socket disconnects
   onDisconnect: function(session, socket) {
-
+    console.log( socket.id )
     // By default: do nothing
     // This is a good place to broadcast a disconnect message, or any other custom socket.io logic
   },
