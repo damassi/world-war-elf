@@ -3,33 +3,36 @@
 // ---------------------------------------+
 //
 
+html
+	height: 100%
+
 body
-	background-color: #000000
 	color: #fff
 	font-family: $font-primary
 	overflow: hidden
+	height: 100%
+	width: 100%
+	background: #11799a	
+	+bg-gradient-radial(#11799a, lighten(#11799a, 35%))
 
 
 img
 	pointer-events: none
 
-
 #container-content
 	color: #fff
 
-	margin: auto
-	position: absolute
-
-	top: 0
-	left: 0
-	right: 0
-	bottom: 0
-
-	width: 960px
-	height: 600px
-
-
 .view
-	width: 960px
-	height: 600px
-	margin-top: 80px
+
+#main-footer
+	.holiday-text
+		width: 351px
+		height: 28px
+		position: absolute
+		margin: auto
+		bottom: 30px
+		left: 0
+		right: 0
+		background: transparent url("#{$images}/holiday-text.png") no-repeat
+
+	

@@ -79,7 +79,7 @@ var AppRouter = Backbone.Router.extend({
 
   gamePlayRoute: function (options) {
     var view = this.appController.gamePlayView
-
+    console.log('gamePlayRoute')
     this.appModel.set({
       view: view
     })

@@ -14,24 +14,20 @@ var template    = require('./gameplay-template.hbs')
 
 var GamePlayView = View.extend({
 
+  id: 'game-play',
 
   template: template,
 
-
   render: function (options) {
     this._super()
-
-    window.socket.on( SocketEvent.ORIENTATION, this._onOrientationUpdate )
-
+    //window.socket.on( SocketEvent.ORIENTATION, this._onOrientationUpdate )
+    this.$el.html( template() );
     return this
   },
 
-
-
   _onOrientationUpdate: function (message) {
-    var orientation = message.orientation
-
-    $('.orientation').html( 'x: ' + orientation.x + ' y: ' + orientation.y + ' z: 0' )
+    //var orientation = message.orientation
+    //$('.orientation').html( 'x: ' + orientation.x + ' y: ' + orientation.y + ' z: 0' )
   }
 
 })
