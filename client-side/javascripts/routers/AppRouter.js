@@ -39,7 +39,7 @@ var AppRouter = Backbone.Router.extend({
 
     // Mobile Routes
 
-    'mobile/sync' : 'mobileSyncRoute',
+    'mobile/sync'      : 'mobileSyncRoute',
     'mobile/play' : 'mobileGamePlayRoute'
   },
 

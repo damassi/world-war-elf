@@ -5,16 +5,16 @@
  * @since  11.18.13
  */
 
-var AppController = require('./AppController');
+var Touch         = require('./utils/Touch')
+var AppController = require('./AppController')
 
 $(function() {
 
   AppController.initialize()
+  Touch.translateTouchEvents()
 
   Backbone.history.start({
     pushState: false
   })
-
-  Touch.translateTouchEvents()
 
 })
