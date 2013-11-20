@@ -60,6 +60,7 @@ var AppController = {
     this.landingView  = new LandingView()
     this.syncView     = new SyncView()
     this.gamePlayView = new GamePlayView({
+      'appController': this,
       'appModel': this.appModel
     })
 
@@ -105,8 +106,9 @@ var AppController = {
 
 
   tick: function () {
-    requestAnimFrame( this.tick )
+    PubSub.trigger( AppEvent.TICK )
     this.renderer.render( this.stage )
+    requestAnimFrame( this.tick )
   },
 
 

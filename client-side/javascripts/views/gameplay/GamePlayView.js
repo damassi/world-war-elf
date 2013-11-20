@@ -6,6 +6,7 @@
  */
 
 var SocketEvent = require('../../../../shared/events/SocketEvent')
+var AppConfig   = require('../../config/AppConfig')
 var AppEvent    = require('../../events/AppEvent')
 var PubSub      = require('../../utils/PubSub')
 var View        = require('../../supers/View')
@@ -15,17 +16,63 @@ var template    = require('./gameplay-template.hbs')
 var GamePlayView = View.extend({
 
 
+  /**
+   * @type {Function}
+   */
   template: template,
 
+  /**
+   * A ref to the primary stage located on AppController
+   * @type {PIXI.Stage}
+   */
+  stage: null,
 
-  render: function (options) {
+
+  bunny: null,
+
+
+
+  render: function () {
     this._super()
 
-    window.socket.on( SocketEvent.ORIENTATION, this._onOrientationUpdate )
+    this.stage = this.appController.stage
+
+    var position = {
+      x: AppConfig.DIMENSIONS.width * .5,
+      y: AppConfig.DIMENSIONS.height * .5
+    }
+
+    //this.bunny = new PIXI.Graphics( position.x, position.y, 100 )
+    var texture = new PIXI.Texture.fromImage('/assets/images/bunny.png')
+    this.bunny = new PIXI.Sprite(texture)
+    this.bunny.anchor.x = 0.5
+    this.bunny.anchor.y = 0.5
+    this.bunny.position.x = 200
+    this.bunny.position.y = 200
+
+    this.stage.addChild( this.bunny )
+
+    this.addEventListeners()
 
     return this
   },
 
+
+
+  addEventListeners: function () {
+    window.socket.on( SocketEvent.ORIENTATION, this._onOrientationUpdate )
+    PubSub.on( AppEvent.TICK, this._onTick )
+  },
+
+
+
+  //+ EVENT HANDLERS
+  // ------------------------------------------------------------
+
+
+  _onTick: function () {
+    this.bunny.rotation += 0.1
+  },
 
 
   _onOrientationUpdate: function (message) {
