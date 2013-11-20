@@ -17,7 +17,7 @@ module.exports.routes = {
     view: 'desktop/index'
   },
 
-  '/mobile/:id': {
+  '/mobile/:route': {
     view: 'mobile/index'
   }
 

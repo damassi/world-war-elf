@@ -82,6 +82,7 @@ module.exports = function( grunt ) {
           '<%= frontend %>/vendor/scripts/lodash.js',
           '<%= frontend %>/vendor/scripts/backbone.js',
           '<%= frontend %>/vendor/scripts/backbone.mods.js',
+          '<%= frontend %>/vendor/scripts/pixi.dev.js',
           '<%= frontend %>/vendor/scripts/greensock/TweenMax.js',
           '<%= frontend %>/vendor/scripts/greensock/easing/EasePack.js',
           '<%= frontend %>/vendor/scripts/greensock/plugins/CSSPlugin.js',
@@ -116,6 +117,16 @@ module.exports = function( grunt ) {
     //
 
     'copy': {
+
+      // PIXI examples for reference
+      examples: {
+        files: [{
+          expand: true,
+          cwd: '<%= frontend %>/vendor/examples',
+          src: '**',
+          dest: '<%= output %>/assets/examples'
+        }]
+      },
 
       images: {
         files: [
@@ -356,6 +367,7 @@ module.exports = function( grunt ) {
     'copy:images',
     'copy:sails',
     'copy:webfonts',
+    'copy:examples',
     'browserify2:compile',
     'sass:compile',
     //'sass:vendor',

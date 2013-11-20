@@ -5,6 +5,7 @@
  * @since  11.18.13
  */
 
+var AppConfig          = require('./config/AppConfig')
 var AppEvent           = require('./events/AppEvent')
 var AppModel           = require('./models/AppModel')
 var AppRouter          = require('./routers/AppRouter')
@@ -43,11 +44,18 @@ var AppController = {
 
     this.$contentContainer = $('#content-container')
 
+    // Instantiate PIXI.js related elements
+    this.stage = new PIXI.Stage( 0x222222 )
+    this.renderer = PIXI.autoDetectRenderer( AppConfig.DIMENSIONS.width, AppConfig.DIMENSIONS.height )
+
+    // Instantiate game elements
+
     this.appModel     = new AppModel()
 
     this.landingView  = new LandingView()
     this.syncView     = new SyncView()
     this.gamePlayView = new GamePlayView({
+      'appController': this,
       'appModel': this.appModel
     })
 
@@ -60,12 +68,24 @@ var AppController = {
     this.delegateEvents()
 
     this.appRouter = new AppRouter({
-      appController: this
+      'appController': this
     })
 
     SocketIO.initialize({
-      appModel: this.appModel
+      'appModel': this.appModel
     })
+
+
+    // Start render engine
+    // TODO: Should this be kicked off after sync has occured?
+
+    requestAnimFrame( this.tick )
+  },
+
+
+
+  delegateEvents: function () {
+    this.appModel.on( 'change:view', this._onViewChange )
 
     PubSub.on( AppEvent.SOCKET_IO_CONNECTED, this._onSocketIOConnected )
     PubSub.on( AppEvent.DESKTOP_CLIENT_SYNCED, this._onDesktopClientSynched )
@@ -74,15 +94,18 @@ var AppController = {
 
 
 
-  delegateEvents: function () {
-    this.appModel.on( 'change:view', this._onViewChange )
-  },
-
-
-
 
   //+ PUBLIC METHODS / GETTERS / SETTERS
   // ------------------------------------------------------------
+
+
+
+  tick: function () {
+    PubSub.trigger( AppEvent.TICK )
+    this.renderer.render( this.stage )
+    requestAnimFrame( this.tick )
+  },
+
 
 
   cleanUpViews: function (view) {

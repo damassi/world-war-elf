@@ -11,7 +11,9 @@ var AppEvent = {
   SOCKET_IO_MESSAGE       : 'onSocketIOMessage',
 
   DESKTOP_CLIENT_SYNCED : 'onDesktopClientSynched',
-  MOBILE_CLIENT_SYNCED  : 'onMobileClientSynced'
+  MOBILE_CLIENT_SYNCED  : 'onMobileClientSynced',
+
+  TICK: 'onTick'
 
 }
 

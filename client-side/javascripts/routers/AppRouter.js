@@ -39,7 +39,7 @@ var AppRouter = Backbone.Router.extend({
 
     // Mobile Routes
 
-    'mobile/sync' : 'mobileSyncRoute',
+    'mobile/sync'      : 'mobileSyncRoute',
     'mobile/play' : 'mobileGamePlayRoute'
   },
 
@@ -79,7 +79,6 @@ var AppRouter = Backbone.Router.extend({
 
   gamePlayRoute: function (options) {
     var view = this.appController.gamePlayView
-    console.log('gamePlayRoute')
     this.appModel.set({
       view: view
     })
