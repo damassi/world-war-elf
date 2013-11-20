@@ -42,7 +42,6 @@ var GamePlayView = View.extend({
       y: AppConfig.DIMENSIONS.height * .5
     }
 
-    //this.bunny = new PIXI.Graphics( position.x, position.y, 100 )
     var texture = new PIXI.Texture.fromImage('/assets/images/bunny.png')
     this.bunny = new PIXI.Sprite(texture)
     this.bunny.anchor.x = 0.5
@@ -70,13 +69,16 @@ var GamePlayView = View.extend({
   // ------------------------------------------------------------
 
 
-  _onTick: function () {
-    this.bunny.rotation += 0.1
-  },
+
+  _onTick: function () {},
+
 
 
   _onOrientationUpdate: function (message) {
     var orientation = message.orientation
+
+    this.bunny.position.x = orientation.x
+    this.bunny.position.y = orientation.y
 
     $('.orientation').html( 'x: ' + orientation.x + ' y: ' + orientation.y + ' z: 0' )
   }
