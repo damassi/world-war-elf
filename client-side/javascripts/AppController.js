@@ -61,6 +61,8 @@ var AppController = {
     SocketIO.initialize()
 
     PubSub.on( AppEvent.SOCKET_IO_CONNECTED, this._onSocketIOConnected )
+    PubSub.on( AppEvent.DESKTOP_CLIENT_SYNCED, this._onDesktopClientSynched )
+    PubSub.on( AppEvent.MOBILE_CLIENT_SYNCED, this._onMobileClientSynched )
   },
 
 
@@ -93,7 +95,21 @@ var AppController = {
   // ------------------------------------------------------------
 
 
-  _onSocketIOConnected: function (event) {},
+
+  _onSocketIOConnected: function (message) {},
+
+
+
+
+  _onDesktopClientSynched: function (message) {
+    window.location.href = '#/play'
+  },
+
+
+
+  _onMobileClientSynched: function (message) {
+    window.location.href = '#/mobile/play'
+  },
 
 
 

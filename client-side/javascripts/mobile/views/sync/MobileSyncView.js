@@ -32,6 +32,7 @@ var MobileSyncView = View.extend({
     this._super()
 
     this.$syncInput = this.$el.find('.input-sync')
+    this.$error = this.$el.find('.error')
 
     return this
   },
@@ -39,16 +40,19 @@ var MobileSyncView = View.extend({
 
 
   _onSubmitBtnClick: function (event) {
-    var syncCode = this.$syncInput.val()
+    var self = this
+      , syncCode = this.$syncInput.val()
 
     window.socket.post( AppConfig.ENDPOINTS.sync, {
       syncCode: syncCode
     },
 
-    function onResponse (response) {
-      if (response.status === 200 )
-        window.location.href = '#/mobile/play'
-    })
+      function onResponse (response) {
+        if (response.status === 200 )
+          PubSub.trigger( AppEvent.MOBILE_CLIENT_SYNCED, response )
+        else
+          self.$error.html('Error entering code: ' + JSON.stringify( response ))
+      })
   }
 
 })

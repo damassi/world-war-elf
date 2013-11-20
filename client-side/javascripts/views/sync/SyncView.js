@@ -47,7 +47,7 @@ var SyncView = View.extend({
 
 
   addEventListeners: function () {
-    PubSub.on( AppEvent.MOBILE_CLIENT_SYNCED, this._onMobileClientSynched )
+    PubSub.on( AppEvent.DESKTOP_CLIENT_SYNCED, this._onDesktopClientSynched )
   },
 
 
@@ -57,18 +57,14 @@ var SyncView = View.extend({
 
     window.socket.get( AppConfig.ENDPOINTS.generateCode, {},
 
-    function onResponse (response) {
-      self.$syncMsg.html( 'Please enter this code in your mobile phone: ' + response.syncCode )
-    })
+      function onResponse (response) {
+        self.$syncMsg.html( 'Please enter this code in your mobile phone: ' + response.syncCode )
+      })
   },
 
 
 
-  _onMobileClientSynched: function (message) {
-    if (message.connected) {
-      window.location.href = '#/play'
-    }
-
+  _onDesktopClientSynched: function (message) {
     this.$el.find(".client-msg").html( message.status )
   }
 

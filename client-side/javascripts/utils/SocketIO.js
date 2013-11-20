@@ -55,6 +55,7 @@ var SocketIO = {
 
   _onSynced: function (message) {
     PubSub.trigger( AppEvent.MOBILE_CLIENT_SYNCED, message )
+    PubSub.trigger( AppEvent.DESKTOP_CLIENT_SYNCED, message )
   }
 
 }
