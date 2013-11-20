@@ -15,15 +15,6 @@ $(function() {
     pushState: false
   })
 
-  // Delegate touch events to mouse if not on a touch device
-  if (! ('ontouchstart' in window )) {
-    $(document).delegate( 'body', 'mousedown', function(e) {
-      $(e.target).trigger( 'touchstart' )
-    })
-
-    $(document).delegate( 'body', 'mouseup', function(e) {
-      $(e.target).trigger( 'touchend' )
-    })
-  }
+  Touch.translateTouchEvents()
 
 })
