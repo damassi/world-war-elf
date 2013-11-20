@@ -56,60 +56,73 @@ module.exports = {
       , socket = req.socket
       , io     = sails.io
 
-    Session.findOne({ sessionId: syncCode }, function foundSession (err, session) {
-      if (err) next(err)
-      if (!session) {
-        return next('Session not found!')
-      }
+    Session.findOne({
+      sessionId: syncCode
+    },
 
-      socket.join( syncCode )
-
-      Session.update({ sessionId: syncCode }, {
-        mobileSocketId: socket.id
-      },
-
-      function sessionUpdated (err, session) {
+      function foundSession (err, session) {
         if (err) next(err)
+        if (!session) {
+          return next('Session not found!')
+        }
 
-        session = session.pop()
+        socket.join( syncCode )
 
-        io.sockets.in(syncCode).emit( SocketEvent.SYNCED, {
-          connected: true,
-          session: session,
-          status: 'SessionId: ' + syncCode + ': Clients synced'
-        })
+        Session.update({ sessionId: syncCode }, {
+          mobileSocketId: socket.id
+        },
 
-        res.json({
-          status: 200,
-          session: session
+        function sessionUpdated (err, session) {
+          if (err) next(err)
+
+          session = session.pop()
+
+          io.sockets.in(syncCode).emit( SocketEvent.SYNCED, {
+            connected: true,
+            session: session,
+            status: 'SessionId: ' + syncCode + ': Clients synced'
+          })
+
+          res.json({
+            status: 200,
+            session: session
+          })
         })
       })
-    })
   },
 
 
+
+  /**
+   * The orientation endpoint receives a websocket POST request which then dispatches
+   * updates to registered clients within a room
+   */
 
   orientation: function (req, res, next) {
     var sessionId = req.param('sessionId')
       , socket    = req.socket
       , io        = sails.io
 
-    Session.findOne({ sessionId: sessionId }, function foundSession (err, session) {
-      if (err) next(err)
-      if (!session) {
-        return next('Session not found!')
-      }
+    Session.findOne({
+      sessionId: sessionId
+    },
 
-      var orientation = JSON.parse( req.param( 'orientation' ))
+      function foundSession (err, session) {
+        if (err) next(err)
+        if (!session) {
+          return next('Session not found!')
+        }
 
-      socket.broadcast.to(sessionId).emit( SocketEvent.ORIENTATION, {
-        orientation: orientation
+        var orientation = JSON.parse( req.param( 'orientation' ))
+
+        socket.broadcast.to(sessionId).emit( SocketEvent.ORIENTATION, {
+          orientation: orientation
+        })
+
+        res.json({
+          orientation: orientation
+        })
       })
-
-      res.json({
-        orientation: orientation
-      })
-    })
   },
 
 
