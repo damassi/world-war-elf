@@ -77,7 +77,7 @@ module.exports = {
           connected: true,
           session: session,
           status: 'SessionId: ' + syncCode + ': Clients synced'
-        });
+        })
 
         res.json({
           status: 200,
