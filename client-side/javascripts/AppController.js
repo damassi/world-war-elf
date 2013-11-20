@@ -5,6 +5,7 @@
  * @since  11.18.13
  */
 
+var AppConfig          = require('./config/AppConfig')
 var AppEvent           = require('./events/AppEvent')
 var AppModel           = require('./models/AppModel')
 var AppRouter          = require('./routers/AppRouter')
@@ -47,9 +48,9 @@ var AppController = {
 
     // Instantiate PIXI.js related elements
 
-    this.stage = new PIXI.Stage( 0xFFFFFF )
-    this.renderer = PIXI.autoDetectRenderer( 960, 600 )
-    //this.$canvas.append( this.renderer.view )
+    this.stage = new PIXI.Stage( 0x222222 )
+    this.renderer = PIXI.autoDetectRenderer( AppConfig.DIMENSIONS.width, AppConfig.DIMENSIONS.height )
+    this.$canvas.append( this.renderer.view )
 
 
     // Instantiate game elements
@@ -82,7 +83,7 @@ var AppController = {
     // Start render engine
     // TODO: Should this be kicked off after sync has occured?
 
-    //requestAnimFrame( this.tick )
+    requestAnimFrame( this.tick )
   },
 
 
