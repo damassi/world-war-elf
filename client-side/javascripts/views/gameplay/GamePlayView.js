@@ -15,7 +15,6 @@ var template    = require('./gameplay-template.hbs')
 
 var GamePlayView = View.extend({
 
-  id: 'game-play',
 
   /**
    * @type {Function}
@@ -33,8 +32,6 @@ var GamePlayView = View.extend({
 
   render: function () {
     this._super()
-
-    $('#game-canvas').append( this.appController.renderer.view )
 
     this.stage = this.appController.stage
 
