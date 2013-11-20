@@ -5,13 +5,13 @@
  * @since  11.19.13
  */
 
-var Backbone     = require('backbone')
-var SessionModel = require('../models/SessionModel')
+var Backbone  = require('backbone')
+var UserModel = require('../models/UserModel')
 
 
 var SessionCollection = Backbone.Collection.extend({
 
-  model: SessionModel
+  model: UserModel
 
 })
 

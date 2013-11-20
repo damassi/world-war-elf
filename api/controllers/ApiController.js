@@ -22,7 +22,12 @@ module.exports = {
       , socket = req.socket
       , io     = sails.io
 
-    Session.create({ sessionId: syncCode }, function groupCreated (err, session) {
+    Session.create({
+      sessionId: syncCode,
+      desktopSocketId: socket.id
+    },
+
+    function groupCreated (err, session) {
       if (err) {
         io.sockets.emit( SocketEvent.MESSAGE, {
           message: 'Error creating Session group'
@@ -57,15 +62,25 @@ module.exports = {
         return next('Session not found!')
       }
 
-      io.sockets.in(syncCode).emit( SocketEvent.SYNCED, {
-        connected: true,
-        sessionId: syncCode,
-        status: 'Mobile client id ' + syncCode + ' connected'
-      });
+      Session.update({ sessionId: syncCode }, {
+        mobileSocketId: socket.id
+      },
 
-      res.json({
-        status: 200,
-        syncCode: syncCode
+      function sessionUpdated (err, session) {
+        if (err) next(err)
+
+        session = session.pop()
+
+        io.sockets.in(syncCode).emit( SocketEvent.SYNCED, {
+          connected: true,
+          session: session,
+          status: 'SessionId: ' + syncCode + ': Clients synced'
+        });
+
+        res.json({
+          status: 200,
+          session: session
+        })
       })
     })
   }

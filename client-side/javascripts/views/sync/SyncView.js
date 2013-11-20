@@ -58,6 +58,7 @@ var SyncView = View.extend({
     window.socket.get( AppConfig.ENDPOINTS.generateCode, {},
 
       function onResponse (response) {
+        console.log( response )
         self.$syncMsg.html( 'Please enter this code in your mobile phone: ' + response.syncCode )
       })
   },

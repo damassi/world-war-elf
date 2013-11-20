@@ -13,7 +13,11 @@ module.exports = {
   	sessionId: {
       type: 'STRING',
       required: true
-    }
+    },
+
+    desktopSocketId: 'STRING',
+
+    mobileSocketId: 'STRING'
 
   }
 }

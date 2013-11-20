@@ -46,9 +46,7 @@ var SocketIO = {
 
 
 
-  _onDisconnect: function (socket) {
-    console.log( 'socket disconnected', socket )
-  },
+  _onDisconnect: function (socket) {},
 
 
 
