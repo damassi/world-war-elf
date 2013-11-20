@@ -15,7 +15,8 @@ var AppConfig = {
 
   ENDPOINTS: {
     generateCode: '/api/generate-code',
-    sync: '/api/sync'
+    sync: '/api/sync',
+    orientation: '/api/orientation'
   }
 
 }

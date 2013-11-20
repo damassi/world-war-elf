@@ -18,7 +18,14 @@ var GamePlayView = View.extend({
   render: function (options) {
     this._super()
 
+    window.socket.on( 'orientation', this._onOrientationUpdate )
+
     return this
+  },
+
+
+  _onOrientationUpdate: function (event) {
+    $('.orientation').html( 'x: ' + event.x + ' y: ' + event.y + ' z: ' + event.z )
   }
 
 })

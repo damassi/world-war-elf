@@ -58,7 +58,6 @@ var SyncView = View.extend({
     window.socket.get( AppConfig.ENDPOINTS.generateCode, {},
 
       function onResponse (response) {
-        console.log( response )
         self.$syncMsg.html( 'Please enter this code in your mobile phone: ' + response.syncCode )
       })
   },
@@ -66,7 +65,7 @@ var SyncView = View.extend({
 
 
   _onDesktopClientSynched: function (message) {
-    this.$el.find(".client-msg").html( message.status )
+    this.$el.find(".client-msg").html( message.sessionId )
   }
 
 

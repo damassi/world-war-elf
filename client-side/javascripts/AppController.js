@@ -44,13 +44,18 @@ var AppController = {
     this.$contentContainer = $('#content-container')
 
     this.appModel     = new AppModel()
+
     this.landingView  = new LandingView()
     this.syncView     = new SyncView()
-    this.gamePlayView = new GamePlayView()
+    this.gamePlayView = new GamePlayView({
+      'appModel': this.appModel
+    })
 
     this.mobileModel        = new MobileModel()
     this.mobileSyncView     = new MobileSyncView()
-    this.mobileGamePlayView = new MobileGamePlayView()
+    this.mobileGamePlayView = new MobileGamePlayView({
+      'appModel': this.appModel
+    })
 
     this.delegateEvents()
 
@@ -58,7 +63,9 @@ var AppController = {
       appController: this
     })
 
-    SocketIO.initialize()
+    SocketIO.initialize({
+      appModel: this.appModel
+    })
 
     PubSub.on( AppEvent.SOCKET_IO_CONNECTED, this._onSocketIOConnected )
     PubSub.on( AppEvent.DESKTOP_CLIENT_SYNCED, this._onDesktopClientSynched )
@@ -101,13 +108,23 @@ var AppController = {
 
 
 
-  _onDesktopClientSynched: function (message) {
+  _onDesktopClientSynched: function () {
+    var sessionId = window.socket.socket.sessionid
+
+    if (sessionId !== this.appModel.get('session').desktopSocketId)
+      return
+
     window.location.href = '#/play'
   },
 
 
 
-  _onMobileClientSynched: function (message) {
+  _onMobileClientSynched: function () {
+    var sessionId = window.socket.socket.sessionid
+
+    if (sessionId !== this.appModel.get('session').mobileSocketId)
+      return
+
     window.location.href = '#/mobile/play'
   },
 

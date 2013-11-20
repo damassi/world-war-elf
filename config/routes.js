@@ -18,8 +18,7 @@ module.exports.routes = {
   },
 
   '/mobile/:id': {
-    controller: 'MobileController',
-    action: 'index'
+    view: 'mobile/index'
   }
 
 };

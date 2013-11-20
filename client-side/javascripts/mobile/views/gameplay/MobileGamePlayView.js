@@ -5,6 +5,8 @@
  * @since  11.19.13
  */
 
+var SocketEvent = require('../../../../../shared/events/SocketEvent')
+var AppConfig = require('../../../config/AppConfig')
 var AppEvent = require('../../../events/AppEvent')
 var PubSub   = require('../../../utils/PubSub')
 var View     = require('../../../supers/View')
@@ -23,7 +25,7 @@ var MobileGamePlayView = View.extend({
   render: function (options) {
     this._super()
 
-    this.addEventListeners()
+    _.defer( this.addEventListeners )
 
     return this
   },
@@ -31,6 +33,7 @@ var MobileGamePlayView = View.extend({
 
 
   addEventListeners: function () {
+    console.log( this.appModel.toJSON() )
     window.addEventListener( 'deviceorientation', this._onDeviceOrientationChange )
   },
 
@@ -43,7 +46,15 @@ var MobileGamePlayView = View.extend({
       z: event.alpha,
     }
 
-    window.socket.emit( 'orientation', props )
+    return
+
+    window.socket.post( AppConfig.ENDPOINTS.orientation, {
+      sessionId: syncCode
+    },
+
+      function onResponse (response) {
+
+      })
   }
 
 

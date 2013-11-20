@@ -62,6 +62,8 @@ module.exports = {
         return next('Session not found!')
       }
 
+      socket.join( syncCode )
+
       Session.update({ sessionId: syncCode }, {
         mobileSocketId: socket.id
       },
@@ -77,11 +79,35 @@ module.exports = {
           status: 'SessionId: ' + syncCode + ': Clients synced'
         });
 
+        console.log( sails.io.sockets.clients(syncCode))
+
         res.json({
           status: 200,
           session: session
         })
       })
     })
+  },
+
+
+  orientation: function (req, res, next) {
+    var sessionId = req.param('sessionId')
+
+    Session.findOne({ sessionId: syncCode }, function foundSession (err, session) {
+      if (err) next(err)
+      if (!session) {
+        return next('Session not found!')
+      }
+
+      console.log('Found!', session)
+    })
+  },
+
+
+
+  'save-score': function (req, res, next) {
+    next()
   }
+
+
 };

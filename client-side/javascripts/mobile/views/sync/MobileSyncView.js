@@ -8,6 +8,7 @@
 var AppConfig = require('../../../config/AppConfig')
 var AppEvent = require('../../../events/AppEvent')
 var PubSub   = require('../../../utils/PubSub')
+var SocketIO = require('../../../utils/SocketIO')
 var View     = require('../../../supers/View')
 var template = require('./mobile-sync-template.hbs')
 
@@ -23,7 +24,7 @@ var MobileSyncView = View.extend({
 
 
   events: {
-    'click .btn-submit': '_onSubmitBtnClick'
+    'touchstart .btn-submit': '_onSubmitBtnClick'
   },
 
 
@@ -48,10 +49,11 @@ var MobileSyncView = View.extend({
     },
 
       function onResponse (response) {
-        if (response.status === 200 )
-          PubSub.trigger( AppEvent.MOBILE_CLIENT_SYNCED, response )
-        else
+
+        // If anything but an OK from the server
+        if (response.status !== 200 ) {
           self.$error.html('Error entering code: ' + JSON.stringify( response ))
+        }
       })
   }
 

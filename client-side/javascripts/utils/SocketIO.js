@@ -10,17 +10,20 @@
  */
 
 var SocketEvent = require('../../../shared/events/SocketEvent')
+var AppConfig = require('../config/AppConfig')
 var AppEvent = require('../events/AppEvent')
 var PubSub   = require('./PubSub')
 
 
 var SocketIO = {
 
+  appModel: null,
+
 
   initialize: function (options) {
     _.bindAll(this)
 
-    options = options || {}
+    this.appModel = options.appModel
 
     window.socket = io.connect()
 
@@ -51,14 +54,17 @@ var SocketIO = {
 
 
   _onMessage: function (message) {
-    console.log( message )
-
     PubSub.trigger( AppEvent.SOCKET_IO_MESSAGE, message )
   },
 
 
 
   _onSynced: function (message) {
+
+    this.appModel.set({
+      'session': message.session
+    })
+
     PubSub.trigger( AppEvent.MOBILE_CLIENT_SYNCED, message )
     PubSub.trigger( AppEvent.DESKTOP_CLIENT_SYNCED, message )
   }
