@@ -118,6 +118,16 @@ module.exports = function( grunt ) {
 
     'copy': {
 
+      // PIXI examples for reference
+      examples: {
+        files: [{
+          expand: true,
+          cwd: '<%= frontend %>/vendor/examples',
+          src: '**',
+          dest: '<%= output %>/assets/examples'
+        }]
+      },
+
       images: {
         files: [
           {
@@ -357,6 +367,7 @@ module.exports = function( grunt ) {
     'copy:images',
     'copy:sails',
     'copy:webfonts',
+    'copy:examples',
     'browserify2:compile',
     'sass:compile',
     //'sass:vendor',
