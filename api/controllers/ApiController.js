@@ -5,11 +5,17 @@
  * @description	:: A set of functions called `actions`.
  */
 
-var SocketEvent = require('../../events/SocketEvent')
+var SocketEvent = require('../../shared/events/SocketEvent')
 
 
 module.exports = {
 
+
+  /**
+   * Async socket.io GET request which generates a random code for connecting
+   * to a mobile client.  Additionally, it creates a shared client-server
+   * session model for storing data related individual game interaction
+   */
 
   'generate-code': function (req, res, next) {
     var syncCode = Math.random().toString(36).substring(12)
@@ -34,6 +40,12 @@ module.exports = {
      })
   },
 
+
+
+  /**
+   * Async socket.io POST request sends a previously generated tracking code in order
+   * to connect the desktop and mobile clients together in gameplay
+   */
 
   sync: function (req, res, next) {
     var syncCode = req.param('syncCode')
