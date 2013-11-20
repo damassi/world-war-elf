@@ -6,11 +6,11 @@
  */
 
 var SocketEvent = require('../../../../../shared/events/SocketEvent')
-var AppConfig = require('../../../config/AppConfig')
-var AppEvent = require('../../../events/AppEvent')
-var PubSub   = require('../../../utils/PubSub')
-var View     = require('../../../supers/View')
-var template = require('./mobile-gameplay-template.hbs')
+var AppConfig   = require('../../../config/AppConfig')
+var AppEvent    = require('../../../events/AppEvent')
+var PubSub      = require('../../../utils/PubSub')
+var View        = require('../../../supers/View')
+var template    = require('./mobile-gameplay-template.hbs')
 
 
 var MobileGamePlayView = View.extend({
@@ -21,11 +21,23 @@ var MobileGamePlayView = View.extend({
    */
   template: template,
 
+  /**
+   * Cached global session id for sending POST data to server
+   * @type {String}
+   */
+  sessionId: null,
+
+
 
   render: function (options) {
     this._super()
 
-    _.defer( this.addEventListeners )
+    var self = this
+
+    _.defer( function() {
+      self.sessionId = self.appModel.get('session').sessionId
+      self.addEventListeners()
+    })
 
     return this
   },
@@ -33,27 +45,26 @@ var MobileGamePlayView = View.extend({
 
 
   addEventListeners: function () {
-    console.log( this.appModel.toJSON() )
-    window.addEventListener( 'deviceorientation', this._onDeviceOrientationChange )
+    //window.addEventListener( 'deviceorientation', this._onDeviceOrientationChange )
+    $('body').on('mousemove', this._onDeviceOrientationChange )
   },
 
 
 
   _onDeviceOrientationChange: function (event) {
-    var props = {
+    var orientation = {
       x: event.beta,
       y: event.gamma,
       z: event.alpha,
     }
 
-    return
-
     window.socket.post( AppConfig.ENDPOINTS.orientation, {
-      sessionId: syncCode
+      sessionId: this.sessionId,
+      orientation: JSON.stringify({ x: event.pageX, y: event.pageY })
     },
 
       function onResponse (response) {
-
+        console.log(response.orientation)
       })
   }
 

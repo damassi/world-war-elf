@@ -5,27 +5,33 @@
  * @since  11.19.13
  */
 
-var AppEvent = require('../../events/AppEvent')
-var PubSub   = require('../../utils/PubSub')
-var View     = require('../../supers/View')
-var template = require('./gameplay-template.hbs')
+var SocketEvent = require('../../../../shared/events/SocketEvent')
+var AppEvent    = require('../../events/AppEvent')
+var PubSub      = require('../../utils/PubSub')
+var View        = require('../../supers/View')
+var template    = require('./gameplay-template.hbs')
 
 
 var GamePlayView = View.extend({
 
+
   template: template,
+
 
   render: function (options) {
     this._super()
 
-    window.socket.on( 'orientation', this._onOrientationUpdate )
+    window.socket.on( SocketEvent.ORIENTATION, this._onOrientationUpdate )
 
     return this
   },
 
 
-  _onOrientationUpdate: function (event) {
-    $('.orientation').html( 'x: ' + event.x + ' y: ' + event.y + ' z: ' + event.z )
+
+  _onOrientationUpdate: function (message) {
+    var orientation = message.orientation
+
+    $('.orientation').html( 'x: ' + orientation.x + ' y: ' + orientation.y + ' z: 0' )
   }
 
 })

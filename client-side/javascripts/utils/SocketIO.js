@@ -10,9 +10,9 @@
  */
 
 var SocketEvent = require('../../../shared/events/SocketEvent')
-var AppConfig = require('../config/AppConfig')
-var AppEvent = require('../events/AppEvent')
-var PubSub   = require('./PubSub')
+var AppConfig   = require('../config/AppConfig')
+var AppEvent    = require('../events/AppEvent')
+var PubSub      = require('./PubSub')
 
 
 var SocketIO = {
@@ -60,7 +60,6 @@ var SocketIO = {
 
 
   _onSynced: function (message) {
-
     this.appModel.set({
       'session': message.session
     })

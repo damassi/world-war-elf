@@ -79,8 +79,6 @@ module.exports = {
           status: 'SessionId: ' + syncCode + ': Clients synced'
         });
 
-        console.log( sails.io.sockets.clients(syncCode))
-
         res.json({
           status: 200,
           session: session
@@ -90,16 +88,27 @@ module.exports = {
   },
 
 
+
   orientation: function (req, res, next) {
     var sessionId = req.param('sessionId')
+      , socket    = req.socket
+      , io        = sails.io
 
-    Session.findOne({ sessionId: syncCode }, function foundSession (err, session) {
+    Session.findOne({ sessionId: sessionId }, function foundSession (err, session) {
       if (err) next(err)
       if (!session) {
         return next('Session not found!')
       }
 
-      console.log('Found!', session)
+      var orientation = JSON.parse( req.param( 'orientation' ))
+
+      socket.broadcast.to(sessionId).emit( SocketEvent.ORIENTATION, {
+        orientation: orientation
+      })
+
+      res.json({
+        orientation: orientation
+      })
     })
   },
 
