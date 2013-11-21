@@ -218,7 +218,7 @@ var Easel = (function() {
 		 * Returns the gfx object under the current grid coord
 		 * @param  {Array} matrixCoord the current position on the grid
 		 * @return {Object}			 an object has consisting of the name, id
-		 *							  and location of the object under the current grid coord
+		 *							         and location of the object under the current grid coord
 		 */
 
 		returnObjectUnderMatrixCoord: function (matrixCoord) {
