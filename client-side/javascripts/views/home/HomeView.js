@@ -5,11 +5,11 @@
  * @since  11.18.13
  */
 
-var AppEvent = require('../../events/AppEvent')
-var PubSub   = require('../../utils/PubSub')
-var View     = require('../../supers/View')
-var Easel    = require('../../utils/Easel')
-
+var AppEvent   = require('../../events/AppEvent')
+var PubSub     = require('../../utils/PubSub')
+var View       = require('../../supers/View')
+var Easel      = require('../../utils/Easel')
+var Snowflakes = require('../../utils/Snowflakes')
 
 var HomeView = View.extend({
 
@@ -47,7 +47,7 @@ var HomeView = View.extend({
     this._super()
 
     this.addChildren( this.children )
-
+    new Snowflakes()
     return this
   },
 
