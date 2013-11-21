@@ -29,6 +29,6 @@
 	background: $startColor
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$startColor), color-stop(0%,$endColor), color-stop(100%,$startColor))
 
-=bg-gradient-radial( $endColor, $startColor )
-	background-image: -webkit-radial-gradient(center center, ellipse farthest-corner, $startColor 0%, $endColor 85%)
-	background-image:         radial-gradient(center center, ellipse farthest-corner, $startColor 0%, $endColor 85%)
+=bg-gradient-radial( $endColor, $startColor, $startColorStop: 50% )
+	background-image: -webkit-radial-gradient(center center, ellipse farthest-corner, $startColor 0%, $endColor $startColorStop)
+	background-image:         radial-gradient(center center, ellipse farthest-corner, $startColor 0%, $endColor $startColorStop)
