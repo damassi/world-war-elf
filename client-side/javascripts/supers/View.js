@@ -41,6 +41,13 @@ var View = Backbone.View.extend({
 	container: null,
 
 
+	/**
+	 * An array of all child display objects contained within `container`
+	 * @type {Array}
+	 */
+	children: [],
+
+
 
 	initialize: function (options) {
 		_.extend( this, options || {} )
@@ -104,6 +111,19 @@ var View = Backbone.View.extend({
 			return
 
 		this.stage.removeChild( this.container )
+	},
+
+
+
+	addChildren: function (children) {
+		if (!this.stage)
+			return
+
+		for (var i = 0, len = children.length; i < len; ++i ) {
+			console.log( children[i])
+			this.container.addChild( children[i] )
+		}
+
 	}
 
 

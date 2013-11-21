@@ -10,6 +10,7 @@ var Assets = {
 
 
   manifest: [
+
     {
       name: 'placeholder-home',
       src: path + '/placeholder-home.jpg',

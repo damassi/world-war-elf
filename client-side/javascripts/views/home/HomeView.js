@@ -17,9 +17,14 @@ var HomeView = View.extend({
   initialize: function (options) {
     this._super(options)
 
-    this.placeholder = Easel.createSprite('homeSprite', 'home-ground-back')
+    this.children = [
+      this.placeholder  = Easel.createBitmap('placeholder-home'),
+      this.backGround   = Easel.createSprite('homeSprite', 'home-ground-back'),
+      this.middleGround = Easel.createSprite('homeSprite', 'home-ground-middle'),
+      this.frontGround  = Easel.createSprite('homeSprite', 'home-ground-front')
+    ]
 
-    Easel.dragObject(this.placeholder)
+    Easel.dragObject( this.children )
 
   },
 
@@ -27,7 +32,7 @@ var HomeView = View.extend({
   render: function (options) {
     this._super()
 
-    this.container.addChild( this.placeholder )
+    this.addChildren( this.children )
 
     return this
   }
