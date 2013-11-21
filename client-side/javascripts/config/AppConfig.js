@@ -29,7 +29,11 @@ var AppConfig = {
     generateCode    : '/api/generate-code',
     sync            : '/api/sync',
     orientation     : '/api/orientation'
-  }
+  },
+
+
+
+  ASSET_PATH: '/assets/images/'
 
 }
 

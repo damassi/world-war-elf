@@ -14,19 +14,13 @@ Snowflakes.prototype = {
 
 	sizeClass: [ 'small', 'medium', 'big' ],
 
-	options: {
-
-	},
-
 	initialize: function () {
 		this.$container = $('<div>', {'class': 'snowflake-container'}).prependTo(document.body);
-		this.snow();
+		this.initSnow();
 	},
 	
-	snow: function () {
+	initSnow: function () {
 		this.createFlake();
-		var snowAgain = this._randomNumber(100, 500);
-		setTimeout($.proxy(this.snow, this), snowAgain);
 	},
 
 	createFlake: function () {
@@ -39,6 +33,7 @@ Snowflakes.prototype = {
 			'right': this._percentage(rightPos) 
 		});
 		this.animateFlake($snowflake, rightPos);
+		setTimeout($.proxy(this.createFlake, this), this._randomNumber(100, 500));
 	},
 
 	animateFlake: function ($snowflake, rightPos) {
@@ -47,15 +42,15 @@ Snowflakes.prototype = {
 		var right = this._randomNumber(rightPos + 50, rightPos + 100);
 		//make it fall
 		tl.to($snowflake, duration, { 
-			'top': '100%', 
+			'top'  : '100%', 
 			'right': this._percentage(right), 
-			'ease': 'Linear.easeNone' 
+			'ease' : 'Linear.easeNone' 
 		});
 		//make it disappear
 		tl.to($snowflake, 3, { 
-			opacity: 0, 
-			delay: duration + 15, 
-			ease: 'Linear.easeNone', 
+			'opacity': 0, 
+			'delay'  : duration + 15, 
+			'ease'   : 'Linear.easeNone', 
 			onComplete: function () {
 				$snowflake.remove();
 			}

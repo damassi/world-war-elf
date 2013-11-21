@@ -7,14 +7,36 @@
 
 var Touch         = require('./utils/Touch')
 var AppController = require('./AppController')
+var Assets        = require('./config/Assets')
 
 $(function() {
 
-  AppController.initialize()
   Touch.translateTouchEvents()
 
-  Backbone.history.start({
-    pushState: false
+
+  var loadQueue = new c.LoadQueue()
+
+  loadQueue.addEventListener( "error", function (error) {
+    console.error('LoadError: ', error)
   })
+
+  loadQueue.addEventListener( "progress", function (event) {
+    var progress = Math.round( event.progress * 100 ) + '%'
+  })
+
+  loadQueue.addEventListener( "complete", function (event) {
+    AppController.initialize()
+
+    Backbone.history.start({
+      pushState: false
+    })
+
+  })
+
+  var manifest = _.map(Assets.manifest, function( asset ) {
+    return asset.src
+  })
+
+  loadQueue.loadManifest( manifest )
 
 })
