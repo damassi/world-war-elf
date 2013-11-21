@@ -26,10 +26,13 @@ var HomeView = View.extend({
       this.bigEShadow   = Easel.createSprite('homeSprite', 'home-shadow-E', { x: 258, y: 489 }),
       this.bigE         = Easel.createSprite('homeSprite', 'home-text-E-w-drift', { x: 310, y: 126 }),
       this.worldWar     = Easel.createSprite('homeSprite', 'home-title-ww', { x: 222, y: 58 }),
-      this.elf          = Easel.createSprite('homeSprite', 'home-elf', { x: 625, y: 295 })
+      this.elf          = Easel.createSprite('homeSprite', 'home-elf', { x: 625, y: 295 }),
+
+      this.playbtn        = Easel.createSprite('home-btn-play', 0, { x: 320, y: 500 }),
+      this.scoreBtn       = Easel.createSprite('home-btn-score', 0, { x: 18, y: 510 } ),
     ]
 
-    Easel.dragObject( this.children )
+    //Easel.dragObject( this.children )
 
   },
 
