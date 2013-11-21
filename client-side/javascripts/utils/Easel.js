@@ -7,7 +7,7 @@
  */
 
 
-var assets = require('config/Assets').assets;
+var assets = require('../config/Assets').manifest;
 
 
 var Easel = (function() {
@@ -73,7 +73,7 @@ var Easel = (function() {
 		 */
 
 		createBitmap: function (value, lookupKey) {
-			return new c.Bitmap( Utils.returnAssetImage( value, lookupKey ));
+			return new c.Bitmap( Easel.returnAssetImage( value, lookupKey ));
 		},
 
 
@@ -86,7 +86,7 @@ var Easel = (function() {
 		 */
 
 		createSpriteSheet: function (value, lookupKey) {
-			return new c.BitmapAnimation( new c.SpriteSheet( Utils.returnAssetSpriteSheet( value, lookupKey )));
+			return new c.BitmapAnimation( new c.SpriteSheet( Easel.returnAssetSpriteSheet( value, lookupKey )));
 		},
 
 
@@ -224,7 +224,7 @@ var Easel = (function() {
 		returnObjectUnderMatrixCoord: function (matrixCoord) {
 			var gfxLayout = GameConfig.BOARD().gfxLayout;
 			var gfxId = gfxLayout[matrixCoord[1]][matrixCoord[0]]
-			var asset = Utils.returnAsset( gfxId, 'id' );
+			var asset = Easel.returnAsset( gfxId, 'id' );
 
 			if( !_.isUndefined( asset ))
 				return {

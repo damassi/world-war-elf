@@ -8,6 +8,7 @@
 var AppEvent = require('../../events/AppEvent')
 var PubSub   = require('../../utils/PubSub')
 var View     = require('../../supers/View')
+var Easel    = require('../../utils/Easel')
 
 
 var HomeView = View.extend({
@@ -16,7 +17,9 @@ var HomeView = View.extend({
   initialize: function (options) {
     this._super(options)
 
-    this.placeholder = new c.Bitmap('/assets/images/placeholder-home.jpg')
+    this.placeholder = Easel.createBitmap('homeSprite')//new c.Bitmap('/assets/images/placeholder-home.jpg')
+
+    this.sprite = new c.SpriteSheet()
 
   },
 
