@@ -16,11 +16,16 @@ var HomeView = View.extend({
   initialize: function (options) {
     this._super(options)
 
+    this.placeholder = new c.Bitmap('/assets/images/placeholder-home.jpg')
+
   },
 
 
   render: function (options) {
     this._super()
+
+    this.container.addChild( this.placeholder )
+    this.stage.addChild( this.container )
 
     return this
   }

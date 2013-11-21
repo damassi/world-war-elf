@@ -49,7 +49,7 @@ var View = Backbone.View.extend({
 		if (this.appController) {
 			if (this.appController.stage) {
 				this.stage = this.appController.stage
-				this.container = new PIXI.DisplayObjectContainer()
+				this.container = new c.Container()
 			}
 		}
 

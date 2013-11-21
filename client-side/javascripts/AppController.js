@@ -18,6 +18,7 @@ var MobileModel        = require('./mobile/models/MobileModel')
 var MobileGamePlayView = require('./mobile/views/gameplay/MobileGamePlayView')
 var MobileSyncView     = require('./mobile/views/sync/MobileSyncView')
 
+c = createjs
 
 var AppController = {
 
@@ -46,12 +47,9 @@ var AppController = {
     this.$canvas = $('#game-canvas')
 
 
-    // Instantiate PIXI.js related elements
-
-    this.stage = new PIXI.Stage( 0x222222 )
-    this.renderer = PIXI.autoDetectRenderer( AppConfig.DIMENSIONS.width, AppConfig.DIMENSIONS.height )
-    this.$canvas.append( this.renderer.view )
-
+    // Instantiate CreateJS related elements
+    this.stage = new c.Stage('canvas')
+    c.Ticker.setFPS(60)
 
     // Instantiate game elements
 
@@ -85,11 +83,7 @@ var AppController = {
       appModel: this.appModel
     })
 
-
-    // Start render engine
-    // TODO: Should this be kicked off after sync has occured?
-
-    requestAnimFrame( this.tick )
+    c.Ticker.addEventListener( 'tick', this.tick )
   },
 
 
@@ -110,10 +104,9 @@ var AppController = {
 
 
 
-  tick: function () {
+  tick: function (event) {
     PubSub.trigger( AppEvent.TICK )
-    this.renderer.render( this.stage )
-    requestAnimFrame( this.tick )
+    this.stage.update(event)
   },
 
 
