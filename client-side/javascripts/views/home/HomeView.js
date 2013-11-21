@@ -25,7 +25,6 @@ var HomeView = View.extend({
     this._super()
 
     this.container.addChild( this.placeholder )
-    this.stage.addChild( this.container )
 
     return this
   }
