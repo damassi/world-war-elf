@@ -8,21 +8,14 @@
 var AppEvent = require('../../events/AppEvent')
 var PubSub   = require('../../utils/PubSub')
 var View     = require('../../supers/View')
-var template = require('./landing-template.hbs')
 
 
-var LandingView = View.extend({
+var HomeView = View.extend({
 
   /**
    * @type {String}
    */
-  id: 'landing',
-
-  /**
-   * @type {Function}
-   */
-  template: template,
-
+  id: 'home',
 
 
   events: {
@@ -46,4 +39,4 @@ var LandingView = View.extend({
 
 })
 
-module.exports = LandingView
+module.exports = HomeView

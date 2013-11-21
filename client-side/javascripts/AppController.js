@@ -11,7 +11,7 @@ var AppModel           = require('./models/AppModel')
 var AppRouter          = require('./routers/AppRouter')
 var SocketIO           = require('./utils/SocketIO')
 var PubSub             = require('./utils/PubSub')
-var LandingView        = require('./views/landing/LandingView')
+var HomeView           = require('./views/home/HomeView')
 var SyncView           = require('./views/sync/SyncView')
 var GamePlayView       = require('./views/gameplay/GamePlayView')
 var MobileModel        = require('./mobile/models/MobileModel')
@@ -57,7 +57,7 @@ var AppController = {
 
     this.appModel     = new AppModel()
 
-    this.landingView  = new LandingView()
+    this.homeView     = new HomeView()
     this.syncView     = new SyncView()
     this.gamePlayView = new GamePlayView({
       'appController': this,
