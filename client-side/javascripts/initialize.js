@@ -27,8 +27,6 @@ $(function() {
   loadQueue.addEventListener( "complete", function (event) {
     AppController.initialize()
 
-    console.log( Assets.manifest)
-
     Backbone.history.start({
       pushState: false
     })

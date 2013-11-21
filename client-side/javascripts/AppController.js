@@ -51,6 +51,11 @@ var AppController = {
 
     // Instantiate CreateJS related elements
     this.stage = new c.Stage('canvas')
+    this.stage.mouseEventsEnabled = true
+    this.stage.snapToPixelEnabled = true
+    this.stage.enableMouseOver()
+    c.Touch.enable( this.stage )
+
     c.Ticker.setFPS(60)
 
     // Instantiate game elements

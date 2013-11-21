@@ -19,6 +19,8 @@ var HomeView = View.extend({
 
     this.placeholder = Easel.createSprite('homeSprite', 'home-ground-back')
 
+    Easel.dragObject(this.placeholder)
+
   },
 
 

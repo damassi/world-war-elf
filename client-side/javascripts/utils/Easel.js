@@ -320,8 +320,11 @@ var Easel = (function() {
 		 *
 		 */
 
-		dragObject: function (objArr) {
-			_.each( objArr, function( displayObject ) {
+		dragObject: function (objects) {
+			if (! (objects instanceof Array))
+				objects = [objects]
+
+			_.each( objects, function( displayObject ) {
 
 				if( displayObject instanceof c.Sprite ) {
 					name = displayObject.spriteSheet._images[0].attributes[0].nodeValue;
@@ -333,10 +336,15 @@ var Easel = (function() {
 					name = '';
 				}
 
-				displayObject.onPress = function (evt) {
-					var offset = {x:displayObject.x-evt.stageX, y:displayObject.y-evt.stageY};
+				displayObject.on('mousedown', function (event) {
+					var target = event.currentTarget
 
-					evt.onMouseMove = function(ev) {
+					var offset = {
+						x: displayObject.x - event.stageX,
+						y: displayObject.y - event.stageY
+					};
+
+					target.on('pressmove', function (ev) {
 						var x = ev.stageX+offset.x;
 						var y = ev.stageY+offset.y;
 
@@ -344,8 +352,8 @@ var Easel = (function() {
 						displayObject.y = y;
 
 						console.log( x + ', ' + y, ' > ' + name );
-					}
-				}
+					})
+				})
 			});
 		},
 
