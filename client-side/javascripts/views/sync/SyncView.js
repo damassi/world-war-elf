@@ -9,34 +9,41 @@ var AppConfig = require('../../config/AppConfig')
 var AppEvent  = require('../../events/AppEvent')
 var PubSub    = require('../../utils/PubSub')
 var View      = require('../../supers/View')
-var template  = require('./sync-template.hbs')
 
 
 var SyncView = View.extend({
 
 
   /**
-   * @type {Function}
+   * @type {$}
    */
-  template: template,
+  syncMsg: null,
 
   /**
    * @type {$}
    */
-  $syncMsg: null,
+  clientMsg: null,
 
-  /**
-   * @type {$}
-   */
-  $clientMsg: null,
+
+  initialize: function (options) {
+    this._super(options)
+
+    this.syncMsg = new c.Text("", "20px Arial", "#fff")
+    this.syncMsg.x = 100
+    this.syncMsg.y = 100
+
+    this.clientMsg = new c.Text("Client not connected", "20px Arial", "#fff")
+    this.clientMsg.x = this.syncMsg.x
+    this.clientMsg.y = this.syncMsg.y + 50
+  },
 
 
 
   render: function (options) {
     this._super()
 
-    this.$syncMsg = this.$el.find('.sync-msg')
-    this.$clientMsg = this.$el.find('.client-msg')
+    this.container.addChild( this.syncMsg )
+    this.container.addChild( this.clientMsg )
 
     this.addEventListeners()
     this.requestSyncId()
@@ -58,14 +65,14 @@ var SyncView = View.extend({
     window.socket.get( AppConfig.ENDPOINTS.generateCode, {},
 
       function onResponse (response) {
-        self.$syncMsg.html( 'Please enter this code in your mobile phone: ' + response.syncCode )
+        self.syncMsg.text = 'Please enter this code in your mobile phone: ' + response.syncCode
       })
   },
 
 
 
   _onDesktopClientSynched: function (message) {
-    this.$el.find(".client-msg").html( message.sessionId )
+    this.clientMsg.text = message.sessionId
   }
 
 

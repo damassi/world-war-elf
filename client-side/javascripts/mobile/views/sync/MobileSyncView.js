@@ -30,10 +30,12 @@ var MobileSyncView = View.extend({
 
 
   render: function (options) {
-    this._super()
+    $(".game-wrapper").prepend( this.template() )
 
     this.$syncInput = this.$el.find('.input-sync')
     this.$error = this.$el.find('.error')
+
+    $('.btn-submit').on('touchstart', this._onSubmitBtnClick )
 
     return this
   },
@@ -49,7 +51,7 @@ var MobileSyncView = View.extend({
     },
 
       function onResponse (response) {
-
+        console.log(response)
         // If anything but an OK from the server
         if (response.status !== 200 ) {
           self.$error.html('Error entering code: ' + JSON.stringify( response ))

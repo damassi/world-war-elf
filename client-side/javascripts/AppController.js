@@ -60,16 +60,25 @@ var AppController = {
       appModel: this.appModel
     })
 
-    this.syncView = new SyncView()
+    this.syncView = new SyncView({
+      appController: this,
+      appModel: this.appModel
+    })
 
     this.gamePlayView = new GamePlayView({
       appController: this,
       appModel: this.appModel
     })
 
-    this.mobileModel        = new MobileModel()
-    this.mobileSyncView     = new MobileSyncView()
+    this.mobileModel = new MobileModel()
+
+    this.mobileSyncView = new MobileSyncView({
+      appController: this,
+      appModel: this.appModel
+    })
+
     this.mobileGamePlayView = new MobileGamePlayView({
+      appController: this,
       appModel: this.appModel
     })
 
