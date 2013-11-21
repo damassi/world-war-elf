@@ -2,3 +2,36 @@
 // Utils
 // ---------------------------------------+
 //
+
+$snowflake-size: 12px
+
+.snowflake-container
+	position: fixed
+	top: 0
+	height: 100%
+	width: 100%
+	background-color: transparent
+	z-index: 9999
+
+.snowflake
+	display: block
+	position: absolute
+	top: -10%
+	// opacity: .5
+	border-radius: 50%
+	+bg-gradient-radial(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), 50%)
+
+	&.small
+		height: $snowflake-size / 2
+		width: $snowflake-size / 2
+		margin-top: ($snowflake-size / 2) / - 2
+
+	&.medium
+		width: $snowflake-size
+		height: $snowflake-size
+		margin-top: $snowflake-size / -2
+
+	&.big
+		width: $snowflake-size * 2
+		height: $snowflake-size * 2
+		margin-top: ($snowflake-size * 2) / - 2
