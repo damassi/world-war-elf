@@ -79,10 +79,10 @@ var Easel = (function() {
 
 
 		/**
-		 * Creates a spritesheet and returns c.BitmapAnimation object
+		 * Creates a spritesheet and returns c.Sprite object
 		 * @param  {*} value the value-pair of the asset
 		 * @param  {String} key to search under
-		 * @return {c.BitmapAnimation}  The animated spritesheet
+		 * @return {c.Sprite}  The animated spritesheet
 		 */
 
 		createSprite: function (value, gotoFrameName) {
@@ -289,11 +289,11 @@ var Easel = (function() {
 		/**
 		 * Moves all frame reg-points to the center.
 		 * USE WITH CAUTION:  Adjusting the internals invalidates pixel-snapping
-		 * @param  {BitmapAnimation} bitmapAnimation
+		 * @param  {Sprite} bitmapAnimation
 		 */
 
-		centerSpriteSheetRegPoint: function (bitmapAnimation) {
-			_.each( bitmapAnimation.spriteSheet._frames, function( frame ) {
+		centerSpriteSheetRegPoint: function (sprite) {
+			_.each( sprite.spriteSheet._frames, function( frame ) {
 				frame.regX = frame.rect.width * .5
 				frame.regY = frame.rect.height * .5
 			});
@@ -303,7 +303,7 @@ var Easel = (function() {
 
 		/**
 		 * Animates a spritesheet once and then returns to old position
-		 * @param  {c.BitmapAnimation} spritesheet
+		 * @param  {c.Sprite} spritesheet
 		 * @param  {String} frameLabel the frame label
 		 */
 
@@ -323,7 +323,7 @@ var Easel = (function() {
 		dragObject: function (objArr) {
 			_.each( objArr, function( displayObject ) {
 
-				if( displayObject instanceof c.BitmapAnimation ) {
+				if( displayObject instanceof c.Sprite ) {
 					name = displayObject.spriteSheet._images[0].attributes[0].nodeValue;
 				}
 				else if( displayObject instanceof c.Bitmap) {

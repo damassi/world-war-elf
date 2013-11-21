@@ -19,8 +19,6 @@ var HomeView = View.extend({
 
     this.placeholder = Easel.createSprite('homeSprite', 'home-ground-back')
 
-    this.sprite = new c.SpriteSheet()
-
   },
 
 

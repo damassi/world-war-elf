@@ -22,11 +22,9 @@ $(function() {
 
   loadQueue.addEventListener( "progress", function (event) {
     var progress = Math.round( event.progress * 100 ) + '%'
-    //console.log( progress )
   })
 
   loadQueue.addEventListener( "complete", function (event) {
-    //console.log(event)
     AppController.initialize()
 
     console.log( Assets.manifest)
@@ -37,13 +35,10 @@ $(function() {
 
   })
 
-  var imgPath = '/assets/images/'
+  var manifest = _.map(Assets.manifest, function( asset ) {
+    return asset.src
+  })
 
-  loadQueue.loadManifest([
-    imgPath + 'spritesheets/sprites-home.json',
-    imgPath + 'spritesheets/sprites-home.png',
-    imgPath + 'spritesheets/sprites-game.json',
-    imgPath + 'spritesheets/sprites-game.png',
-  ])
+  loadQueue.loadManifest( manifest )
 
 })
