@@ -9,7 +9,8 @@
     "ejs": "0.8.4",
     "optimist": "0.3.4",
     "sails-mongo": "~0.9.5",
-    "node-monkey": "~0.2.8"
+    "node-monkey": "~0.2.8",
+    "q": "~0.9.7"
   },
   "main": "app.js",
   "devDependencies": {

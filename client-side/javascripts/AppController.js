@@ -18,7 +18,9 @@ var MobileModel        = require('./mobile/models/MobileModel')
 var MobileGamePlayView = require('./mobile/views/gameplay/MobileGamePlayView')
 var MobileSyncView     = require('./mobile/views/sync/MobileSyncView')
 
+// Globally rewrite namespace cjs to c
 c = createjs
+
 
 var AppController = {
 
