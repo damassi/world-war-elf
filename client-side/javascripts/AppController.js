@@ -164,11 +164,10 @@ var AppController = {
 
     this.cleanUpViews( previousView )
 
-    this.$contentContainer.append( view.render().el )
-
-    view.show({
+    view.render().show({
       animated: true
     })
+
   }
 
 }
