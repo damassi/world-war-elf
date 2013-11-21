@@ -13,15 +13,48 @@ var View = Backbone.View.extend({
 
 
 	/**
-	 * @type {String}
+	 * A ref to the primary AppController, passed in during view
+	 * initialization
+	 * @type {AppController}
 	 */
-	className: 'view',
+	appController: null,
+
+
+	/**
+	 * A ref to the primary AppModel
+	 * @type {AppModel}
+	 */
+	appModel: null,
+
+
+	/**
+   * A ref to the primary stage located on AppController
+   * @type {PIXI.Stage}
+   */
+	stage: null,
+
+
+	/**
+	 * The views display object container
+	 * @type {PIXI.DisplayObjectContainer}
+	 */
+	container: null,
 
 
 
 	initialize: function (options) {
 		_.extend( this, options || {} )
 		_.bindAll( this )
+
+		if (this.appController) {
+			if (this.appController.stage) {
+				this.stage = this.appController.stage
+				this.container = new PIXI.DisplayObjectContainer()
+			}
+		}
+
+		if (this.appModel)
+			this.appModel = this.appModel
 	},
 
 

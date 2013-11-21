@@ -15,20 +15,11 @@ var View        = require('../../supers/View')
 var GamePlayView = View.extend({
 
 
-  /**
-   * A ref to the primary stage located on AppController
-   * @type {PIXI.Stage}
-   */
-  stage: null,
-
-
   bunny: null,
 
 
   render: function () {
     this._super()
-
-    this.stage = this.appController.stage
 
     var position = {
       x: AppConfig.DIMENSIONS.width * .5,
@@ -42,7 +33,9 @@ var GamePlayView = View.extend({
     this.bunny.position.x = 200
     this.bunny.position.y = 200
 
-    this.stage.addChild( this.bunny )
+    this.container.addChild( this.bunny )
+
+    this.stage.addChild( this.container )
 
     this.addEventListeners()
 

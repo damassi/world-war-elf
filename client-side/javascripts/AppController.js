@@ -55,29 +55,34 @@ var AppController = {
 
     // Instantiate game elements
 
-    this.appModel     = new AppModel()
+    this.appModel = new AppModel()
 
-    this.homeView     = new HomeView()
-    this.syncView     = new SyncView()
+    this.homeView = new HomeView({
+      appController: this,
+      appModel: this.appModel
+    })
+
+    this.syncView = new SyncView()
+
     this.gamePlayView = new GamePlayView({
-      'appController': this,
-      'appModel': this.appModel
+      appController: this,
+      appModel: this.appModel
     })
 
     this.mobileModel        = new MobileModel()
     this.mobileSyncView     = new MobileSyncView()
     this.mobileGamePlayView = new MobileGamePlayView({
-      'appModel': this.appModel
+      appModel: this.appModel
     })
 
     this.delegateEvents()
 
     this.appRouter = new AppRouter({
-      'appController': this
+      appController: this
     })
 
     SocketIO.initialize({
-      'appModel': this.appModel
+      appModel: this.appModel
     })
 
 
