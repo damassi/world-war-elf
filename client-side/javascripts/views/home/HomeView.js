@@ -17,7 +17,7 @@ var HomeView = View.extend({
   initialize: function (options) {
     this._super(options)
 
-    this.placeholder = Easel.createSpriteSheet('homeSprite', 'home-ground-back')
+    this.placeholder = Easel.createSprite('homeSprite', 'home-ground-back')
 
     this.sprite = new c.SpriteSheet()
 

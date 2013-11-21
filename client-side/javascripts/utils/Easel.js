@@ -85,13 +85,13 @@ var Easel = (function() {
 		 * @return {c.BitmapAnimation}  The animated spritesheet
 		 */
 
-		createSpriteSheet: function (value, gotoFrameName) {
-			var bm = new c.BitmapAnimation( new c.SpriteSheet( Easel.returnAssetSpriteSheet( value )));
+		createSprite: function (value, gotoFrameName) {
+			var sprite = new c.Sprite( new c.SpriteSheet( Easel.returnAssetSpriteSheet( value )));
 
 			if (!_.isUndefined(gotoFrameName))
-				bm.gotoAndStop(gotoFrameName)
+				sprite.gotoAndStop(gotoFrameName)
 
-			return bm
+			return sprite
 		},
 
 
