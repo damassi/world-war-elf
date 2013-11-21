@@ -39,6 +39,11 @@ var MobileGamePlayView = View.extend({
       self.addEventListeners()
     })
 
+    $('.desktop .message').html('desktop client connected')
+    $('.mobile .message').html('mobile client connected')
+    $('.btn-submit').remove()
+    $('.input-sync').remove()
+
     return this
   },
 

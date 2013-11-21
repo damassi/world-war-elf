@@ -26,14 +26,16 @@ var GamePlayView = View.extend({
       y: AppConfig.DIMENSIONS.height * .5
     }
 
-    this.bunny = new PIXI.Sprite(new PIXI.Texture.fromImage('/assets/images/bunny.png'))
-    this.bunny.anchor.x = 0.5
-    this.bunny.anchor.y = 0.5
-    this.bunny.position.x = 200
-    this.bunny.position.y = 200
+    $('.desktop .message').html('desktop client connected')
+    $('.mobile .message').html('mobile client connected')
+    $('.btn-submit').remove()
+    $('.input-sync').remove()
+
+    this.bunny = new c.Bitmap('/assets/images/bunny.png')
+    this.bunny.x = 0.5
+    this.bunny.y = 0.5
 
     this.container.addChild( this.bunny )
-    this.stage.addChild( this.container )
 
     this.addEventListeners()
 
@@ -61,8 +63,8 @@ var GamePlayView = View.extend({
   _onOrientationUpdate: function (message) {
     var orientation = message.orientation
 
-    this.bunny.position.x = orientation.x
-    this.bunny.position.y = orientation.y
+    this.bunny.x = orientation.x
+    this.bunny.y = orientation.y
 
     // orientation.z
   }

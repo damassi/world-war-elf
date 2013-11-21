@@ -30,10 +30,7 @@ var MobileSyncView = View.extend({
 
 
   render: function (options) {
-    $(".game-wrapper").prepend( this.template() )
-
-    this.$syncInput = this.$el.find('.input-sync')
-    this.$error = this.$el.find('.error')
+    this._super()
 
     $('.btn-submit').on('touchstart', this._onSubmitBtnClick )
 
@@ -43,18 +40,20 @@ var MobileSyncView = View.extend({
 
 
   _onSubmitBtnClick: function (event) {
+    event.preventDefault()
+
     var self = this
-      , syncCode = this.$syncInput.val()
+      , syncCode = $('.input-sync').val()
 
     window.socket.post( AppConfig.ENDPOINTS.sync, {
       syncCode: syncCode
     },
 
       function onResponse (response) {
-        console.log(response)
+
         // If anything but an OK from the server
         if (response.status !== 200 ) {
-          self.$error.html('Error entering code: ' + JSON.stringify( response ))
+          $('.mobile .message').html('Error entering code: ' + JSON.stringify( response ))
         }
       })
   }

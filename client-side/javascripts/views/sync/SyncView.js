@@ -35,6 +35,8 @@ var SyncView = View.extend({
     this.clientMsg = new c.Text("Client not connected", "20px Arial", "#fff")
     this.clientMsg.x = this.syncMsg.x
     this.clientMsg.y = this.syncMsg.y + 50
+
+    $('.desktop .message').html('Client not connected')
   },
 
 
@@ -66,6 +68,7 @@ var SyncView = View.extend({
 
       function onResponse (response) {
         self.syncMsg.text = 'Please enter this code in your mobile phone: ' + response.syncCode
+        $('.desktop .message').html('Please enter this code in your mobile phone: ' + response.syncCode)
       })
   },
 

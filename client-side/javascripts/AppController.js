@@ -78,7 +78,6 @@ var AppController = {
     })
 
     this.mobileGamePlayView = new MobileGamePlayView({
-      appController: this,
       appModel: this.appModel
     })
 
