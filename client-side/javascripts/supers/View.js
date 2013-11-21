@@ -68,11 +68,7 @@ var View = Backbone.View.extend({
 		if (data instanceof Backbone.Model)
 			data = this.data.toJSON()
 
-		this.$el.html( this.template( data ))
-
 		this.delegateEvents()
-
-		this.$el.appendTo( '#container-content' )
 
 		return this
 	},
@@ -86,7 +82,10 @@ var View = Backbone.View.extend({
 	show: function (options) {
 		options = options || {}
 
-		this.$el.show()
+		if (!this.stage)
+			return
+
+		this.stage.addChild( this.container )
 	},
 
 
@@ -97,6 +96,15 @@ var View = Backbone.View.extend({
 		if (options.remove)
 		 	this.remove()
 	},
+
+
+
+	remove: function (options) {
+		if (!this.stage)
+			return
+
+		this.stage.removeChild( this.container )
+	}
 
 
 
