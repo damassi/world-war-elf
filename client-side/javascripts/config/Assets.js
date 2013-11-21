@@ -5,6 +5,7 @@
 
 var path = require('./AppConfig').ASSET_PATH
 
+
 var Assets = {
 
 

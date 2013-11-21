@@ -72,8 +72,8 @@ var Easel = (function() {
 		 * @return {c.Bitmap}  The bitmap
 		 */
 
-		createBitmap: function (value, lookupKey) {
-			return new c.Bitmap( Easel.returnAssetImage( value, lookupKey ));
+		createBitmap: function (value) {
+			return new c.Bitmap( Easel.returnAssetImage( value ));
 		},
 
 
@@ -85,8 +85,13 @@ var Easel = (function() {
 		 * @return {c.BitmapAnimation}  The animated spritesheet
 		 */
 
-		createSpriteSheet: function (value, lookupKey) {
-			return new c.BitmapAnimation( new c.SpriteSheet( Easel.returnAssetSpriteSheet( value, lookupKey )));
+		createSpriteSheet: function (value, gotoFrameName) {
+			var bm = new c.BitmapAnimation( new c.SpriteSheet( Easel.returnAssetSpriteSheet( value )));
+
+			if (!_.isUndefined(gotoFrameName))
+				bm.gotoAndStop(gotoFrameName)
+
+			return bm
 		},
 
 
@@ -146,8 +151,8 @@ var Easel = (function() {
 		 * @return {Object}	  the asset
 		 */
 
-		returnAsset: function (value, lookupKey) {
-			if( _.isUndefined( lookupKey )) lookupKey = DEFAULT_KEY;
+		returnAsset: function (value) {
+			var lookupKey = DEFAULT_KEY;
 
 			var len = assets.length;
 			for( var i = 0; i < len; ++i ) {
@@ -171,8 +176,8 @@ var Easel = (function() {
 		 * @return {String}	  the asset url
 		 */
 
-		returnAssetImage: function (value, lookupKey) {
-			if( _.isUndefined( lookupKey )) lookupKey = DEFAULT_KEY;
+		returnAssetImage: function (value) {
+			var lookupKey = DEFAULT_KEY;
 
 			var len = assets.length;
 			for( var i = 0; i < len; ++i ) {
@@ -196,8 +201,8 @@ var Easel = (function() {
 		 * @return {Object}	  the asset spritesheet
 		 */
 
-		returnAssetSpriteSheet: function (value, lookupKey) {
-			if( _.isUndefined( lookupKey )) lookupKey = DEFAULT_KEY;
+		returnAssetSpriteSheet: function (value) {
+			var lookupKey = DEFAULT_KEY;
 
 			var len = assets.length;
 			for( var i = 0; i < len; ++i ) {
