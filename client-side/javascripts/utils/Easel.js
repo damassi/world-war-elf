@@ -20,6 +20,7 @@ var Easel = (function() {
 	var DEFAULT_KEY = 'name'
 
 
+
 	return {
 
 		/**
@@ -370,7 +371,7 @@ var Easel = (function() {
 			for( var i = 0; i < aLen; i++ ) {
 				transformedArray[i] = new Array();
 
-				// fill the row with everything in the appropriate column of the source array
+				// Fill the row with everything in the appropriate column of the source array
 				var transformedArrayColumn = -1;
 				var bLen = array.length - 1;
 				for ( var j = bLen; j > -1; j-- ) {

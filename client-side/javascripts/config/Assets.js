@@ -11,6 +11,11 @@ var Assets = {
 
   manifest: [
     {
+      name: 'placeholder-home',
+      src: path + '/placeholder-home.jpg',
+    },
+
+    {
       name: 'homeSprite',
       src: path + 'spritesheets/sprites-home.png',
 
