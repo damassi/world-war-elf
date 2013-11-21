@@ -26,15 +26,13 @@ var GamePlayView = View.extend({
       y: AppConfig.DIMENSIONS.height * .5
     }
 
-    var texture = new PIXI.Texture.fromImage('/assets/images/bunny.png')
-    this.bunny = new PIXI.Sprite(texture)
+    this.bunny = new PIXI.Sprite(new PIXI.Texture.fromImage('/assets/images/bunny.png'))
     this.bunny.anchor.x = 0.5
     this.bunny.anchor.y = 0.5
     this.bunny.position.x = 200
     this.bunny.position.y = 200
 
     this.container.addChild( this.bunny )
-
     this.stage.addChild( this.container )
 
     this.addEventListeners()
