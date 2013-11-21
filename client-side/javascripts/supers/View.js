@@ -119,10 +119,8 @@ var View = Backbone.View.extend({
 		if (!this.stage)
 			return
 
-		for (var i = 0, len = children.length; i < len; ++i ) {
-			console.log( children[i])
+		for (var i = 0, len = children.length; i < len; ++i)
 			this.container.addChild( children[i] )
-		}
 
 	}
 
