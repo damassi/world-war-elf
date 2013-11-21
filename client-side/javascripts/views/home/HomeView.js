@@ -14,6 +14,12 @@ var Easel    = require('../../utils/Easel')
 var HomeView = View.extend({
 
 
+  canvasEvents: {
+    'playBtn mouseover' : '_onPlayBtnOver',
+    'playBtn rollout'   : '_onPlayBtnOut'
+  },
+
+
   initialize: function (options) {
     this._super(options)
 
@@ -28,8 +34,8 @@ var HomeView = View.extend({
       this.worldWar     = Easel.createSprite('homeSprite', 'home-title-ww', { x: 222, y: 58 }),
       this.elf          = Easel.createSprite('homeSprite', 'home-elf', { x: 625, y: 295 }),
 
-      this.playbtn        = Easel.createSprite('home-btn-play', 0, { x: 320, y: 500 }),
-      this.scoreBtn       = Easel.createSprite('home-btn-score', 0, { x: 18, y: 510 } ),
+      this.playBtn      = Easel.createSprite('home-btn-play', 0, { x: 320, y: 500 }),
+      this.scoreBtn     = Easel.createSprite('home-btn-score', 0, { x: 18, y: 510 } ),
     ]
 
     //Easel.dragObject( this.children )
@@ -43,6 +49,16 @@ var HomeView = View.extend({
     this.addChildren( this.children )
 
     return this
+  },
+
+
+  _onPlayBtnOver: function (event) {
+    console.log('over!')
+  },
+
+
+  _onPlayBtnOut: function (event) {
+    console.log('out')
   }
 
 

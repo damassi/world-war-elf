@@ -29,14 +29,14 @@ var View = Backbone.View.extend({
 
 	/**
    * A ref to the primary stage located on AppController
-   * @type {PIXI.Stage}
+   * @type {c.Stage}
    */
 	stage: null,
 
 
 	/**
 	 * The views display object container
-	 * @type {PIXI.DisplayObjectContainer}
+	 * @type {c.Container}
 	 */
 	container: null,
 
@@ -57,11 +57,32 @@ var View = Backbone.View.extend({
 			if (this.appController.stage) {
 				this.stage = this.appController.stage
 				this.container = new c.Container()
+
+				this.bindCanvasEvents()
 			}
 		}
 
 		if (this.appModel)
 			this.appModel = this.appModel
+	},
+
+
+
+	bindCanvasEvents: function() {
+		var self = this
+
+		_.defer(function() {
+			if (!_.isUndefined( self.canvasEvents )) {
+				for (event in self.canvasEvents) {
+					var evtName = event.split(' ')
+					var displayObject = evtName.shift()
+					var handler = self.canvasEvents[event]
+					if (self[displayObject]) {
+						self[displayObject].on(evtName, self[handler])
+					}
+				}
+			}
+		})
 	},
 
 
