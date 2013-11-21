@@ -58,31 +58,12 @@ var View = Backbone.View.extend({
 				this.stage = this.appController.stage
 				this.container = new c.Container()
 
-				this.bindCanvasEvents()
+				this._bindCanvasEvents()
 			}
 		}
 
 		if (this.appModel)
 			this.appModel = this.appModel
-	},
-
-
-
-	bindCanvasEvents: function() {
-		var self = this
-
-		_.defer(function() {
-			if (!_.isUndefined( self.canvasEvents )) {
-				for (event in self.canvasEvents) {
-					var evtName = event.split(' ')
-					var displayObject = evtName.shift()
-					var handler = self.canvasEvents[event]
-					if (self[displayObject]) {
-						self[displayObject].on(evtName, self[handler])
-					}
-				}
-			}
-		})
 	},
 
 
@@ -143,7 +124,7 @@ var View = Backbone.View.extend({
 		for (var i = 0, len = children.length; i < len; ++i)
 			this.container.addChild( children[i] )
 
-	}
+	},
 
 
 
@@ -154,6 +135,24 @@ var View = Backbone.View.extend({
 
 	//+ PRIVATE METHODS
 	//--------------------------------------
+
+
+	_bindCanvasEvents: function() {
+		var self = this
+
+		_.defer(function() {
+			if (!_.isUndefined( self.canvasEvents )) {
+				for (event in self.canvasEvents) {
+					var evtName = event.split(' ')
+					var displayObject = evtName.shift()
+					var handler = self.canvasEvents[event]
+					if (self[displayObject]) {
+						self[displayObject].on(evtName, self[handler])
+					}
+				}
+			}
+		})
+	}
 
 })
 
