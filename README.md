@@ -18,6 +18,56 @@ Project Setup
 (Please note that depending upon your setup you may need `sudo` permissions to execute the above commands.)
 
 
+CreateJS Examples
+-----------------
+
+- http://localhost:3000/assets/examples/createjs/examples/AlphaMaskReveal.html
+- http://localhost:3000/assets/examples/createjs/examples/APITest.html
+- http://localhost:3000/assets/examples/createjs/examples/BarGraph.html
+- http://localhost:3000/assets/examples/createjs/examples/BitmapAnimation.html
+- http://localhost:3000/assets/examples/createjs/examples/BitmapText.html
+- http://localhost:3000/assets/examples/createjs/examples/Cache_update.html
+- http://localhost:3000/assets/examples/createjs/examples/Cache_vday.html
+- http://localhost:3000/assets/examples/createjs/examples/Cache.html
+- http://localhost:3000/assets/examples/createjs/examples/CurveTo.html
+- http://localhost:3000/assets/examples/createjs/examples/DoubleClickTest.html
+- http://localhost:3000/assets/examples/createjs/examples/DragAndDrop_hitArea.html
+- http://localhost:3000/assets/examples/createjs/examples/DragAndDrop.html
+- http://localhost:3000/assets/examples/createjs/examples/EventBubbling.html
+- http://localhost:3000/assets/examples/createjs/examples/ExtractFrame.html
+- http://localhost:3000/assets/examples/createjs/examples/Filters_input.html
+- http://localhost:3000/assets/examples/createjs/examples/Filters_simple.html
+- http://localhost:3000/assets/examples/createjs/examples/Filters.html
+- http://localhost:3000/assets/examples/createjs/examples/Game.html
+- http://localhost:3000/assets/examples/createjs/examples/GlobalToLocal1.html
+- http://localhost:3000/assets/examples/createjs/examples/GlobalToLocal2.html
+- http://localhost:3000/assets/examples/createjs/examples/Graphics_inject.html
+- http://localhost:3000/assets/examples/createjs/examples/Graphics_simple.html
+- http://localhost:3000/assets/examples/createjs/examples/Graphics_winding.html
+- http://localhost:3000/assets/examples/createjs/examples/GraphicsReuse.html
+- http://localhost:3000/assets/examples/createjs/examples/GraphicsTest.html
+- http://localhost:3000/assets/examples/createjs/examples/GraphicsTestTiny.html
+- http://localhost:3000/assets/examples/createjs/examples/HelloWorld.html
+- http://localhost:3000/assets/examples/createjs/examples/HtmlElements.html
+- http://localhost:3000/assets/examples/createjs/examples/Icons.html
+- http://localhost:3000/assets/examples/createjs/examples/LocalToGlobal.html
+- http://localhost:3000/assets/examples/createjs/examples/Masks.html
+- http://localhost:3000/assets/examples/createjs/examples/MovieClip.html
+- http://localhost:3000/assets/examples/createjs/examples/RollOverMouseOver.html
+- http://localhost:3000/assets/examples/createjs/examples/Segments.html
+- http://localhost:3000/assets/examples/createjs/examples/Sparkles.html
+- http://localhost:3000/assets/examples/createjs/examples/SparklesFade.html
+- http://localhost:3000/assets/examples/createjs/examples/SpriteSheet_simple.html
+- http://localhost:3000/assets/examples/createjs/examples/SpriteSheet.html
+- http://localhost:3000/assets/examples/createjs/examples/SpriteSheetBuilder.html
+- http://localhost:3000/assets/examples/createjs/examples/Text_links.html
+- http://localhost:3000/assets/examples/createjs/examples/Text_multiline.html
+- http://localhost:3000/assets/examples/createjs/examples/Text_simple.html
+- http://localhost:3000/assets/examples/createjs/examples/Transform_simple.html
+- http://localhost:3000/assets/examples/createjs/examples/Transform.html
+- http://localhost:3000/assets/examples/createjs/examples/TwoStages.html
+
+
 PIXI Examples
 -------------
 Once the server is running you can hit the examples here:
