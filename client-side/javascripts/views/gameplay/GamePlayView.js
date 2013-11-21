@@ -10,16 +10,10 @@ var AppConfig   = require('../../config/AppConfig')
 var AppEvent    = require('../../events/AppEvent')
 var PubSub      = require('../../utils/PubSub')
 var View        = require('../../supers/View')
-var template    = require('./gameplay-template.hbs')
 
 
 var GamePlayView = View.extend({
 
-
-  /**
-   * @type {Function}
-   */
-  template: template,
 
   /**
    * A ref to the primary stage located on AppController
@@ -29,6 +23,7 @@ var GamePlayView = View.extend({
 
 
   bunny: null,
+
 
   render: function () {
     this._super()
@@ -78,8 +73,7 @@ var GamePlayView = View.extend({
     this.bunny.position.x = orientation.x
     this.bunny.position.y = orientation.y
 
-    $('.orientation').html( 'x: ' + orientation.x + ' y: ' + orientation.y + ' z: 0' )
-
+    // orientation.z
   }
 
 })

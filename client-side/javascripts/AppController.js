@@ -45,10 +45,13 @@ var AppController = {
     this.$contentContainer = $('#game-play')
     this.$canvas = $('#game-canvas')
 
+
     // Instantiate PIXI.js related elements
+
     this.stage = new PIXI.Stage( 0x222222 )
     this.renderer = PIXI.autoDetectRenderer( AppConfig.DIMENSIONS.width, AppConfig.DIMENSIONS.height )
     this.$canvas.append( this.renderer.view )
+
 
     // Instantiate game elements
 
