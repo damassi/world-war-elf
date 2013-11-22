@@ -17,6 +17,11 @@ var Assets = {
     },
 
     {
+      name: 'frame-background',
+      src: path + '/frame-background.jpg',
+    },
+
+    {
       name: 'homeSprite',
       src: path + 'spritesheets/sprites-home.png',
 

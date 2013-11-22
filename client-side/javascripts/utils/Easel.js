@@ -100,7 +100,7 @@ var Easel = (function() {
 				}
 			};
 
-			return false;
+			return new Error('Asset not found');
 		},
 
 

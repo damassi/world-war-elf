@@ -11,6 +11,8 @@ var AppModel           = require('./models/AppModel')
 var AppRouter          = require('./routers/AppRouter')
 var SocketIO           = require('./utils/SocketIO')
 var PubSub             = require('./utils/PubSub')
+var Snowflakes         = require('./utils/Snowflakes')
+var Easel              = require('./utils/Easel')
 var HomeView           = require('./views/home/HomeView')
 var SyncView           = require('./views/sync/SyncView')
 var GamePlayView       = require('./views/gameplay/GamePlayView')
@@ -48,17 +50,16 @@ var AppController = {
     this.$contentContainer = $('#game-play')
     this.$canvas = $('#game-canvas')
 
+    new Snowflakes()
 
-    // Instantiate CreateJS related elements
     this.stage = new c.Stage('canvas')
     this.stage.mouseEventsEnabled = true
     this.stage.snapToPixelEnabled = true
     this.stage.enableMouseOver()
     c.Touch.enable( this.stage )
-
     c.Ticker.setFPS(60)
 
-    // Instantiate game elements
+
 
     this.appModel = new AppModel()
 
@@ -97,6 +98,8 @@ var AppController = {
     SocketIO.initialize({
       appModel: this.appModel
     })
+
+    this.stage.addChild( Easel.createBitmap( 'frame-background' ))
 
     c.Ticker.addEventListener( 'tick', this.tick )
   },

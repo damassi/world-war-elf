@@ -9,7 +9,7 @@ var AppEvent   = require('../../events/AppEvent')
 var PubSub     = require('../../utils/PubSub')
 var View       = require('../../supers/View')
 var Easel      = require('../../utils/Easel')
-var Snowflakes = require('../../utils/Snowflakes')
+
 
 var HomeView = View.extend({
 
@@ -29,9 +29,9 @@ var HomeView = View.extend({
     this._super(options)
 
     this.children = [
-      this.placeholder  = Easel.createBitmap('placeholder-home'),
+      //this.placeholder  = Easel.createBitmap('placeholder-home'),
       this.backGround   = Easel.createSprite('homeSprite', 'home-ground-back', { x: -7, y: 410 }),
-      this.middleGround = Easel.createSprite('homeSprite', 'home-ground-middle', { x: 232, y: 427 }),
+      this.middleGround = Easel.createSprite('homeSprite', 'home-ground-middle', { x: 232, y: 440 }),
       this.frontGround  = Easel.createSprite('homeSprite', 'home-ground-front', { x: 0, y: 437 }),
 
       this.bigEShadow   = Easel.createSprite('homeSprite', 'home-shadow-E', { x: 258, y: 489 }),
@@ -50,8 +50,6 @@ var HomeView = View.extend({
 
   render: function (options) {
     this._super()
-
-    new Snowflakes()
 
     this.addChildren( this.children )
 
