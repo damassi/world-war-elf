@@ -6,19 +6,18 @@
  * @updated 11.19.13
  */
 
-
 var assets = require('../config/Assets').manifest;
 
 
-/**
- * Set the default search key for asset queries
- * @type {String}
- */
-var DEFAULT_KEY = 'name'
-
-
-
 var Easel = {
+
+
+	/**
+	 * Set the default search key for asset queries
+	 * @type {String}
+	 */
+	DEFAULT_KEY: 'name',
+
 
 	/**
 	 * Creates a bitmap
@@ -85,7 +84,7 @@ var Easel = {
 	 */
 
 	returnAsset: function (value) {
-		var lookupKey = DEFAULT_KEY;
+		var lookupKey = this.DEFAULT_KEY;
 
 		var len = assets.length;
 		for( var i = 0; i < len; ++i ) {
@@ -110,7 +109,7 @@ var Easel = {
 	 */
 
 	returnAssetImage: function (value) {
-		var lookupKey = DEFAULT_KEY;
+		var lookupKey = this.DEFAULT_KEY;
 
 		var len = assets.length;
 		for( var i = 0; i < len; ++i ) {
@@ -135,7 +134,7 @@ var Easel = {
 	 */
 
 	returnAssetSpriteSheet: function (value) {
-		var lookupKey = DEFAULT_KEY;
+		var lookupKey = this.DEFAULT_KEY;
 
 		var len = assets.length;
 		for( var i = 0; i < len; ++i ) {
