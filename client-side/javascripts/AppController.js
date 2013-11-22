@@ -50,7 +50,7 @@ var AppController = {
     this.$contentContainer = $('#game-play')
     this.$canvas = $('#game-canvas')
 
-    new Snowflakes()
+    Snowflakes.initialize()
 
     this.stage = new c.Stage('canvas')
     this.stage.mouseEventsEnabled = true

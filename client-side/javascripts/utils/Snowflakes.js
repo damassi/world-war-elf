@@ -4,18 +4,41 @@
  * @author Charlie
  */
 
-function Snowflakes() {
-  this.initialize();
-}
+Snowflakes = {
 
-Snowflakes.prototype = {
-
+  /**
+   * window reference
+   * @type {jQuery}
+   */
   $window     : $(window),
-  $container  : null,                    
+
+  /**
+   * Snowflake element wrapper
+   * @type {jQuery}
+   */
+  $container  : null,
+
+  /**
+   * viewport width
+   * @type {Number}
+   */
   winWidth    : 0,
+
+  /**
+   * viewport height
+   * @type {Number}
+   */
   winHeight   : 0,
+
+  /**
+   * Snowflake size classes
+   * @type {Array}
+   */
   sizeClasses : [ 'small', 'medium', 'big' ], 
 
+  /**
+   * Initializes Snow
+   */
   initialize: function () {
     this.$container = $('<div>', {'class': 'snowflake-container'}).prependTo(document.body);
     this.winWidth   = this.$window.width();
@@ -32,7 +55,7 @@ Snowflakes.prototype = {
   },
   
   /**
-   * Initializes snow
+   * Initializes flakes
    */
   initSnow: function () {
     this.createFlake();
