@@ -4,71 +4,100 @@
  * @author Charlie
  */
 
-function Snowflakes(options) {
-	this.initialize();
+function Snowflakes() {
+  this.initialize();
 }
 
 Snowflakes.prototype = {
 
-	$container: null,
+  $window     : $(window),
+  $container  : null,                    
+  winWidth    : 0,
+  winHeight   : 0,
+  sizeClasses : [ 'small', 'medium', 'big' ], 
 
-	sizeClass: [ 'small', 'medium', 'big' ],
+  initialize: function () {
+    this.$container = $('<div>', {'class': 'snowflake-container'}).prependTo(document.body);
+    this.winWidth   = this.$window.width();
+    this.winHeight  = this.$window.height();
+    this.addEventlisteners(); 
+    this.initSnow();
+  },
 
-	initialize: function () {
-		this.$container = $('<div>', {'class': 'snowflake-container'}).prependTo(document.body);
-		this.initSnow();
-	},
-	
-	initSnow: function () {
-		this.createFlake();
-	},
+  /**
+   * Event listeners
+   */
+  addEventlisteners: function () {
+    this.$window.resize($.proxy(this._onWindowResize, this));
+  },
+  
+  /**
+   * Initializes snow
+   */
+  initSnow: function () {
+    this.createFlake();
+  },
 
-	createFlake: function () {
-		var $snowflake = $('<div>', {'class': 'snowflake'});
-		var rightPos = this._randomNumber(100, -100);
-		var size = this.randomSize();
-		$snowflake.addClass(size);
-		$snowflake.prependTo(this.$container);
-		$snowflake.css({
-			'right': this._percentage(rightPos) 
-		});
-		this.animateFlake($snowflake, rightPos);
-		setTimeout($.proxy(this.createFlake, this), this._randomNumber(100, 500));
-	},
+  /**
+   * creates snowflakes
+   */
+  createFlake: function () {
+    var $snowflake = $('<div>', {'class': 'snowflake'});
+    var sizeClasses  = this.sizeClasses[ this._randomNumber(0, this.sizeClasses.length - 1) ];
+    var rightPos   = this._randomNumber(100, -100);
+    var opacity    = this._randomNumber(50, 90) / 100;
 
-	animateFlake: function ($snowflake, rightPos) {
-		var tl = new TimelineLite();
-		var duration = this._randomNumber(10, 15);
-		var right = this._randomNumber(rightPos + 50, rightPos + 100);
-		//make it fall
-		tl.to($snowflake, duration, { 
-			'top'  : '100%', 
-			'right': this._percentage(right), 
-			'ease' : 'Linear.easeNone' 
-		});
-		//make it disappear
-		tl.to($snowflake, 3, { 
-			'opacity': 0, 
-			'delay'  : duration + 15, 
-			'ease'   : 'Linear.easeNone', 
-			onComplete: function () {
-				$snowflake.remove();
-			}
-		});
-	},
+    $snowflake.addClass(sizeClasses)
+              .prependTo(this.$container)
+              .css({
+                'right'   : rightPos + '%',
+                'opacity' : opacity
+              });
 
-	randomSize: function () {
-		var from = 0, to = this.sizeClass.length - 1;
-		return this.sizeClass[ this._randomNumber(from, to) ];
-	},
+    //create next snowflake
+    setTimeout($.proxy(this.createFlake, this), this._randomNumber(100, 300));
+    this.animateFlake($snowflake);
+  },
 
-	_randomNumber: function (from, to) {
-		return Math.floor( Math.random() * (to-from+1) + from);
-	},
+  /**
+   * Animates element
+   * @param  {jQuery} $snowflake
+   */
+  animateFlake: function ($snowflake) {
+    var timeline = new TimelineLite();
+    var duration = this._randomNumber(10, 15);
+    var right = this._randomNumber(this.winWidth / 2, this.winWidth) /* go left */ * - 1;
 
-	_percentage: function (value) {
-		return parseInt(value, 10) + '%';
-	}
+    //make it fall
+    timeline.to($snowflake, duration, { 
+      'y'        : this.winHeight * 1.5, 
+      'x'        : right, 
+      'ease'     : 'Linear.easeNone',
+      //remove from DOM on complete
+      onComplete : function () {
+        $snowflake.remove();
+      }
+    });
+  },
+
+  /**
+   * Generates random number
+   * @param  {Number} from
+   * @param  {Number} to
+   * @return {Number} random value
+   */
+  _randomNumber: function (from, to) {
+    return Math.floor( Math.random() * (to-from+1) + from);
+  },
+
+  /**
+   * Resize event hanlder
+   * @param {Object} event object
+   */
+  _onWindowResize: function (event) {
+    this.winWidth   = this.$window.width();
+    this.winHeight  = this.$window.height();
+  }
 
 };
 
