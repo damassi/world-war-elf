@@ -20,50 +20,7 @@ var Easel = (function() {
 	var DEFAULT_KEY = 'name'
 
 
-
 	return {
-
-		/**
-		 * Returns a random nunber within two ranges
-		 * @param {Number} min
-		 * @param {Number} max
-		 */
-
-		randRange: function (min, max) {
-			return Math.floor(Math.random() * (max - min + 1)) + min;
-		},
-
-
-
-		/**
-		 * Returns a random hex color
-		 *
-		 */
-
-		returnRandomHexColor: function() {
-			var letters = '0123456789ABCDEF'.split('');
-			var color = '#';
-			for ( var i = 0; i < 6; i++ ) {
-				color += letters[ Math.round( Math.random() * 15 ) ];
-			}
-
-			return color;
-		},
-
-
-
-		/**
-		 * convert our score to a 4 digit number
-		 * @param  {int} $scoreInt an int holding our current score
-		 * @return {string} a 4 digit string
-		 */
-
-		convertScore: function (scoreInt) {
-			var scoreStr = scoreInt+"";
-	    	while (scoreStr.length < 4) { scoreStr = "0" + scoreStr; }
-	    	return scoreStr;
-		},
-
 
 
 		/**
@@ -120,39 +77,6 @@ var Easel = (function() {
 			height = height || 0;
 
 			parent.hitArea = new c.Shape( new c.Graphics().beginFill("#f00").drawRect( 0, 0, width, height ));
-		},
-
-
-
-		/**
-		 * Check to see if we're a supported mobile device
-		 * @return {Boolean} true if mobile, false if not
-		 */
-
-		isMobile: function () {
-			if(navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iPhone|iPad|iPod/i) || navigator.userAgent.match(/IEMobile/i)){
-				return true;
-			}else{
-				return false;
-			}
-		},
-
-
-
-		isIOS: function () {
-			if(navigator.userAgent.match(/iPhone|iPad|iPod/i)){
-				return true;
-			}else{
-				return false;
-			}
-		},
-
-
-
-		isIE: function (){
-			if( navigator.userAgent.match(/IE/i)){
-				return true;
-			}
 		},
 
 
@@ -320,7 +244,7 @@ var Easel = (function() {
 		 */
 
 		animateOnce: function (spritesheet, frameLabel) {
-			spritesheet.onAnimationEnd = function() { this.gotoAndStop( frameLabel ) };
+			spritesheet.on('animationend', function() { this.gotoAndStop( frameLabel ) });
 			spritesheet.gotoAndPlay( frameLabel );
 		},
 
@@ -367,6 +291,82 @@ var Easel = (function() {
 					})
 				})
 			});
+		},
+
+
+
+		/**
+		 * Check to see if we're a supported mobile device
+		 * @return {Boolean} true if mobile, false if not
+		 */
+
+		isMobile: function () {
+			if(navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iPhone|iPad|iPod/i) || navigator.userAgent.match(/IEMobile/i)){
+				return true;
+			}else{
+				return false;
+			}
+		},
+
+
+
+		isIOS: function () {
+			if(navigator.userAgent.match(/iPhone|iPad|iPod/i)){
+				return true;
+			}else{
+				return false;
+			}
+		},
+
+
+
+		isIE: function (){
+			if( navigator.userAgent.match(/IE/i)){
+				return true;
+			}
+		},
+
+
+
+		/**
+		 * Returns a random nunber within two ranges
+		 * @param {Number} min
+		 * @param {Number} max
+		 */
+
+		randRange: function (min, max) {
+			return Math.floor(Math.random() * (max - min + 1)) + min;
+		},
+
+
+
+		/**
+		 * Returns a random hex color
+		 *
+		 */
+
+		returnRandomHexColor: function() {
+			var letters = '0123456789ABCDEF'.split('');
+			var color = '#';
+			for ( var i = 0; i < 6; i++ ) {
+				color += letters[ Math.round( Math.random() * 15 ) ];
+			}
+
+			return color;
+		},
+
+
+
+		/**
+		 * convert our score to a 4 digit number
+		 * @param  {int} $scoreInt an int holding our current score
+		 * @return {string} a 4 digit string
+		 */
+
+		convertScore: function (scoreInt) {
+			var scoreStr = scoreInt+"";
+	    	while (scoreStr.length < 4) { scoreStr = "0" + scoreStr; }
+	    	return scoreStr;
 		},
 
 

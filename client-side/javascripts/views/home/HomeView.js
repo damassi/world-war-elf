@@ -15,8 +15,13 @@ var HomeView = View.extend({
 
 
   canvasEvents: {
-    'playBtn mouseover' : '_onPlayBtnOver',
-    'playBtn rollout'   : '_onPlayBtnOut'
+    'playBtn mouseover' : '_onBtnOver',
+    'playBtn rollout'   : '_onBtnOut',
+    'playBtn click'     : '_onPlayBtnClick',
+
+    'scoreBtn mouseover' : '_onBtnOver',
+    'scoreBtn rollout'   : '_onBtnOut',
+    'scoreBtn click'     : '_onScoreBtnClick',
   },
 
 
@@ -46,19 +51,41 @@ var HomeView = View.extend({
   render: function (options) {
     this._super()
 
-    this.addChildren( this.children )
     new Snowflakes()
+
+    this.addChildren( this.children )
+
     return this
   },
 
 
-  _onPlayBtnOver: function (event) {
-    console.log('over!')
+
+
+  //+ EVENT HANDLERS
+  //--------------------------------------
+
+
+
+  _onBtnOver: function (event) {
+    Easel.animateOnce( event.currentTarget, 'over' )
   },
 
 
-  _onPlayBtnOut: function (event) {
-    console.log('out')
+
+  _onBtnOut: function (event) {
+    Easel.animateOnce( event.currentTarget, 'out' )
+  },
+
+
+
+  _onPlayBtnClick: function (event) {
+    window.location.href ='#/sync'
+  },
+
+
+
+  _onScoreBtnClick: function (event) {
+    window.location.href ='#/sync'
   }
 
 

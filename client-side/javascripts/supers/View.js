@@ -1,12 +1,10 @@
 /**
- * View Superclass
+ * Easel js view which builds standard backbone functionality in order to provide
+ * canvas functionality
  *
  * @author christopher.pappas@popagency.com
- * @since  10.10.13
+ * @since  11.17.13
  */
-
-var AppEvent  = require('../events/AppEvent')
-var PubSub    = require('../utils/PubSub')
 
 
 var View = Backbone.View.extend({
@@ -57,7 +55,6 @@ var View = Backbone.View.extend({
 			if (this.appController.stage) {
 				this.stage = this.appController.stage
 				this.container = new c.Container()
-
 				this._bindCanvasEvents()
 			}
 		}
@@ -140,18 +137,20 @@ var View = Backbone.View.extend({
 	_bindCanvasEvents: function() {
 		var self = this
 
-		_.defer(function() {
-			if (!_.isUndefined( self.canvasEvents )) {
-				for (event in self.canvasEvents) {
-					var evtName = event.split(' ')
-					var displayObject = evtName.shift()
-					var handler = self.canvasEvents[event]
-					if (self[displayObject]) {
-						self[displayObject].on(evtName, self[handler])
-					}
-				}
-			}
-		})
+    _.defer(function() {
+      if (typeof self.canvasEvents !== 'undefined') {
+        for (event in self.canvasEvents) {
+          var evtName = event.split(' ')
+            , objName = evtName.shift()
+            , handler = self.canvasEvents[event]
+            , displayObject = self[objName]
+
+          if (displayObject) {
+            displayObject.on(evtName, self[handler])
+          }
+        }
+      }
+    })
 	}
 
 })
