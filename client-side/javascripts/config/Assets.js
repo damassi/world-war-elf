@@ -17,8 +17,46 @@ var Assets = {
     },
 
     {
+      name: 'placeholder-instructions',
+      src: path + '/placeholder-instructions.jpg',
+    },
+
+    {
       name: 'frame-background',
       src: path + '/frame-background.jpg',
+    },
+
+    {
+        name: 'instructionsSprite',
+        src: path + 'spritesheets/sprites-instructions.png',
+
+        spritesheet: {
+            "images": [path + "spritesheets/sprites-instructions.png"],
+            "frames": [
+
+                [1134, 171, 245, 32],
+                [933, 182, 199, 13],
+                [1134, 105, 231, 64],
+                [640, 182, 291, 20],
+                [640, 100, 399, 80],
+                [1041, 100, 62, 51],
+                [1270, 2, 65, 101],
+                [2, 2, 636, 204],
+                [640, 2, 628, 96]
+            ],
+            "animations": {
+
+                    "instructions-btn-mouse-grass":[0],
+                    "instructions-btn-mouse-snow":[1],
+                    "instructions-btn-mouse":[2],
+                    "instructions-btn-phone-snow":[3],
+                    "instructions-btn-phone":[4],
+                    "instructions-mouse-gfx":[5],
+                    "instructions-phone-gfx":[6],
+                    "instructions-text-instructions":[7],
+                    "instructions-text-mission":[8]
+            },
+        }
     },
 
     {

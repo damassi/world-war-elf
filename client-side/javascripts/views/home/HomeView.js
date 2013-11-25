@@ -56,6 +56,7 @@ var HomeView = View.extend({
   },
 
 
+
   render: function (options) {
     this._super()
 

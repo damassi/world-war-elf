@@ -32,7 +32,8 @@ var AppRouter = Backbone.Router.extend({
 
     // Desktop Routes
 
-    ''       : 'homeRoute',
+    //''       : 'homeRoute',
+    ''       : 'instructionsRoute',
     'sync'   : 'syncRoute',
     'play'   : 'gamePlayRoute',
 
@@ -55,7 +56,7 @@ var AppRouter = Backbone.Router.extend({
 
 
 
-  homeRoute: function (options) {
+  homeRoute: function () {
     var view = this.appController.homeView
 
     this.appModel.set({
@@ -66,7 +67,17 @@ var AppRouter = Backbone.Router.extend({
 
 
 
-  syncRoute: function (options) {
+  instructionsRoute: function () {
+    var view = this.appController.instructionsView
+
+    this.appModel.set({
+      view: view
+    })
+  },
+
+
+
+  syncRoute: function () {
     var view = this.appController.syncView
 
     this.appModel.set({
@@ -77,7 +88,7 @@ var AppRouter = Backbone.Router.extend({
 
 
 
-  gamePlayRoute: function (options) {
+  gamePlayRoute: function () {
     var view = this.appController.gamePlayView
     this.appModel.set({
       view: view

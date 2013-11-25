@@ -14,6 +14,7 @@ var PubSub             = require('./utils/PubSub')
 var Snowflakes         = require('./utils/Snowflakes')
 var Easel              = require('./utils/Easel')
 var HomeView           = require('./views/home/HomeView')
+var InstructionsView   = require('./views/instructions/InstructionsView')
 var SyncView           = require('./views/sync/SyncView')
 var GamePlayView       = require('./views/gameplay/GamePlayView')
 var MobileModel        = require('./mobile/models/MobileModel')
@@ -78,6 +79,11 @@ var AppController = {
       appModel: this.appModel
     })
 
+    this.instructionsView = new InstructionsView({
+      appController: this,
+      appModel: this.appModel
+    })
+
     this.mobileModel = new MobileModel()
 
     this.mobileSyncView = new MobileSyncView({
@@ -103,7 +109,7 @@ var AppController = {
 
     c.Ticker.addEventListener( 'tick', this.tick )
 
-    this.animateIn()
+    //this.animateIn()
   },
 
 
@@ -144,9 +150,9 @@ var AppController = {
 
 
   animateIn: function () {
-    TweenMax.set( this.$contentContainer, { autoAlpha: 0, scale: .1, rotation: 0 })
+    TweenMax.set( this.$contentContainer, { autoAlpha: 0, scale: .6, rotation: 0 })
 
-    TweenMax.to( this.$contentContainer, 1, {
+    TweenMax.to( this.$contentContainer, .6, {
       scale: 1,
       autoAlpha: 1,
       rotation: 0,
