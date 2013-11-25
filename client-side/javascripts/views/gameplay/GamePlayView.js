@@ -35,15 +35,15 @@ var GamePlayView = View.extend({
     this.hudView = new HUDView({ appController: this.appController })
 
     this.children = [
-      this.placeholder  = Easel.createBitmap('placeholder-gameplay'),
+      //this.placeholder  = Easel.createBitmap('placeholder-gameplay'),
 
       this.enemy0  = Easel.createSprite('gameplaySprite', 'game-enemy-1', { x: 163, y: 121 }),
       this.backGround   = Easel.createSprite('gameplaySprite', 'game-ground-back', { x: 0, y: 148 }),
 
       this.enemy1  = Easel.createSprite('gameplaySprite', 'game-enemy-2', { x: 290, y: 200 }),
+      this.enemy2  = Easel.createSprite('gameplaySprite', 'game-enemy-3', { x: 763, y: 229 }),
       this.middleGround = Easel.createSprite('gameplaySprite', 'game-ground-middle', { x: 0, y: 311 }),
 
-      this.enemy2  = Easel.createSprite('gameplaySprite', 'game-enemy-3', { x: 763, y: 229 }),
       this.signPopUp  = Easel.createSprite('gameplaySprite', 'game-sign-popup', { x: 156, y: 401 }, { center: true  }),
       this.frontGround  = Easel.createSprite('gameplaySprite', 'game-ground-front', { x: 0, y: 453 }),
 
@@ -69,11 +69,6 @@ var GamePlayView = View.extend({
     $('.btn-submit').remove()
     $('.input-sync').remove()
 
-    this.bunny = new c.Bitmap('/assets/images/bunny.png')
-    this.bunny.x = 0.5
-    this.bunny.y = 0.5
-
-    this.container.addChild( this.bunny )
 
     this.addChildren( this.children )
     this.container.addChild( this.hudView.render().container )
@@ -104,8 +99,8 @@ var GamePlayView = View.extend({
   _onOrientationUpdate: function (message) {
     var orientation = message.orientation
 
-    this.bunny.x = orientation.x
-    this.bunny.y = orientation.y
+    this.crossHairs.x = orientation.x
+    this.crossHairs.y = orientation.y
 
     // orientation.z
   }
