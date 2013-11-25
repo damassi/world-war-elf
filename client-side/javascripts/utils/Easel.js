@@ -65,13 +65,26 @@ var Easel = {
 
 
 
-	Text: function (str, fontFace, fontSize, color, params, stroke) {
+	/**
+	 * TODO: Abstract this out into seperate Text class and rewrite for
+	 * extensibility
+	 *
+	 * @param  {String} str          The text to place in the textfield
+	 * @param  {String} fontFace
+	 * @param  {String} fontSize     The size, with a 'px'
+	 * @param  {String} color        Color, in format '#333'
+	 * @param  {Object} params       Additional EaselJS properties
+	 * @param  {Object} strokeParams Stroke parameters
+	 * @return {Class}               A new text object witha few
+	 */
+
+	Text: function (str, fontFace, fontSize, color, params, strokeParams) {
 		var container = new c.Container()
 		var text = new c.Text( str, fontSize + ' ' + fontFace, color )
 
-		if (!_.isUndefined(stroke)) {
-			var textStroke = new c.Text( str, fontSize + ' ' + fontFace, stroke.color )
-			textStroke.outline = stroke.size
+		if (!_.isUndefined(strokeParams)) {
+			var textStroke = new c.Text( str, fontSize + ' ' + fontFace, strokeParams.color )
+			textStroke.outline = strokeParams.size
 			container.addChild( textStroke )
 		}
 
@@ -81,8 +94,8 @@ var Easel = {
 			for (var param in params)
 				container[param] = params[param]
 
-
 		return {
+
 			container: container,
 
 			getText: function () {
