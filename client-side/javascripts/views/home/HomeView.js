@@ -69,14 +69,27 @@ var HomeView = View.extend({
   show: function () {
     this._super()
 
-    //console.log( this.worldWar.width)
-
     TweenMax.fromTo( this.worldWar, .4, { scaleX: .1, scaleY: .1, alpha: 0 }, {
       scaleX: 1,
       scaleY: 1,
       alpha: 1,
       ease: Back.easeOut,
-      delay: 1
+      delay: .5
+    })
+
+    TweenMax.fromTo( this.bigEShadow, .6, { scaleX: .1, scaleY: .1, alpha: 0}, {
+      scaleX: 1,
+      scaleY: 1,
+      alpha: 1,
+      ease: Bounce.easeOut,
+      delay: .7
+    })
+
+    TweenMax.from( this.bigE, .6, {
+      alpha: 0,
+      y: -300,
+      ease: Bounce.easeOut,
+      delay: .7
     })
   },
 

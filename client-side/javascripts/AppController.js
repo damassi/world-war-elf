@@ -103,7 +103,7 @@ var AppController = {
 
     c.Ticker.addEventListener( 'tick', this.tick )
 
-    //this.animateIn()
+    this.animateIn()
   },
 
 
@@ -144,13 +144,14 @@ var AppController = {
 
 
   animateIn: function () {
-    TweenMax.set( this.$contentContainer, { autoAlpha: 0, scale: 2.5 })
+    TweenMax.set( this.$contentContainer, { autoAlpha: 0, scale: .1, rotation: 0 })
 
-    TweenMax.to( this.$contentContainer, 3, {
+    TweenMax.to( this.$contentContainer, 1, {
       scale: 1,
       autoAlpha: 1,
+      rotation: 0,
       ease: Expo.easeOut,
-      delay: .5
+      delay: .3
     })
   },
 
