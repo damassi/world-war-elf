@@ -18,8 +18,8 @@ var HUDView = View.extend({
 
 
   TEXT_POS: {
-    time: { x: 860, y: 20 },
-    presents: { x: 880, y: 65 }
+    time: { x: 945, y: 20 },
+    presents: { x: 945, y: 65 }
   },
 
 
@@ -36,20 +36,23 @@ var HUDView = View.extend({
     this.timeText = new Easel.Text('0:00', 'Luckiest Guy', '39px', '#fff', {
       x: this.TEXT_POS.time.x,
       y: this.TEXT_POS.time.y,
-      textAlign: 'right'
     }, {
       size: 5,
       color: '#333'
     })
 
-    this.presentsText = new Easel.Text('11', 'Luckiest Guy', '79px', '#ff0000', {
+    this.presentsText = new Easel.Text('0', 'Luckiest Guy', '79px', '#ff0000', {
       x: this.TEXT_POS.presents.x,
       y: this.TEXT_POS.presents.y,
-      textAlign: 'right'
     }, {
       size: 5,
       color: '#333'
     })
+
+
+    this.timeText.textAlign('right')
+    this.presentsText.textAlign('right')
+
 
     this.children = [
       this.hudClock    = Easel.createSprite('gameplaySprite', 'game-hud-clock', { x: 820, y: 15 }),
@@ -62,12 +65,10 @@ var HUDView = View.extend({
 
     Easel.dragObject( this.children )
 
-
     this.timer = new Timer({
       direction: 'up',
       startValue: '0:00'
     })
-
 
     this.timer.on( 'change', this._onTimerUpdate )
   },

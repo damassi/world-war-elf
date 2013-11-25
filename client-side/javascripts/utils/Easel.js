@@ -107,6 +107,13 @@ var Easel = {
 				if (textStroke) {
 					textStroke.text = str
 				}
+			},
+
+			textAlign: function (align) {
+				text.textAlign = align
+				if (textStroke) {
+					textStroke.textAlign = align
+				}
 			}
 		}
 	},
