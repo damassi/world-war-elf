@@ -52,6 +52,7 @@ var InstructionsView = View.extend({
     ]
 
     Easel.dragObject( this.children )
+
   },
 
 

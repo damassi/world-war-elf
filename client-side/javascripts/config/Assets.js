@@ -13,17 +13,57 @@ var Assets = {
 
     {
       name: 'placeholder-home',
-      src: path + '/placeholder-home.jpg',
+      src: path + 'placeholder-home.jpg',
     },
 
     {
       name: 'placeholder-instructions',
-      src: path + '/placeholder-instructions.jpg',
+      src: path + 'placeholder-instructions.jpg',
+    },
+
+    {
+      name: 'placeholder-gameplay',
+      src: path + 'placeholder-gameplay.jpg',
     },
 
     {
       name: 'frame-background',
-      src: path + '/frame-background.jpg',
+      src: path + 'frame-background.jpg',
+    },
+
+    {
+      name: 'gameplaySprite',
+      src: path + 'spritesheets/sprites-game.png',
+
+      spritesheet: {
+        "images": [path + "spritesheets/sprites-game.png"],
+        "frames": [
+
+            [1449, 192, 112, 113],
+            [1354, 192, 93, 144],
+            [1115, 192, 113, 184],
+            [1230, 192, 122, 142],
+            [2, 2, 960, 255],
+            [2, 259, 960, 165],
+            [964, 2, 960, 188],
+            [1001, 371, 33, 36],
+            [964, 371, 35, 39],
+            [964, 192, 149, 177]
+        ],
+        "animations": {
+
+                "game-crosshairs":[0],
+                "game-enemy-1":[1],
+                "game-enemy-2":[2],
+                "game-enemy-3":[3],
+                "game-ground-back":[4],
+                "game-ground-front":[5],
+                "game-ground-middle":[6],
+                "game-hud-clock":[7],
+                "game-hud-gift":[8],
+                "game-sign-popup":[9]
+        },
+      }
     },
 
     {

@@ -33,7 +33,8 @@ var AppRouter = Backbone.Router.extend({
     // Desktop Routes
 
     //''       : 'homeRoute',
-    ''       : 'instructionsRoute',
+    //''       : 'instructionsRoute',
+    ''       : 'gamePlayRoute',
     'sync'   : 'syncRoute',
     'play'   : 'gamePlayRoute',
 
