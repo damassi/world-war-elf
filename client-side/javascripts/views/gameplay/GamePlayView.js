@@ -35,7 +35,7 @@ var GamePlayView = View.extend({
     this.hudView = new HUDView({ appController: this.appController })
 
     this.children = [
-//      this.placeholder  = Easel.createBitmap('placeholder-gameplay'),
+      this.placeholder  = Easel.createBitmap('placeholder-gameplay'),
 
       this.enemy0  = Easel.createSprite('gameplaySprite', 'game-enemy-1', { x: 163, y: 121 }),
       this.backGround   = Easel.createSprite('gameplaySprite', 'game-ground-back', { x: 0, y: 148 }),
@@ -50,7 +50,7 @@ var GamePlayView = View.extend({
       this.crossHairs  = Easel.createSprite('gameplaySprite', 'game-crosshairs', { x: 468, y: 245 }),
     ]
 
-    Easel.dragObject( this.children )
+    //Easel.dragObject( this.children )
 
   },
 

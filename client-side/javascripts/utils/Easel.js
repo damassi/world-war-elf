@@ -65,6 +65,18 @@ var Easel = {
 
 
 
+	createText: function (text, fontFace, fontSize, color, params) {
+		var text = new c.Text( text, fontSize + ' ' + fontFace, color )
+
+		if (!_.isUndefined(params))
+			for (var param in params)
+				text[param] = params[param]
+
+		return text
+	},
+
+
+
 	/**
 	 * Creates a hit area for DisplayObjects
 	 * @param  {DisplayObject} parent

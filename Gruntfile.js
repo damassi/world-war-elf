@@ -87,6 +87,7 @@ module.exports = function( grunt ) {
           '<%= frontend %>/vendor/scripts/greensock/easing/EasePack.js',
           '<%= frontend %>/vendor/scripts/greensock/plugins/CSSPlugin.js',
           '<%= frontend %>/vendor/scripts/greensock/plugins/GreenProp.js',
+          '<%= frontend %>/vendor/scripts/greensock/plugins/EaselPlugin.js',
         ],
 
         dest: '<%= output %>/assets/javascripts/vendor.js'
