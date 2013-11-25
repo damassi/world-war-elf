@@ -51,7 +51,7 @@ var HomeView = View.extend({
       this.grassSprouts = Easel.createSprite('homeSprite', 'home-grass-sprouts', { x: 7, y: 486 }),
     ]
 
-    Easel.dragObject( this.children )
+    //Easel.dragObject( this.children )
 
   },
 
@@ -116,13 +116,13 @@ var HomeView = View.extend({
 
 
   _onPlayBtnClick: function (event) {
-    //window.location.href ='#/sync'
+    window.location.href ='#/sync'
   },
 
 
 
   _onScoreBtnClick: function (event) {
-    //window.location.href ='#/sync'
+    window.location.href ='#/sync'
   }
 
 
