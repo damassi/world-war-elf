@@ -10,7 +10,8 @@
     "optimist": "0.3.4",
     "sails-mongo": "~0.9.5",
     "node-monkey": "~0.2.8",
-    "q": "~0.9.7"
+    "q": "~0.9.7",
+    "time-counter": "0.0.2"
   },
   "main": "app.js",
   "devDependencies": {

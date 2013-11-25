@@ -5,6 +5,7 @@
  * @since  11.25.13
  */
 
+var Timer       = require('time-counter')
 var SocketEvent = require('../../../../shared/events/SocketEvent')
 var AppConfig   = require('../../config/AppConfig')
 var AppEvent    = require('../../events/AppEvent')
@@ -22,11 +23,33 @@ var HUDView = View.extend({
   },
 
 
+  /**
+   * @type {Timer}
+   */
+  timer: null,
+
+
+
   initialize: function (options) {
     this._super(options)
 
-    this.timeText = new Easel.Text('0:00', 'Luckiest Guy', '39px', '#fff', { x: this.TEXT_POS.time.x, y: this.TEXT_POS.time.y }, {size: 5, color: '#333' })
-    this.presentsText = new Easel.Text('11', 'Luckiest Guy', '79px', '#ff0000', { x: this.TEXT_POS.presents.x, y: this.TEXT_POS.presents.y }, {size: 5, color: '#333' })
+    this.timeText = new Easel.Text('0:00', 'Luckiest Guy', '39px', '#fff', {
+      x: this.TEXT_POS.time.x,
+      y: this.TEXT_POS.time.y,
+      textAlign: 'right'
+    }, {
+      size: 5,
+      color: '#333'
+    })
+
+    this.presentsText = new Easel.Text('11', 'Luckiest Guy', '79px', '#ff0000', {
+      x: this.TEXT_POS.presents.x,
+      y: this.TEXT_POS.presents.y,
+      textAlign: 'right'
+    }, {
+      size: 5,
+      color: '#333'
+    })
 
     this.children = [
       this.hudClock    = Easel.createSprite('gameplaySprite', 'game-hud-clock', { x: 820, y: 15 }),
@@ -34,15 +57,19 @@ var HUDView = View.extend({
 
       this.timeText.container,
       this.presentsText.container,
-
-      //this.timeTextStroke = Easel.createText('0:00', 'Luckiest Guy', '39px', '#fff', { x: this.TEXT_POS.time.x, y: this.TEXT_POS.time.y }, { size: 5, color: '#333'}),
-      //this.timeText = Easel.createText('0:00', 'Luckiest Guy', '39px', '#fff', { x: this.TEXT_POS.time.x, y: this.TEXT_POS.time.y }),
-
-      //this.presentTextStroke = Easel.createText('11', 'Luckiest Guy', '79px', '#333', { x: this.TEXT_POS.presents.x, y: this.TEXT_POS.presents.y, outline: 5 }),
-      //this.presentText = Easel.createText('11', 'Luckiest Guy', '79px', '#ff0000', { x: this.TEXT_POS.presents.x, y: this.TEXT_POS.presents.y })
     ]
 
+
     Easel.dragObject( this.children )
+
+
+    this.timer = new Timer({
+      direction: 'up',
+      startValue: '0:00'
+    })
+
+
+    this.timer.on( 'change', this._onTimerUpdate )
   },
 
 
@@ -52,6 +79,36 @@ var HUDView = View.extend({
 
     return this
   },
+
+
+
+  startTimer: function (time) {
+    this.timer.start()
+  },
+
+
+
+  stopTimer: function (time) {
+    this.timer.stop()
+  },
+
+
+  updatePoints: function (points) {
+
+  },
+
+
+
+  updatePresents: function (presents) {
+
+  },
+
+
+
+  _onTimerUpdate: function (time) {
+    this.timeText.setText(time)
+  },
+
 
 })
 
