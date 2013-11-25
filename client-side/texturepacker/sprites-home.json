@@ -2,10 +2,10 @@
 "images": ["home.png"],
 "frames": [
 
-    [1317, 288, 300, 24], 
-    [1317, 338, 258, 18], 
-    [1317, 314, 229, 22], 
-    [1317, 358, 199, 13], 
+    [1317, 312, 277, 21], 
+    [1317, 335, 258, 18], 
+    [1317, 288, 229, 22], 
+    [1317, 355, 199, 13], 
     [1317, 2, 310, 284], 
     [2, 293, 693, 87], 
     [2, 382, 554, 120], 
@@ -31,7 +31,7 @@
         "home-title-ww":[11]
 },
 "texturepacker": [
-        "SmartUpdateHash: $TexturePacker:SmartUpdate:3bc0272b11ebabbbb3702dab2c397122:dbee45c8c30541b6ce3f9d6b2871a0c7:32ba9df0123f1fe37ca3ecbc16485b3d$",
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:0204a4916adfb9d17e2bd9552a9c25dc:1b81a2318cdb2451e4db29143400871f:32ba9df0123f1fe37ca3ecbc16485b3d$",
         "Created with TexturePacker (http://www.texturepacker.com) for EaselJS"
 ]
 }

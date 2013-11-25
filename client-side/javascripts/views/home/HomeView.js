@@ -34,13 +34,21 @@ var HomeView = View.extend({
       this.middleGround = Easel.createSprite('homeSprite', 'home-ground-middle', { x: 232, y: 440 }),
       this.frontGround  = Easel.createSprite('homeSprite', 'home-ground-front', { x: 0, y: 437 }),
 
-      this.bigEShadow   = Easel.createSprite('homeSprite', 'home-shadow-E', { x: 258, y: 489 }),
+      this.bigEShadow   = Easel.createSprite('homeSprite', 'home-shadow-E', { x: 257, y: 485 }),
       this.bigE         = Easel.createSprite('homeSprite', 'home-text-E-w-drift', { x: 310, y: 126 }),
       this.worldWar     = Easel.createSprite('homeSprite', 'home-title-ww', { x: 222, y: 58 }),
       this.elf          = Easel.createSprite('homeSprite', 'home-elf', { x: 625, y: 295 }),
 
-      this.playBtn      = Easel.createSprite('home-btn-play', 0, { x: 320, y: 500 }),
-      this.scoreBtn     = Easel.createSprite('home-btn-score', 0, { x: 18, y: 510 } ),
+      this.playBtnShadow   = Easel.createSprite('homeSprite', 'home-btn-play-shadow', { x: 314, y: 526 } ),
+      this.playBtn         = Easel.createSprite('home-btn-play', 0, { x: 317, y: 464 }),
+      this.playBtnSnow     = Easel.createSprite('homeSprite', 'home-btn-play-snow', { x: 335, y: 524 } ),
+
+      this.scoreBtnShadow   = Easel.createSprite('homeSprite', 'home-btn-scores-shadow', { x: 21, y: 553 } ),
+      this.scoreBtn         = Easel.createSprite('home-btn-score', 0, { x: 18, y: 510 } ),
+      this.scoreBtnSnow     = Easel.createSprite('homeSprite', 'home-btn-scores-snow', { x: 41, y: 557 } ),
+
+
+      this.grassSprouts = Easel.createSprite('homeSprite', 'home-grass-sprouts', { x: 7, y: 486 }),
     ]
 
     //Easel.dragObject( this.children )
@@ -65,25 +73,27 @@ var HomeView = View.extend({
 
 
   _onBtnOver: function (event) {
-    Easel.animateOnce( event.currentTarget, 'over' )
+    //Easel.animateOnce( event.currentTarget, 'over' )
+    event.currentTarget.gotoAndStop(10)
   },
 
 
 
   _onBtnOut: function (event) {
-    Easel.animateOnce( event.currentTarget, 'out' )
+    //Easel.animateOnce( event.currentTarget, 'out' )
+    event.currentTarget.gotoAndStop(0)
   },
 
 
 
   _onPlayBtnClick: function (event) {
-    window.location.href ='#/sync'
+    //window.location.href ='#/sync'
   },
 
 
 
   _onScoreBtnClick: function (event) {
-    window.location.href ='#/sync'
+    //window.location.href ='#/sync'
   }
 
 

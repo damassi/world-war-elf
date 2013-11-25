@@ -29,17 +29,18 @@ var Assets = {
         "images": [path + "spritesheets/sprites-home.png"],
         "frames": [
 
-            [898, 251, 277, 21],
-            [1177, 251, 258, 18],
-            [667, 251, 229, 22],
-            [1186, 227, 199, 13],
-            [355, 2, 310, 284],
-            [355, 288, 554, 120],
-            [667, 2, 960, 170],
-            [911, 274, 740, 131],
-            [1186, 174, 413, 51],
-            [2, 2, 351, 408],
-            [667, 174, 517, 75]
+            [1317, 288, 300, 24],
+            [1317, 338, 258, 18],
+            [1317, 314, 229, 22],
+            [1317, 358, 199, 13],
+            [1317, 2, 310, 284],
+            [2, 293, 693, 87],
+            [2, 382, 554, 120],
+            [2, 2, 960, 156],
+            [2, 160, 740, 131],
+            [1077, 412, 413, 51],
+            [964, 2, 351, 408],
+            [558, 412, 517, 75]
         ],
         "animations": {
 
@@ -48,12 +49,13 @@ var Assets = {
                 "home-btn-scores-shadow":[2],
                 "home-btn-scores-snow":[3],
                 "home-elf":[4],
-                "home-ground-back":[5],
-                "home-ground-front":[6],
-                "home-ground-middle":[7],
-                "home-shadow-E":[8],
-                "home-text-E-w-drift":[9],
-                "home-title-ww":[10]
+                "home-grass-sprouts":[5],
+                "home-ground-back":[6],
+                "home-ground-front":[7],
+                "home-ground-middle":[8],
+                "home-shadow-E":[9],
+                "home-text-E-w-drift":[10],
+                "home-title-ww":[11]
         },
         "frequency": 12
       }
