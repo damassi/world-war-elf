@@ -34,10 +34,10 @@ var HomeView = View.extend({
       this.middleGround = Easel.createSprite('homeSprite', 'home-ground-middle', { x: 232, y: 440 }),
       this.frontGround  = Easel.createSprite('homeSprite', 'home-ground-front', { x: 0, y: 437 }),
 
-      this.bigEShadow   = Easel.createSprite('homeSprite', 'home-shadow-E', { x: 257, y: 485 }),
-      this.bigE         = Easel.createSprite('homeSprite', 'home-text-E-w-drift', { x: 310, y: 126 }),
-      this.worldWar     = Easel.createSprite('homeSprite', 'home-title-ww', { x: 222, y: 58 }),
+      this.worldWar     = Easel.createSprite('homeSprite', 'home-title-ww', { x: 477, y: 70 }, { center: true }),
       this.elf          = Easel.createSprite('homeSprite', 'home-elf', { x: 625, y: 295 }),
+      this.bigEShadow   = Easel.createSprite('homeSprite', 'home-shadow-E', { x: 465, y: 509 }, { center: true }),
+      this.bigE         = Easel.createSprite('homeSprite', 'home-text-E-w-drift', { x: 310, y: 126 }),
 
       this.playBtnShadow   = Easel.createSprite('homeSprite', 'home-btn-play-shadow', { x: 314, y: 526 } ),
       this.playBtn         = Easel.createSprite('home-btn-play', 0, { x: 317, y: 464 }),
@@ -51,7 +51,7 @@ var HomeView = View.extend({
       this.grassSprouts = Easel.createSprite('homeSprite', 'home-grass-sprouts', { x: 7, y: 486 }),
     ]
 
-    //Easel.dragObject( this.children )
+    Easel.dragObject( this.children )
 
   },
 
@@ -62,6 +62,22 @@ var HomeView = View.extend({
     this.addChildren( this.children )
 
     return this
+  },
+
+
+
+  show: function () {
+    this._super()
+
+    //console.log( this.worldWar.width)
+
+    TweenMax.fromTo( this.worldWar, .4, { scaleX: .1, scaleY: .1, alpha: 0 }, {
+      scaleX: 1,
+      scaleY: 1,
+      alpha: 1,
+      ease: Back.easeOut,
+      delay: 1
+    })
   },
 
 

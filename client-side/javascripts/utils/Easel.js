@@ -46,7 +46,7 @@ var Easel = {
 	 * @return {c.Sprite}  The animated spritesheet
 	 */
 
-	createSprite: function (name, gotoFrameName, params) {
+	createSprite: function (name, gotoFrameName, params, registration) {
 		var sprite = new c.Sprite( new c.SpriteSheet( this.returnAssetSpriteSheet( name )));
 
 		if (!_.isUndefined(gotoFrameName))
@@ -55,6 +55,10 @@ var Easel = {
 		if (!_.isUndefined(params))
 			for (var param in params)
 				sprite[param] = params[param]
+
+		if (!_.isUndefined(registration))
+			if (registration.center)
+				this.centerRegistrationPoint( sprite )
 
 		return sprite
 	},
@@ -242,6 +246,30 @@ var Easel = {
 	animateOnce: function (spritesheet, frameLabel) {
 		spritesheet.on('animationend', function() { this.gotoAndStop( frameLabel ) });
 		spritesheet.gotoAndPlay( frameLabel );
+	},
+
+
+
+	/**
+	 * Centers a sprite or displayobject around a registration point
+	 * @param  {DisplayObjectContainer|Array} displayObject A DO or array of DO's to
+	 * center registration point around
+	 */
+
+	centerRegistrationPoint: function (displayObject) {
+		if (displayObject instanceof Array) {
+			_.each( displayObject, function (obj) {
+				var bounds = obj.getBounds()
+				obj.regX = Math.floor( bounds.width * .5 )
+				obj.regY = Math.floor( bounds.height * .5 )
+			})
+
+			return
+		}
+
+		var bounds = displayObject.getBounds()
+		displayObject.regX = Math.floor( bounds.width * .5 )
+		displayObject.regY = Math.floor( bounds.height * .5 )
 	},
 
 

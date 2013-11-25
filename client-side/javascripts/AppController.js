@@ -102,6 +102,8 @@ var AppController = {
     this.stage.addChild( Easel.createBitmap( 'frame-background' ))
 
     c.Ticker.addEventListener( 'tick', this.tick )
+
+    //this.animateIn()
   },
 
 
@@ -136,6 +138,19 @@ var AppController = {
     view.hide({
       animated: true,
       remove: true
+    })
+  },
+
+
+
+  animateIn: function () {
+    TweenMax.set( this.$contentContainer, { autoAlpha: 0, scale: 2.5 })
+
+    TweenMax.to( this.$contentContainer, 3, {
+      scale: 1,
+      autoAlpha: 1,
+      ease: Expo.easeOut,
+      delay: .5
     })
   },
 
