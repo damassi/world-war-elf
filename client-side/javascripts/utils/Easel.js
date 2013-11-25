@@ -65,14 +65,37 @@ var Easel = {
 
 
 
-	createText: function (text, fontFace, fontSize, color, params) {
-		var text = new c.Text( text, fontSize + ' ' + fontFace, color )
+	Text: function (str, fontFace, fontSize, color, params, stroke) {
+		var container = new c.Container()
+		var text = new c.Text( str, fontSize + ' ' + fontFace, color )
+
+		if (!_.isUndefined(stroke)) {
+			var textStroke = new c.Text( str, fontSize + ' ' + fontFace, stroke.color )
+			textStroke.outline = stroke.size
+			container.addChild( textStroke )
+		}
+
+		container.addChild( text )
 
 		if (!_.isUndefined(params))
 			for (var param in params)
-				text[param] = params[param]
+				container[param] = params[param]
 
-		return text
+
+		return {
+			container: container,
+
+			getText: function () {
+				return text.text
+			},
+
+			setText: function (str) {
+				text.text = str
+				if (textStroke) {
+					textStroke.text = str
+				}
+			}
+		}
 	},
 
 
