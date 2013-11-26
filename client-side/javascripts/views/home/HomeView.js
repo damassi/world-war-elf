@@ -5,6 +5,7 @@
  * @since  11.18.13
  */
 
+var AppConfig  = require('../../config/AppConfig')
 var AppEvent   = require('../../events/AppEvent')
 var PubSub     = require('../../utils/PubSub')
 var View       = require('../../supers/View')
@@ -30,9 +31,6 @@ var HomeView = View.extend({
 
     this.children = [
       //this.placeholder  = Easel.createBitmap('placeholder-home'),
-      this.backGround   = Easel.createSprite('homeSprite', 'home-ground-back', { x: -7, y: 410 }),
-      this.middleGround = Easel.createSprite('homeSprite', 'home-ground-middle', { x: 232, y: 440 }),
-      this.frontGround  = Easel.createSprite('homeSprite', 'home-ground-front', { x: 0, y: 437 }),
 
       this.worldWar     = Easel.createSprite('homeSprite', 'home-title-ww', { x: 477, y: 70 }, { center: true }),
       this.elf          = Easel.createSprite('homeSprite', 'home-elf', { x: 625, y: 295 }),
@@ -70,6 +68,12 @@ var HomeView = View.extend({
   show: function () {
     this._super()
 
+    TweenMax.from( this.container, AppConfig.TRANSITION_TIME, {
+      x: 1500,
+      ease: Expo.easeOut,
+      delay: AppConfig.TRANSITION_TIME
+    })
+
     TweenMax.fromTo( this.worldWar, .4, { scaleX: .1, scaleY: .1, alpha: 0 }, {
       scaleX: 1,
       scaleY: 1,
@@ -95,6 +99,19 @@ var HomeView = View.extend({
   },
 
 
+  hide: function (options) {
+    var self = this
+
+    TweenMax.to( this.container, AppConfig.TRANSITION_TIME, {
+      x: -1000,
+      ease: Expo.easeIn,
+      onComplete: function() {
+        self.remove()
+      }
+    })
+  },
+
+
 
 
   //+ EVENT HANDLERS
@@ -103,21 +120,23 @@ var HomeView = View.extend({
 
 
   _onBtnOver: function (event) {
-    //Easel.animateOnce( event.currentTarget, 'over' )
-    event.currentTarget.gotoAndStop(10)
+    TweenMax.to( event.currentTarget, .1, {
+      y: event.currentTarget.y -5,
+      yoyo: true,
+      repeat: 1
+    })
   },
 
 
 
   _onBtnOut: function (event) {
-    //Easel.animateOnce( event.currentTarget, 'out' )
-    event.currentTarget.gotoAndStop(0)
+
   },
 
 
 
   _onPlayBtnClick: function (event) {
-    window.location.href ='#/sync'
+    window.location.href ='#/instructions'
   },
 
 

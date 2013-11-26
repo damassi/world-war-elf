@@ -105,7 +105,12 @@ var AppController = {
       appModel: this.appModel
     })
 
-    this.stage.addChild( Easel.createBitmap( 'frame-background' ))
+
+    this.backGround   = Easel.createSprite('homeSprite', 'home-ground-back', { x: -7, y: 410 }),
+    this.middleGround = Easel.createSprite('homeSprite', 'home-ground-middle', { x: 232, y: 440 }),
+    this.frontGround  = Easel.createSprite('homeSprite', 'home-ground-front', { x: 0, y: 437 }),
+
+    this.stage.addChild( Easel.createBitmap( 'frame-background' ), this.backGround, this.middleGround, this.frontGround )
 
     c.Ticker.addEventListener( 'tick', this.tick )
 

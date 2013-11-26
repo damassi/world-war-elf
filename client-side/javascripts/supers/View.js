@@ -91,6 +91,9 @@ var View = Backbone.View.extend({
 		if (!this.stage)
 			return
 
+		this.container.x = 0
+		this.container.y = 0
+
 		this.stage.addChild( this.container )
 	},
 
@@ -109,7 +112,16 @@ var View = Backbone.View.extend({
 		if (!this.stage)
 			return
 
+		this.removeChildren( this.container )
 		this.stage.removeChild( this.container )
+	},
+
+
+
+	removeChildren: function (container) {
+		while (container.children > 0) {
+	    container.removeChildAt(0);
+		}
 	},
 
 

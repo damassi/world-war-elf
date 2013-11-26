@@ -5,6 +5,7 @@
  * @since  11.25.13
  */
 
+var AppConfig  = require('../../config/AppConfig')
 var AppEvent   = require('../../events/AppEvent')
 var PubSub     = require('../../utils/PubSub')
 var View       = require('../../supers/View')
@@ -14,14 +15,14 @@ var Easel      = require('../../utils/Easel')
 var InstructionsView = View.extend({
 
 
-  _canvasEvents: {
-    'playBtn mouseover' : '_onBtnOver',
-    'playBtn rollout'   : '_onBtnOut',
-    'playBtn click'     : '_onPlayBtnClick',
+  canvasEvents: {
+    'mouseBtn mouseover' : '_onBtnOver',
+    'mouseBtn rollout'   : '_onBtnOut',
+    'mouseBtn click'     : '_onMouseBtnClick',
 
-    'scoreBtn mouseover' : '_onBtnOver',
-    'scoreBtn rollout'   : '_onBtnOut',
-    'scoreBtn click'     : '_onScoreBtnClick',
+    'phoneBtn mouseover' : '_onBtnOver',
+    'phoneBtn rollout'   : '_onBtnOut',
+    'phoneBtn click'     : '_onPhoneBtnClick',
   },
 
 
@@ -30,28 +31,25 @@ var InstructionsView = View.extend({
     this._super(options)
 
     this.children = [
-      this.placeholder  = Easel.createBitmap('placeholder-instructions'),
-
-      this.backGround   = Easel.createSprite('homeSprite', 'home-ground-back', { x: -7, y: 410 }),
-      this.middleGround = Easel.createSprite('homeSprite', 'home-ground-middle', { x: 232, y: 440 }),
-      this.frontGround  = Easel.createSprite('homeSprite', 'home-ground-front', { x: 0, y: 437 }),
+      //this.placeholder  = Easel.createBitmap('placeholder-instructions'),
 
       this.instructionsText = Easel.createSprite('instructionsSprite', 'instructions-text-instructions', { x: 154, y: 54 }),
       this.missionText = Easel.createSprite('instructionsSprite', 'instructions-text-mission', { x: 154, y: 285 }),
 
-      this.missionText = Easel.createSprite('instructionsSprite', 'instructions-mouse-gfx', { x: 619, y: 459 }),
-      this.missionText = Easel.createSprite('instructionsSprite', 'instructions-btn-mouse', { x: 617, y: 461 }),
-      this.missionText = Easel.createSprite('instructionsSprite', 'instructions-btn-mouse-snow', { x: 636, y: 510 }),
-      this.missionText = Easel.createSprite('instructionsSprite', 'instructions-btn-mouse-grass', { x: 615, y: 495 }),
+      this.mouseBtn = Easel.createSprite('instructionsSprite', 'instructions-btn-mouse', { x: 617, y: 461 }),
+      this.mouseGfx = Easel.createSprite('instructionsSprite', 'instructions-mouse-gfx', { x: 619, y: 459 }),
 
-      this.missionText = Easel.createSprite('instructionsSprite', 'instructions-btn-phone', { x: 154, y: 469 }),
-      this.missionText = Easel.createSprite('instructionsSprite', 'instructions-btn-phone-snow', { x: 204, y: 528 }),
-      this.missionText = Easel.createSprite('instructionsSprite', 'instructions-phone-gfx', { x: 114, y: 453 }),
+      Easel.createSprite('instructionsSprite', 'instructions-btn-mouse-snow', { x: 636, y: 511 }),
+      Easel.createSprite('instructionsSprite', 'instructions-btn-mouse-grass', { x: 615, y: 495 }),
 
-      this.grassSprouts = Easel.createSprite('homeSprite', 'home-grass-sprouts', { x: -140, y: 502 }),
+      this.phoneBtn = Easel.createSprite('instructionsSprite', 'instructions-btn-phone', { x: 154, y: 469 }),
+      this.phongGfx = Easel.createSprite('instructionsSprite', 'instructions-phone-gfx', { x: 114, y: 453 }),
+
+      Easel.createSprite('instructionsSprite', 'instructions-btn-phone-snow', { x: 204, y: 532 }),
+      Easel.createSprite('homeSprite', 'home-grass-sprouts', { x: -140, y: 502 }),
     ]
 
-    Easel.dragObject( this.children )
+    //Easel.dragObject( this.children )
 
   },
 
@@ -64,6 +62,64 @@ var InstructionsView = View.extend({
 
     return this
   },
+
+
+
+  show: function (options) {
+    this._super()
+
+    TweenMax.from( this.container, AppConfig.TRANSITION_TIME, {
+      x: 1500,
+      ease: Expo.easeOut,
+      delay: AppConfig.TRANSITION_TIME
+    })
+  },
+
+
+
+  hide: function (options) {
+    var self = this
+
+    TweenMax.to( this.container, AppConfig.TRANSITION_TIME, {
+      x: -1000,
+      ease: Expo.easeIn,
+      onComplete: function() {
+        self.remove()
+      }
+    })
+  },
+
+
+
+  //+ EVENT HANDLERS
+  //--------------------------------------
+
+
+
+  _onBtnOver: function (event) {
+    TweenMax.to( event.currentTarget, .05, {
+      y: event.currentTarget.y -5,
+      yoyo: true,
+      repeat: 1
+    })
+  },
+
+
+
+  _onBtnOut: function (event) {
+
+  },
+
+
+  _onMouseBtnClick: function (event) {
+
+  },
+
+
+  _onPhoneBtnClick: function (event) {
+
+  },
+
 
 })
 

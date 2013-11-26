@@ -32,8 +32,14 @@ var AppConfig = {
   },
 
 
+  /**
+   * Base asset path
+   * @type {String}
+   */
+  ASSET_PATH: '/assets/images/',
 
-  ASSET_PATH: '/assets/images/'
+
+  TRANSITION_TIME: .4
 
 }
 
