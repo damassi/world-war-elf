@@ -76,9 +76,18 @@ var HUDView = View.extend({
 
 
   render: function (options) {
+    this.startTimer()
     this.addChildren( this.children )
 
     return this
+  },
+
+
+
+  hide: function (options) {
+    this.stopTimer()
+
+    this._super({ remove: true })
   },
 
 

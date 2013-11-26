@@ -103,7 +103,7 @@ var InstructionsView = View.extend({
 
 
   _onPhoneBtnClick: function (event) {
-
+    window.location.href = '#/sync'
   },
 
 

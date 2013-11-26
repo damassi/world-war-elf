@@ -87,6 +87,13 @@ var GamePlayView = View.extend({
 
 
 
+  hide: function (options) {
+    this.hudView.stopTimer()
+    this._super({ remove: true })
+  },
+
+
+
   //+ EVENT HANDLERS
   // ------------------------------------------------------------
 
