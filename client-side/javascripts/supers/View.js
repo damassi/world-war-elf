@@ -6,6 +6,8 @@
  * @since  11.17.13
  */
 
+var AppConfig = require('../config/AppConfig')
+
 
 var View = Backbone.View.extend({
 
@@ -85,8 +87,9 @@ var View = Backbone.View.extend({
 	//--------------------------------------
 
 
+
 	show: function (options) {
-		options = options || {}
+    options = options || {}
 
 		if (!this.stage)
 			return
@@ -95,16 +98,30 @@ var View = Backbone.View.extend({
 		this.container.y = 0
 
 		this.stage.addChild( this.container )
-	},
+
+    TweenMax.from( this.container, AppConfig.TRANSITION_TIME, {
+      x: 1500,
+      ease: Expo.easeOut,
+      delay: AppConfig.TRANSITION_TIME
+    })
+  },
 
 
 
-	hide: function (options) {
-		options = options || {}
+  hide: function (options) {
+    options = options || {}
 
-		if (options.remove)
-		 	this.remove()
-	},
+		var self = this
+
+    TweenMax.to( this.container, AppConfig.TRANSITION_TIME, {
+      x: -1000,
+      ease: Expo.easeIn,
+      onComplete: function() {
+      	if (options.remove)
+        	self.remove()
+      }
+    })
+  },
 
 
 

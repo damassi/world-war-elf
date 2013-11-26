@@ -68,12 +68,6 @@ var HomeView = View.extend({
   show: function () {
     this._super()
 
-    TweenMax.from( this.container, AppConfig.TRANSITION_TIME, {
-      x: 1500,
-      ease: Expo.easeOut,
-      delay: AppConfig.TRANSITION_TIME
-    })
-
     TweenMax.fromTo( this.worldWar, .4, { scaleX: .1, scaleY: .1, alpha: 0 }, {
       scaleX: 1,
       scaleY: 1,
@@ -99,16 +93,9 @@ var HomeView = View.extend({
   },
 
 
-  hide: function (options) {
-    var self = this
 
-    TweenMax.to( this.container, AppConfig.TRANSITION_TIME, {
-      x: -1000,
-      ease: Expo.easeIn,
-      onComplete: function() {
-        self.remove()
-      }
-    })
+  hide: function (options) {
+    this._super({ remove: true })
   },
 
 

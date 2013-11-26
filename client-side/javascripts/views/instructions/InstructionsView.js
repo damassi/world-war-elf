@@ -67,26 +67,12 @@ var InstructionsView = View.extend({
 
   show: function (options) {
     this._super()
-
-    TweenMax.from( this.container, AppConfig.TRANSITION_TIME, {
-      x: 1500,
-      ease: Expo.easeOut,
-      delay: AppConfig.TRANSITION_TIME
-    })
   },
 
 
 
   hide: function (options) {
-    var self = this
-
-    TweenMax.to( this.container, AppConfig.TRANSITION_TIME, {
-      x: -1000,
-      ease: Expo.easeIn,
-      onComplete: function() {
-        self.remove()
-      }
-    })
+    this._super({ remove: true })
   },
 
 
