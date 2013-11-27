@@ -21,9 +21,6 @@ var MobileModel        = require('./mobile/models/MobileModel')
 var MobileGamePlayView = require('./mobile/views/gameplay/MobileGamePlayView')
 var MobileSyncView     = require('./mobile/views/sync/MobileSyncView')
 
-// Globally rewrite namespace cjs to c
-c = createjs
-
 
 var AppController = {
 
@@ -155,7 +152,7 @@ var AppController = {
 
 
   animateIn: function () {
-    TweenMax.set( this.$contentContainer, { autoAlpha: 0, scale: .6, rotation: 0 })
+    TweenMax.set( this.$contentContainer, { autoAlpha: 0, scale: .6, rotation: 120 })
 
     TweenMax.to( this.$contentContainer, .6, {
       scale: 1,

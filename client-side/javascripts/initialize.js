@@ -9,6 +9,11 @@ var Touch         = require('./utils/Touch')
 var AppController = require('./AppController')
 var Assets        = require('./config/Assets')
 
+
+// Globally rewrite CreateJS namespace to a shorthand c
+c = createjs
+
+
 $(function() {
 
   Touch.translateTouchEvents()

@@ -17,18 +17,6 @@ var HUDView     = require('./HUDView')
 var GamePlayView = View.extend({
 
 
-  _canvasEvents: {
-    'playBtn mouseover' : '_onBtnOver',
-    'playBtn rollout'   : '_onBtnOut',
-    'playBtn click'     : '_onPlayBtnClick',
-
-    'scoreBtn mouseover' : '_onBtnOver',
-    'scoreBtn rollout'   : '_onBtnOut',
-    'scoreBtn click'     : '_onScoreBtnClick',
-  },
-
-
-
   initialize: function (options) {
     this._super(options)
 
@@ -47,7 +35,7 @@ var GamePlayView = View.extend({
       this.signPopUp  = Easel.createSprite('gameplaySprite', 'game-sign-popup', { x: 156, y: 401 }, { center: true  }),
       this.frontGround  = Easel.createSprite('gameplaySprite', 'game-ground-front', { x: 0, y: 453 }),
 
-      this.crossHairs  = Easel.createSprite('gameplaySprite', 'game-crosshairs', { x: 468, y: 245 }),
+      this.crossHairs  = Easel.createSprite('gameplaySprite', 'game-crosshairs', { x: 468, y: 245 }, { center: true }),
     ]
 
     //Easel.dragObject( this.children )
@@ -64,15 +52,10 @@ var GamePlayView = View.extend({
       y: AppConfig.DIMENSIONS.height * .5
     }
 
-    $('.desktop .message').html('desktop client connected')
-    $('.mobile .message').html('mobile client connected')
-    $('.btn-submit').remove()
-    $('.input-sync').remove()
-
-
     this.addChildren( this.children )
     this.container.addChild( this.hudView.render().container )
 
+    this.addDebugWindow()
     this.addEventListeners()
 
     return this
@@ -82,7 +65,9 @@ var GamePlayView = View.extend({
 
   addEventListeners: function () {
     window.socket.on( SocketEvent.ORIENTATION, this._onOrientationUpdate )
-    PubSub.on( AppEvent.TICK, this._onTick )
+
+    $(canvas).on( 'mousemove', this._onMouseMove )
+    $(canvas).on( 'click', this._onFire )
   },
 
 
@@ -94,22 +79,77 @@ var GamePlayView = View.extend({
 
 
 
+  addDebugWindow: function () {
+    $('.desktop .message').html('desktop client connected')
+    $('.mobile .message').html('mobile client connected')
+    $('.btn-submit').remove()
+    $('.input-sync').remove()
+  },
+
+
+
   //+ EVENT HANDLERS
   // ------------------------------------------------------------
 
 
+  _onFire: function (event) {
+    this._fireShot()
+  },
 
-  _onTick: function () {},
+
+
+  _onMouseMove: function (event) {
+    this._moveCroshairs({
+      x: event.offsetX,
+      y: event.offsetY
+    })
+  },
 
 
 
   _onOrientationUpdate: function (message) {
     var orientation = message.orientation
 
-    this.crossHairs.x = orientation.x
-    this.crossHairs.y = orientation.y
+    this._moveCroshairs({
+      x: orientation.x,
+      y: orientation.y
+    })
+  },
 
-    // orientation.z
+
+
+  //+ PRIVATE METHODS
+  // ------------------------------------------------------------
+
+
+  _fireShot: function (position) {
+    var fireTime = .4
+
+    TweenMax.to( this.crossHairs, fireTime, {
+      rotation: 90,
+      ease: Back.easeOut,
+      onComplete: function () {
+        this.target.rotation = 0
+      }
+    })
+
+    TweenMax.to( this.crossHairs, fireTime * .5, {
+      scaleX: .8,
+      scaleY: .8,
+      yoyo: true,
+      repeat: 1,
+      ease: Back.easeInOut
+    })
+  },
+
+
+
+  _moveCroshairs: function (position) {
+    TweenMax.to( this.crossHairs, 1, {
+      x: position.x,
+      y: position.y,
+      ease: Expo.easeOut
+    })
   }
 
 })

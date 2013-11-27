@@ -36,7 +36,7 @@
         <key>dataFormat</key>
         <string>easeljs</string>
         <key>textureFileName</key>
-        <filename>../../texturepacker/home.png</filename>
+        <filename>sprites-home.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>ditherType</key>
@@ -127,7 +127,7 @@
             <key>json</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>../../texturepacker/home.json</filename>
+                <filename>sprites-home.json</filename>
             </struct>
         </map>
         <key>multiPack</key>
