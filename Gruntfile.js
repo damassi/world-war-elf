@@ -83,6 +83,7 @@ module.exports = function( grunt ) {
           '<%= frontend %>/vendor/scripts/backbone.js',
           '<%= frontend %>/vendor/scripts/backbone.mods.js',
           '<%= frontend %>/vendor/scripts/createjs-2013.09.25.min.js',
+          '<%= frontend %>/vendor/scripts/createjs.collision.js',
           '<%= frontend %>/vendor/scripts/greensock/TweenMax.js',
           '<%= frontend %>/vendor/scripts/greensock/easing/EasePack.js',
           '<%= frontend %>/vendor/scripts/greensock/plugins/CSSPlugin.js',

@@ -17,6 +17,22 @@ var HUDView     = require('./HUDView')
 var GamePlayView = View.extend({
 
 
+  /**
+   * Flag to check if user is currently pressing the mouse cursor or
+   * the fire button from a mobile device
+   * @type {Boolean}
+   */
+  isFiring: false,
+
+
+  /**
+   * An array of currently "shootable" targets on the screen
+   * @type {Array}
+   */
+  hitTargets: null,
+
+
+
   initialize: function (options) {
     this._super(options)
 
@@ -25,20 +41,25 @@ var GamePlayView = View.extend({
     this.children = [
       //this.placeholder  = Easel.createBitmap('placeholder-gameplay'),
 
-      this.enemy0  = Easel.createSprite('gameplaySprite', 'game-enemy-1', { x: 163, y: 121 }),
+      this.enemy0       = Easel.createSprite('gameplaySprite', 'game-enemy-1', { x: 163, y: 121 }),
       this.backGround   = Easel.createSprite('gameplaySprite', 'game-ground-back', { x: 0, y: 148 }),
 
-      this.enemy1  = Easel.createSprite('gameplaySprite', 'game-enemy-2', { x: 290, y: 200 }),
-      this.enemy2  = Easel.createSprite('gameplaySprite', 'game-enemy-3', { x: 763, y: 229 }),
+      this.enemy1       = Easel.createSprite('gameplaySprite', 'game-enemy-2', { x: 290, y: 200 }),
+      this.enemy2       = Easel.createSprite('gameplaySprite', 'game-enemy-3', { x: 763, y: 229 }),
       this.middleGround = Easel.createSprite('gameplaySprite', 'game-ground-middle', { x: 0, y: 311 }),
 
-      this.signPopUp  = Easel.createSprite('gameplaySprite', 'game-sign-popup', { x: 156, y: 401 }, { center: true  }),
+      this.signPopUp    = Easel.createSprite('gameplaySprite', 'game-sign-popup', { x: 156, y: 401 }, { center: true  }),
       this.frontGround  = Easel.createSprite('gameplaySprite', 'game-ground-front', { x: 0, y: 453 }),
 
-      this.crossHairs  = Easel.createSprite('gameplaySprite', 'game-crosshairs', { x: 468, y: 245 }, { center: true }),
+      this.crossHairs   = Easel.createSprite('gameplaySprite', 'game-crosshairs', { x: 468, y: 245 }, { center: true }),
     ]
 
-    //Easel.dragObject( this.children )
+    this.hitTargets = [
+      this.enemy0,
+      this.enemy1,
+      this.enemy2,
+      this.signPopUp
+    ]
 
   },
 
@@ -64,6 +85,7 @@ var GamePlayView = View.extend({
 
 
   addEventListeners: function () {
+    PubSub.on( AppEvent.TICK, this._onTick )
     window.socket.on( SocketEvent.ORIENTATION, this._onOrientationUpdate )
 
     $(canvas).on( 'mousemove', this._onMouseMove )
@@ -84,12 +106,33 @@ var GamePlayView = View.extend({
     $('.mobile .message').html('mobile client connected')
     $('.btn-submit').remove()
     $('.input-sync').remove()
+
+    ndgmr.DEBUG_COLLISION = true
   },
 
 
 
   //+ EVENT HANDLERS
   // ------------------------------------------------------------
+
+
+  _onTick: function (event) {
+      if (!this.isFiring)
+        return
+
+      var i = 0
+        , len = this.hitTargets.length
+        , target
+
+      for (i = 0; i < len; ++i) {
+        target = this.hitTargets[i]
+
+        if (ndgmr.checkRectCollision( this.crossHairs, target )) {
+          console.log( true )
+        }
+      }
+  },
+
 
 
   _onFire: function (event) {
@@ -125,13 +168,9 @@ var GamePlayView = View.extend({
   _fireShot: function (position) {
     var fireTime = .4
 
-    TweenMax.to( this.crossHairs, fireTime, {
-      rotation: 90,
-      ease: Back.easeOut,
-      onComplete: function () {
-        this.target.rotation = 0
-      }
-    })
+    var self = this
+
+    self.isFiring = true
 
     TweenMax.to( this.crossHairs, fireTime * .5, {
       scaleX: .8,
@@ -139,6 +178,16 @@ var GamePlayView = View.extend({
       yoyo: true,
       repeat: 1,
       ease: Back.easeInOut
+    })
+
+    TweenMax.to( this.crossHairs, fireTime, {
+      rotation: 90,
+      ease: Back.easeOut,
+      onComplete: function () {
+        this.target.rotation = 0
+
+        self.isFiring = false
+      }
     })
   },
 
