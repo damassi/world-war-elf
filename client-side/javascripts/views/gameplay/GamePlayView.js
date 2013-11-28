@@ -36,7 +36,10 @@ var GamePlayView = View.extend({
   initialize: function (options) {
     this._super(options)
 
-    this.hudView = new HUDView({ appController: this.appController })
+    this.hudView = new HUDView({
+      appModel : this.appModel,
+      appController : this.appController
+    })
 
     this.children = [
       //this.placeholder  = Easel.createBitmap('placeholder-gameplay'),
@@ -61,6 +64,8 @@ var GamePlayView = View.extend({
       this.signPopUp
     ]
 
+    // Add throttler to prevent interval updates once targets are hit
+    this.hitTarget = _.throttle( this._hitTarget, 500 )
   },
 
 
@@ -128,7 +133,7 @@ var GamePlayView = View.extend({
         target = this.hitTargets[i]
 
         if (ndgmr.checkRectCollision( this.crossHairs, target )) {
-          console.log( true )
+          this.hitTarget( target )
         }
       }
   },
@@ -163,6 +168,15 @@ var GamePlayView = View.extend({
 
   //+ PRIVATE METHODS
   // ------------------------------------------------------------
+
+
+
+  _hitTarget: function (target) {
+    this.container.removeChild( target )
+
+    this.appModel.increaseHits()
+  },
+
 
 
   _fireShot: function (position) {

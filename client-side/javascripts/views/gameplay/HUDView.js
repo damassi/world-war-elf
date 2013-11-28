@@ -9,6 +9,7 @@ var Timer       = require('time-counter')
 var SocketEvent = require('../../../../shared/events/SocketEvent')
 var AppConfig   = require('../../config/AppConfig')
 var AppEvent    = require('../../events/AppEvent')
+var GameEvent   = require('../../events/GameEvent')
 var PubSub      = require('../../utils/PubSub')
 var View        = require('../../supers/View')
 var Easel       = require('../../utils/Easel')
@@ -70,7 +71,7 @@ var HUDView = View.extend({
       startValue: '0:00'
     })
 
-    this.timer.on( 'change', this._onTimerUpdate )
+    this.addEventListeners()
   },
 
 
@@ -80,6 +81,14 @@ var HUDView = View.extend({
     this.addChildren( this.children )
 
     return this
+  },
+
+
+
+  addEventListeners: function () {
+    this.timer.on( 'change', this._onTimerUpdate )
+
+    this.listenTo( this.appModel, GameEvent.HITS, this._onChangeHits )
   },
 
 
@@ -103,6 +112,7 @@ var HUDView = View.extend({
   },
 
 
+
   updatePoints: function (points) {
 
   },
@@ -118,6 +128,14 @@ var HUDView = View.extend({
   _onTimerUpdate: function (time) {
     this.timeText.setText(time)
   },
+
+
+
+  _onChangeHits: function (model) {
+    var hits = model.changed.hits
+
+    this.presentsText.setText( hits )
+  }
 
 
 })

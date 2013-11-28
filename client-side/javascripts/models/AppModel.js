@@ -9,8 +9,17 @@ var AppModel = Backbone.Model.extend({
 
   defaults: {
 
-    view : null
+    view : null,
 
+    score: 0,
+
+    hits: 0
+
+  },
+
+
+  increaseHits: function () {
+    this.set( 'hits', this.get('hits') + 1 )
   }
 
 })
