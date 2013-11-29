@@ -21,6 +21,7 @@ var MobileGamePlayView = View.extend({
    */
   template: template,
 
+
   /**
    * Cached global session id for sending POST data to server
    * @type {String}

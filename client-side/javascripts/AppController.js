@@ -30,15 +30,25 @@ var AppController = {
    */
   appModel: null,
 
+
   /**
    * @type {AppRouter}
    */
   appRouter: null,
 
+
   /**
    * @type {Array}
    */
   views: null,
+
+
+  /**
+   * Flag used to check against persistant ground additions during
+   * non game-play states
+   * @type {Boolean}
+   */
+  groundAdded: false,
 
 
 
@@ -102,12 +112,15 @@ var AppController = {
       appModel: this.appModel
     })
 
+    this.stage.addChild( Easel.createBitmap( 'frame-background' ))
 
-    this.backGround   = Easel.createSprite('homeSprite', 'home-ground-back', { x: -7, y: 410 }),
-    this.middleGround = Easel.createSprite('homeSprite', 'home-ground-middle', { x: 232, y: 440 }),
-    this.frontGround  = Easel.createSprite('homeSprite', 'home-ground-front', { x: 0, y: 437 }),
+    this.ground = [
+      this.backGround   = Easel.createSprite('homeSprite', 'home-ground-back', { x: -7, y: 410 }),
+      this.middleGround = Easel.createSprite('homeSprite', 'home-ground-middle', { x: 232, y: 440 }),
+      this.frontGround  = Easel.createSprite('homeSprite', 'home-ground-front', { x: 0, y: 437 }),
+    ]
 
-    this.stage.addChild( Easel.createBitmap( 'frame-background' ), this.backGround, this.middleGround, this.frontGround )
+    this._addGround()
 
     c.Ticker.addEventListener( 'tick', this.tick )
 
@@ -175,7 +188,6 @@ var AppController = {
 
 
 
-
   _onDesktopClientSynched: function () {
     var sessionId = window.socket.socket.sessionid
 
@@ -204,11 +216,62 @@ var AppController = {
 
     this.cleanUpViews( previousView )
 
+    if (view !== this.gamePlayView)
+      this._addGround()
+    else
+      this._removeGround()
+
     view.render().show({
       animated: true
     })
 
-  }
+  },
+
+
+
+
+  //+ PRIVATE METHODS
+  // ------------------------------------------------------------
+
+
+  _addGround: function () {
+    if (this.groundAdded)
+      return
+
+    this.groundAdded = true
+
+    for (var i = 0, len = this.ground.length; i < len; ++i ) {
+      var ground = this.ground[i]
+      this.stage.addChild( ground )
+    }
+  },
+
+
+
+  _removeGround: function () {
+    var self = this
+
+    return
+
+    if (!this.groundAdded)
+      return
+
+    this.groundAdded = false
+
+    for (var i = 0, len = this.ground.length; i < len; ++i ) {
+      var ground = this.ground[i]
+
+      TweenMax.to( ground, .4, {
+        y: AppConfig.DIMENSIONS.height + 100,
+        ease: Expo.easeIn,
+        onComplete: function () {
+          self.stage.removeChild( this.target )
+        }
+      })
+    }
+  },
+
+
 
 }
 

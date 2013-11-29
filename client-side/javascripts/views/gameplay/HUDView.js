@@ -64,8 +64,6 @@ var HUDView = View.extend({
     ]
 
 
-    Easel.dragObject( this.children )
-
     this.timer = new Timer({
       direction: 'up',
       startValue: '0:00'
