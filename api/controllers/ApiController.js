@@ -132,16 +132,18 @@ module.exports = {
       , socket    = req.socket
       , io        = sails.io
 
-
-    console.log('firing!')
-
-
     Session.findOne({
       sessionId: sessionId
     },
 
       function foundSession (err, session) {
+        socket.broadcast.to(sessionId).emit( SocketEvent.FIRE, {
+          fire: true
+        })
 
+        res.json({
+          fire: true
+        })
       })
   },
 

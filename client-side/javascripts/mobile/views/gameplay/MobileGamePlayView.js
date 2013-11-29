@@ -96,7 +96,13 @@ var MobileGamePlayView = View.extend({
 
 
   _onFireButtonPress: function (event) {
-    console.log('firing!')
+    window.socket.post( AppConfig.ENDPOINTS.fire, {
+      sessionId: this.sessionId
+    },
+
+      function onResponse (response) {
+        console.log(response, 'successfully fired')
+      })
   }
 
 
