@@ -101,7 +101,7 @@ var MobileGamePlayView = View.extend({
     },
 
       function onResponse (response) {
-        console.log(response, 'successfully fired')
+        //console.log(response, 'successfully fired')
       })
   }
 

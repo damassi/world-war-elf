@@ -96,6 +96,38 @@ var GamePlayView = View.extend({
 
 
 
+  show: function (options) {
+
+    var delay = 1
+      , tweenTime = .5
+      , height = AppConfig.DIMENSIONS.height * 2
+
+    this.container.x = 0
+    this.container.y = 0
+
+    this.stage.addChild( this.container )
+
+    TweenMax.from( this.backGround, .3, {
+      y: height,
+      ease: Back.easeOut,
+      delay: delay
+    })
+
+    TweenMax.from( this.middleGround, .3, {
+      y: height,
+      ease: Back.easeOut,
+      delay: delay + .1
+    })
+
+    TweenMax.from( this.frontGround, .3, {
+      y: height,
+      ease: Back.easeOut,
+      delay: delay + .2
+    })
+  },
+
+
+
   hide: function (options) {
     this.hudView.hide()
     this.removeEventListeners()
