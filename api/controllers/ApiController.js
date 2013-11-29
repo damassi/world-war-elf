@@ -127,6 +127,26 @@ module.exports = {
 
 
 
+  fire: function (req, res, next) {
+    var sessionId = req.param('sessionId')
+      , socket    = req.socket
+      , io        = sails.io
+
+
+    console.log('firing!')
+
+
+    Session.findOne({
+      sessionId: sessionId
+    },
+
+      function foundSession (err, session) {
+
+      })
+  },
+
+
+
   'save-score': function (req, res, next) {
     next()
   }

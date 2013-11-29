@@ -28,9 +28,18 @@ var MobileGamePlayView = View.extend({
   sessionId: null,
 
 
+  /**
+   * @type {$}
+   */
+  $body: null,
+
+
+
 
   render: function (options) {
     this._super()
+
+    this.$body = $('body')
 
     var self = this
 
@@ -39,10 +48,7 @@ var MobileGamePlayView = View.extend({
       self.addEventListeners()
     })
 
-    $('.desktop .message').html('desktop client connected')
-    $('.mobile .message').html('mobile client connected')
-    $('.btn-submit').remove()
-    $('.input-sync').remove()
+    this.addDebugWindow()
 
     return this
   },
@@ -51,9 +57,23 @@ var MobileGamePlayView = View.extend({
 
   addEventListeners: function () {
     //window.addEventListener( 'deviceorientation', this._onDeviceOrientationChange )
-    $('body').on('mousemove', this._onDeviceOrientationChange )
+    this.$body.on('mousemove', this._onDeviceOrientationChange )
+    this.$body.on('click', this._onFireButtonPress )
   },
 
+
+
+  addDebugWindow: function () {
+    $('.desktop .message').html('desktop client connected')
+    $('.mobile .message').html('mobile client connected')
+    $('.btn-submit').remove()
+    $('.input-sync').remove()
+  },
+
+
+
+  //+ EVENT HANDLERS
+  // ------------------------------------------------------------
 
 
   _onDeviceOrientationChange: function (event) {
@@ -69,8 +89,14 @@ var MobileGamePlayView = View.extend({
     },
 
       function onResponse (response) {
-        console.log(response.orientation)
+        //console.log(response.orientation)
       })
+  },
+
+
+
+  _onFireButtonPress: function (event) {
+    console.log('firing!')
   }
 
 

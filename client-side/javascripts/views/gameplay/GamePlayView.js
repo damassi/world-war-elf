@@ -18,6 +18,13 @@ var GamePlayView = View.extend({
 
 
   /**
+   * The time between shots that targets are freezed from being hit
+   * @type {Number}
+   */
+  FIRE_INTERVAL_TIME: .5,
+
+
+  /**
    * Flag to check if user is currently pressing the mouse cursor or
    * the fire button from a mobile device
    * @type {Boolean}
@@ -102,6 +109,7 @@ var GamePlayView = View.extend({
     PubSub.on( AppEvent.TICK, this._onTick )
 
     window.socket.on( SocketEvent.ORIENTATION, this._onOrientationUpdate )
+    window.socket.on( SocketEvent.FIRE, this._onFire )
 
     $(canvas).on( 'mousemove', this._onMouseMove )
     $(canvas).on( 'click', this._onFire )
@@ -146,7 +154,9 @@ var GamePlayView = View.extend({
       for (i = 0; i < len; ++i) {
         target = this.hitTargets[i]
 
-        if (ndgmr.checkRectCollision( this.crossHairs, target )) {
+        if (ndgmr.checkRectCollision( this.crossHairs, target )
+          && this.isFiring) {
+
           this.hitTarget( target )
         }
       }
@@ -189,6 +199,11 @@ var GamePlayView = View.extend({
     this.container.removeChild( target )
 
     this.appModel.increaseHits()
+
+    // Reset interval
+    TweenMax.delayedCall( this.FIRE_INTERVAL_TIME, function() {
+      self.isFiring = false
+    })
   },
 
 
@@ -213,8 +228,6 @@ var GamePlayView = View.extend({
       ease: Back.easeOut,
       onComplete: function () {
         this.target.rotation = 0
-
-        self.isFiring = false
       }
     })
   },
