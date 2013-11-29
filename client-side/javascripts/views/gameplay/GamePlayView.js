@@ -89,8 +89,18 @@ var GamePlayView = View.extend({
 
 
 
+  hide: function (options) {
+    this.hudView.hide()
+    this.removeEventListeners()
+    this._super({ remove: true })
+  },
+
+
+
+
   addEventListeners: function () {
     PubSub.on( AppEvent.TICK, this._onTick )
+
     window.socket.on( SocketEvent.ORIENTATION, this._onOrientationUpdate )
 
     $(canvas).on( 'mousemove', this._onMouseMove )
@@ -99,9 +109,13 @@ var GamePlayView = View.extend({
 
 
 
-  hide: function (options) {
-    this.hudView.stopTimer()
-    this._super({ remove: true })
+  removeEventListeners: function () {
+    PubSub.off( AppEvent.TICK, this._onTick )
+
+    window.socket.removeListener( SocketEvent.ORIENTATION, this._onOrientationUpdate )
+
+    $(canvas).off( 'mousemove', this._onMouseMove )
+    $(canvas).off( 'click', this._onFire )
   },
 
 

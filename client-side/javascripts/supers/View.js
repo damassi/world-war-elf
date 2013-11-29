@@ -129,17 +129,10 @@ var View = Backbone.View.extend({
 		if (!this.stage)
 			return
 
-		this.removeChildren( this.container )
+    this.container.removeAllChildren()
 		this.stage.removeChild( this.container )
 	},
 
-
-
-	removeChildren: function (container) {
-		while (container.children > 0) {
-	    container.removeChildAt(0);
-		}
-	},
 
 
 

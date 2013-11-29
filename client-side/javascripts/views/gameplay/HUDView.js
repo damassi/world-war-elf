@@ -70,13 +70,12 @@ var HUDView = View.extend({
       direction: 'up',
       startValue: '0:00'
     })
-
-    this.addEventListeners()
   },
 
 
 
   render: function (options) {
+    this.addEventListeners()
     this.startTimer()
     this.addChildren( this.children )
 
@@ -89,6 +88,13 @@ var HUDView = View.extend({
     this.timer.on( 'change', this._onTimerUpdate )
 
     this.listenTo( this.appModel, GameEvent.HITS, this._onChangeHits )
+  },
+
+
+
+  removeEventListeners: function () {
+    this.timer.off( 'change', this._onTimerUpdate )
+    this.stopListening()
   },
 
 

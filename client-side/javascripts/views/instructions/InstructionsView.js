@@ -98,7 +98,7 @@ var InstructionsView = View.extend({
 
 
   _onMouseBtnClick: function (event) {
-
+    window.location.href = '#/play'
   },
 
 
