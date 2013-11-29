@@ -206,7 +206,7 @@ var GamePlayView = View.extend({
       target.x = position.xPos,
       target.y = position.yPos
 
-      this.container.addChild( target )
+      this.container.addChildAt( target, position.depth )
     }
   },
 
