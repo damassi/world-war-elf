@@ -62,7 +62,10 @@ var GamePlayView = View.extend({
   hitTargets: null,
 
 
-
+  /**
+   * An array of currently occupied positions, based upon the matrix above
+   * @type {Array}
+   */
   occupiedPositions: null,
 
 
@@ -80,7 +83,6 @@ var GamePlayView = View.extend({
       this.middleGround = Easel.createSprite('gameplaySprite', 'game-ground-middle', { x: 0, y: 311 }),
       this.frontGround  = Easel.createSprite('gameplaySprite', 'game-ground-front', { x: 0, y: 453 }),
       this.crossHairs   = Easel.createSprite('gameplaySprite', 'game-crosshairs', { x: 468, y: 245 }, { center: true }),
-      //this.enemy1       = Easel.createSprite('gameplaySprite', 'game-enemy-2', { x: 290, y: 200 }),
     ]
 
     //Easel.dragObject( this.enemy1 )

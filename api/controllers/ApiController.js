@@ -141,9 +141,7 @@ module.exports = {
           fire: true
         })
 
-        res.json({
-          fire: true
-        })
+        next()
       })
   },
 

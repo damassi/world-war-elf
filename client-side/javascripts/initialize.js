@@ -18,7 +18,6 @@ $(function() {
 
   Touch.translateTouchEvents()
 
-
   var loadQueue = new c.LoadQueue()
 
   loadQueue.addEventListener( "error", function (error) {
@@ -32,13 +31,15 @@ $(function() {
   loadQueue.addEventListener( "complete", function (event) {
     AppController.initialize()
 
+
+    // Kick off application
     Backbone.history.start({
       pushState: false
     })
 
   })
 
-  var manifest = _.map(Assets.manifest, function( asset ) {
+  var manifest = _.map( Assets.manifest, function (asset) {
     return asset.src
   })
 

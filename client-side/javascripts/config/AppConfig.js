@@ -40,6 +40,10 @@ var AppConfig = {
   ASSET_PATH: '/assets/images/',
 
 
+  /**
+   * Time between route changes / animate in / animate out
+   * @type {Number}
+   */
   TRANSITION_TIME: .4
 
 }

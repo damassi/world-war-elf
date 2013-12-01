@@ -5,8 +5,6 @@
  * @since  11.19.13
  */
 
-//var Backbone = require('backbone')
-
 
 var UserModel = Backbone.Model.extend({
 
@@ -36,6 +34,7 @@ var UserModel = Backbone.Model.extend({
      * @type {String}
      */
     clientType: null
+
   }
 
 })
