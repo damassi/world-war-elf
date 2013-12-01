@@ -9,8 +9,8 @@ var GameEvent = require('../events/GameEvent')
 var AppEvent = require('../events/AppEvent')
 
 
-var GameTarget = Backbone.View.extend({
+var GameTargetView = Backbone.View.extend({
 
 })
 
-module.exports = GameTarget
+module.exports = GameTargetView

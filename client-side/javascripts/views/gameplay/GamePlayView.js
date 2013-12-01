@@ -21,7 +21,7 @@ var GamePlayView = View.extend({
    * The time between shots that targets are freezed from being hit
    * @type {Number}
    */
-  FIRE_INTERVAL_TIME: .5,
+  FIRE_INTERVAL_TIME: 1,
 
 
   /**
@@ -88,7 +88,7 @@ var GamePlayView = View.extend({
     //Easel.dragObject( this.enemy1 )
 
     // Add throttler to prevent interval updates once targets are hit
-    this.hitTarget = _.throttle( this._hitTarget, 500 )
+    this.hitTarget = this._hitTarget //_.throttle( this._hitTarget, this.FIRE_INTERVAL_TIME * 1000 )
   },
 
 
@@ -199,14 +199,17 @@ var GamePlayView = View.extend({
 
     for (var i = 0, len = this.hitTargets.length; i < len; ++i) {
       var target = this.hitTargets[i]
-      var position = this._returnPosition()
+      var position = this._returnPosition(target)
 
-      //console.log('AFTER: ', position)
       if (typeof position === 'undefined')
         return
 
-      target.x = position.xPos,
-      target.y = position.yPos
+      target.x = position.x,
+      target.y = position.y
+
+      this.occupiedPositions.push( position )
+
+      console.log(position)
 
       this.container.addChildAt( target, position.depth )
     }
@@ -214,14 +217,21 @@ var GamePlayView = View.extend({
 
 
 
-  _returnPosition: function () {
+  /**
+   * Returns a position based upon the playMatrix defined above
+   * @param  {c.DisplayObject} target The target to return the position for
+   * @return {Object}
+   */
+
+  _returnPosition: function (target) {
     var matrixPosition = this.playMatrix[ Math.floor( Math.random() * this.playMatrix.length )]
       , xPos = matrixPosition.xPositions[ Math.floor( Math.random() * matrixPosition.xPositions.length )]
 
     var newPosition = {
-      xPos: xPos,
-      yPos: matrixPosition.yPos,
-      depth: matrixPosition.depth
+      x: xPos,
+      y: matrixPosition.yPos,
+      depth: matrixPosition.depth,
+      target: target
     }
 
     var foundOccupiedPosition = false
@@ -240,8 +250,6 @@ var GamePlayView = View.extend({
       return
     }
 
-    this.occupiedPositions.push( newPosition )
-
     return newPosition
   },
 
@@ -257,11 +265,12 @@ var GamePlayView = View.extend({
         return
 
       var i = 0
-        , len = this.hitTargets.length
+        , len = this.occupiedPositions.length
         , target
 
       for (i = 0; i < len; ++i) {
-        target = this.hitTargets[i]
+        target = this.occupiedPositions[i].target
+        console.log( target)
 
         if (ndgmr.checkRectCollision( this.crossHairs, target )
           && this.isFiring) {
@@ -304,25 +313,10 @@ var GamePlayView = View.extend({
 
 
 
-  _hitTarget: function (target) {
-    this.container.removeChild( target )
-
-    this.appModel.increaseHits()
-
-    // Reset interval
-    TweenMax.delayedCall( this.FIRE_INTERVAL_TIME, function() {
-      self.isFiring = false
-    })
-  },
-
-
-
   _fireShot: function (position) {
     var fireTime = .4
 
-    var self = this
-
-    self.isFiring = true
+    this.isFiring = true
 
     TweenMax.to( this.crossHairs, fireTime * .5, {
       scaleX: .8,
@@ -332,12 +326,29 @@ var GamePlayView = View.extend({
       ease: Back.easeInOut
     })
 
+    var self = this
+
     TweenMax.to( this.crossHairs, fireTime, {
       rotation: 90,
       ease: Back.easeOut,
       onComplete: function () {
         this.target.rotation = 0
       }
+    })
+  },
+
+
+
+  _hitTarget: function (target) {
+    this.container.removeChild( target )
+
+    var self = this
+
+    // Reset fire interval interval
+    TweenMax.delayedCall( this.FIRE_INTERVAL_TIME, function() {
+      self.hitTargets = _.without( self.hitTargets, target )
+      self.isFiring = false
+      self.appModel.increaseHits()
     })
   },
 
