@@ -11,8 +11,9 @@ var AppEvent      = require('../../events/AppEvent')
 var PubSub        = require('../../utils/PubSub')
 var Easel         = require('../../utils/Easel')
 var View          = require('../../supers/View')
-var TargetFactory = require('../../factories/TargetFactory')
 var HUDView       = require('./HUDView')
+
+var GamePlayController = require('../../controllers/GamePlayController')
 
 
 var GamePlayView = View.extend({
@@ -32,12 +33,6 @@ var GamePlayView = View.extend({
    */
   isFiring: false,
 
-
-  /**
-   * An array of currently "shootable" targets on the screen
-   * @type {Array}
-   */
-  hitTargets: null,
 
 
   /**
@@ -74,12 +69,6 @@ var GamePlayView = View.extend({
   render: function () {
     this._super()
 
-    this.occupiedPositions = []
-
-    TargetFactory.initialize({
-      container: this.container
-    })
-
     var position = {
       x: AppConfig.DIMENSIONS.width * .5,
       y: AppConfig.DIMENSIONS.height * .5
@@ -87,11 +76,6 @@ var GamePlayView = View.extend({
 
     this.addChildren( this.children )
     this.container.addChild( this.hudView.render().container )
-
-    var target = TargetFactory.createTarget()
-    this.container.addChildAt( target.instance, target.depth )
-
-    this.occupiedPositions.push( target )
 
     this.addDebugWindow()
     this.addEventListeners()
@@ -184,22 +168,24 @@ var GamePlayView = View.extend({
 
 
   _onTick: function (event) {
-      if (!this.isFiring)
-        return
+    return
 
-      var i = 0
-        , len = this.occupiedPositions.length
-        , target
+    if (!this.isFiring)
+      return
 
-      for (i = 0; i < len; ++i) {
-        target = this.occupiedPositions[i].instance
+    var i = 0
+      , len = this.occupiedPositions.length
+      , target
 
-        if (ndgmr.checkRectCollision( this.crossHairs, target )
-          && this.isFiring) {
+    for (i = 0; i < len; ++i) {
+      target = this.occupiedPositions[i].instance
 
-          this.hitTarget( target )
-        }
+      if (ndgmr.checkRectCollision( this.crossHairs, target )
+        && this.isFiring) {
+
+        this.hitTarget( target )
       }
+    }
   },
 
 
