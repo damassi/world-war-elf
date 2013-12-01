@@ -5,13 +5,14 @@
  * @since  11.19.13
  */
 
-var SocketEvent = require('../../../../shared/events/SocketEvent')
-var AppConfig   = require('../../config/AppConfig')
-var AppEvent    = require('../../events/AppEvent')
-var PubSub      = require('../../utils/PubSub')
-var Easel       = require('../../utils/Easel')
-var View        = require('../../supers/View')
-var HUDView     = require('./HUDView')
+var SocketEvent   = require('../../../../shared/events/SocketEvent')
+var AppConfig     = require('../../config/AppConfig')
+var AppEvent      = require('../../events/AppEvent')
+var PubSub        = require('../../utils/PubSub')
+var Easel         = require('../../utils/Easel')
+var View          = require('../../supers/View')
+var TargetFactory = require('../../factories/TargetFactory')
+var HUDView       = require('./HUDView')
 
 
 var GamePlayView = View.extend({
@@ -75,14 +76,22 @@ var GamePlayView = View.extend({
 
     this.occupiedPositions = []
 
+    TargetFactory.initialize({
+      container: this.container
+    })
+
     var position = {
       x: AppConfig.DIMENSIONS.width * .5,
       y: AppConfig.DIMENSIONS.height * .5
     }
 
     this.addChildren( this.children )
-    this.createTargets()
     this.container.addChild( this.hudView.render().container )
+
+    var target = TargetFactory.createTarget()
+    this.container.addChildAt( target.instance, target.depth )
+
+    this.occupiedPositions.push( target )
 
     this.addDebugWindow()
     this.addEventListeners()
@@ -183,8 +192,7 @@ var GamePlayView = View.extend({
         , target
 
       for (i = 0; i < len; ++i) {
-        target = this.occupiedPositions[i].target
-        console.log( target)
+        target = this.occupiedPositions[i].instance
 
         if (ndgmr.checkRectCollision( this.crossHairs, target )
           && this.isFiring) {
@@ -247,6 +255,7 @@ var GamePlayView = View.extend({
       ease: Back.easeOut,
       onComplete: function () {
         this.target.rotation = 0
+        self.isFiring = false
       }
     })
   },
@@ -261,7 +270,6 @@ var GamePlayView = View.extend({
     // Reset fire interval interval
     TweenMax.delayedCall( this.FIRE_INTERVAL_TIME, function() {
       self.hitTargets = _.without( self.hitTargets, target )
-      self.isFiring = false
       self.appModel.increaseHits()
     })
   },

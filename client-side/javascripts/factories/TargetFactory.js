@@ -5,7 +5,11 @@
  * @date   12.1.13
  */
 
+var Easel = require('../utils/Easel')
+
+
 var TargetFactory = {
+
 
   /**
    * Defines placements for enemies and bonuses
@@ -37,6 +41,9 @@ var TargetFactory = {
   hitTargets: null,
 
 
+  occupiedPositions: null,
+
+
 
   initialize: function () {
     this.hitTargets = [
@@ -45,6 +52,8 @@ var TargetFactory = {
       this.enemy2       = Easel.createSprite('gameplaySprite', 'game-enemy-3', { x: 763, y: 229 }),
       this.enemy0       = Easel.createSprite('gameplaySprite', 'game-enemy-1', { x: 163, y: 121 }),
     ]
+
+    this.occupiedPositions = []
   },
 
 
@@ -62,7 +71,7 @@ var TargetFactory = {
 
     this.occupiedPositions.push( position )
 
-    this.container.addChildAt( target, position.depth )
+    return position
   },
 
 
@@ -82,7 +91,7 @@ var TargetFactory = {
       x: xPos,
       y: matrixPosition.yPos,
       depth: matrixPosition.depth,
-      target: target
+      instance: target
     }
 
     var foundOccupiedPosition = false

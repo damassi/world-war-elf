@@ -5,10 +5,10 @@
  * @date   11.29.14
  */
 
-var GameTargetView = require('../../supers/GameTargetView')
+var TargetView = require('../../supers/TargetView')
 
 
-var EnemyView = GameTargetView.extend({
+var EnemyView = TargetView.extend({
 
 })
 
