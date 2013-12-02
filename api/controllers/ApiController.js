@@ -137,7 +137,7 @@ module.exports = {
     },
 
       function foundSession (err, session) {
-        socket.broadcast.to(sessionId).emit( SocketEvent.FIRE, {
+        socket.broadcast.to(sessionId).emit( SocketEvent.SHOOT, {
           fire: true
         })
 

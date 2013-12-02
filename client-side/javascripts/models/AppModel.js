@@ -41,21 +41,43 @@ var AppModel = Backbone.Model.extend({
      * Number of targets hit, both good and bad
      * @type {[type]}
      */
-    hits: 0
+    hits: 0,
+
+
+    /**
+     * The number of shots the player has made
+     * @type {Number}
+     */
+    shots: 0,
 
   },
 
 
 
   /**
-   * Incremental counter which increases the hits
+   * Incremental counter which increases the number of targets
+   * that have been hit by `shots`
    *
    */
 
   increaseHits: function () {
-    var hits = this.get('hits') + 1
+    this.set({
+      hits: this.get('hits') + 1
+    })
+  },
 
-    this.set( 'hits', hits )
+
+
+  /**
+   * Incremental counter which increases the number of targets
+   * that have been hit by `shots`
+   *
+   */
+
+  increaseShots: function () {
+    this.set({
+      shots: this.get('shots') + 1
+    })
   }
 
 })

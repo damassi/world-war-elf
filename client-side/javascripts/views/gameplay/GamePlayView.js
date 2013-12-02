@@ -8,6 +8,7 @@
 var SocketEvent        = require('../../../../shared/events/SocketEvent')
 var AppConfig          = require('../../config/AppConfig')
 var AppEvent           = require('../../events/AppEvent')
+var GameEvent          = require('../../events/GameEvent')
 var PubSub             = require('../../utils/PubSub')
 var Easel              = require('../../utils/Easel')
 var View               = require('../../supers/View')
@@ -107,20 +108,20 @@ var GamePlayView = View.extend({
 
   addEventListeners: function () {
     window.socket.on( SocketEvent.ORIENTATION, this._onOrientationUpdate )
-    window.socket.on( SocketEvent.FIRE, this._onFire )
+    window.socket.on( SocketEvent.SHOOT, this._onShoot )
 
     $(canvas).on( 'mousemove', this._onMouseMove )
-    $(canvas).on( 'click', this._onFire )
+    $(canvas).on( 'click', this._onShoot )
   },
 
 
 
   removeEventListeners: function () {
     window.socket.removeListener( SocketEvent.ORIENTATION, this._onOrientationUpdate )
-    window.socket.removeListener( SocketEvent.FIRE, this._onFire )
+    window.socket.removeListener( SocketEvent.SHOOT, this._onShoot )
 
     $(canvas).off( 'mousemove', this._onMouseMove )
-    $(canvas).off( 'click', this._onFire )
+    $(canvas).off( 'click', this._onShoot )
   },
 
 
@@ -144,7 +145,7 @@ var GamePlayView = View.extend({
 
 
 
-  _onFire: function (event) {
+  _onShoot: function (event) {
     var fireTweenTime = .4
 
     TweenMax.to( this.crossHairs, fireTweenTime * .5, {
@@ -164,6 +165,8 @@ var GamePlayView = View.extend({
         this.target.rotation = 0
       }
     })
+
+    this.appModel.increaseShots()
   },
 
 

@@ -8,8 +8,9 @@
 
 var GameEvent = {
 
-  SCORE: 'change:score',
-  HITS: 'change:hits'
+  SCORE  : 'change:score',
+  HITS   : 'change:hits',
+  SHOOT  : 'change:shots'
 
 }
 

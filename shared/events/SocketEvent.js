@@ -10,7 +10,7 @@ module.exports = {
 
   CONNECT     : 'connect',
   DISCONNECT  : 'disconnect',
-  FIRE        : 'fire',
+  SHOOT       : 'shoot',
   MESSAGE     : 'message',
   ORIENTATION : 'orientation',
   SYNCED      : 'synced'

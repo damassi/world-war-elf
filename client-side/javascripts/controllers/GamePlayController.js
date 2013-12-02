@@ -18,7 +18,7 @@ var GamePlayController = Backbone.View.extend({
    * The time between shots that targets are freezed from being hit
    * @type {Number}
    */
-  FIRE_INTERVAL_TIME: 1,
+  FIRE_INTERVAL_TIME: .2,
 
 
   /**
@@ -40,8 +40,9 @@ var GamePlayController = Backbone.View.extend({
   initialize: function (options) {
     _.bindAll(this)
 
-    this.gamePlayView      = options.gamePlayView
-    this.container         = this.gamePlayView.container
+    this.gamePlayView = options.gamePlayView
+    this.appModel     = this.gamePlayView.appModel
+    this.container    = this.gamePlayView.container
 
     // Add throttler to prevent interval updates once targets are hit
     this.hitTarget = _.throttle( this._hitTarget, this.FIRE_INTERVAL_TIME * 1000 )
@@ -54,6 +55,8 @@ var GamePlayController = Backbone.View.extend({
   addEventListeners: function () {
     PubSub.on( AppEvent.START_GAMEPLAY, this._onStartGamePlay )
     PubSub.on( AppEvent.STOP_GAMEPLAY, this._onStopGamePlay )
+
+    this.listenTo( this.appModel, GameEvent.SHOOT, this._onShoot )
   },
 
 
@@ -103,6 +106,31 @@ var GamePlayController = Backbone.View.extend({
 
 
 
+  _onShoot: function (event) {
+    this.isFiring = true
+  },
+
+
+
+  _onTick: function (event) {
+    if (!this.isFiring) return
+
+    var i = 0
+      , len = TargetFactory.occupiedPositions.length
+      , target
+
+    for (i = 0; i < len; ++i) {
+      target = TargetFactory.occupiedPositions[i].instance
+
+      if (ndgmr.checkRectCollision( this.gamePlayView.crossHairs, target )) {
+
+        this.hitTarget( target )
+      }
+    }
+  },
+
+
+
   _onStartGamePlay: function () {
     this.start()
   },
@@ -121,29 +149,6 @@ var GamePlayController = Backbone.View.extend({
 
 
 
-  _onTick: function (event) {
-    return
-
-    if (!this.isFiring)
-      return
-
-    var i = 0
-      , len = this.occupiedPositions.length
-      , target
-
-    for (i = 0; i < len; ++i) {
-      target = this.occupiedPositions[i].instance
-
-      if (ndgmr.checkRectCollision( this.crossHairs, target )
-        && this.isFiring) {
-
-        this.hitTarget( target )
-      }
-    }
-  },
-
-
-
 
   //+ PRIVATE METHODS
   // ------------------------------------------------------------
@@ -151,13 +156,18 @@ var GamePlayController = Backbone.View.extend({
 
 
   _hitTarget: function (target) {
-    this.container.removeChild( target )
+    if (target && target.parent)
+      target.parent.removeChild( target )
+    else
+      return
 
     var self = this
 
     // Reset fire interval interval
     TweenMax.delayedCall( this.FIRE_INTERVAL_TIME, function() {
-      self.hitTargets = _.without( self.hitTargets, target )
+      self.isFiring = false
+
+      //self.hitTargets = _.without( self.hitTargets, target )
       self.appModel.increaseHits()
     })
   },
