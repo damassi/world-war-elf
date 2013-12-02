@@ -5,10 +5,10 @@
  * @since  11.18.13
  */
 
-var AppConfig = require('../../config/AppConfig')
-var AppEvent  = require('../../events/AppEvent')
-var PubSub    = require('../../utils/PubSub')
-var View      = require('../../supers/View')
+var AppConfig = require('../config/AppConfig')
+var AppEvent  = require('../events/AppEvent')
+var PubSub    = require('../utils/PubSub')
+var View      = require('../supers/View')
 
 
 var SyncView = View.extend({

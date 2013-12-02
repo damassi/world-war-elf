@@ -86,7 +86,6 @@ var TargetView = View.extend({
 
 
   hit: function () {
-
     TweenMax.to( this.instance, .2, {
       easel: {
         tint: '#FF0000',
@@ -110,6 +109,21 @@ var TargetView = View.extend({
           targetView: self
         })
       }
+    })
+  },
+
+
+
+  scurryAway: function () {
+    var moveTo = Easel.randRange( -1000, 1000 )
+
+    moveTo = (moveTo > 0) ? 1500 : -1500
+
+    TweenMax.to( this.instance, .6, {
+      x: this.instance.x + moveTo,
+      ease: Back.easeIn,
+      delay: (Math.random() * .3) + .1,
+      overwrite: 'all'
     })
   }
 

@@ -5,11 +5,11 @@
  * @since  11.25.13
  */
 
-var AppConfig  = require('../../config/AppConfig')
-var AppEvent   = require('../../events/AppEvent')
-var PubSub     = require('../../utils/PubSub')
-var View       = require('../../supers/View')
-var Easel      = require('../../utils/Easel')
+var AppConfig  = require('../config/AppConfig')
+var AppEvent   = require('../events/AppEvent')
+var PubSub     = require('../utils/PubSub')
+var View       = require('../supers/View')
+var Easel      = require('../utils/Easel')
 
 
 var InstructionsView = View.extend({

@@ -118,8 +118,6 @@ var GamePlayView = View.extend({
 
 
   hide: function (options) {
-    PubSub.trigger( AppEvent.STOP_GAMEPLAY )
-
     this.hudView.hide()
     this.removeEventListeners()
 
@@ -209,6 +207,7 @@ var GamePlayView = View.extend({
       y: orientation.y
     })
   },
+
 
 
 

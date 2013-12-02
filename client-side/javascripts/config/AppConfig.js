@@ -52,7 +52,14 @@ var AppConfig = {
    * at the game
    * @type {Number}
    */
-  INITIAL_TARGETS: 6
+  INITIAL_TARGETS: 6,
+
+
+  /**
+   * Amount of gameplay time
+   * @type {String}
+   */
+  DEFAULT_GAMEPLAY_TIME: '2:00'
 
 }
 

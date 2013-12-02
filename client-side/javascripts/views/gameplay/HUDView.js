@@ -20,7 +20,7 @@ var HUDView = View.extend({
 
   TEXT_POS: {
     time: { x: 945, y: 20 },
-    presents: { x: 945, y: 65 }
+    presents: { x: 945, y: 78 }
   },
 
 
@@ -49,7 +49,7 @@ var HUDView = View.extend({
       color: '#333'
     })
 
-    this.presentsText = new Easel.Text('0', 'Luckiest Guy', '79px', '#ff0000', {
+    this.presentsText = new Easel.Text('0', 'Luckiest Guy', '49px', '#ff0000', {
       x: this.TEXT_POS.presents.x,
       y: this.TEXT_POS.presents.y,
     }, {
@@ -72,8 +72,8 @@ var HUDView = View.extend({
 
 
     this.timer = new Timer({
-      direction: 'up',
-      startValue: '0:00'
+      direction: 'down',
+      startValue: AppConfig.DEFAULT_GAMEPLAY_TIME
     })
 
     this.addEventListeners()
@@ -140,20 +140,16 @@ var HUDView = View.extend({
 
 
 
-  updatePoints: function (points) {
-
-  },
-
-
-
-  updatePresents: function (presents) {
-
-  },
-
-
+  /**
+   * Update the HUD timer and, when at certain points, dispatch events to the GameController
+   * @param  {String} time the current time
+   */
 
   _onTimerUpdate: function (time) {
-    this.timeText.setText(time)
+    this.timeText.setText( time )
+
+    if (time === '0:00')
+      PubSub.trigger( AppEvent.STOP_GAMEPLAY )
   },
 
 

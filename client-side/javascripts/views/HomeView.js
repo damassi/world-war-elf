@@ -5,11 +5,11 @@
  * @since  11.18.13
  */
 
-var AppConfig  = require('../../config/AppConfig')
-var AppEvent   = require('../../events/AppEvent')
-var PubSub     = require('../../utils/PubSub')
-var View       = require('../../supers/View')
-var Easel      = require('../../utils/Easel')
+var AppConfig  = require('../config/AppConfig')
+var AppEvent   = require('../events/AppEvent')
+var PubSub     = require('../utils/PubSub')
+var View       = require('../supers/View')
+var Easel      = require('../utils/Easel')
 
 
 var HomeView = View.extend({
@@ -30,7 +30,6 @@ var HomeView = View.extend({
     this._super(options)
 
     this.children = [
-      //this.placeholder  = Easel.createBitmap('placeholder-home'),
 
       this.worldWar     = Easel.createSprite('homeSprite', 'home-title-ww', { x: 477, y: 70 }, { center: true }),
       this.elf          = Easel.createSprite('homeSprite', 'home-elf', { x: 625, y: 295 }),

@@ -37,6 +37,7 @@ var GamePlayController = Backbone.View.extend({
 
 
 
+
   initialize: function (options) {
     _.bindAll(this)
 
@@ -64,33 +65,6 @@ var GamePlayController = Backbone.View.extend({
   removeEventListeners: function () {
     PubSub.off( AppEvent.TICK, this._onTick )
   },
-
-
-
-  start: function () {
-    this.occupiedPositions = []
-
-    this.targetFactory = new TargetFactory({
-      gamePlayView: this.gamePlayView
-    })
-
-    PubSub.on( AppEvent.TICK, this._onTick )
-  },
-
-
-
-  pause: function () {
-
-  },
-
-
-
-  stop: function() {
-    this.removeEventListeners()
-    this.targetFactory.removeEventListeners()
-    this.targetFactory = null
-  },
-
 
 
 
@@ -129,19 +103,34 @@ var GamePlayController = Backbone.View.extend({
 
 
   _onStartGamePlay: function () {
-    this.start()
+
+    this.occupiedPositions = []
+
+    this.targetFactory = new TargetFactory({
+      gamePlayView: this.gamePlayView
+    })
+
+    PubSub.on( AppEvent.TICK, this._onTick )
   },
 
 
 
   _onStopGamePlay: function () {
-    this.stop()
+
+    this.removeEventListeners()
+    this.targetFactory.removeEventListeners()
+
+    _.each(this.targetFactory.occupiedPositions, function(target) {
+      target.scurryAway()
+    })
+
+    this.gamePlayView.hide()
   },
 
 
 
   _onPauseGamePlay: function () {
-    this.pause()
+    //this.pause()
   },
 
 

@@ -17,7 +17,7 @@ var GameEvent = {
 
   // PubSub updates
 
-  TARGET_HIT : 'onTargetHit',
+  TARGET_HIT  : 'onTargetHit'
 
 }
 
