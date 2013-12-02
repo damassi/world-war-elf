@@ -17,13 +17,33 @@ var Assets = {
     },
 
     {
+      name: 'placeholder-highscores',
+      src: path + 'placeholder-highscores.jpg',
+    },
+
+    {
       name: 'placeholder-instructions',
       src: path + 'placeholder-instructions.jpg',
     },
 
     {
+      name: 'placeholder-sync',
+      src: path + 'placeholder-sync.jpg',
+    },
+
+    {
+      name: 'placeholder-calibrate',
+      src: path + 'placeholder-calibrate.jpg',
+    },
+
+    {
       name: 'placeholder-gameplay',
       src: path + 'placeholder-gameplay.jpg',
+    },
+
+    {
+      name: 'placeholder-submit-score',
+      src: path + 'placeholder-submit-score.jpg',
     },
 
     {

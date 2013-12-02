@@ -55,16 +55,6 @@ var InstructionsView = View.extend({
 
 
 
-  render: function (options) {
-    this._super()
-
-    this.addChildren( this.children )
-
-    return this
-  },
-
-
-
   show: function (options) {
     this._super()
   },

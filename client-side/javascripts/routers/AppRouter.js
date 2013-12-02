@@ -28,6 +28,7 @@ var AppRouter = Backbone.Router.extend({
 
 
 
+
   routes: {
 
     // Desktop Routes
@@ -35,12 +36,15 @@ var AppRouter = Backbone.Router.extend({
     ''              : 'homeRoute',
     'instructions'  : 'instructionsRoute',
     'sync'          : 'syncRoute',
+    'calibrate'     : 'calibrateRoute',
     'play'          : 'gamePlayRoute',
+    'submit-score'  : 'submitScoreRoute',
+    'high-scores'   : 'highScoresRoute',
 
 
     // Mobile Routes
 
-    'mobile/sync'      : 'mobileSyncRoute',
+    'mobile/sync' : 'mobileSyncRoute',
     'mobile/play' : 'mobileGamePlayRoute'
   },
 
@@ -83,13 +87,43 @@ var AppRouter = Backbone.Router.extend({
     this.appModel.set({
       view: view
     })
+  },
 
+
+
+  calibrateRoute: function () {
+    var view = this.appController.calibrateView
+
+    this.appModel.set({
+      view: view
+    })
   },
 
 
 
   gamePlayRoute: function () {
     var view = this.appController.gamePlayView
+
+    this.appModel.set({
+      view: view
+    })
+  },
+
+
+
+  submitScoreRoute: function () {
+    var view = this.appController.submitScoreView
+
+    this.appModel.set({
+      view: view
+    })
+  },
+
+
+
+  highScoresRoute: function () {
+    var view = this.appController.highScoresView
+
     this.appModel.set({
       view: view
     })

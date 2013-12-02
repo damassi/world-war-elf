@@ -16,7 +16,10 @@ var AppConfig          = require('./config/AppConfig')
   , HomeView           = require('./views/HomeView')
   , InstructionsView   = require('./views/InstructionsView')
   , SyncView           = require('./views/SyncView')
+  , CalibrateView      = require('./views/CalibrateView')
   , GamePlayView       = require('./views/gameplay/GamePlayView')
+  , SubmitScoreView    = require('./views/SubmitScoreView')
+  , HighScoresView     = require('./views/HighScoresView')
   , GamePlayController = require('./controllers/GamePlayController')
   , MobileModel        = require('./mobile/models/MobileModel')
   , MobileGamePlayView = require('./mobile/views/gameplay/MobileGamePlayView')
@@ -67,9 +70,19 @@ var AppController = {
     this.mobileModel = new MobileModel()
 
 
-    // Initialize Views
+    // Initialize Desktop Views
 
     this.homeView = new HomeView({
+      appController: this,
+      appModel: this.appModel
+    })
+
+    this.instructionsView = new InstructionsView({
+      appController: this,
+      appModel: this.appModel
+    })
+
+    this.highScoresView = new HighScoresView({
       appController: this,
       appModel: this.appModel
     })
@@ -79,15 +92,23 @@ var AppController = {
       appModel: this.appModel
     })
 
+    this.calibrateView = new CalibrateView({
+      appController: this,
+      appModel: this.appModel
+    })
+
     this.gamePlayView = new GamePlayView({
       appController: this,
       appModel: this.appModel
     })
 
-    this.instructionsView = new InstructionsView({
+    this.submitScoreView = new SubmitScoreView({
       appController: this,
       appModel: this.appModel
     })
+
+
+    // Initialize Mobile Views
 
     this.mobileSyncView = new MobileSyncView({
       appController: this,

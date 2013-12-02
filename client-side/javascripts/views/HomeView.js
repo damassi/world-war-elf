@@ -128,7 +128,7 @@ var HomeView = View.extend({
 
 
   _onScoreBtnClick: function (event) {
-    window.location.href ='#/sync'
+    window.location.href ='#/high-scores'
   }
 
 
