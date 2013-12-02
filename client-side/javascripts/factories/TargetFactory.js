@@ -17,19 +17,19 @@ var TargetFactory = {
    */
   playMatrix: [
     {
-      depth: 0,
-      xPositions: [0, 100, 200, 300, 400, 500],
+      depth: 'back',
+      xPositions: [50, 200, 400, 600],
       yPos: 120
     },
     {
-      depth: 2,
-      xPositions: [0, 50, 150, 250, 350, 450],
-      yPos: 190
+      depth: 'middle',
+      xPositions: [100, 300, 500],
+      yPos: 220
     },
     {
-      depth: 4,
-      xPositions: [0, 100, 200, 300, 400, 500],
-      yPos: 390
+      depth: 'front',
+      xPositions: [50, 200, 400, 600],
+      yPos: 360
     }
   ],
 
@@ -63,8 +63,12 @@ var TargetFactory = {
     var target = Easel.createSprite('gameplaySprite', _.sample( this.targetIds ))
     var position = this._returnPosition(target)
 
+    var bounds = target.getBounds()
+    target.regX = Math.floor( bounds.width * .5 )
+    target.regY = Math.floor( bounds.height )
+
     target.x = position.x,
-    target.y = position.y
+    target.y = position.y + bounds.height
 
     this.occupiedPositions.push( position )
 

@@ -71,15 +71,12 @@ var GamePlayController = Backbone.View.extend({
 
     var x = -40
 
-    for (var i = 0; i < 10; ++i) {
+    for (var i = 0; i < 5; ++i) {
       var target = TargetFactory.createTarget()
-      // target.instance.x = x
-      // target.instance.y = 100
-      // x += 100
 
-      //this.container.addChildAt( target.instance, target.depth )
-      this.container.addChild( target.instance)
-      this.container.setChildIndex( target.instance, target.depth )
+      // Find the proper container on the view and add child to in
+      // This resolves issues with depth sorting and dirty indexes
+      this.gamePlayView[target.depth + 'Container'].addChild( target.instance )
     }
   },
 

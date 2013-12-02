@@ -5,19 +5,17 @@
  * @since  11.19.13
  */
 
-var SocketEvent   = require('../../../../shared/events/SocketEvent')
-var AppConfig     = require('../../config/AppConfig')
-var AppEvent      = require('../../events/AppEvent')
-var PubSub        = require('../../utils/PubSub')
-var Easel         = require('../../utils/Easel')
-var View          = require('../../supers/View')
-var HUDView       = require('./HUDView')
-
+var SocketEvent        = require('../../../../shared/events/SocketEvent')
+var AppConfig          = require('../../config/AppConfig')
+var AppEvent           = require('../../events/AppEvent')
+var PubSub             = require('../../utils/PubSub')
+var Easel              = require('../../utils/Easel')
+var View               = require('../../supers/View')
+var HUDView            = require('./HUDView')
 var GamePlayController = require('../../controllers/GamePlayController')
 
 
 var GamePlayView = View.extend({
-
 
 
   initialize: function (options) {
@@ -29,8 +27,11 @@ var GamePlayView = View.extend({
     })
 
     this.children = [
+      this.backContainer = new c.Container(),
       this.backGround   = Easel.createSprite('gameplaySprite', 'game-ground-back', { x: 0, y: 148 }),
+      this.middleContainer = new c.Container(),
       this.middleGround = Easel.createSprite('gameplaySprite', 'game-ground-middle', { x: 0, y: 311 }),
+      this.frontContainer = new c.Container(),
       this.frontGround  = Easel.createSprite('gameplaySprite', 'game-ground-front', { x: 0, y: 453 }),
       this.crossHairs   = Easel.createSprite('gameplaySprite', 'game-crosshairs', { x: 468, y: 245 }, { center: true }),
     ]
