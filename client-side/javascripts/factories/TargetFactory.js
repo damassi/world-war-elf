@@ -5,6 +5,7 @@
  * @date   12.1.13
  */
 
+var AppConfig  = require('../config/AppConfig')
 var Easel      = require('../utils/Easel')
 var PubSub     = require('../utils/PubSub')
 var GameEvent  = require('../events/GameEvent')
@@ -67,7 +68,7 @@ var TargetFactory = Backbone.View.extend({
 
     this.occupiedPositions = []
 
-    for (var i = 0; i < 1; ++i) {
+    for (var i = 0; i < AppConfig.INITIAL_TARGETS; ++i) {
       var targetView = this.createTarget()
     }
 

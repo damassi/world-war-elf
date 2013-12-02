@@ -30,13 +30,6 @@ var GamePlayController = Backbone.View.extend({
 
 
   /**
-   * An array of currently occupied positions, based upon the matrix above
-   * @type {Array}
-   */
-  occupiedPositions: null,
-
-
-  /**
    * Handles creation and management of targets
    * @type {TargetFactory}
    */
@@ -114,7 +107,8 @@ var GamePlayController = Backbone.View.extend({
 
 
   _onTick: function (event) {
-    if (!this.isFiring) return
+    if (!this.isFiring)
+      return
 
     var occupiedPositions = this.targetFactory.occupiedPositions
 

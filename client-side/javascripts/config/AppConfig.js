@@ -44,7 +44,15 @@ var AppConfig = {
    * Time between route changes / animate in / animate out
    * @type {Number}
    */
-  TRANSITION_TIME: .4
+  TRANSITION_TIME: .4,
+
+
+  /**
+   * The number of targets that are initially shown when the user arrives
+   * at the game
+   * @type {Number}
+   */
+  INITIAL_TARGETS: 5
 
 }
 
