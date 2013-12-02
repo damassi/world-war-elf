@@ -8,9 +8,16 @@
 
 var GameEvent = {
 
+  // Model property updates
+
   SCORE  : 'change:score',
   HITS   : 'change:hits',
-  SHOOT  : 'change:shots'
+  SHOOT  : 'change:shots',
+
+
+  // PubSub updates
+
+  TARGET_HIT : 'onTargetHit',
 
 }
 

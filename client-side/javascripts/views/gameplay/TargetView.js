@@ -6,9 +6,10 @@
  */
 
 var GameEvent = require('../../events/GameEvent')
-var AppEvent = require('../../events/AppEvent')
-var Easel = require('../../utils/Easel')
-var View = require('../../supers/View')
+var AppEvent  = require('../../events/AppEvent')
+var Easel     = require('../../utils/Easel')
+var PubSub    = require('../../utils/PubSub')
+var View      = require('../../supers/View')
 
 
 var TargetView = View.extend({
@@ -85,9 +86,6 @@ var TargetView = View.extend({
 
 
   hit: function () {
-    var bounds = this.instance.getBounds()
-
-    this.instance.cache( bounds.x, bounds.y, bounds.width, bounds.height )
 
     TweenMax.to( this.instance, .2, {
       easel: {
@@ -105,7 +103,12 @@ var TargetView = View.extend({
       delay: .1,
       overwrite: 'concurrent',
       onComplete: function () {
-        self.instance.parent.removeChild( self.instance )
+        this.target.parent.removeChild( this.target )
+
+        // Dispatch hit to factory to create new enemy
+        PubSub.trigger( GameEvent.TARGET_HIT, {
+          targetView: self
+        })
       }
     })
   }

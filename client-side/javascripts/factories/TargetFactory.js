@@ -6,6 +6,8 @@
  */
 
 var Easel      = require('../utils/Easel')
+var PubSub     = require('../utils/PubSub')
+var GameEvent  = require('../events/GameEvent')
 var TargetView = require('../views/gameplay/TargetView')
 
 
@@ -51,19 +53,22 @@ var TargetFactory = Backbone.View.extend({
 
 
   initialize: function () {
+    _.bindAll(this)
+
     this.occupiedPositions = []
+    this.addEventListeners()
   },
 
 
 
   addEventListeners: function ()  {
-
+    PubSub.on( GameEvent.TARGET_HIT, this._onTargetHit )
   },
 
 
 
   removeEventListeners: function () {
-
+    PubSub.off( GameEvent.TARGET_HIT, this._onTargetHit )
   },
 
 
@@ -78,6 +83,9 @@ var TargetFactory = Backbone.View.extend({
         depth: orientation.depth
       }
     })
+
+    var bounds = targetView.instance.getBounds()
+    targetView.instance.cache( bounds.x, bounds.y, bounds.width, bounds.height )
 
     this.occupiedPositions.push( targetView )
 
@@ -114,6 +122,22 @@ var TargetFactory = Backbone.View.extend({
 
     return newOrientation
   },
+
+
+
+
+  //+ EVENT HANDLERS
+  // ------------------------------------------------------------
+
+
+
+  _onTargetHit: function (params) {
+    var targetView = params.targetView
+
+    this.occupiedPositions = _.without( this.occupiedPositions, targetView )
+  }
+
+
 
 })
 
