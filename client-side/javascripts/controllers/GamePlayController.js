@@ -44,8 +44,6 @@ var GamePlayController = Backbone.View.extend({
     this.container         = this.gamePlayView.container
     this.occupiedPositions = []
 
-    TargetFactory.initialize()
-
     // Add throttler to prevent interval updates once targets are hit
     this.hitTarget = _.throttle( this._hitTarget, this.FIRE_INTERVAL_TIME * 1000 )
 
@@ -56,6 +54,7 @@ var GamePlayController = Backbone.View.extend({
 
   addEventListeners: function () {
     PubSub.on( AppEvent.START_GAMEPLAY, this._onStartGamePlay )
+    PubSub.on( AppEvent.STOP_GAMEPLAY, this._onStopGamePlay )
   },
 
 
@@ -67,6 +66,8 @@ var GamePlayController = Backbone.View.extend({
 
 
   start: function () {
+    TargetFactory.initialize()
+
     PubSub.on( AppEvent.TICK, this._onTick )
 
     var x = -40
@@ -76,7 +77,9 @@ var GamePlayController = Backbone.View.extend({
 
       // Find the proper container on the view and add child to in
       // This resolves issues with depth sorting and dirty indexes
-      this.gamePlayView[target.depth + 'Container'].addChild( target.instance )
+      var row = this.gamePlayView[ target.depth + 'Container' ]
+
+      row.addChild( target.instance )
     }
   },
 

@@ -129,6 +129,13 @@ var View = Backbone.View.extend({
 		if (!this.stage)
 			return
 
+    for(var i = 0, len = this.container.children.length; i < len; ++i ) {
+      var child = this.container.children[i]
+
+      if (child instanceof c.Container)
+        child.removeAllChildren()
+    }
+
     this.container.removeAllChildren()
 		this.stage.removeChild( this.container )
 	},

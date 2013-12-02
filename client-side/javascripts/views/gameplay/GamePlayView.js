@@ -71,8 +71,6 @@ var GamePlayView = View.extend({
 
     this.stage.addChild( this.container )
 
-    console.log(this.container)
-
     TweenMax.from( this.backGround, .3, {
       y: height,
       ease: Expo.easeOut,
@@ -97,6 +95,8 @@ var GamePlayView = View.extend({
 
 
   hide: function (options) {
+    PubSub.trigger( AppEvent.STOP_GAMEPLAY )
+
     this.hudView.hide()
     this.removeEventListeners()
     this._super({ remove: true })
