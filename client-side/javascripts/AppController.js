@@ -6,21 +6,21 @@
  */
 
 var AppConfig          = require('./config/AppConfig')
-var AppEvent           = require('./events/AppEvent')
-var AppModel           = require('./models/AppModel')
-var AppRouter          = require('./routers/AppRouter')
-var SocketIO           = require('./utils/SocketIO')
-var PubSub             = require('./utils/PubSub')
-var Snowflakes         = require('./utils/Snowflakes')
-var Easel              = require('./utils/Easel')
-var HomeView           = require('./views/home/HomeView')
-var InstructionsView   = require('./views/instructions/InstructionsView')
-var SyncView           = require('./views/sync/SyncView')
-var GamePlayView       = require('./views/gameplay/GamePlayView')
-var GamePlayController = require('./controllers/GamePlayController')
-var MobileModel        = require('./mobile/models/MobileModel')
-var MobileGamePlayView = require('./mobile/views/gameplay/MobileGamePlayView')
-var MobileSyncView     = require('./mobile/views/sync/MobileSyncView')
+  , AppEvent           = require('./events/AppEvent')
+  , AppModel           = require('./models/AppModel')
+  , AppRouter          = require('./routers/AppRouter')
+  , SocketIO           = require('./utils/SocketIO')
+  , PubSub             = require('./utils/PubSub')
+  , Snowflakes         = require('./utils/Snowflakes')
+  , Easel              = require('./utils/Easel')
+  , HomeView           = require('./views/home/HomeView')
+  , InstructionsView   = require('./views/instructions/InstructionsView')
+  , SyncView           = require('./views/sync/SyncView')
+  , GamePlayView       = require('./views/gameplay/GamePlayView')
+  , GamePlayController = require('./controllers/GamePlayController')
+  , MobileModel        = require('./mobile/models/MobileModel')
+  , MobileGamePlayView = require('./mobile/views/gameplay/MobileGamePlayView')
+  , MobileSyncView     = require('./mobile/views/sync/MobileSyncView')
 
 
 var AppController = {
@@ -213,17 +213,6 @@ var AppController = {
       , previousView = appModel._previousAttributes.view
 
     this.cleanUpViews( previousView )
-
-    switch (view) {
-
-      case this.gamePlayView:
-        // PubSub.trigger( AppEvent.START_GAMEPLAY )
-
-        break
-
-      default:
-
-    }
 
     view.render().show({
       animated: true
