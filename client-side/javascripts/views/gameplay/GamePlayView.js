@@ -28,16 +28,22 @@ var GamePlayView = View.extend({
     })
 
     this.children = [
+
+      // Hold the back zombies
       this.backContainer = new c.Container(),
       this.backGround   = Easel.createSprite('gameplaySprite', 'game-ground-back', { x: 0, y: 148 }),
+
+      // Middle zombies
       this.middleContainer = new c.Container(),
       this.middleGround = Easel.createSprite('gameplaySprite', 'game-ground-middle', { x: 0, y: 311 }),
+
+      // Front zombies
       this.frontContainer = new c.Container(),
       this.frontGround  = Easel.createSprite('gameplaySprite', 'game-ground-front', { x: 0, y: 453 }),
+
+      // The user-controlled target
       this.crossHairs   = Easel.createSprite('gameplaySprite', 'game-crosshairs', { x: 468, y: 245 }, { center: true }),
     ]
-
-    //Easel.dragObject( this.enemy1 )
   },
 
 
@@ -132,10 +138,6 @@ var GamePlayView = View.extend({
     $('.btn-submit').remove()
     $('.input-sync').remove()
   },
-
-
-
-
 
 
 

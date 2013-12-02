@@ -36,6 +36,13 @@ var GamePlayController = Backbone.View.extend({
   occupiedPositions: null,
 
 
+  /**
+   * Handles creation and management of targets
+   * @type {TargetFactory}
+   */
+  targetFactory: null,
+
+
 
   initialize: function (options) {
     _.bindAll(this)
@@ -70,12 +77,12 @@ var GamePlayController = Backbone.View.extend({
   start: function () {
     this.occupiedPositions = []
 
-    TargetFactory.initialize()
+    this.targetFactory = new TargetFactory()
 
     PubSub.on( AppEvent.TICK, this._onTick )
 
-    for (var i = 0; i < 5; ++i) {
-      var targetView = TargetFactory.createTarget()
+    for (var i = 0; i < 10; ++i) {
+      var targetView = this.targetFactory.createTarget()
 
       // Find the proper container on the view and add child to in
       // This resolves issues with depth sorting and dirty indexes
@@ -95,6 +102,8 @@ var GamePlayController = Backbone.View.extend({
 
   stop: function() {
     this.removeEventListeners()
+    this.targetFactory.removeEventListeners()
+    this.targetFactory = null
   },
 
 
@@ -115,12 +124,14 @@ var GamePlayController = Backbone.View.extend({
   _onTick: function (event) {
     if (!this.isFiring) return
 
+    var occupiedPositions = this.targetFactory.occupiedPositions
+
     var i = 0
-      , len = TargetFactory.occupiedPositions.length
+      , len = occupiedPositions.length
       , target
 
     for (i = 0; i < len; ++i) {
-      target = TargetFactory.occupiedPositions[i].instance
+      target = occupiedPositions[i].instance
 
       if (ndgmr.checkRectCollision( this.gamePlayView.crossHairs, target )) {
 
@@ -167,7 +178,6 @@ var GamePlayController = Backbone.View.extend({
     TweenMax.delayedCall( this.FIRE_INTERVAL_TIME, function() {
       self.isFiring = false
 
-      //self.hitTargets = _.without( self.hitTargets, target )
       self.appModel.increaseHits()
     })
   },

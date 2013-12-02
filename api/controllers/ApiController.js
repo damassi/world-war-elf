@@ -101,7 +101,6 @@ module.exports = {
   orientation: function (req, res, next) {
     var sessionId = req.param('sessionId')
       , socket    = req.socket
-      , io        = sails.io
 
     Session.findOne({
       sessionId: sessionId
@@ -130,7 +129,6 @@ module.exports = {
   fire: function (req, res, next) {
     var sessionId = req.param('sessionId')
       , socket    = req.socket
-      , io        = sails.io
 
     Session.findOne({
       sessionId: sessionId

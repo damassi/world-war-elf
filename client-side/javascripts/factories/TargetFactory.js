@@ -9,7 +9,7 @@ var Easel      = require('../utils/Easel')
 var TargetView = require('../views/gameplay/TargetView')
 
 
-var TargetFactory = {
+var TargetFactory = Backbone.View.extend({
 
 
   /**
@@ -52,6 +52,18 @@ var TargetFactory = {
 
   initialize: function () {
     this.occupiedPositions = []
+  },
+
+
+
+  addEventListeners: function ()  {
+
+  },
+
+
+
+  removeEventListeners: function () {
+
   },
 
 
@@ -103,6 +115,6 @@ var TargetFactory = {
     return newOrientation
   },
 
-}
+})
 
 module.exports = TargetFactory
