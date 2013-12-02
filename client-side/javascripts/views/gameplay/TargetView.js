@@ -52,19 +52,34 @@ var TargetView = View.extend({
 
 
   show: function() {
+    var self = this
+
     TweenMax.fromTo( this.instance, .4, { alpha: 0, rotation: 180 }, {
       immediateRender: true,
       alpha: 1,
       rotation: 0,
       ease: Back.easeOut,
-      delay: 2 + ( Math.random() * 1 )
+      delay: 2 + ( Math.random() * 1 ),
+      onComplete: function () {
+        self.hide()
+      }
     })
   },
 
 
 
   hide: function() {
+    var self = this
 
+    TweenMax.to( this.instance, .4, {
+      rotation: -180,
+      ease: Back.easeIn,
+      delay: 2 + ( Math.random() * 1 ),
+      onComplete: function () {
+        self.show()
+      }
+
+    })
   }
 
 })

@@ -57,15 +57,19 @@ var TargetFactory = {
 
 
   createTarget: function () {
-    var position = this._returnPosition()
+    var orientation = this._returnOrientation()
 
-    return new TargetView({
+    var targetView = new TargetView({
       orientation: {
-        x: position.x,
-        y: position.y,
-        depth: position.depth
+        x: orientation.x,
+        y: orientation.y,
+        depth: orientation.depth
       }
     })
+
+    this.occupiedPositions.push( targetView )
+
+    return targetView
   },
 
 
@@ -76,29 +80,27 @@ var TargetFactory = {
    * @return {Object}
    */
 
-  _returnPosition: function () {
-    var matrixPosition = _.sample( this.playMatrix )
-      , xPos = _.sample( matrixPosition.xPositions )
+  _returnOrientation: function () {
+    var matrixOrientation = _.sample( this.playMatrix )
+      , xPos = _.sample( matrixOrientation.xPositions )
 
-    var newPosition = {
+    var newOrientation = {
       x: xPos,
-      y: matrixPosition.yPos,
-      depth: matrixPosition.depth
+      y: matrixOrientation.yPos,
+      depth: matrixOrientation.depth
     }
 
-    var i, len, position
+    var i, len, orientation
 
     for (i = 0, len = this.occupiedPositions.length; i < len; ++i) {
-      position = this.occupiedPositions[i]
+      orientation = this.occupiedPositions[i].orientation
 
-      if (_.isEqual( position, newPosition )) {
-        return this._returnPosition()
+      if (_.isEqual( orientation, newOrientation )) {
+        return this._returnOrientation()
       }
     }
 
-    this.occupiedPositions.push( newPosition )
-
-    return newPosition
+    return newOrientation
   },
 
 }
