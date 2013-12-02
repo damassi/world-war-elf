@@ -34,6 +34,13 @@ var TargetFactory = {
   ],
 
 
+  targetIds: [
+    'game-enemy-1',
+    'game-enemy-2',
+    'game-enemy-3'
+  ],
+
+
   /**
    * An array of targets to be pooled during gameplay
    * @type {Array}
@@ -46,25 +53,14 @@ var TargetFactory = {
 
 
   initialize: function () {
-    this.hitTargets = [
-      this.signPopUp    = Easel.createSprite('gameplaySprite', 'game-sign-popup', { x: 156, y: 401 }, { center: true  }),
-      this.enemy1       = Easel.createSprite('gameplaySprite', 'game-enemy-2', { x: 290, y: 200 }),
-      this.enemy2       = Easel.createSprite('gameplaySprite', 'game-enemy-3', { x: 763, y: 229 }),
-      this.enemy0       = Easel.createSprite('gameplaySprite', 'game-enemy-1', { x: 163, y: 121 }),
-    ]
-
     this.occupiedPositions = []
   },
 
 
 
   createTarget: function () {
-
-    var target = _.sample( this.hitTargets )
+    var target = Easel.createSprite('gameplaySprite', _.sample( this.targetIds ))
     var position = this._returnPosition(target)
-
-    if (typeof position === 'undefined')
-      return
 
     target.x = position.x,
     target.y = position.y
@@ -83,9 +79,8 @@ var TargetFactory = {
    */
 
   _returnPosition: function (target) {
-    var matrixPosition = _.sample( this.playMatrix ) //this.playMatrix[ Math.floor( Math.random() * this.playMatrix.length )]
-      , xPos = _.sample( matrixPosition.xPositions ) //[ Math.floor( Math.random() * matrixPosition.xPositions.length )]
-
+    var matrixPosition = _.sample( this.playMatrix )
+      , xPos = _.sample( matrixPosition.xPositions )
 
     var newPosition = {
       x: xPos,

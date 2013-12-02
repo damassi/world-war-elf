@@ -38,32 +38,24 @@ var GamePlayController = Backbone.View.extend({
 
 
   initialize: function (options) {
-    this.container = options.container
+    _.bindAll(this)
 
+    this.gamePlayView      = options.gamePlayView
+    this.container         = this.gamePlayView.container
     this.occupiedPositions = []
 
-    TargetFactory.initialize({
-      container: this.container
-    })
+    TargetFactory.initialize()
 
     // Add throttler to prevent interval updates once targets are hit
     this.hitTarget = _.throttle( this._hitTarget, this.FIRE_INTERVAL_TIME * 1000 )
 
-    // var target = TargetFactory.createTarget()
-    // this.container.addChildAt( target.instance, target.depth )
-
-  },
-
-
-
-  destroy: function () {
-    this.removeEventListeners()
+    this.addEventListeners()
   },
 
 
 
   addEventListeners: function () {
-    PubSub.on( AppEvent.TICK, this._onTick )
+    PubSub.on( AppEvent.START_GAMEPLAY, this._onStartGamePlay )
   },
 
 
@@ -74,9 +66,58 @@ var GamePlayController = Backbone.View.extend({
 
 
 
+  start: function () {
+    PubSub.on( AppEvent.TICK, this._onTick )
+
+    var x = -40
+
+    for (var i = 0; i < 10; ++i) {
+      var target = TargetFactory.createTarget()
+      target.instance.x = x
+      target.instance.y = 100
+      x += 100
+      //this.container.addChildAt( target.instance, target.depth )
+      this.container.addChild( target.instance)
+    }
+  },
+
+
+
+  pause: function () {
+
+  },
+
+
+
+  stop: function() {
+    this.removeEventListeners()
+  },
+
+
+
+
 
   //+ EVENT HANDLERS
   // ------------------------------------------------------------
+
+
+
+  _onStartGamePlay: function () {
+    this.start()
+  },
+
+
+
+  _onStopGamePlay: function () {
+    this.stop()
+  },
+
+
+
+  _onPauseGamePlay: function () {
+    this.pause()
+  },
+
 
 
   _onTick: function (event) {

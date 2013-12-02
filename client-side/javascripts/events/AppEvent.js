@@ -13,6 +13,9 @@ var AppEvent = {
   DESKTOP_CLIENT_SYNCED : 'onDesktopClientSynched',
   MOBILE_CLIENT_SYNCED  : 'onMobileClientSynced',
 
+  START_GAMEPLAY : 'onStartGamePlay',
+  STOP_GAMEPLAY  : 'onStopGamePlay',
+
   TICK: 'onTick'
 
 }

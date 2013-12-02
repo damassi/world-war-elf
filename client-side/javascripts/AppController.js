@@ -17,6 +17,7 @@ var HomeView           = require('./views/home/HomeView')
 var InstructionsView   = require('./views/instructions/InstructionsView')
 var SyncView           = require('./views/sync/SyncView')
 var GamePlayView       = require('./views/gameplay/GamePlayView')
+var GamePlayController = require('./controllers/GamePlayController')
 var MobileModel        = require('./mobile/models/MobileModel')
 var MobileGamePlayView = require('./mobile/views/gameplay/MobileGamePlayView')
 var MobileSyncView     = require('./mobile/views/sync/MobileSyncView')
@@ -43,14 +44,6 @@ var AppController = {
   views: null,
 
 
-  /**
-   * Flag used to check against persistant ground additions during
-   * non game-play states
-   * @type {Boolean}
-   */
-  groundAdded: false,
-
-
 
   initialize: function () {
     _.bindAll(this)
@@ -68,8 +61,13 @@ var AppController = {
     c.Ticker.setFPS(60)
 
 
+    // Initialize Models
 
-    this.appModel = new AppModel()
+    this.appModel    = new AppModel()
+    this.mobileModel = new MobileModel()
+
+
+    // Initialize Views
 
     this.homeView = new HomeView({
       appController: this,
@@ -91,8 +89,6 @@ var AppController = {
       appModel: this.appModel
     })
 
-    this.mobileModel = new MobileModel()
-
     this.mobileSyncView = new MobileSyncView({
       appController: this,
       appModel: this.appModel
@@ -101,6 +97,16 @@ var AppController = {
     this.mobileGamePlayView = new MobileGamePlayView({
       appModel: this.appModel
     })
+
+
+    // Initialize Controllers
+
+    this.gamePlayController = new GamePlayController({
+      gamePlayView: this.gamePlayView
+    })
+
+
+    // Initialize Routing and Events
 
     this.delegateEvents()
 
@@ -114,17 +120,9 @@ var AppController = {
 
     this.stage.addChild( Easel.createBitmap( 'frame-background' ))
 
-    this.ground = [
-      this.backGround   = Easel.createSprite('homeSprite', 'home-ground-back', { x: -7, y: 410 }),
-      this.middleGround = Easel.createSprite('homeSprite', 'home-ground-middle', { x: 232, y: 440 }),
-      this.frontGround  = Easel.createSprite('homeSprite', 'home-ground-front', { x: 0, y: 437 }),
-    ]
-
     this._addGround()
 
     c.Ticker.addEventListener( 'tick', this.tick )
-
-    //this.animateIn()
   },
 
 
@@ -216,10 +214,16 @@ var AppController = {
 
     this.cleanUpViews( previousView )
 
-    if (view !== this.gamePlayView)
-      this._addGround()
-    else
-      this._removeGround()
+    switch (view) {
+
+      case this.gamePlayView:
+        PubSub.trigger( AppEvent.START_GAMEPLAY )
+
+        break
+
+      default:
+
+    }
 
     view.render().show({
       animated: true
@@ -235,42 +239,17 @@ var AppController = {
 
 
   _addGround: function () {
-    if (this.groundAdded)
-      return
-
-    this.groundAdded = true
+    this.ground = [
+      this.backGround   = Easel.createSprite('homeSprite', 'home-ground-back', { x: -7, y: 410 }),
+      this.middleGround = Easel.createSprite('homeSprite', 'home-ground-middle', { x: 232, y: 440 }),
+      this.frontGround  = Easel.createSprite('homeSprite', 'home-ground-front', { x: 0, y: 437 }),
+    ]
 
     for (var i = 0, len = this.ground.length; i < len; ++i ) {
       var ground = this.ground[i]
       this.stage.addChild( ground )
     }
   },
-
-
-
-  _removeGround: function () {
-    var self = this
-
-    return
-
-    if (!this.groundAdded)
-      return
-
-    this.groundAdded = false
-
-    for (var i = 0, len = this.ground.length; i < len; ++i ) {
-      var ground = this.ground[i]
-
-      TweenMax.to( ground, .4, {
-        y: AppConfig.DIMENSIONS.height + 100,
-        ease: Expo.easeIn,
-        onComplete: function () {
-          self.stage.removeChild( this.target )
-        }
-      })
-    }
-  },
-
 
 
 }
