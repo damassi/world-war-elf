@@ -77,22 +77,11 @@ var GamePlayController = Backbone.View.extend({
   start: function () {
     this.occupiedPositions = []
 
-    this.targetFactory = new TargetFactory()
+    this.targetFactory = new TargetFactory({
+      gamePlayView: this.gamePlayView
+    })
 
     PubSub.on( AppEvent.TICK, this._onTick )
-
-    for (var i = 0; i < 10; ++i) {
-      var targetView = this.targetFactory.createTarget()
-
-      // Store ref to the actual TargetView container for hit detection delegation
-      targetView.instance.targetView = targetView
-
-      // Find the proper container on the view and add child to in
-      // This resolves issues with depth sorting and dirty indexes
-      var rowContainer = this.gamePlayView[ targetView.orientation.depth + 'Container' ]
-
-      rowContainer.addChild( targetView.instance )
-    }
   },
 
 

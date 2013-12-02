@@ -38,6 +38,14 @@ var TargetFactory = Backbone.View.extend({
 
 
   /**
+   * Reference to the gameplay view for pushing targets
+   * into the proper containers
+   * @type {GamePlayView}
+   */
+  gamePlayView: null,
+
+
+  /**
    * An array of targets to be pooled during gameplay
    * @type {Array}
    */
@@ -52,10 +60,17 @@ var TargetFactory = Backbone.View.extend({
 
 
 
-  initialize: function () {
+  initialize: function (options) {
     _.bindAll(this)
 
+    this.gamePlayView = options.gamePlayView
+
     this.occupiedPositions = []
+
+    for (var i = 0; i < 1; ++i) {
+      var targetView = this.createTarget()
+    }
+
     this.addEventListeners()
   },
 
@@ -84,10 +99,22 @@ var TargetFactory = Backbone.View.extend({
       }
     })
 
+    // Store ref to the actual TargetView container for hit detection delegation
+    targetView.instance.targetView = targetView
+
+    // Cache for speed as well as Easel filters
     var bounds = targetView.instance.getBounds()
     targetView.instance.cache( bounds.x, bounds.y, bounds.width, bounds.height )
 
+    // Push position into game matrix
     this.occupiedPositions.push( targetView )
+
+    // Find the proper container on the view and add child to in
+    // This resolves issues with depth sorting and dirty indexes
+    var rowContainer = this.gamePlayView[ targetView.orientation.depth + 'Container' ]
+
+    // Add to final stage
+    rowContainer.addChild( targetView.instance )
 
     return targetView
   },
@@ -135,6 +162,8 @@ var TargetFactory = Backbone.View.extend({
     var targetView = params.targetView
 
     this.occupiedPositions = _.without( this.occupiedPositions, targetView )
+
+    this.createTarget()
   }
 
 
