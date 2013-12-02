@@ -18,7 +18,7 @@ var GamePlayController = Backbone.View.extend({
    * The time between shots that targets are freezed from being hit
    * @type {Number}
    */
-  FIRE_INTERVAL_TIME: .2,
+  FIRE_INTERVAL_TIME: .5,
 
 
   /**
@@ -83,6 +83,9 @@ var GamePlayController = Backbone.View.extend({
 
     for (var i = 0; i < 10; ++i) {
       var targetView = this.targetFactory.createTarget()
+
+      // Store ref to the actual TargetView container for hit detection delegation
+      targetView.instance.targetView = targetView
 
       // Find the proper container on the view and add child to in
       // This resolves issues with depth sorting and dirty indexes
@@ -168,7 +171,7 @@ var GamePlayController = Backbone.View.extend({
 
   _hitTarget: function (target) {
     if (target && target.parent)
-      target.parent.removeChild( target )
+      target.targetView.hit()
     else
       return
 

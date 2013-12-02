@@ -51,6 +51,14 @@ var TargetView = View.extend({
 
 
 
+  hit: function () {
+    this.remove({
+      animated: true
+    })
+  },
+
+
+
   show: function() {
     var self = this
 
@@ -80,6 +88,33 @@ var TargetView = View.extend({
       }
 
     })
+  },
+
+
+
+  remove: function (options) {
+    options = options || {}
+
+    var self = this
+
+    function removeChild() {
+      self.instance.parent.removeChild( self.instance )
+    }
+
+    if (options.animated) {
+      TweenMax.to( this.instance, .4, {
+        y: this.instance.y + 300,
+        ease: Back.easeIn,
+        delay: 0,
+        overwrite: 'all',
+        onComplete: function () {
+          removeChild()
+        }
+      })
+    }
+    else {
+      removeChild()
+    }
   }
 
 })
