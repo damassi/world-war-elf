@@ -5,7 +5,8 @@
  * @date   12.1.13
  */
 
-var Easel = require('../utils/Easel')
+var Easel      = require('../utils/Easel')
+var TargetView = require('../views/gameplay/TargetView')
 
 
 var TargetFactory = {
@@ -34,13 +35,6 @@ var TargetFactory = {
   ],
 
 
-  targetIds: [
-    'game-enemy-1',
-    'game-enemy-2',
-    'game-enemy-3'
-  ],
-
-
   /**
    * An array of targets to be pooled during gameplay
    * @type {Array}
@@ -48,7 +42,10 @@ var TargetFactory = {
   hitTargets: null,
 
 
-
+  /**
+   * Internal reference for all currently occupied positions
+   * @type {Array}
+   */
   occupiedPositions: null,
 
 
@@ -60,19 +57,15 @@ var TargetFactory = {
 
 
   createTarget: function () {
-    var target = Easel.createSprite('gameplaySprite', _.sample( this.targetIds ))
-    var position = this._returnPosition(target)
+    var position = this._returnPosition()
 
-    var bounds = target.getBounds()
-    target.regX = Math.floor( bounds.width * .5 )
-    target.regY = Math.floor( bounds.height )
-
-    target.x = position.x,
-    target.y = position.y + bounds.height
-
-    this.occupiedPositions.push( position )
-
-    return position
+    return new TargetView({
+      orientation: {
+        x: position.x,
+        y: position.y,
+        depth: position.depth
+      }
+    })
   },
 
 
@@ -83,32 +76,27 @@ var TargetFactory = {
    * @return {Object}
    */
 
-  _returnPosition: function (target) {
+  _returnPosition: function () {
     var matrixPosition = _.sample( this.playMatrix )
       , xPos = _.sample( matrixPosition.xPositions )
 
     var newPosition = {
       x: xPos,
       y: matrixPosition.yPos,
-      depth: matrixPosition.depth,
-      instance: target
+      depth: matrixPosition.depth
     }
 
-    var foundOccupiedPosition = false
+    var i, len, position
 
-    for (var i = 0, len = this.occupiedPositions.length; i < len; ++i) {
-      var position = this.occupiedPositions[i]
+    for (i = 0, len = this.occupiedPositions.length; i < len; ++i) {
+      position = this.occupiedPositions[i]
 
       if (_.isEqual( position, newPosition )) {
-        foundOccupiedPosition = true
-        break
+        return this._returnPosition()
       }
     }
 
-    if (foundOccupiedPosition) {
-      this._returnPosition()
-      return
-    }
+    this.occupiedPositions.push( newPosition )
 
     return newPosition
   },
