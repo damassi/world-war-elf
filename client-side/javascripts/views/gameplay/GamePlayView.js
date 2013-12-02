@@ -19,29 +19,6 @@ var GamePlayController = require('../../controllers/GamePlayController')
 var GamePlayView = View.extend({
 
 
-  /**
-   * The time between shots that targets are freezed from being hit
-   * @type {Number}
-   */
-  FIRE_INTERVAL_TIME: 1,
-
-
-  /**
-   * Flag to check if user is currently pressing the mouse cursor or
-   * the fire button from a mobile device
-   * @type {Boolean}
-   */
-  isFiring: false,
-
-
-
-  /**
-   * An array of currently occupied positions, based upon the matrix above
-   * @type {Array}
-   */
-  occupiedPositions: null,
-
-
 
   initialize: function (options) {
     this._super(options)
@@ -59,9 +36,6 @@ var GamePlayView = View.extend({
     ]
 
     //Easel.dragObject( this.enemy1 )
-
-    // Add throttler to prevent interval updates once targets are hit
-    this.hitTarget = this._hitTarget //_.throttle( this._hitTarget, this.FIRE_INTERVAL_TIME * 1000 )
   },
 
 
@@ -127,8 +101,6 @@ var GamePlayView = View.extend({
 
 
   addEventListeners: function () {
-    PubSub.on( AppEvent.TICK, this._onTick )
-
     window.socket.on( SocketEvent.ORIENTATION, this._onOrientationUpdate )
     window.socket.on( SocketEvent.FIRE, this._onFire )
 
@@ -139,9 +111,8 @@ var GamePlayView = View.extend({
 
 
   removeEventListeners: function () {
-    PubSub.off( AppEvent.TICK, this._onTick )
-
     window.socket.removeListener( SocketEvent.ORIENTATION, this._onOrientationUpdate )
+    window.socket.removeListener( SocketEvent.FIRE, this._onFire )
 
     $(canvas).off( 'mousemove', this._onMouseMove )
     $(canvas).off( 'click', this._onFire )
@@ -167,31 +138,27 @@ var GamePlayView = View.extend({
   // ------------------------------------------------------------
 
 
-  _onTick: function (event) {
-    return
-
-    if (!this.isFiring)
-      return
-
-    var i = 0
-      , len = this.occupiedPositions.length
-      , target
-
-    for (i = 0; i < len; ++i) {
-      target = this.occupiedPositions[i].instance
-
-      if (ndgmr.checkRectCollision( this.crossHairs, target )
-        && this.isFiring) {
-
-        this.hitTarget( target )
-      }
-    }
-  },
-
-
 
   _onFire: function (event) {
-    this._fireShot()
+    var fireTweenTime = .4
+
+    TweenMax.to( this.crossHairs, fireTweenTime * .5, {
+      scaleX: .8,
+      scaleY: .8,
+      yoyo: true,
+      repeat: 1,
+      ease: Back.easeInOut
+    })
+
+    var self = this
+
+    TweenMax.to( this.crossHairs, fireTweenTime, {
+      rotation: 90,
+      ease: Back.easeOut,
+      onComplete: function () {
+        this.target.rotation = 0
+      }
+    })
   },
 
 
@@ -218,47 +185,6 @@ var GamePlayView = View.extend({
 
   //+ PRIVATE METHODS
   // ------------------------------------------------------------
-
-
-
-  _fireShot: function (position) {
-    var fireTime = .4
-
-    this.isFiring = true
-
-    TweenMax.to( this.crossHairs, fireTime * .5, {
-      scaleX: .8,
-      scaleY: .8,
-      yoyo: true,
-      repeat: 1,
-      ease: Back.easeInOut
-    })
-
-    var self = this
-
-    TweenMax.to( this.crossHairs, fireTime, {
-      rotation: 90,
-      ease: Back.easeOut,
-      onComplete: function () {
-        this.target.rotation = 0
-        self.isFiring = false
-      }
-    })
-  },
-
-
-
-  _hitTarget: function (target) {
-    this.container.removeChild( target )
-
-    var self = this
-
-    // Reset fire interval interval
-    TweenMax.delayedCall( this.FIRE_INTERVAL_TIME, function() {
-      self.hitTargets = _.without( self.hitTargets, target )
-      self.appModel.increaseHits()
-    })
-  },
 
 
 
