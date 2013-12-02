@@ -70,6 +70,8 @@ var GamePlayView = View.extend({
 
     this.stage.addChild( this.container )
 
+    console.log(this.container)
+
     TweenMax.from( this.backGround, .3, {
       y: height,
       ease: Expo.easeOut,
@@ -87,6 +89,8 @@ var GamePlayView = View.extend({
       ease: Expo.easeOut,
       delay: delay
     })
+
+    PubSub.trigger( AppEvent.START_GAMEPLAY )
   },
 
 

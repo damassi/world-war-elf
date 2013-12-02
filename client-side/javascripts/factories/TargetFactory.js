@@ -48,6 +48,7 @@ var TargetFactory = {
   hitTargets: null,
 
 
+
   occupiedPositions: null,
 
 

@@ -73,11 +73,13 @@ var GamePlayController = Backbone.View.extend({
 
     for (var i = 0; i < 10; ++i) {
       var target = TargetFactory.createTarget()
-      target.instance.x = x
-      target.instance.y = 100
-      x += 100
+      // target.instance.x = x
+      // target.instance.y = 100
+      // x += 100
+
       //this.container.addChildAt( target.instance, target.depth )
       this.container.addChild( target.instance)
+      this.container.setChildIndex( target.instance, target.depth )
     }
   },
 

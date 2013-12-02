@@ -217,7 +217,7 @@ var AppController = {
     switch (view) {
 
       case this.gamePlayView:
-        PubSub.trigger( AppEvent.START_GAMEPLAY )
+        // PubSub.trigger( AppEvent.START_GAMEPLAY )
 
         break
 
