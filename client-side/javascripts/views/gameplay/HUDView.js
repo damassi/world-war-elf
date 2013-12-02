@@ -34,6 +34,13 @@ var HUDView = View.extend({
   initialize: function (options) {
     this._super(options)
 
+
+  },
+
+
+
+  render: function (options) {
+
     this.timeText = new Easel.Text('0:00', 'Luckiest Guy', '39px', '#fff', {
       x: this.TEXT_POS.time.x,
       y: this.TEXT_POS.time.y,
@@ -56,8 +63,8 @@ var HUDView = View.extend({
 
 
     this.children = [
-      this.hudClock    = Easel.createSprite('gameplaySprite', 'game-hud-clock', { x: 820, y: 15 }),
-      this.hudGift     = Easel.createSprite('gameplaySprite', 'game-hud-gift', { x: 820, y: 76 }),
+      this.hudClock = Easel.createSprite('gameplaySprite', 'game-hud-clock', { x: 820, y: 15 }),
+      this.hudGift  = Easel.createSprite('gameplaySprite', 'game-hud-gift', { x: 820, y: 76 }),
 
       this.timeText.container,
       this.presentsText.container,
@@ -68,14 +75,12 @@ var HUDView = View.extend({
       direction: 'up',
       startValue: '0:00'
     })
-  },
 
-
-
-  render: function (options) {
     this.addEventListeners()
     this.startTimer()
     this.addChildren( this.children )
+
+    TweenMax.set( this.container, { alpha: 0, x: 200 })
 
     return this
   },
@@ -97,10 +102,28 @@ var HUDView = View.extend({
 
 
 
+  show: function () {
+    TweenMax.to( this.container, .6, {
+      alpha: 1,
+      x: 0,
+      ease: Expo.easeOut,
+      delay: 1
+    })
+  },
+
+
+
   hide: function (options) {
     this.stopTimer()
 
-    this._super({ remove: true })
+    var self = this
+
+    TweenMax.to( this.container, .3, {
+      alpha: 0,
+      onComplete: function () {
+        self.remove()
+      }
+    })
   },
 
 

@@ -52,7 +52,7 @@ var AppConfig = {
    * at the game
    * @type {Number}
    */
-  INITIAL_TARGETS: 5
+  INITIAL_TARGETS: 6
 
 }
 

@@ -22,17 +22,17 @@ var TargetFactory = Backbone.View.extend({
   playMatrix: [
     {
       depth: 'back',
-      xPositions: [50, 200, 400, 600],
+      xPositions: [50, 200, 400, 600, 800],
       yPos: 120
     },
     {
       depth: 'middle',
-      xPositions: [100, 300, 500],
+      xPositions: [100, 300, 500, 700],
       yPos: 220
     },
     {
       depth: 'front',
-      xPositions: [50, 200, 400, 600],
+      xPositions: [50, 200, 400, 600, 800],
       yPos: 360
     }
   ],

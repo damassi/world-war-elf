@@ -57,7 +57,6 @@ var GamePlayView = View.extend({
     }
 
     this.addChildren( this.children )
-    this.container.addChild( this.hudView.render().container )
 
     this.addDebugWindow()
     this.addEventListeners()
@@ -77,6 +76,8 @@ var GamePlayView = View.extend({
     this.container.y = 0
 
     this.stage.addChild( this.container )
+    this.container.addChild( this.hudView.render().container )
+    this.hudView.show()
 
     TweenMax.from( this.backGround, .3, {
       y: height,
@@ -96,6 +97,21 @@ var GamePlayView = View.extend({
       delay: delay
     })
 
+    TweenMax.fromTo( this.crossHairs, .2, { alpha: 0 }, {
+      immediateRender: true,
+      alpha: 1,
+      ease: Linear.easeNone,
+      delay: 1
+    })
+
+    TweenMax.fromTo( this.crossHairs, .4, { scaleX: 0, scaleY: 0 }, {
+      immediateRender: true,
+      scaleX: 1,
+      scaleY: 1,
+      ease: Expo.easeOut,
+      delay: 1
+    })
+
     PubSub.trigger( AppEvent.START_GAMEPLAY )
   },
 
@@ -106,7 +122,10 @@ var GamePlayView = View.extend({
 
     this.hudView.hide()
     this.removeEventListeners()
-    this._super({ remove: true })
+
+    this._super({
+      remove: true
+    })
   },
 
 
