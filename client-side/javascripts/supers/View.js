@@ -6,6 +6,7 @@
  * @since  11.17.13
  */
 
+var AppController = require('../AppController')
 var AppConfig = require('../config/AppConfig')
 
 
@@ -53,13 +54,8 @@ var View = Backbone.View.extend({
 		_.extend( this, options || {} )
 		_.bindAll( this )
 
-		if (this.appController) {
-			if (this.appController.stage) {
-				this.stage = this.appController.stage
-				this.container = new c.Container()
-				this._bindCanvasEvents()
-			}
-		}
+		this.container = new c.Container()
+		this._bindCanvasEvents()
 
 		if (this.appModel)
 			this.appModel = this.appModel

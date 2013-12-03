@@ -96,15 +96,6 @@ var TargetView = View.extend({
     var bounds = this.instance.getBounds()
     this.instance.cache( bounds.x, bounds.y, bounds.width, bounds.height )
 
-    TweenMax.to( this.instance, .2, {
-      easel: {
-        //tint: '#FF0000',
-        //tintAmount: .2,
-        //brightness: 1,
-      },
-      ease: Linear.easeNone
-    })
-
     var self = this
 
     TweenMax.to( this.instance, .4, {

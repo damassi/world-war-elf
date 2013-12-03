@@ -13,6 +13,7 @@ var PubSub             = require('../../utils/PubSub')
 var Easel              = require('../../utils/Easel')
 var View               = require('../../supers/View')
 var HUDView            = require('./HUDView')
+var SnowballView       = require('./SnowballView')
 var GamePlayController = require('../../controllers/GamePlayController')
 
 
@@ -23,8 +24,8 @@ var GamePlayView = View.extend({
     this._super(options)
 
     this.hudView = new HUDView({
-      appModel : this.appModel,
-      appController : this.appController
+      stage : this.stage,
+      appModel : this.appModel
     })
 
     this.children = [
@@ -50,11 +51,6 @@ var GamePlayView = View.extend({
 
   render: function () {
     this._super()
-
-    var position = {
-      x: AppConfig.DIMENSIONS.width * .5,
-      y: AppConfig.DIMENSIONS.height * .5
-    }
 
     this.addChildren( this.children )
 
@@ -196,6 +192,15 @@ var GamePlayView = View.extend({
     TweenMax.to( this.crossHairs, fireTweenTime, {
       rotation: 0,
       ease: Back.easeOut
+    })
+
+    var snowball = new SnowballView({ stage: this.stage })
+
+    this.container.addChild( snowball.render().container )
+
+    snowball.throwSnowball({
+      x: this.crossHairs.x,
+      y: this.crossHairs.y
     })
 
     this.appModel.increaseShots()

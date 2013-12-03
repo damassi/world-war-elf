@@ -52,6 +52,21 @@ var Assets = {
     },
 
     {
+      name: 'snowball-plain',
+      src: path + 'snowball-plain.png',
+    },
+
+    {
+      name: 'snowball-candycane',
+      src: path + 'snowball-candycane.png',
+    },
+
+    {
+      name: 'frame-background',
+      src: path + 'frame-background.jpg',
+    },
+
+    {
         name: 'elf1',
         src: path + 'spritesheets/elf-1.png',
 

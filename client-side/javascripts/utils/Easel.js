@@ -407,6 +407,21 @@ var Easel = {
 
 
 
+	returnPointsBetweenPoints: function (point1, point2, num) {
+		var d0 = (point2.x - point1.x) / (num + 1);
+    var d1 = (point2.y - point1.y) / (num + 1);
+    var points = [];
+    for (var i = 1; i <= num; i++) {
+        points.push({
+            x: point1.x + d0 * i,
+            y: point1.y + d1 * i
+        });
+    }
+    return points;
+	},
+
+
+
 	/**
 	 * Returns a random nunber within two ranges
 	 * @param {Number} min

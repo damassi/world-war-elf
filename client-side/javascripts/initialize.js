@@ -14,28 +14,32 @@ var Assets        = require('./config/Assets')
 c = createjs
 
 
+function startGame() {
+  AppController.initialize()
+
+  Backbone.history.start({
+    pushState: false
+  })
+}
+
+
 $(function() {
 
   Touch.translateTouchEvents()
 
   var loadQueue = new c.LoadQueue()
 
-  loadQueue.addEventListener( "error", function (error) {
+  loadQueue.addEventListener( 'error', function (error) {
     console.error('LoadError: ', error)
   })
 
-  loadQueue.addEventListener( "progress", function (event) {
+  loadQueue.addEventListener( 'progress', function (event) {
     var progress = Math.round( event.progress * 100 ) + '%'
   })
 
-  loadQueue.addEventListener( "complete", function (event) {
-    AppController.initialize()
+  loadQueue.addEventListener( 'complete', function (event) {
 
-
-    // Kick off application
-    Backbone.history.start({
-      pushState: false
-    })
+    startGame()
 
   })
 

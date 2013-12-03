@@ -73,17 +73,17 @@ var AppController = {
     // Initialize Desktop Views
 
     this.homeView = new HomeView({
-      appController: this,
+      stage: this.stage,
       appModel: this.appModel
     })
 
     this.instructionsView = new InstructionsView({
-      appController: this,
+      stage: this.stage,
       appModel: this.appModel
     })
 
     this.highScoresView = new HighScoresView({
-      appController: this,
+      stage: this.stage,
       appModel: this.appModel
     })
 
@@ -93,17 +93,17 @@ var AppController = {
     })
 
     this.calibrateView = new CalibrateView({
-      appController: this,
+      stage: this.stage,
       appModel: this.appModel
     })
 
     this.gamePlayView = new GamePlayView({
-      appController: this,
+      stage: this.stage,
       appModel: this.appModel
     })
 
     this.submitScoreView = new SubmitScoreView({
-      appController: this,
+      stage: this.stage,
       appModel: this.appModel
     })
 

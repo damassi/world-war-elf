@@ -4,7 +4,7 @@
  * @author Charlie
  */
 
-Snowflakes = {
+var Snowflakes = {
 
   /**
    * window reference
@@ -34,7 +34,7 @@ Snowflakes = {
    * Snowflake size classes
    * @type {Array}
    */
-  sizeClasses : [ 'small', 'medium', 'big' ], 
+  sizeClasses : [ 'small', 'medium', 'big' ],
 
   /**
    * Initializes Snow
@@ -43,7 +43,7 @@ Snowflakes = {
     this.$container = $('<div>', {'class': 'snowflake-container'}).prependTo(document.body);
     this.winWidth   = this.$window.width();
     this.winHeight  = this.$window.height();
-    this.addEventlisteners(); 
+    this.addEventlisteners();
     this.initSnow();
   },
 
@@ -53,7 +53,7 @@ Snowflakes = {
   addEventlisteners: function () {
     this.$window.resize($.proxy(this._onWindowResize, this));
   },
-  
+
   /**
    * Initializes flakes
    */
@@ -92,9 +92,9 @@ Snowflakes = {
     var right = this._randomNumber(this.winWidth / 2, this.winWidth) /* go left */ * - 1;
 
     //make it fall
-    timeline.to($snowflake, duration, { 
-      'y'        : this.winHeight * 1.5, 
-      'x'        : right, 
+    timeline.to($snowflake, duration, {
+      'y'        : this.winHeight * 1.5,
+      'x'        : right,
       'ease'     : 'Linear.easeNone',
       //remove from DOM on complete
       onComplete : function () {
