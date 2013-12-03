@@ -78,7 +78,6 @@ var GamePlayView = View.extend({
 
 
 
-
   initialize: function (options) {
     this._super(options)
 
@@ -104,9 +103,7 @@ var GamePlayView = View.extend({
       // The user-controlled target
       this.crossHairs   = Easel.createSprite('gameplaySprite', 'game-crosshairs', { x: 468, y: 245 }, { center: true }),
     ]
-
-    // Add throttler to prevent interval updates once targets are hit
-    this.hitTarget = _.throttle( this._hitTarget, this.FIRE_INTERVAL_TIME * 1000 )
+    
 
   },
 
@@ -229,8 +226,6 @@ var GamePlayView = View.extend({
 
   _onStartGamePlay: function () {
 
-    this.occupiedPositions = []
-
     this.targetFactory = new TargetFactory({
       gamePlayView: this
     })
@@ -249,7 +244,7 @@ var GamePlayView = View.extend({
       target.scurryAway()
     })
 
-    //this.gamePlayView.hide()
+    this.hide()
   },
 
 
@@ -258,34 +253,6 @@ var GamePlayView = View.extend({
 
   },
 
-
-  _onTick: function (event) {
-    return
-
-    if (!this.isFiring)
-      return
-
-    var occupiedPositions = this.targetFactory.occupiedPositions
-
-    var i = 0
-      , j = 0
-      , len = occupiedPositions.length
-      , snowballLen = this.snowballs.length
-      , target
-      , snowball
-
-    for (i = 0; i < len; ++i) {
-      target = occupiedPositions[i].instance
-
-      for (j = 0; j < snowballLen; ++j) {
-        snowball = this.snowballs[j].snowball
-
-        if (ndgmr.checkPixelCollision( snowball, target, 1, false )) {
-          this.hitTarget( target )
-        }
-      }
-    }
-  },
 
 
   _onPrepareTarget: function (event) {
@@ -333,6 +300,26 @@ var GamePlayView = View.extend({
 
 
 
+  _onTargetHit: function (params) {
+    var target = params.target 
+
+    if (target && target.parent)
+      target.targetView.hit()
+    else
+      return
+
+    var self = this
+
+    // Reset fire interval interval
+    TweenMax.delayedCall( this.FIRE_INTERVAL_TIME, function() {
+      self.isFiring = false
+
+      self.appModel.increaseHits()
+    })
+  },
+
+
+
   _onMouseMove: function (event) {
     this._moveCroshairs({
       x: event.offsetX,
@@ -375,34 +362,22 @@ var GamePlayView = View.extend({
       parentContainer: this.container
     })
 
+    snowball.on( GameEvent.TARGET_HIT, this._onTargetHit )
+
     var self = this
 
     snowball.throwSnowball({
       x: this.crossHairs.x,
       y: this.crossHairs.y,
+
+      occupiedPositions: this.targetFactory.occupiedPositions,
+
       onComplete: function() {
         self.snowballs = _.without(this)
       }
     })
 
     this.snowballs.push( snowball )
-  },
-
-
-  _hitTarget: function (target) {
-    if (target && target.parent)
-      target.targetView.hit()
-    else
-      return
-
-    var self = this
-
-    // Reset fire interval interval
-    TweenMax.delayedCall( this.FIRE_INTERVAL_TIME, function() {
-      self.isFiring = false
-
-      self.appModel.increaseHits()
-    })
   },
 
 })

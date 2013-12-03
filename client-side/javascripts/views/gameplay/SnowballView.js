@@ -57,10 +57,12 @@ var SnowballView = View.extend({
 
 
   throwSnowball: function (params) {
-    var endpoint = { x: params.x, y: params. y }
+    this.occupiedPositions = params.occupiedPositions
 
     this.snowball.x = this.stageCenter.x
     this.snowball.y = this.stageCenter.y
+
+    var endpoint = { x: params.x, y: params. y }
 
     var startpoint = {
       x: this.snowball.x,
@@ -83,10 +85,12 @@ var SnowballView = View.extend({
       y: endpoint.y,
       ease: Expo.easeOut,
       onComplete: function() {
-         self.remove()
+        self._checkHit() 
 
-         if(params.onComplete)
-            params.onComplete.call(self)
+        self.remove()
+
+        if(params.onComplete)
+          params.onComplete.call(self)
       }
     })
 
@@ -101,6 +105,38 @@ var SnowballView = View.extend({
     //     self.remove()
     //   }
     // })
+  },
+
+
+  _checkHit: function() {
+    var i = 0
+      , len = this.occupiedPositions.length
+
+    var target
+      , point
+      , targetPoint
+      , bounds
+
+    for (i = 0; i < len; ++i) {
+      target = this.occupiedPositions[i].instance
+
+      point = { x: this.snowball.x, y: this.snowball.y }
+      targetPoint = target.localToGlobal( 0, 0 )
+      bounds = target.getBounds()
+
+      bounds.x = targetPoint.x + 50
+      bounds.y = targetPoint.y + 30
+
+      if (Easel.isWithinBounds( point, bounds )) {
+        
+        this.trigger( GameEvent.TARGET_HIT, {
+          target: target
+        }) 
+        
+        return
+      }
+    }
+
   }
 
 })
