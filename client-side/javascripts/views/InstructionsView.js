@@ -68,7 +68,7 @@ var InstructionsView = View.extend({
 
 
   //+ EVENT HANDLERS
-  //--------------------------------------
+  // ------------------------------------------------------------
 
 
 
@@ -87,9 +87,11 @@ var InstructionsView = View.extend({
   },
 
 
+
   _onMouseBtnClick: function (event) {
     window.location.href = '#/play'
   },
+
 
 
   _onPhoneBtnClick: function (event) {

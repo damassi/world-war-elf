@@ -130,7 +130,7 @@ var GamePlayController = Backbone.View.extend({
 
 
   _onPauseGamePlay: function () {
-    //this.pause()
+
   },
 
 
