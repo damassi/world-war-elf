@@ -112,12 +112,14 @@ var TargetView = View.extend({
       delay: .1,
       overwrite: 'concurrent',
       onComplete: function () {
-        this.target.parent.removeChild( this.target )
+        if (this.target && this.target.parent) {
+          this.target.parent.removeChild( this.target )
 
-        // Dispatch hit to factory to create new enemy
-        PubSub.trigger( GameEvent.TARGET_HIT, {
-          targetView: self
-        })
+          // Dispatch hit to factory to create new enemy
+          PubSub.trigger( GameEvent.TARGET_HIT, {
+            targetView: self
+          })
+        }
       }
     })
   },
