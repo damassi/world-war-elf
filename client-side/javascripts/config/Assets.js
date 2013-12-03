@@ -56,6 +56,8 @@ var Assets = {
         src: path + 'spritesheets/elf-1.png',
 
         spritesheet: {
+            framerate: 40,
+
             "animations": {"bad": {"frames": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 0]}, "good": {"frames": [19]}},
             "images": [path + 'spritesheets/elf-1.png'],
             "frames": [
@@ -88,6 +90,8 @@ var Assets = {
         src: path + 'spritesheets/elf-2.png',
 
         spritesheet: {
+            framerate: 40,
+
             "animations": {"bad": {"frames": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 0]}, "good": {"frames": [19]}},
             "images": [path + 'spritesheets/elf-2.png'],
             "frames": [
@@ -120,6 +124,8 @@ var Assets = {
         src: path + 'spritesheets/elf-3.png',
 
         spritesheet: {
+            framerate: 40,
+
             "animations": {"bad": {"frames": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 0]}, "good": {"frames": [19]}},
             "images": [path + 'spritesheets/elf-3.png'],
             "frames": [

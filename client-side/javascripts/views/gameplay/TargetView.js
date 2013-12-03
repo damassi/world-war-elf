@@ -21,9 +21,9 @@ var TargetView = View.extend({
    * @type {Array}
    */
   targetIds: [
-    'game-enemy-1',
-    'game-enemy-2',
-    'game-enemy-3'
+    'elf1',
+    'elf2',
+    'elf3'
   ],
 
 
@@ -38,7 +38,7 @@ var TargetView = View.extend({
   initialize: function (options) {
     this._super(options)
 
-    this.instance = Easel.createSprite('gameplaySprite', _.sample( this.targetIds ))
+    this.instance = Easel.createSprite(_.sample( this.targetIds ), 0)
 
     var bounds = this.instance.getBounds()
     this.instance.regX = Math.floor( bounds.width * .5 )
@@ -46,6 +46,8 @@ var TargetView = View.extend({
 
     this.instance.x = this.orientation.x
     this.instance.y = this.orientation.y + bounds.height
+
+    this.instance.gotoAndPlay('bad')
 
     this.show()
   },
@@ -86,6 +88,9 @@ var TargetView = View.extend({
 
 
   hit: function () {
+    var bounds = this.instance.getBounds()
+    this.instance.cache( bounds.x, bounds.y, bounds.width, bounds.height )
+
     TweenMax.to( this.instance, .2, {
       easel: {
         tint: '#FF0000',
