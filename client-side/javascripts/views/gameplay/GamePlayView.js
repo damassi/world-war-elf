@@ -9,15 +9,74 @@ var SocketEvent        = require('../../../../shared/events/SocketEvent')
 var AppConfig          = require('../../config/AppConfig')
 var AppEvent           = require('../../events/AppEvent')
 var GameEvent          = require('../../events/GameEvent')
+var TargetFactory      = require('../../factories/TargetFactory')
 var PubSub             = require('../../utils/PubSub')
 var Easel              = require('../../utils/Easel')
 var View               = require('../../supers/View')
 var HUDView            = require('./HUDView')
 var SnowballView       = require('./SnowballView')
-var GamePlayController = require('../../controllers/GamePlayController')
 
 
 var GamePlayView = View.extend({
+
+
+  /**
+   * The time between shots that targets are freezed from being hit
+   * @type {Number}
+   */
+  FIRE_INTERVAL_TIME: .5,
+
+
+  /**
+   * Flag to check if user is currently pressing the mouse cursor or
+   * the fire button from a mobile device
+   * @type {Boolean}
+   */
+  isFiring: false,
+
+
+  /**
+   * Handles creation and management of targets
+   * @type {TargetFactory}
+   */
+  targetFactory: null,
+
+  /**
+   * Container to hold back enemies
+   * @type {c.Container}
+   */
+  backContainer: null,
+
+
+  /**
+   * Container to hold middle enemies
+   * @type {c.Container}
+   */
+  middleContainer: null,
+
+
+  /**
+   * Container to hold front enemies
+   * @type {c.Container}
+   */
+  frontContainer: null,
+
+
+  /**
+   * The user-controlled crosshairs
+   * @type {c.Container}
+   */
+  crossHairs: null,
+
+
+  /**
+   * An array which stores all of the currently displayed snowballs
+   * @type {Array}
+   */
+  snowballs: null,
+
+
+
 
 
   initialize: function (options) {
@@ -45,6 +104,10 @@ var GamePlayView = View.extend({
       // The user-controlled target
       this.crossHairs   = Easel.createSprite('gameplaySprite', 'game-crosshairs', { x: 468, y: 245 }, { center: true }),
     ]
+
+    // Add throttler to prevent interval updates once targets are hit
+    this.hitTarget = _.throttle( this._hitTarget, this.FIRE_INTERVAL_TIME * 1000 )
+
   },
 
 
@@ -53,7 +116,6 @@ var GamePlayView = View.extend({
     this._super()
 
     this.addChildren( this.children )
-
     this.addDebugWindow()
     this.addEventListeners()
 
@@ -70,6 +132,8 @@ var GamePlayView = View.extend({
 
     this.container.x = 0
     this.container.y = 0
+
+    this.snowballs = []
 
     this.stage.addChild( this.container )
     this.container.addChild( this.hudView.render().container )
@@ -129,6 +193,9 @@ var GamePlayView = View.extend({
     window.socket.on( SocketEvent.ORIENTATION, this._onOrientationUpdate )
     window.socket.on( SocketEvent.SHOOT, this._onShoot )
 
+    PubSub.on( AppEvent.START_GAMEPLAY, this._onStartGamePlay )
+    PubSub.on( AppEvent.STOP_GAMEPLAY, this._onStopGamePlay )
+
     $(canvas).on( 'mousemove', this._onMouseMove )
     $(canvas).on( 'mousedown', this._onPrepareTarget )
     $(canvas).on( 'mouseup', this._onShoot )
@@ -160,6 +227,67 @@ var GamePlayView = View.extend({
   // ------------------------------------------------------------
 
 
+  _onStartGamePlay: function () {
+
+    this.occupiedPositions = []
+
+    this.targetFactory = new TargetFactory({
+      gamePlayView: this
+    })
+
+    PubSub.on( AppEvent.TICK, this._onTick )
+  },
+
+
+
+  _onStopGamePlay: function () {
+
+    this.removeEventListeners()
+    this.targetFactory.removeEventListeners()
+
+    _.each(this.targetFactory.occupiedPositions, function(target) {
+      target.scurryAway()
+    })
+
+    //this.gamePlayView.hide()
+  },
+
+
+
+  _onPauseGamePlay: function () {
+
+  },
+
+
+  _onTick: function (event) {
+    return
+
+    if (!this.isFiring)
+      return
+
+    var occupiedPositions = this.targetFactory.occupiedPositions
+
+    var i = 0
+      , j = 0
+      , len = occupiedPositions.length
+      , snowballLen = this.snowballs.length
+      , target
+      , snowball
+
+    for (i = 0; i < len; ++i) {
+      target = occupiedPositions[i].instance
+
+      for (j = 0; j < snowballLen; ++j) {
+        snowball = this.snowballs[j].snowball
+
+        if (ndgmr.checkPixelCollision( snowball, target, 1, false )) {
+          this.hitTarget( target )
+        }
+      }
+    }
+  },
+
+
   _onPrepareTarget: function (event) {
     var fireTweenTime = .4
 
@@ -169,8 +297,6 @@ var GamePlayView = View.extend({
       ease: Back.easeOut
     })
 
-    var self = this
-
     TweenMax.to( this.crossHairs, fireTweenTime, {
       rotation: 90,
       ease: Back.easeOut
@@ -178,7 +304,15 @@ var GamePlayView = View.extend({
   },
 
 
+
   _onShoot: function (event) {
+
+    var self = this
+
+    setTimeout(function() {
+      self.isFiring = true
+    }, 600 )
+
     var fireTweenTime = .4
 
     TweenMax.to( this.crossHairs, fireTweenTime * .5, {
@@ -187,21 +321,12 @@ var GamePlayView = View.extend({
       ease: Back.easeInOut
     })
 
-    var self = this
-
     TweenMax.to( this.crossHairs, fireTweenTime, {
       rotation: 0,
       ease: Back.easeOut
     })
 
-    var snowball = new SnowballView({ stage: this.stage })
-
-    this.container.addChild( snowball.render().container )
-
-    snowball.throwSnowball({
-      x: this.crossHairs.x,
-      y: this.crossHairs.y
-    })
+    this._throwSnowball()
 
     this.appModel.increaseShots()
   },
@@ -235,12 +360,50 @@ var GamePlayView = View.extend({
 
 
   _moveCroshairs: function (position) {
-    TweenMax.to( this.crossHairs, 1, {
+    TweenMax.to( this.crossHairs, .4, {
       x: position.x,
       y: position.y,
       ease: Expo.easeOut
     })
-  }
+  },
+
+
+
+  _throwSnowball: function () {
+    var snowball = new SnowballView({
+      stage: this.stage,
+      parentContainer: this.container
+    })
+
+    var self = this
+
+    snowball.throwSnowball({
+      x: this.crossHairs.x,
+      y: this.crossHairs.y,
+      onComplete: function() {
+        self.snowballs = _.without(this)
+      }
+    })
+
+    this.snowballs.push( snowball )
+  },
+
+
+  _hitTarget: function (target) {
+    if (target && target.parent)
+      target.targetView.hit()
+    else
+      return
+
+    var self = this
+
+    // Reset fire interval interval
+    TweenMax.delayedCall( this.FIRE_INTERVAL_TIME, function() {
+      self.isFiring = false
+
+      self.appModel.increaseHits()
+    })
+  },
 
 })
 

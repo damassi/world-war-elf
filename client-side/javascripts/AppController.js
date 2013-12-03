@@ -20,7 +20,6 @@ var AppConfig          = require('./config/AppConfig')
   , GamePlayView       = require('./views/gameplay/GamePlayView')
   , SubmitScoreView    = require('./views/SubmitScoreView')
   , HighScoresView     = require('./views/HighScoresView')
-  , GamePlayController = require('./controllers/GamePlayController')
   , MobileModel        = require('./mobile/models/MobileModel')
   , MobileGamePlayView = require('./mobile/views/gameplay/MobileGamePlayView')
   , MobileSyncView     = require('./mobile/views/sync/MobileSyncView')
@@ -122,9 +121,9 @@ var AppController = {
 
     // Initialize Controllers
 
-    this.gamePlayController = new GamePlayController({
-      gamePlayView: this.gamePlayView
-    })
+    // this.gamePlayController = new GamePlayController({
+    //   gamePlayView: this.gamePlayView
+    // })
 
 
     // Initialize Routing and Events

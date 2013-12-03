@@ -31,58 +31,76 @@ var SnowballView = View.extend({
 
     this.snowball.x = this.stageCenter.x
     this.snowball.y = this.stageCenter.y
+
+    this.render()
   },
+
 
 
   render: function () {
     this._super()
 
     this.container.addChild( this.snowball )
+    this.parentContainer.addChild( this.container )
 
     return this
   },
 
 
+
   remove: function () {
-    this._super({remove: true})
+    this.container.removeChild( this.snowball )
+    this.parentContainer.removeChild( this.container )
+    this.stage.removeChild( this.container )
   },
 
 
-  throwSnowball: function (endpoint) {
-    endpoint = endpoint || this.stageCenter
+
+  throwSnowball: function (params) {
+    var endpoint = { x: params.x, y: params. y }
 
     this.snowball.x = this.stageCenter.x
-    this.snowball.y =this.stageCenter.y
+    this.snowball.y = this.stageCenter.y
 
     var startpoint = {
       x: this.snowball.x,
       y: this.snowball.y
     }
 
-    var bezierValues = Easel.returnPointsBetweenPoints( startpoint, endpoint, 10 )
+    var bezierValues = Easel.returnPointsBetweenPoints( startpoint, endpoint, 4 )
 
     TweenMax.fromTo( this.snowball, .2, { alpha: 0 }, {
       alpha: 1
     })
 
+    var self = this
+
     TweenMax.fromTo( this.snowball, .6, { scaleX: 6, scaleY: 6 }, {
       immediateRender: true,
       scaleX: .2,
       scaleY: .2,
-      ease: Expo.easeOut
-    })
+      x: endpoint.x,
+      y: endpoint.y,
+      ease: Expo.easeOut,
+      onComplete: function() {
+         self.remove()
 
-    var self = this
-
-    TweenMax.to( this.snowball, .6, {
-      bezier: {
-        values: bezierValues
-      },
-      ease: Expo.easeInOut,
-      onComplete: function () {
-        self.remove()
+         if(params.onComplete)
+            params.onComplete.call(self)
       }
     })
+
+
+
+    // TweenMax.to( this.snowball, .5, {
+    //   bezier: {
+    //     values: bezierValues
+    //   },
+    //   ease: Expo.easeInOut,
+    //   onComplete: function () {
+    //     self.remove()
+    //   }
+    // })
   }
 
 })
