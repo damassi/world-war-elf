@@ -69,7 +69,7 @@ var SnowballView = View.extend({
       y: this.snowball.y
     }
 
-    var bezierValues = Easel.returnPointsBetweenPoints( startpoint, endpoint, 4 )
+    //var bezierValues = Easel.returnPointsBetweenPoints( startpoint, endpoint, 4 )
 
     TweenMax.fromTo( this.snowball, .2, { alpha: 0 }, {
       alpha: 1
@@ -84,27 +84,19 @@ var SnowballView = View.extend({
       x: endpoint.x,
       y: endpoint.y,
       ease: Expo.easeOut,
+
       onComplete: function() {
-        self._checkHit() 
 
-        self.remove()
-
-        if(params.onComplete)
-          params.onComplete.call(self)
+        if (self._checkHit()) {
+          self.remove()
+        }
+        else {
+          TweenMax.to(this.target, .2, { alpha: 0, onComplete: function () {
+            self.remove()
+          }})
+        }
       }
     })
-
-
-
-    // TweenMax.to( this.snowball, .5, {
-    //   bezier: {
-    //     values: bezierValues
-    //   },
-    //   ease: Expo.easeInOut,
-    //   onComplete: function () {
-    //     self.remove()
-    //   }
-    // })
   },
 
 
@@ -127,16 +119,18 @@ var SnowballView = View.extend({
       bounds.x = targetPoint.x + 50
       bounds.y = targetPoint.y + 30
 
+      // Hit target, dispatch event back to GamePlayView
       if (Easel.isWithinBounds( point, bounds )) {
-        
+
         this.trigger( GameEvent.TARGET_HIT, {
           target: target
-        }) 
-        
-        return
+        })
+
+        return true
       }
     }
 
+    return false
   }
 
 })

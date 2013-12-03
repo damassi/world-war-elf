@@ -103,7 +103,7 @@ var GamePlayView = View.extend({
       // The user-controlled target
       this.crossHairs   = Easel.createSprite('gameplaySprite', 'game-crosshairs', { x: 468, y: 245 }, { center: true }),
     ]
-    
+
 
   },
 
@@ -301,7 +301,7 @@ var GamePlayView = View.extend({
 
 
   _onTargetHit: function (params) {
-    var target = params.target 
+    var target = params.target
 
     if (target && target.parent)
       target.targetView.hit()
@@ -347,7 +347,7 @@ var GamePlayView = View.extend({
 
 
   _moveCroshairs: function (position) {
-    TweenMax.to( this.crossHairs, .4, {
+    TweenMax.to( this.crossHairs, .2, {
       x: position.x,
       y: position.y,
       ease: Expo.easeOut
@@ -370,14 +370,8 @@ var GamePlayView = View.extend({
       x: this.crossHairs.x,
       y: this.crossHairs.y,
 
-      occupiedPositions: this.targetFactory.occupiedPositions,
-
-      onComplete: function() {
-        self.snowballs = _.without(this)
-      }
+      occupiedPositions: this.targetFactory.occupiedPositions
     })
-
-    this.snowballs.push( snowball )
   },
 
 })
