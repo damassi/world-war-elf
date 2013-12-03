@@ -47,8 +47,6 @@ var TargetView = View.extend({
     this.instance.x = this.orientation.x
     this.instance.y = this.orientation.y + bounds.height
 
-    this.instance.gotoAndPlay('bad')
-
     this.show()
   },
 
@@ -56,6 +54,10 @@ var TargetView = View.extend({
 
   show: function() {
     var self = this
+
+    setTimeout(function() {
+      self.instance.gotoAndPlay('bad')
+    }, 1000 )
 
     TweenMax.fromTo( this.instance, .4, { alpha: 0, rotation: 180 }, {
       immediateRender: true,
@@ -88,13 +90,16 @@ var TargetView = View.extend({
 
 
   hit: function () {
+    this.instance.gotoAndStop('good')
+
     var bounds = this.instance.getBounds()
     this.instance.cache( bounds.x, bounds.y, bounds.width, bounds.height )
 
     TweenMax.to( this.instance, .2, {
       easel: {
-        tint: '#FF0000',
-        tintAmount: .8
+        //tint: '#FF0000',
+        //tintAmount: .2,
+        //brightness: 1,
       },
       ease: Linear.easeNone
     })
