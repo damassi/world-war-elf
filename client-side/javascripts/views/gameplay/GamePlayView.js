@@ -134,7 +134,8 @@ var GamePlayView = View.extend({
     window.socket.on( SocketEvent.SHOOT, this._onShoot )
 
     $(canvas).on( 'mousemove', this._onMouseMove )
-    $(canvas).on( 'click', this._onShoot )
+    $(canvas).on( 'mousedown', this._onPrepareTarget )
+    $(canvas).on( 'mouseup', this._onShoot )
   },
 
 
@@ -163,26 +164,38 @@ var GamePlayView = View.extend({
   // ------------------------------------------------------------
 
 
-
-  _onShoot: function (event) {
+  _onPrepareTarget: function (event) {
     var fireTweenTime = .4
 
-    TweenMax.to( this.crossHairs, fireTweenTime * .5, {
+     TweenMax.to( this.crossHairs, fireTweenTime * .5, {
       scaleX: .8,
       scaleY: .8,
-      yoyo: true,
-      repeat: 1,
-      ease: Back.easeInOut
+      ease: Back.easeOut
     })
 
     var self = this
 
     TweenMax.to( this.crossHairs, fireTweenTime, {
       rotation: 90,
-      ease: Back.easeOut,
-      onComplete: function () {
-        this.target.rotation = 0
-      }
+      ease: Back.easeOut
+    })
+  },
+
+
+  _onShoot: function (event) {
+    var fireTweenTime = .4
+
+    TweenMax.to( this.crossHairs, fireTweenTime * .5, {
+      scaleX: 1,
+      scaleY: 1,
+      ease: Back.easeInOut
+    })
+
+    var self = this
+
+    TweenMax.to( this.crossHairs, fireTweenTime, {
+      rotation: 0,
+      ease: Back.easeOut
     })
 
     this.appModel.increaseShots()
