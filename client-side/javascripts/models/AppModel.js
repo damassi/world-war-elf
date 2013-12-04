@@ -24,7 +24,9 @@ var AppModel = Backbone.Model.extend({
      *
      * @type {Object}
      */
-    session: null,
+    session: {
+      sessionId: ''
+    },
 
 
     /**
@@ -106,7 +108,7 @@ var AppModel = Backbone.Model.extend({
 
     // Reset back to default
     TweenMax.delayedCall( AppConfig.SUPERMODE_TIME, function() {
-      self.set( 'supermode', this._postModeToMobile( false ) )
+      self.set( 'supermode', self._postModeToMobile( false ) )
     })
   },
 
