@@ -1,0 +1,34 @@
+body.mobile
+	background: url("#{$images}/mobile/bg-mobile.jpg")
+	background-size: 100% 100%
+	position: relative
+	min-width: 100%
+
+	.page
+		display: table
+		height: 100%
+		width: 100%
+
+		.content-wrapper
+			display: table-cell
+			text-align: center
+			vertical-align: middle
+
+			img
+				max-width: 100%
+				display: block
+
+			a
+				display: inline-block
+				&.sync
+					width: 80%
+
+			input[type="text"]
+				width: 80%
+				margin: 1em 0
+				height: 1.5em
+				line-height: 1em
+				font-size: 150%
+				text-align: center
+				outline: none
+

@@ -3,35 +3,11 @@
 // ---------------------------------------+
 //
 
-$snowflake-size: 12px
+.hidden
+	display: none !important
+	visibility: hidden
 
-.snowflake-container
-	position: fixed
-	top: 0
-	height: 100%
-	width: 100%
-	background-color: transparent
-	z-index: 9999
-	pointer-events: none
-
-.snowflake
-	display: block
-	position: absolute
-	top: -1%
-	border-radius: 50%
-	+bg-gradient-radial(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1))
-
-	&.small
-		height: $snowflake-size / 2
-		width: $snowflake-size / 2
-		margin-top: ($snowflake-size / 2) / - 2
-
-	&.medium
-		width: $snowflake-size
-		height: $snowflake-size
-		margin-top: $snowflake-size / -2
-
-	&.big
-		width: $snowflake-size * 2
-		height: $snowflake-size * 2
-		margin-top: ($snowflake-size * 2) / - 2
+.hide-text
+	text-indent: 100%
+	white-space: nowrap
+	overflow: hidden
