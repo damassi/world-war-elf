@@ -2,11 +2,11 @@
 "images": ["sprites-home.png"],
 "frames": [
 
-    [1317, 288, 300, 24], 
-    [1317, 338, 258, 18], 
-    [1317, 314, 229, 22], 
-    [1317, 358, 199, 13], 
-    [1317, 2, 310, 284], 
+    [558, 382, 300, 24], 
+    [697, 317, 258, 18], 
+    [697, 293, 229, 22], 
+    [744, 160, 199, 13], 
+    [1317, 2, 187, 380], 
     [2, 293, 693, 87], 
     [2, 382, 554, 120], 
     [2, 2, 960, 156], 
@@ -21,7 +21,7 @@
         "home-btn-play-snow":[1], 
         "home-btn-scores-shadow":[2], 
         "home-btn-scores-snow":[3], 
-        "home-elf":[4], 
+        "home-good-elf":[4], 
         "home-grass-sprouts":[5], 
         "home-ground-back":[6], 
         "home-ground-front":[7], 
@@ -31,7 +31,7 @@
         "home-title-ww":[11]
 },
 "texturepacker": [
-        "SmartUpdateHash: $TexturePacker:SmartUpdate:67ad9adaad0e64f1ffb5c72f99ea023c:dbee45c8c30541b6ce3f9d6b2871a0c7:39c9b1ba82fe2850bbdaab95c2168eb9$",
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:fab738b5aefb06490c3e176958993657:c3a384070a5e1bdd47378c1d3f3b5c89:39c9b1ba82fe2850bbdaab95c2168eb9$",
         "Created with TexturePacker (http://www.texturepacker.com) for EaselJS"
 ]
 }

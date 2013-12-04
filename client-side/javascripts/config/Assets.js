@@ -354,11 +354,11 @@ var Assets = {
         "images": [path + "spritesheets/sprites-home.png"],
         "frames": [
 
-            [1317, 288, 300, 24],
-            [1317, 338, 258, 18],
-            [1317, 314, 229, 22],
-            [1317, 358, 199, 13],
-            [1317, 2, 310, 284],
+            [558, 382, 300, 24],
+            [697, 317, 258, 18],
+            [697, 293, 229, 22],
+            [744, 160, 199, 13],
+            [1317, 2, 187, 380],
             [2, 293, 693, 87],
             [2, 382, 554, 120],
             [2, 2, 960, 156],
@@ -373,7 +373,7 @@ var Assets = {
                 "home-btn-play-snow":[1],
                 "home-btn-scores-shadow":[2],
                 "home-btn-scores-snow":[3],
-                "home-elf":[4],
+                "home-good-elf":[4],
                 "home-grass-sprouts":[5],
                 "home-ground-back":[6],
                 "home-ground-front":[7],
@@ -381,8 +381,7 @@ var Assets = {
                 "home-shadow-E":[9],
                 "home-text-E-w-drift":[10],
                 "home-title-ww":[11]
-        },
-        "frequency": 12
+            }
       }
     },
 

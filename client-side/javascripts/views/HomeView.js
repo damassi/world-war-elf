@@ -32,9 +32,11 @@ var HomeView = View.extend({
     this.children = [
 
       this.worldWar     = Easel.createSprite('homeSprite', 'home-title-ww', { x: 477, y: 70 }, { center: true }),
-      this.elf          = Easel.createSprite('homeSprite', 'home-elf', { x: 625, y: 295 }),
       this.bigEShadow   = Easel.createSprite('homeSprite', 'home-shadow-E', { x: 465, y: 509 }, { center: true }),
       this.bigE         = Easel.createSprite('homeSprite', 'home-text-E-w-drift', { x: 310, y: 126 }),
+
+      this.lElf = new c.Container(),
+      this.rElf = new c.Container(),
 
       this.playBtnShadow   = Easel.createSprite('homeSprite', 'home-btn-play-shadow', { x: 314, y: 526 } ),
       this.playBtn         = Easel.createSprite('home-btn-play', 0, { x: 317, y: 464 }),
@@ -44,11 +46,27 @@ var HomeView = View.extend({
       this.scoreBtn         = Easel.createSprite('home-btn-score', 0, { x: 18, y: 510 } ),
       this.scoreBtnSnow     = Easel.createSprite('homeSprite', 'home-btn-scores-snow', { x: 41, y: 557 } ),
 
-
       this.grassSprouts = Easel.createSprite('homeSprite', 'home-grass-sprouts', { x: 7, y: 486 }),
+
+      this.elf          = Easel.createSprite('homeSprite', 'home-good-elf', { x: 660, y: 179 }),
     ]
 
-    //Easel.dragObject( this.children )
+    this.lElf.x = 40
+    this.rElf.x = 85
+
+    this.fatElfShadow = Easel.createSprite( 'homeSprite', 'home-btn-scores-shadow', { scaleX: .3, scaleY: .45, x: 98, y: 436 } ),
+    this.fatElf = Easel.createSprite( 'elf3', 0, { x: 145, y: 406, scaleX: .5, scaleY: .5 }, { center: true } ),
+
+    this.skinnyElfShadow = Easel.createSprite( 'homeSprite', 'home-btn-scores-shadow', { scaleX: .25, scaleY: .45, x: 783, y: 452 }  ),
+    this.skinnyElf = Easel.createSprite( 'elf1', 0, { x: 825, y: 422, scaleX: .5, scaleY: .5 }, { center: true } ),
+
+    this.lElf.addChild( this.fatElfShadow, this.fatElf )
+    this.rElf.addChild( this.skinnyElfShadow, this.skinnyElf )
+
+    this.fatElf.gotoAndPlay('start')
+    this.skinnyElf.gotoAndPlay('start')
+
+    Easel.dragObject( this.children )
 
   },
 
