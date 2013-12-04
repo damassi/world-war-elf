@@ -6,47 +6,15 @@
  */
 
 var Touch         = require('./utils/Touch')
-var AppController = require('./AppController')
-var Assets        = require('./config/Assets')
-
+var PreloaderView = require('./views/preloader/PreloaderView')
 
 // Globally rewrite CreateJS namespace to a shorthand c
 c = createjs
 
-
-function startGame() {
-  AppController.initialize()
-
-  Backbone.history.start({
-    pushState: false
-  })
-}
-
-
-$(function() {
+$(function siteInitialized () {
 
   Touch.translateTouchEvents()
 
-  var loadQueue = new c.LoadQueue()
-
-  loadQueue.addEventListener( 'error', function (error) {
-    console.error('LoadError: ', error)
-  })
-
-  loadQueue.addEventListener( 'progress', function (event) {
-    var progress = Math.round( event.progress * 100 ) + '%'
-  })
-
-  loadQueue.addEventListener( 'complete', function (event) {
-
-    startGame()
-
-  })
-
-  var manifest = _.map( Assets.manifest, function (asset) {
-    return asset.src
-  })
-
-  loadQueue.loadManifest( manifest )
+  new PreloaderView()
 
 })
