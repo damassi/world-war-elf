@@ -73,8 +73,12 @@ var InstructionsView = View.extend({
 
 
   _onBtnOver: function (event) {
-    TweenMax.to( event.currentTarget, .05, {
-      y: event.currentTarget.y -5,
+    var target = event.currentTarget
+
+    target.cursor = 'pointer'
+
+    TweenMax.to( target, .05, {
+      y: target.y -5,
       yoyo: true,
       repeat: 1
     })
