@@ -137,6 +137,7 @@ var AppController = {
     this.stage.addChild( Easel.createBitmap( 'frame-background' ))
 
     this._addGround()
+    this._animateIn()
 
     c.Ticker.addEventListener( 'tick', this.tick )
   },
@@ -173,20 +174,6 @@ var AppController = {
     view.hide({
       animated: true,
       remove: true
-    })
-  },
-
-
-
-  animateIn: function () {
-    TweenMax.set( this.$contentContainer, { autoAlpha: 0, scale: .6, rotation: 120 })
-
-    TweenMax.to( this.$contentContainer, .6, {
-      scale: 1,
-      autoAlpha: 1,
-      rotation: 0,
-      ease: Expo.easeOut,
-      delay: .3
     })
   },
 
@@ -254,6 +241,17 @@ var AppController = {
       var ground = this.ground[i]
       this.stage.addChild( ground )
     }
+  },
+
+
+
+  _animateIn: function () {
+    TweenMax.fromTo( this.$contentContainer, .7, { scale: 0, rotation: 80, autoAlpha: 1 }, {
+      scale: 1,
+      rotation: 0,
+      ease: Expo.easeOut,
+      delay: .3
+    })
   },
 
 

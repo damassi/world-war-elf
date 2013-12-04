@@ -106,8 +106,12 @@ var HomeView = View.extend({
 
 
   _onBtnOver: function (event) {
-    TweenMax.to( event.currentTarget, .1, {
-      y: event.currentTarget.y -5,
+    var target = event.currentTarget
+
+    target.cursor = 'pointer'
+
+    TweenMax.to( target, .1, {
+      y: target.y -5,
       yoyo: true,
       repeat: 1
     })
