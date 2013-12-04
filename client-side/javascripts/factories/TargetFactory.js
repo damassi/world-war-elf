@@ -93,7 +93,11 @@ var TargetFactory = Backbone.View.extend({
   createTarget: function () {
     var orientation = this._returnOrientation()
 
+    // TODO Frequency generator
+    var type = _.sample([1,1,1,0,0,0,0,0,0,0]) === 0 ? 'bad' : 'good'
+
     var targetView = new TargetView({
+      type: type,
       orientation: {
         x: orientation.x,
         y: orientation.y,

@@ -20,11 +20,19 @@ var TargetView = View.extend({
    * when a new enemy or target is called
    * @type {Array}
    */
-  targetIds: [
-    'elf1',
-    'elf2',
-    'elf3'
-  ],
+  targetIds: {
+
+    bad: [
+      'elf1',
+      'elf2',
+      'elf3'
+    ],
+
+    good: [
+      'sign-gift',
+      'sign-candycane'
+    ]
+  },
 
 
   /**
@@ -34,12 +42,19 @@ var TargetView = View.extend({
   instance: null,
 
 
+  /**
+   * Is the target a good target or a bad target?
+   * @type {String} 'good|bad'
+   */
+  type: null,
+
+
 
 
   initialize: function (options) {
     this._super(options)
 
-    this.instance = Easel.createSprite(_.sample( this.targetIds ), 0)
+    this.instance = Easel.createSprite( _.sample( this.targetIds[this.type] ), 0 )
 
     var bounds = this.instance.getBounds()
     this.instance.regX = Math.floor( bounds.width * .5 )
@@ -57,7 +72,7 @@ var TargetView = View.extend({
     var self = this
 
     setTimeout(function() {
-      self.instance.gotoAndPlay('bad')
+      self.instance.gotoAndPlay('start')
     }, 1000 )
 
     TweenMax.fromTo( this.instance, .4, { alpha: 0, rotation: 180 }, {
@@ -91,10 +106,12 @@ var TargetView = View.extend({
 
 
   hit: function () {
-    this.instance.gotoAndStop('good')
+    Easel.animateOnce( this.instance, 'hit' )
 
-    var bounds = this.instance.getBounds()
-    this.instance.cache( bounds.x, bounds.y, bounds.width, bounds.height )
+    if (this.type === 'bad') {
+      var bounds = this.instance.getBounds()
+      this.instance.cache( bounds.x, bounds.y, bounds.width, bounds.height )
+    }
 
     var self = this
 

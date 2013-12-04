@@ -59,7 +59,14 @@ var AppConfig = {
    * Amount of gameplay time
    * @type {String}
    */
-  DEFAULT_GAMEPLAY_TIME: '22:00'
+  DEFAULT_GAMEPLAY_TIME: '22:00',
+
+
+  /**
+   * The time which the player is in supermode.
+   * @type {Number}
+   */
+  SUPERMODE_TIME: 5
 
 }
 
