@@ -8,7 +8,7 @@
 var Touch         = require('./utils/Touch')
 var PreloaderView = require('./views/preloader/PreloaderView')
 
-// Globally rewrite CreateJS namespace to a shorthand c
+// Convenience ref
 c = createjs
 
 $(function siteInitialized () {

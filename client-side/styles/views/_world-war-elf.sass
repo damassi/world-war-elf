@@ -1,0 +1,45 @@
+#preloader
+  img
+    -webkit-transform: translate3d(0, 0, 0)
+
+    position: absolute
+    margin: auto
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+
+
+#game-play
+  width: 1022px
+  height: 689px
+  background: transparent url("#{$images}/frame-bg-main-game.png") no-repeat
+  position: relative
+  overflow: hidden
+  margin: 50px auto 30px
+
+  position: absolute
+  margin: auto
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+
+  visibility: hidden
+
+  .game-wrapper
+    margin: 30px
+
+    #game-canvas
+      width: 960px
+      height: 600px
+      background: #333
+
+  .clouds
+    background: transparent url("#{$images}/frame-clouds.png") no-repeat
+    width: 135px
+    height: 73px
+    position: absolute
+    bottom: 15px
+    right: 0
+    z-index: 100

@@ -29,6 +29,24 @@ var PreloaderView = Backbone.View.extend({
   render: function () {
     $('body').append( this.$el.html( this.template() ))
 
+    this.$preloaderGfx = this.$el.find('img')
+
+    TweenMax.fromTo( this.$preloaderGfx, .6, { x: 2000, autoAlpha: 0, scale: 1, rotation: 220 }, {
+      immediateRender: true,
+      x: 0,
+      autoAlpha: 1,
+      scale: 1,
+      rotation: 0,
+      ease: Back.easeOut,
+      delay: .4,
+      onComplete: this.loadSite
+    })
+
+  },
+
+
+
+  loadSite: function() {
     var loadQueue = new c.LoadQueue()
 
     loadQueue.addEventListener( 'error', this._onLoadError )
@@ -57,13 +75,23 @@ var PreloaderView = Backbone.View.extend({
 
 
   _onLoadComplete: function () {
-    AppController.initialize()
+    var self = this
 
-    Backbone.history.start({
-      pushState: false
+    TweenMax.to( this.$preloaderGfx, .6, {
+      x: -2000,
+      rotation: -180,
+      ease: Back.easeIn,
+      delay: .5,
+      onComplete: function() {
+        AppController.initialize()
+
+        Backbone.history.start({
+          pushState: false
+        })
+
+        self.remove()
+      }
     })
-
-    this.remove()
   }
 
 })
