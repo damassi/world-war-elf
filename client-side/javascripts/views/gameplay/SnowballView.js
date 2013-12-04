@@ -17,7 +17,7 @@ var SnowballView = View.extend({
 
 
   types: {
-    standard: 'snowball-plain',
+    normal: 'snowball-plain',
     supermode: 'snowball-candycane'
   },
 

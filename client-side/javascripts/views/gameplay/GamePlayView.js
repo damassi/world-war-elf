@@ -314,6 +314,9 @@ var GamePlayView = View.extend({
     TweenMax.delayedCall( this.FIRE_INTERVAL_TIME, function() {
       self.isFiring = false
 
+      if (target.targetView.type === 'good')
+        self.appModel.enableSupermode()
+
       self.appModel.increaseHits()
     })
   },
@@ -358,15 +361,13 @@ var GamePlayView = View.extend({
 
   _throwSnowball: function () {
 
-    var snowballType = this.appModel.get('supermode') ? 'supermode' : 'supermode'
+    var snowballType = this.appModel.get('supermode') ? 'supermode' : 'normal'
 
     var snowball = new SnowballView({
       snowballType: snowballType,
       stage: this.stage,
       parentContainer: this.container
     })
-
-    snowball.on( GameEvent.TARGET_HIT, this._onTargetHit )
 
     var self = this
 
@@ -376,6 +377,9 @@ var GamePlayView = View.extend({
 
       occupiedPositions: this.targetFactory.occupiedPositions
     })
+
+    // Add listenrs to trigger hit animations
+    snowball.on( GameEvent.TARGET_HIT, this._onTargetHit )
   },
 
 })

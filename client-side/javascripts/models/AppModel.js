@@ -5,7 +5,11 @@
  * @since  11.18.13
  */
 
+var AppConfig = require('../config/AppConfig')
+
+
 var AppModel = Backbone.Model.extend({
+
 
   defaults: {
 
@@ -50,6 +54,13 @@ var AppModel = Backbone.Model.extend({
      */
     shots: 0,
 
+
+    /**
+     * Sends gameplay into supermode
+     * @type {Boolean}
+     */
+    supermode: false,
+
   },
 
 
@@ -77,6 +88,19 @@ var AppModel = Backbone.Model.extend({
   increaseShots: function () {
     this.set({
       shots: this.get('shots') + 1
+    })
+  },
+
+
+
+  enableSupermode: function() {
+    var self = this
+
+    this.set( 'supermode', true )
+
+    // Seet back to default
+    TweenMax.delayedCall( AppConfig.SUPERMODE_TIME, function() {
+      self.set( 'supermode', false )
     })
   }
 
