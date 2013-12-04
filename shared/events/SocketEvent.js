@@ -13,6 +13,7 @@ module.exports = {
   SHOOT       : 'shoot',
   MESSAGE     : 'message',
   ORIENTATION : 'orientation',
-  SYNCED      : 'synced'
+  SYNCED      : 'synced',
+  TOGGLE_MODE : 'toggleMode'
 
 }

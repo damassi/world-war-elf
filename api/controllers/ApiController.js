@@ -145,6 +145,27 @@ module.exports = {
 
 
 
+  'toggle-mode': function (req, res, next) {
+    var sessionId = req.param('sessionId')
+      , supermode = req.param('supermode')
+      , socket    = req.socket
+
+    Session.findOne({
+      sessionId: sessionId
+    },
+
+      function foundSession (err, session) {
+
+        socket.broadcast.to(sessionId).emit( SocketEvent.TOGGLE_MODE, {
+          supermode: supermode
+        })
+
+        next()
+      })
+  },
+
+
+
   'save-score': function (req, res, next) {
     next()
   }

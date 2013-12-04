@@ -29,7 +29,8 @@ var AppConfig = {
     generateCode    : '/api/generate-code',
     sync            : '/api/sync',
     orientation     : '/api/orientation',
-    fire            : '/api/fire'
+    fire            : '/api/fire',
+    toggleMode      : '/api/toggle-mode'
   },
 
 

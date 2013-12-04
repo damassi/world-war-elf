@@ -65,6 +65,12 @@ var AppModel = Backbone.Model.extend({
 
 
 
+  initialize: function () {
+    _.bindAll(this)
+  },
+
+
+
   /**
    * Incremental counter which increases the number of targets
    * that have been hit by `shots`
@@ -93,15 +99,30 @@ var AppModel = Backbone.Model.extend({
 
 
 
-  enableSupermode: function() {
+  enableSupermode: function () {
     var self = this
 
-    this.set( 'supermode', true )
+    this.set( 'supermode', this._postModeToMobile( true ))
 
-    // Seet back to default
+    // Reset back to default
     TweenMax.delayedCall( AppConfig.SUPERMODE_TIME, function() {
-      self.set( 'supermode', false )
+      self.set( 'supermode', this._postModeToMobile( false ) )
     })
+  },
+
+
+
+  _postModeToMobile: function (mode) {
+    window.socket.post( AppConfig.ENDPOINTS.toggleMode, {
+      sessionId: this.get('session').sessionId,
+      supermode: mode
+    },
+
+      function onResponse (response) {
+        //console.log(response.orientation)
+      })
+
+    return mode
   }
 
 })

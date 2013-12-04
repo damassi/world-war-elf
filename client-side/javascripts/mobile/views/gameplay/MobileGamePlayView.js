@@ -60,6 +60,10 @@ var MobileGamePlayView = View.extend({
     //window.addEventListener( 'deviceorientation', this._onDeviceOrientationChange )
     this.$body.on('mousemove', this._onDeviceOrientationChange )
     this.$body.on('click', this._onFireButtonPress )
+
+    window.socket.on( SocketEvent.TOGGLE_MODE, function(message) {
+      console.log('WORKING', message)
+    })
   },
 
 
