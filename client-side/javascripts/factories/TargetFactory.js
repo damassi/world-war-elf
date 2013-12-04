@@ -94,6 +94,7 @@ var TargetFactory = Backbone.View.extend({
     var orientation = this._returnOrientation()
 
     var targetView = new TargetView({
+      type: 'good',
       orientation: {
         x: orientation.x,
         y: orientation.y,
