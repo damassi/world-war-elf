@@ -108,6 +108,7 @@ var Snowball = View.extend({
   },
 
 
+
   _checkHit: function() {
     var i = 0
       , len = this.occupiedPositions.length

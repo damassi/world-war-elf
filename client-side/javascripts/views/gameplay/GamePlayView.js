@@ -21,21 +21,6 @@ var GamePlayView = View.extend({
 
 
   /**
-   * The time between shots that targets are freezed from being hit
-   * @type {Number}
-   */
-  FIRE_INTERVAL_TIME: .5,
-
-
-  /**
-   * Flag to check if user is currently pressing the mouse cursor or
-   * the fire button from a mobile device
-   * @type {Boolean}
-   */
-  isFiring: false,
-
-
-  /**
    * Handles creation and management of targets
    * @type {TargetFactory}
    */
@@ -225,7 +210,6 @@ var GamePlayView = View.extend({
 
 
   _onStartGamePlay: function () {
-
     this.targetFactory = new TargetFactory({
       appModel: this.appModel,
       gamePlayView: this
@@ -237,7 +221,6 @@ var GamePlayView = View.extend({
 
 
   _onStopGamePlay: function () {
-
     this.removeEventListeners()
     this.targetFactory.removeEventListeners()
 
@@ -274,13 +257,6 @@ var GamePlayView = View.extend({
 
 
   _onShoot: function (event) {
-
-    var self = this
-
-    setTimeout(function() {
-      self.isFiring = true
-    }, 600 )
-
     var fireTweenTime = .4
 
     TweenMax.to( this.crossHairs, fireTweenTime * .5, {
@@ -312,8 +288,7 @@ var GamePlayView = View.extend({
     var self = this
 
     // Reset fire interval interval
-    TweenMax.delayedCall( this.FIRE_INTERVAL_TIME, function() {
-      self.isFiring = false
+    TweenMax.delayedCall( .5, function() {
 
       if (target.targetView.type === 'good')
         self.appModel.enableSupermode()
@@ -361,7 +336,6 @@ var GamePlayView = View.extend({
 
 
   _throwSnowball: function () {
-
     var snowballType = this.appModel.get('supermode') ? 'supermode' : 'normal'
 
     var snowball = new Snowball({
@@ -370,16 +344,17 @@ var GamePlayView = View.extend({
       parentContainer: this.container
     })
 
-    var self = this
-
     snowball.throwSnowball({
       x: this.crossHairs.x,
       y: this.crossHairs.y,
 
+      // Push positions into each snowball so that
+      // detection only occurs when firing, and can be
+      // coordinate based rather than hitDetection based
       occupiedPositions: this.targetFactory.occupiedPositions
     })
 
-    // Add listenrs to trigger hit animations
+    // Add listeners to trigger hit animations
     snowball.on( GameEvent.TARGET_HIT, this._onTargetHit )
   },
 

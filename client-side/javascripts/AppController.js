@@ -69,6 +69,7 @@ var AppController = {
     this.mobileModel = new MobileModel()
 
 
+
     // Initialize Desktop Views
 
     this.homeView = new HomeView({
@@ -107,6 +108,7 @@ var AppController = {
     })
 
 
+
     // Initialize Mobile Views
 
     this.mobileSyncView = new MobileSyncView({
@@ -118,12 +120,6 @@ var AppController = {
       appModel: this.appModel
     })
 
-
-    // Initialize Controllers
-
-    // this.gamePlayController = new GamePlayController({
-    //   gamePlayView: this.gamePlayView
-    // })
 
 
     // Initialize Routing and Events
