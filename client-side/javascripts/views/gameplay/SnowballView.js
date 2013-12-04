@@ -16,10 +16,16 @@ var View      = require('../../supers/View')
 var SnowballView = View.extend({
 
 
+  types: {
+    standard: 'snowball-plain',
+    supermode: 'snowball-candycane'
+  },
+
+
   initialize: function (options) {
     this._super(options)
 
-    this.snowball = Easel.createBitmap('snowball-plain')
+    this.snowball = Easel.createBitmap( this.types[ options.snowballType ])
     this.snowball.alpha = 0
 
     Easel.centerRegistrationPoint( this.snowball )
@@ -79,6 +85,7 @@ var SnowballView = View.extend({
 
     TweenMax.fromTo( this.snowball, .6, { scaleX: 6, scaleY: 6 }, {
       immediateRender: true,
+      rotation: 360,
       scaleX: .2,
       scaleY: .2,
       x: endpoint.x,

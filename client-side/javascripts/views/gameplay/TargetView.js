@@ -31,8 +31,6 @@ var TargetView = View.extend({
     good: [
       'sign-gift',
       'sign-candycane'
-      //'sign2',
-      //'sign3'
     ]
   },
 

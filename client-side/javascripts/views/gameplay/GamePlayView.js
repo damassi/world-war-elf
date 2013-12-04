@@ -357,7 +357,11 @@ var GamePlayView = View.extend({
 
 
   _throwSnowball: function () {
+
+    var snowballType = this.appModel.get('supermode') ? 'supermode' : 'supermode'
+
     var snowball = new SnowballView({
+      snowballType: snowballType,
       stage: this.stage,
       parentContainer: this.container
     })
