@@ -9,7 +9,7 @@ var AppConfig  = require('../config/AppConfig')
 var Easel      = require('../utils/Easel')
 var PubSub     = require('../utils/PubSub')
 var GameEvent  = require('../events/GameEvent')
-var TargetView = require('../views/gameplay/TargetView')
+var Target     = require('../views/gameplay/Target')
 
 
 var TargetFactory = Backbone.View.extend({
@@ -66,11 +66,12 @@ var TargetFactory = Backbone.View.extend({
     _.bindAll(this)
 
     this.gamePlayView = options.gamePlayView
+    this.appModel = options.appModel
 
     this.occupiedPositions = []
 
     for (var i = 0; i < AppConfig.INITIAL_TARGETS; ++i) {
-      var targetView = this.createTarget()
+      var target = this.createTarget()
     }
 
     this.addEventListeners()
@@ -96,7 +97,10 @@ var TargetFactory = Backbone.View.extend({
     // TODO Frequency generator
     var type = _.sample([1,1,1,0,0,0,0,0,0,0]) === 0 ? 'bad' : 'good'
 
-    var targetView = new TargetView({
+    if (this.appModel.get('supermode'))
+      type = 'bad'
+
+    var target = new Target({
       type: type,
       orientation: {
         x: orientation.x,
@@ -106,19 +110,19 @@ var TargetFactory = Backbone.View.extend({
     })
 
     // Store ref to the actual TargetView container for hit detection delegation
-    targetView.instance.targetView = targetView
+    target.instance.targetView = target
 
     // Push position into game matrix
-    this.occupiedPositions.push( targetView )
+    this.occupiedPositions.push( target )
 
     // Find the proper container on the view and add child to in
     // This resolves issues with depth sorting and dirty indexes
-    var rowContainer = this.gamePlayView[ targetView.orientation.depth + 'Container' ]
+    var rowContainer = this.gamePlayView[ target.orientation.depth + 'Container' ]
 
     // Add to final stage
-    rowContainer.addChild( targetView.instance )
+    rowContainer.addChild( target.instance )
 
-    return targetView
+    return target
   },
 
 
@@ -161,9 +165,9 @@ var TargetFactory = Backbone.View.extend({
 
 
   _onTargetHit: function (params) {
-    var targetView = params.targetView
+    var target = params.targetView
 
-    this.occupiedPositions = _.without( this.occupiedPositions, targetView )
+    this.occupiedPositions = _.without( this.occupiedPositions, target )
 
     this.createTarget()
   }

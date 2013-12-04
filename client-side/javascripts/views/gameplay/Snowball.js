@@ -13,13 +13,14 @@ var PubSub    = require('../../utils/PubSub')
 var View      = require('../../supers/View')
 
 
-var SnowballView = View.extend({
+var Snowball = View.extend({
 
 
   types: {
     normal: 'snowball-plain',
     supermode: 'snowball-candycane'
   },
+
 
 
   initialize: function (options) {
@@ -142,4 +143,4 @@ var SnowballView = View.extend({
 
 })
 
-module.exports = SnowballView
+module.exports = Snowball

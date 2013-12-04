@@ -13,8 +13,8 @@ var TargetFactory      = require('../../factories/TargetFactory')
 var PubSub             = require('../../utils/PubSub')
 var Easel              = require('../../utils/Easel')
 var View               = require('../../supers/View')
-var HUDView            = require('./HUDView')
-var SnowballView       = require('./SnowballView')
+var HUD                = require('./HUD')
+var Snowball           = require('./Snowball')
 
 
 var GamePlayView = View.extend({
@@ -81,7 +81,7 @@ var GamePlayView = View.extend({
   initialize: function (options) {
     this._super(options)
 
-    this.hudView = new HUDView({
+    this.hud = new HUD({
       stage : this.stage,
       appModel : this.appModel
     })
@@ -133,8 +133,8 @@ var GamePlayView = View.extend({
     this.snowballs = []
 
     this.stage.addChild( this.container )
-    this.container.addChild( this.hudView.render().container )
-    this.hudView.show()
+    this.container.addChild( this.hud.render().container )
+    this.hud.show()
 
     TweenMax.from( this.backGround, .3, {
       y: height,
@@ -175,7 +175,7 @@ var GamePlayView = View.extend({
 
 
   hide: function (options) {
-    this.hudView.hide()
+    this.hud.hide()
     this.removeEventListeners()
 
     this._super({
@@ -227,6 +227,7 @@ var GamePlayView = View.extend({
   _onStartGamePlay: function () {
 
     this.targetFactory = new TargetFactory({
+      appModel: this.appModel,
       gamePlayView: this
     })
 
@@ -363,7 +364,7 @@ var GamePlayView = View.extend({
 
     var snowballType = this.appModel.get('supermode') ? 'supermode' : 'normal'
 
-    var snowball = new SnowballView({
+    var snowball = new Snowball({
       snowballType: snowballType,
       stage: this.stage,
       parentContainer: this.container

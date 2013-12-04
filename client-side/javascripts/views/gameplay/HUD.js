@@ -15,7 +15,7 @@ var View        = require('../../supers/View')
 var Easel       = require('../../utils/Easel')
 
 
-var HUDView = View.extend({
+var HUD = View.extend({
 
 
   TEXT_POS: {
@@ -163,4 +163,4 @@ var HUDView = View.extend({
 
 })
 
-module.exports = HUDView
+module.exports = HUD

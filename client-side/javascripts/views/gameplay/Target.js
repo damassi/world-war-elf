@@ -12,7 +12,7 @@ var PubSub    = require('../../utils/PubSub')
 var View      = require('../../supers/View')
 
 
-var TargetView = View.extend({
+var Target = View.extend({
 
 
   /**
@@ -150,4 +150,4 @@ var TargetView = View.extend({
 
 })
 
-module.exports = TargetView
+module.exports = Target
