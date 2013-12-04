@@ -246,12 +246,7 @@ var AppController = {
 
 
   _animateIn: function () {
-    TweenMax.fromTo( this.$contentContainer, .7, { scale: 0, rotation: 80, autoAlpha: 1 }, {
-      scale: 1,
-      rotation: 0,
-      ease: Expo.easeOut,
-      delay: .3
-    })
+    TweenMax.to( this.$contentContainer, .5, { autoAlpha: 1, ease: Linear.easeNone })
   },
 
 

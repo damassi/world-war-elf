@@ -107,6 +107,13 @@ var HomeView = View.extend({
       ease: Bounce.easeOut,
       delay: .7
     })
+
+    TweenMax.from( this.elf, .5, {
+      immediateRender: true,
+      x: 1000,
+      ease: Expo.easeOut,
+      delay: 1.3
+    })
   },
 
 
