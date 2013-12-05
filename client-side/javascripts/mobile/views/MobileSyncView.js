@@ -16,24 +16,25 @@ var MobileView  = require('./supers/MobileView')
 
 var MobileSyncView = MobileView.extend({
 
+  el: '.synching',
 
   events: {
-    'touchstart .btn-submit': '_onSubmitBtnClick'
+    'touchstart .sync-btn': '_onSyncBtnClick'
   },
 
 
-
   render: function (options) {
-    _.bindAll(this)
-
     this.$el = $('.syncing')
+    this.el = this.$el.selector
     this.$syncingMessage = $('.syncing-wait')
     this.$syncBtn = this.$el.find('.sync-btn')
     this.$input = this.$el.find('.sync-input')
 
     this.show()
 
-    this.$syncBtn.on('touchstart', this._onSubmitBtnClick )
+    this.delegateEvents()
+
+    //this.$syncBtn.on('touchstart', this._onSubmitBtnClick )
 
     return this
   },
