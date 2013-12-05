@@ -126,10 +126,11 @@ var AppController = {
 
     Sound.initialize({ appModel: this.appModel })
 
-    Sound.play({
-      soundId: 'audio-bg',
-      repeat: -1
-    })
+    // Sound.play({
+    //   soundId: 'audio-bg',
+    //   repeat: -1,
+    //   volume: 0
+    // })
   },
 
 

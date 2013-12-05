@@ -101,6 +101,7 @@ var TargetFactory = Backbone.View.extend({
       type = 'bad'
 
     var target = new Target({
+      appModel: this.appModel,
       type: type,
       orientation: {
         x: orientation.x,

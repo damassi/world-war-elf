@@ -25,14 +25,32 @@ var Target = View.extend({
   targetIds: {
 
     bad: [
-      'elf1',
-      'elf2',
-      'elf3'
+      {
+        id: 'elf1',
+        energy: 1,
+        attacker: false
+      },
+      {
+        id: 'elf2',
+        energy: 0,
+        attacker: false
+      },
+      {
+        id: 'elf3',
+        energy: 2,
+        attacker: true
+      }
     ],
 
     good: [
-      'sign-gift',
-      'sign-candycane'
+      {
+        id: 'sign-gift',
+        bonus: 'clear-screen'
+      },
+      {
+        id: 'sign-candycane',
+        bonus: 'supermode'
+      }
     ]
   },
 
@@ -56,7 +74,8 @@ var Target = View.extend({
   initialize: function (options) {
     this._super(options)
 
-    this.instance = Easel.createSprite( _.sample( this.targetIds[this.type] ), 0 )
+    this.targetProps = _.clone(_.sample( this.targetIds[this.type] ))
+    this.instance = Easel.createSprite( this.targetProps.id, 0 )
 
     var bounds = this.instance.getBounds()
     this.instance.regX = Math.floor( bounds.width * .5 )
@@ -108,16 +127,8 @@ var Target = View.extend({
 
 
   hit: function () {
-    Easel.animateOnce( this.instance, 'hit' )
 
-    if (this.type === 'good') {
-      Sound.play({
-        soundId: 'bonus-hit-candycane',
-        volume: .2
-      })
-    }
-
-    if (this.type == 'bad') {
+    if (this.type === 'bad') {
       Sound.play({
         soundId: _.sample([
           'zombie-hit-1',
@@ -126,6 +137,35 @@ var Target = View.extend({
           'zombie-hit-4'
         ]),
         volume: .3
+      })
+
+
+      // Decrease energy and return if not 0 to
+      // simulate energy hits
+
+      if (!this.appModel.get('supermode')) {
+        if (this.targetProps.energy !== 0) {
+          this.targetProps.energy--
+
+          var scale = this.instance.scaleX
+
+          TweenMax.to( this.instance, .3, {
+            scaleX: scale + .1,
+            scaleY: scale + .1,
+            ease: Expo.easeOut
+          })
+
+          return
+        }
+      }
+    }
+
+    Easel.animateOnce( this.instance, 'hit' )
+
+    if (this.type === 'good') {
+      Sound.play({
+        soundId: 'bonus-hit-candycane',
+        volume: .2
       })
     }
 
