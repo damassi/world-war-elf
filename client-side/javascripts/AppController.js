@@ -20,7 +20,6 @@ var AppConfig          = require('./config/AppConfig')
   , GamePlayView       = require('./views/gameplay/GamePlayView')
   , SubmitScoreView    = require('./views/SubmitScoreView')
   , HighScoresView     = require('./views/HighScoresView')
-  , MobileModel        = require('./mobile/models/MobileModel')
   , MobileGamePlayView = require('./mobile/views/gameplay/MobileGamePlayView')
   , MobileSyncView     = require('./mobile/views/sync/MobileSyncView')
 
@@ -65,9 +64,7 @@ var AppController = {
 
     // Initialize Models
 
-    this.appModel    = new AppModel()
-    this.mobileModel = new MobileModel()
-
+    this.appModel = new AppModel()
 
 
     // Initialize Desktop Views

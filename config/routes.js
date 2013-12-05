@@ -13,18 +13,5 @@ module.exports.routes = {
     view: 'desktop/index'
   },
 
-  // '/:route': {
-  //   view: 'desktop/index'
-  // },
-
-  '/mobile/:route': {
-    view: 'mobile/index'
-  },
-
-  '/mobile-layout': {
-    view: 'mobile/layout.html',
-    template: null
-  }
-
 };
 
