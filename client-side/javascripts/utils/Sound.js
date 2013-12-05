@@ -17,16 +17,16 @@ var Sound = {
 
 
 
-  play: function (soundID, delay, offset, loop, volume) {
+  play: function (props) {
     if (this.appModel.get('mute'))
       return
 
-    delay  = delay  || 0
-    offset = offset || 0
-    loop   = loop   || 0
-    volume = volume || 1
+    var delay  = props.delay  || 0
+      , offset = props.offset || 0
+      , loop   = props.loop   || 0
+      , volume = props.volume || 1
 
-    return c.Sound.play( soundID, c.Sound.INTERRUPT_ANY, delay, offset, loop, volume )
+    return c.Sound.play( props.soundId, c.Sound.INTERRUPT_ANY, delay, offset, loop, volume )
   },
 
 

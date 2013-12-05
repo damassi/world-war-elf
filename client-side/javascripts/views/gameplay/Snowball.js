@@ -107,7 +107,7 @@ var Snowball = View.extend({
       }
     })
 
-    Sound.play( _.sample(['audio-throw-1', 'audio-throw-2']) )
+    Sound.play({ soundId: _.sample(['audio-throw-1', 'audio-throw-2']) })
   },
 
 

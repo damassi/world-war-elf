@@ -10,6 +10,7 @@ var AppEvent  = require('../../events/AppEvent')
 var AppConfig = require('../../config/AppConfig')
 var Easel     = require('../../utils/Easel')
 var PubSub    = require('../../utils/PubSub')
+var Sound     = require('../../utils/Sound')
 var View      = require('../../supers/View')
 
 
@@ -132,6 +133,20 @@ var Target = View.extend({
         }
       }
     })
+
+    if (this.type === 'good') {
+      Sound.play({
+        soundId: 'bonus-hit-candycane',
+        volume: .2
+      })
+    }
+
+    if (this.type == 'bad') {
+      Sound.play({
+        soundId: _.sample(['zombie-hit-1']),
+        volume: .5
+      })
+    }
   },
 
 

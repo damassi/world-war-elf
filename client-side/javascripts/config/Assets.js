@@ -40,16 +40,6 @@ var Assets = {
     },
 
     {
-        audioId: 'zombie-hit-2',
-        src: audio + 'hit-2.mp3'
-    },
-
-    {
-        audioId: 'zombie-hit-3',
-        src: audio + 'hit-3.mp3'
-    },
-
-    {
         audioId: 'low-energy',
         src: audio + 'low-energy.mp3'
     },
