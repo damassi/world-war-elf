@@ -58,6 +58,16 @@ var PreloaderView = Backbone.View.extend({
       return asset.src
     })
 
+    var audioManifest = _.filter( Assets.manifest, function (asset) {
+      if (asset.hasOwnProperty('audioId')) {
+        return asset
+      }
+    })
+
+    _.each( audioManifest, function (asset) {
+      c.Sound.registerSound(asset.src, asset.audioId)
+    })
+
     loadQueue.loadManifest( manifest )
   },
 

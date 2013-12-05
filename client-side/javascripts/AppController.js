@@ -13,6 +13,7 @@ var AppConfig          = require('./config/AppConfig')
   , PubSub             = require('./utils/PubSub')
   , Snowflakes         = require('./utils/Snowflakes')
   , Easel              = require('./utils/Easel')
+  , Sound              = require('./utils/Sound')
   , HomeView           = require('./views/HomeView')
   , InstructionsView   = require('./views/InstructionsView')
   , SyncView           = require('./views/SyncView')
@@ -123,7 +124,8 @@ var AppController = {
 
     c.Ticker.addEventListener( 'tick', this.tick )
 
-     //Sound.play('background-music', 0, 0, -1 )
+    Sound.initialize({ appModel: this.appModel })
+    Sound.play('audio-bg', 0, 0, -1 )
   },
 
 

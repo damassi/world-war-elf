@@ -8,8 +8,19 @@
 var Sound = {
 
 
+  initialize: function (options) {
+    _.bindAll(this)
+
+    console.log(options)
+
+    this.appModel = options.appModel
+    this.appModel.on( 'change:mute', this._onMuteChange )
+  },
+
+
+
   play: function( soundID, delay, offset, loop, volume ) {
-    if( GameConfig.SOUND_MUTED )
+    if (this.appModel.get('mute'))
       return
 
     delay  = delay  || 0
@@ -17,15 +28,21 @@ var Sound = {
     loop   = loop   || 0
     volume = volume || 1
 
-    this._soundID = soundID
-
-    return createjs.Sound.play( this._soundID, createjs.Sound.INTERRUPT_ANY, delay, offset, loop, volume )
+    return c.Sound.play( soundID, c.Sound.INTERRUPT_ANY, delay, offset, loop, volume )
   },
 
 
 
   mute: function( doMute ) {
-    createjs.Sound.setMute( doMute )
+    c.Sound.setMute( doMute )
+  },
+
+
+
+  _onMuteChange: function (model) {
+    var muted = model.change.mute
+
+    this.mute( !muted )
   }
 
 }

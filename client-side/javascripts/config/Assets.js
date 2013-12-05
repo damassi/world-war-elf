@@ -15,17 +15,17 @@ var Assets = {
     // Audio assets
 
     {
-        name: 'audio-bg',
+        audioId: 'audio-bg',
         src: audio + 'bg-carolbells.mp3'
     },
 
     {
-        name: 'audio-throw-1',
+        audioId: 'audio-throw-1',
         src: audio + 'whoosh.mp3'
     },
 
     {
-        name: 'audio-throw-2',
+        audioId: 'audio-throw-2',
         src: audio + 'whoosh2.mp3'
     },
 
