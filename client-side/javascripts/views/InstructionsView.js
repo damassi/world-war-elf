@@ -49,6 +49,8 @@ var InstructionsView = View.extend({
       Easel.createSprite('homeSprite', 'home-grass-sprouts', { x: -140, y: 502 }),
     ]
 
+    Easel.cache([ this.mouseBtn, this.phoneBtn ])
+
     //Easel.dragObject( this.children )
 
   },
@@ -82,12 +84,28 @@ var InstructionsView = View.extend({
       yoyo: true,
       repeat: 1
     })
+
+    TweenMax.to( target, .2, {
+      easel: {
+        tint: '#ffffff',
+        tintAmount: .2,
+      },
+      ease: Linear.easeNone
+    })
   },
 
 
 
   _onBtnOut: function (event) {
+    var target = event.currentTarget
 
+    TweenMax.to( target, .2, {
+      easel: {
+        tint: '#ffffff',
+        tintAmount: 0,
+      },
+      ease: Linear.easeNone
+    })
   },
 
 

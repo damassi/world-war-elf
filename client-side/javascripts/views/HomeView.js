@@ -51,6 +51,8 @@ var HomeView = View.extend({
       this.elf          = Easel.createSprite('homeSprite', 'home-good-elf', { x: 660, y: 179 }),
     ]
 
+    Easel.cache([ this.playBtn, this.scoreBtn ])
+
     this.lElf.x = 40
     this.rElf.x = 85
 
@@ -140,12 +142,28 @@ var HomeView = View.extend({
       yoyo: true,
       repeat: 1
     })
+
+    TweenMax.to( target, .2, {
+      easel: {
+        tint: '#ffffff',
+        tintAmount: .2,
+      },
+      ease: Linear.easeNone
+    })
   },
 
 
 
   _onBtnOut: function (event) {
+    var target = event.currentTarget
 
+    TweenMax.to( target, .2, {
+      easel: {
+        tint: '#ffffff',
+        tintAmount: 0,
+      },
+      ease: Linear.easeNone
+    })
   },
 
 

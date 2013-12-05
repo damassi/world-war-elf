@@ -28,7 +28,18 @@ var Easel = {
    */
 
   cache: function (displayObject) {
-    var bounds = displayObject.getBounds()
+    var bounds
+
+    if (displayObject instanceof Array) {
+      _.each( displayObject, function (obj) {
+        bounds = obj.getBounds()
+        obj.cache( bounds.x, bounds.y, bounds.width, bounds.height )
+      })
+
+      return
+    }
+
+    bounds = displayObject.getBounds()
     displayObject.cache( bounds.x, bounds.y, bounds.width, bounds.height )
   },
 
