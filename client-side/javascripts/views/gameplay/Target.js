@@ -95,7 +95,7 @@ var Target = View.extend({
     TweenMax.to( this.instance, .4, {
       rotation: -180,
       ease: Back.easeIn,
-      delay: 5 + ( Math.random() * 1 ),
+      delay: 1 + ( Math.random() * 1 ),
       onComplete: function () {
         self.show()
       }

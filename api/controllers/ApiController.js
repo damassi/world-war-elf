@@ -6,6 +6,7 @@
  */
 
 var SocketEvent = require('../../shared/events/SocketEvent')
+var ErrorEvent  = require('../../shared/events/ErrorEvent')
 
 
 module.exports = {
@@ -18,7 +19,7 @@ module.exports = {
    */
 
   'generate-code': function (req, res, next) {
-    var syncCode = Math.random().toString(36).substring(12)
+    var syncCode = (""+Math.random()).substring(2,7) //Math.random().toString(36).substring(12)
       , socket = req.socket
       , io     = sails.io
 
@@ -63,7 +64,7 @@ module.exports = {
       function foundSession (err, session) {
         if (err) next(err)
         if (!session) {
-          return next('Session not found!')
+          return next( ErrorEvent.SESSION_NOT_FOUND )
         }
 
         socket.join( syncCode )

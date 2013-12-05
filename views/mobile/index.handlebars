@@ -18,6 +18,7 @@
   </head>
 
   <body class="mobile">
+    <p class='debug'>debug</p>
 
     <div class="page gameplay hidden">
       <div class="content-wrapper">
@@ -29,25 +30,25 @@
     <div class="page calibrate hidden">
       <div class="content-wrapper">
         <img src="/assets/images/mobile/calibrate-text.png">
-        <a href="#">
+        <a class='start-btn' href="#">
           <img src="/assets/images/mobile/calibrate-button.png">
         </a>
       </div>
     </div>
 
-    <div class="page syncing hidden">
+    <div class="page syncing-wait hidden">
       <div class="content-wrapper">
         <img src="/assets/images/mobile/syncing-text.png">
       </div>
     </div>
 
-    <div class="page syncing ">
+    <div class="page syncing hidden">
       <div class="content-wrapper">
         <img src="/assets/images/mobile/code-text.png">
         <div>
-          <input type="text">
+          <input class='sync-input' type="text" pattern="\d*">
         </div>
-        <a href="#" class="sync">
+        <a href="#" class="sync-btn">
           <img src="/assets/images/mobile/code-button.png">
         </a>
       </div>

@@ -13,6 +13,8 @@ var AppEvent = {
   DESKTOP_CLIENT_SYNCED : 'onDesktopClientSynched',
   MOBILE_CLIENT_SYNCED  : 'onMobileClientSynced',
 
+  MOBILE_CALIBRATED: 'onMobileCalibrated',
+
   START_GAMEPLAY : 'onStartGamePlay',
   STOP_GAMEPLAY  : 'onStopGamePlay',
 

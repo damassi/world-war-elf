@@ -60,8 +60,10 @@ var SocketIO = {
 
 
   _onSynced: function (message) {
+
     this.appModel.set({
-      'session': message.session
+      'connected' : true,
+      'session'   : message.session
     })
 
     PubSub.trigger( AppEvent.MOBILE_CLIENT_SYNCED, message )

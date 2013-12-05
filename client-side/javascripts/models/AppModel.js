@@ -30,6 +30,13 @@ var AppModel = Backbone.Model.extend({
 
 
     /**
+     * Flag set when connection is established
+     * @type {Boolean}
+     */
+    connected: false,
+
+
+    /**
      * The current view being displayed
      * @type {View}
      */

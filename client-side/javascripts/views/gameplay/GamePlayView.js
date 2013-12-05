@@ -61,6 +61,20 @@ var GamePlayView = View.extend({
   snowballs: null,
 
 
+  /**
+   * Model reference property to check for socket connection
+   * @type {Boolean}
+   */
+  connected: false,
+
+
+  /**
+   * Updated when the socket sends back a new phone orientation
+   * @type {Object}
+   */
+  phoneOrientation: null,
+
+
 
 
   initialize: function (options) {
@@ -96,6 +110,13 @@ var GamePlayView = View.extend({
 
   render: function () {
     this._super()
+
+    this.connected = this.appModel.get('connected')
+
+    this.phoneOrientation = {
+      x: this.crossHairs.x,
+      y: this.crossHairs.y
+    }
 
     this.addChildren( this.children )
     this.addDebugWindow()
@@ -309,12 +330,35 @@ var GamePlayView = View.extend({
 
 
   _onOrientationUpdate: function (message) {
-    var orientation = message.orientation
 
-    this._moveCroshairs({
-      x: orientation.x,
-      y: orientation.y
-    })
+    this.phoneOrientation = {
+      x: message.orientation.x * 2,
+      y: message.orientation.y * 2
+    }
+  },
+
+
+
+  _onTick: function() {
+    if (!this.connected)
+      return
+
+    var dimensions = AppConfig.DIMENSIONS
+
+    this.crossHairs.x += this.phoneOrientation.x
+    this.crossHairs.y += this.phoneOrientation.y
+
+    if (this.crossHairs.x < 0)
+      this.crossHairs.x = 0
+
+    if (this.crossHairs.x > dimensions.width)
+      this.crossHairs.x = dimensions.width
+
+    if (this.crossHairs.y < 0)
+      this.crossHairs.y = 0
+
+    if (this.crossHairs.y > dimensions.height)
+      this.crossHairs.y = dimensions.height
   },
 
 
