@@ -11,8 +11,6 @@ var Sound = {
   initialize: function (options) {
     _.bindAll(this)
 
-    console.log(options)
-
     this.appModel = options.appModel
     this.appModel.on( 'change:mute', this._onMuteChange )
   },
