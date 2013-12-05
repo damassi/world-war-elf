@@ -5,6 +5,7 @@
  * @since  11.19.13
  */
 
+var ErrorEvent = require('../../../../shared/events/ErrorEvent')
 var AppConfig = require('../../config/AppConfig')
 var AppEvent = require('../../events/AppEvent')
 var PubSub   = require('../../utils/PubSub')
@@ -41,18 +42,35 @@ var MobileSyncView = Backbone.View.extend({
     var syncCode = this.$input.val()
 
     window.socket.post( AppConfig.ENDPOINTS.sync, {
-      syncCode: syncCode
+       syncCode: syncCode
     },
-
-      function onResponse (response) {
-        console.log(response)
-        // If anything but an OK from the server
-        if (response.status !== 200 ) {
-          $('.mobile .message').html('Error entering code: ' + JSON.stringify( response ))
-        }
-      })
+      this._onServerResponse
+    )
 
     return false
+  },
+
+
+
+  _onServerResponse: function (response) {
+    console.log(response)
+
+    if (response.status === 500) {
+
+      var error = response.errors[0]
+
+      switch (error) {
+        case ErrorEvent.SESSION_NOT_FOUND:
+          console.error('Session not found.')
+      }
+
+      return
+    }
+
+    // If anything but an OK from the server
+    if (response.status !== 200 ) {
+      $('.mobile .message').html('Error entering code: ' + JSON.stringify( response ))
+    }
   }
 
 })
