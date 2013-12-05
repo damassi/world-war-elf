@@ -26,6 +26,7 @@ var MobileSyncView = Backbone.View.extend({
     _.bindAll(this)
 
     this.$el = $('.syncing')
+    this.$syncingMessage = $('.syncing-wait')
     this.$syncBtn = this.$el.find('.sync-btn')
     this.$input = this.$el.find('.sync-input')
 
@@ -40,12 +41,16 @@ var MobileSyncView = Backbone.View.extend({
     event.preventDefault()
 
     var syncCode = this.$input.val()
+    var self = this
 
-    window.socket.post( AppConfig.ENDPOINTS.sync, {
-       syncCode: syncCode
-    },
-      this._onServerResponse
-    )
+    // Animate in message and then post
+    this._showSyncingMessage( function () {
+      window.socket.post( AppConfig.ENDPOINTS.sync, {
+        syncCode: syncCode
+      },
+        self._onServerResponse
+      )
+    })
 
     return false
   },
@@ -53,8 +58,15 @@ var MobileSyncView = Backbone.View.extend({
 
 
   _onServerResponse: function (response) {
-    console.log(response)
+    console.log(response, this)
 
+    // Connection success
+    if (response.status === 200) {
+
+      return
+    }
+
+    // Error connecting to the client
     if (response.status === 500) {
 
       var error = response.errors[0]
@@ -62,15 +74,57 @@ var MobileSyncView = Backbone.View.extend({
       switch (error) {
         case ErrorEvent.SESSION_NOT_FOUND:
           console.error('Session not found.')
+
+          this._hideSyncingMessage()
       }
 
       return
     }
+  },
 
-    // If anything but an OK from the server
-    if (response.status !== 200 ) {
-      $('.mobile .message').html('Error entering code: ' + JSON.stringify( response ))
-    }
+
+
+  _showSyncingMessage: function (callback) {
+    var self = this
+
+    TweenMax.to( this.$el, .4, {
+      x: -1000,
+      ease: Expo.easeIn,
+      onComplete: function() {
+        self.$el.addClass('hidden')
+
+        TweenMax.fromTo( self.$syncingMessage, .4, { x: 1000 }, {
+          immediateRender: true,
+          x: 0,
+          ease: Expo.easeOut,
+          onComplete: callback
+        })
+
+        self.$syncingMessage.removeClass('hidden')
+      }
+    })
+  },
+
+
+
+  _hideSyncingMessage: function () {
+    var self = this
+
+    TweenMax.to( this.$syncingMessage, .4, {
+      x: -1000,
+      ease: Expo.easeIn,
+      onComplete: function() {
+        self.$syncingMessage.addClass('hidden')
+
+        TweenMax.fromTo( self.$el, .4, { x: 1000 }, {
+          immediateRender: true,
+          x: 0,
+          ease: Expo.easeOut
+        })
+
+        self.$el.removeClass('hidden')
+      }
+    })
   }
 
 })
