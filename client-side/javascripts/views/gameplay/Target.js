@@ -110,10 +110,8 @@ var Target = View.extend({
   hit: function () {
     Easel.animateOnce( this.instance, 'hit' )
 
-    if (this.type === 'bad') {
-      var bounds = this.instance.getBounds()
-      this.instance.cache( bounds.x, bounds.y, bounds.width, bounds.height )
-    }
+    if (this.type === 'bad')
+      Easel.cache( this.instance )
 
     var self = this
 

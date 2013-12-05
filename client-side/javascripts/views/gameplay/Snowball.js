@@ -79,12 +79,26 @@ var Snowball = View.extend({
 
     //var bezierValues = Easel.returnPointsBetweenPoints( startpoint, endpoint, 4 )
 
+    Easel.cache( this.snowball )
+
+    // Tint snowball as it recedes
+    TweenMax.to( this.snowball, .6, {
+      easel: {
+        tint: '#000000',
+        tintAmount: .4,
+      },
+      delay: .3,
+      ease: Linear.easeNone
+    })
+
+    // Fade snowball in
     TweenMax.fromTo( this.snowball, .2, { alpha: 0 }, {
       alpha: 1
     })
 
     var self = this
 
+    // Spin and scale back towards target
     TweenMax.fromTo( this.snowball, .6, { scaleX: 6, scaleY: 6 }, {
       immediateRender: true,
       rotation: 360,

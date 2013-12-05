@@ -19,6 +19,21 @@ var Easel = {
   DEFAULT_KEY: 'name',
 
 
+
+
+  /**
+   * Cache the bitmap for transformations
+   * @param  {c.DisplayObject} displayObject
+   * @return {void}
+   */
+
+  cache: function (displayObject) {
+    var bounds = displayObject.getBounds()
+    displayObject.cache( bounds.x, bounds.y, bounds.width, bounds.height )
+  },
+
+
+
   /**
    * Creates a bitmap
    * @param  {String} value the value-pair of the asset
