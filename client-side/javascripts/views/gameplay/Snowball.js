@@ -110,9 +110,7 @@ var Snowball = View.extend({
 
       onComplete: function() {
 
-        if (self._checkHit()) {
-          //self.remove()
-        }
+        if (self._checkHit()) {}
         else {
           TweenMax.to(this.target, .2, { alpha: 0, onComplete: function () {
             self.remove()
