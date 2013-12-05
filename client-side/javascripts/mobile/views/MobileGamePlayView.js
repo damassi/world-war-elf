@@ -13,7 +13,7 @@ var View        = require('../../supers/View')
 var template    = '' //require('./mobile-gameplay-template.hbs')
 
 
-var MobileGamePlayView = View.extend({
+var MobileGamePlayView = Backbone.View.extend({
 
 
   /**
@@ -37,9 +37,10 @@ var MobileGamePlayView = View.extend({
 
 
 
-  render: function (options) {
-    this._super()
+  render: function () {
+    _.bindAll(this)
 
+    this.$el = $('.gameplay')
     this.$body = $('body')
 
     var self = this
@@ -77,8 +78,10 @@ var MobileGamePlayView = View.extend({
 
 
 
+
   //+ EVENT HANDLERS
   // ------------------------------------------------------------
+
 
 
   _onDeviceOrientationChange: function (event) {

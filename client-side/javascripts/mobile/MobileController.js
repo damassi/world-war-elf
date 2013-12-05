@@ -5,6 +5,7 @@
  * @date   12.4.13
  */
 
+var SocketEvent        = require('../../../shared/events/SocketEvent')
 var AppModel           = require('../models/AppModel')
 var SocketIO           = require('../utils/SocketIO')
 var MobileSyncView     = require('./views/MobileSyncView')
@@ -20,12 +21,30 @@ var MobileController = {
       this.appModel = new AppModel()
 
       this.mobileSyncView = new MobileSyncView()
-      this.mobileSyncView.render()
+      this.mobileGamePlayView = new MobileGamePlayView()
 
       SocketIO.initialize({
         appModel: this.appModel
       })
 
+      this.showSyncView()
+
+      this.mobileSyncView.on( SocketEvent.SYNCED, this.showGamePlayView )
+    },
+
+
+
+    showSyncView: function () {
+      this.mobileSyncView.render()
+    },
+
+
+
+    showGamePlayView: function () {
+      this.mobileSyncView.hide()
+      //this.mobileGamePlayView.render()
+
+      console.log('shoudl be showing gameplay view')
     }
 
 }

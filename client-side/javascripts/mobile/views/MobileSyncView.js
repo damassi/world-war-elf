@@ -5,15 +5,16 @@
  * @since  11.19.13
  */
 
-var ErrorEvent = require('../../../../shared/events/ErrorEvent')
-var AppConfig = require('../../config/AppConfig')
-var AppEvent = require('../../events/AppEvent')
-var PubSub   = require('../../utils/PubSub')
-var SocketIO = require('../../utils/SocketIO')
+var ErrorEvent  = require('../../../../shared/events/ErrorEvent')
+var SocketEvent = require('../../../../shared/events/SocketEvent')
+var AppConfig   = require('../../config/AppConfig')
+var AppEvent    = require('../../events/AppEvent')
+var PubSub      = require('../../utils/PubSub')
+var SocketIO    = require('../../utils/SocketIO')
+var MobileView  = require('./supers/MobileView')
 
 
-var MobileSyncView = Backbone.View.extend({
-
+var MobileSyncView = MobileView.extend({
 
 
   events: {
@@ -30,6 +31,8 @@ var MobileSyncView = Backbone.View.extend({
     this.$syncBtn = this.$el.find('.sync-btn')
     this.$input = this.$el.find('.sync-input')
 
+    this.show()
+
     this.$syncBtn.on('touchstart', this._onSubmitBtnClick )
 
     return this
@@ -37,11 +40,17 @@ var MobileSyncView = Backbone.View.extend({
 
 
 
+
+  //+ EVENT HANDLERS
+  // ------------------------------------------------------------
+
+
+
   _onSubmitBtnClick: function (event) {
     event.preventDefault()
 
     var syncCode = this.$input.val()
-    var self = this
+      , self = this
 
     // Animate in message and then post
     this._showSyncingMessage( function () {
@@ -58,29 +67,30 @@ var MobileSyncView = Backbone.View.extend({
 
 
   _onServerResponse: function (response) {
-    console.log(response, this)
+    console.log(response)
 
-    // Connection success
     if (response.status === 200) {
-
-      return
+      this.trigger( SocketEvent.SYNCED )
     }
 
-    // Error connecting to the client
-    if (response.status === 500) {
-
+    else if (response.status === 500) {
       var error = response.errors[0]
 
       switch (error) {
+
         case ErrorEvent.SESSION_NOT_FOUND:
-          console.error('Session not found.')
-
           this._hideSyncingMessage()
-      }
 
-      return
+          console.error('Session not found.')
+      }
     }
   },
+
+
+
+
+  //+ PRIVATE METHODS
+  // ------------------------------------------------------------
 
 
 
@@ -90,6 +100,8 @@ var MobileSyncView = Backbone.View.extend({
     TweenMax.to( this.$el, .4, {
       x: -1000,
       ease: Expo.easeIn,
+
+
       onComplete: function() {
         self.$el.addClass('hidden')
 
@@ -113,6 +125,8 @@ var MobileSyncView = Backbone.View.extend({
     TweenMax.to( this.$syncingMessage, .4, {
       x: -1000,
       ease: Expo.easeIn,
+
+
       onComplete: function() {
         self.$syncingMessage.addClass('hidden')
 
