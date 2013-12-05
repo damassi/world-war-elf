@@ -41,7 +41,6 @@ var PreloaderView = Backbone.View.extend({
       delay: .4,
       onComplete: this.loadSite
     })
-
   },
 
 

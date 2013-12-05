@@ -37,6 +37,13 @@ var AppModel = Backbone.Model.extend({
 
 
     /**
+     * If the user opts to play with a mouse instead
+     * @type {Boolean}
+     */
+    mouseMode: false,
+
+
+    /**
      * The current view being displayed
      * @type {View}
      */

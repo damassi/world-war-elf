@@ -329,27 +329,12 @@ var GamePlayView = View.extend({
 
 
 
-  // TODO: Clean up debug mode
-
   _onOrientationUpdate: function (message) {
 
-    if (message.mobile) {
-      // Phone accelerometer data being returned
-      return this.phoneOrientation = {
-        x: message.orientation.x * 2,
-        y: message.orientation.y * 2
-      }
+    this.phoneOrientation = {
+      x: message.orientation.x * 2,
+      y: message.orientation.y * 2
     }
-
-    PubSub.off( AppEvent.TICK, this._onTick )
-
-    // If using mouse in another browser return with
-    // mouse coordinates.  Debug, essentially
-    this._moveCroshairs({
-      x: message.orientation.x,
-      y: message.orientation.y
-    })
-
 
   },
 

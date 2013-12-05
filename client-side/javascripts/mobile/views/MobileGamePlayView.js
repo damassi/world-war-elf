@@ -80,7 +80,6 @@ var MobileGamePlayView = MobileView.extend({
 
     window.socket.post( AppConfig.ENDPOINTS.orientation, {
       sessionId: self.sessionId,
-      mobile: true,
       orientation: JSON.stringify( orientation )
     },
 
@@ -128,7 +127,6 @@ var MobileGamePlayView = MobileView.extend({
 
     window.socket.post( AppConfig.ENDPOINTS.orientation, {
       sessionId: this.sessionId,
-      mobile: false,
       orientation: JSON.stringify( orientation )
     },
 
