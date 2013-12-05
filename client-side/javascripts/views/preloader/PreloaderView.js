@@ -50,6 +50,8 @@ var PreloaderView = Backbone.View.extend({
   loadSite: function() {
     var loadQueue = new c.LoadQueue()
 
+    loadQueue.installPlugin( c.Sound )
+
     loadQueue.addEventListener( 'error', this._onLoadError )
     loadQueue.addEventListener( 'progress', this._onLoadProgress )
     loadQueue.addEventListener( 'complete', this._onLoadComplete )

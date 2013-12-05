@@ -3,13 +3,34 @@
  * loader.  Dispatches a complete event on complete
  */
 
-var path = require('./AppConfig').ASSET_PATH
+var path  = require('./AppConfig').ASSET_PATH
+var audio = require('./AppConfig').AUDIO_PATH
 
 
 var Assets = {
 
 
   manifest: [
+
+    // Audio assets
+
+    {
+        name: 'audio-bg',
+        src: audio + 'bg-carolbells.mp3'
+    },
+
+    {
+        name: 'audio-throw-1',
+        src: audio + 'whoosh.mp3'
+    },
+
+    {
+        name: 'audio-throw-2',
+        src: audio + 'whoosh2.mp3'
+    },
+
+
+    // Visual assets
 
     {
       name: 'placeholder-home',

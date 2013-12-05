@@ -122,6 +122,8 @@ var AppController = {
     this._animateIn()
 
     c.Ticker.addEventListener( 'tick', this.tick )
+
+     //Sound.play('background-music', 0, 0, -1 )
   },
 
 

@@ -42,6 +42,13 @@ var AppConfig = {
 
 
   /**
+   * Audio bg path
+   * @type {String}
+   */
+  AUDIO_PATH: '/assets/audio/',
+
+
+  /**
    * Time between route changes / animate in / animate out
    * @type {Number}
    */

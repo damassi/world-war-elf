@@ -100,6 +100,9 @@ module.exports = function( grunt ) {
           '<%= frontend %>/vendor/scripts/greensock/plugins/CSSPlugin.js',
           '<%= frontend %>/vendor/scripts/greensock/plugins/EaselPlugin.js',
           '<%= frontend %>/vendor/scripts/greensock/plugins/BezierPlugin.js',
+          '<%= frontend %>/vendor/scripts/greensock/plugins/ThrowPropsPlugin.min.js',
+          '<%= frontend %>/vendor/scripts/greensock/utils/Draggable.js',
+
         ],
 
         dest: '<%= output %>/assets/javascripts/vendor.js'
@@ -156,6 +159,17 @@ module.exports = function( grunt ) {
               '**'
             ],
             dest: '<%= output %>/assets/images/'
+          }
+        ]
+      },
+
+      audio: {
+        files: [
+          {
+            expand: true,
+            cwd: '<%= frontend %>/audio/',
+            src: ['**'],
+            dest: '<%= output %>/assets/audio/'
           }
         ]
       },
@@ -330,6 +344,11 @@ module.exports = function( grunt ) {
         tasks: ['copy:images']
       },
 
+      audio: {
+        files: '<%= frontend %>/audio/**',
+        tasks: ['copy:audio']
+      },
+
       javascripts: {
         files: '<%= frontend %>/javascripts/**/*',
         tasks: ['browserify2:compile', 'browserify2:mobile']
@@ -378,6 +397,7 @@ module.exports = function( grunt ) {
   grunt.registerTask( 'compileAssets', [
     'clean:output',
     'copy:images',
+    'copy:audio',
     'copy:sails',
     'copy:webfonts',
     'copy:examples',
