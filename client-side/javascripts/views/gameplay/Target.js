@@ -141,8 +141,13 @@ var Target = View.extend({
 
     if (this.type == 'bad') {
       Sound.play({
-        soundId: _.sample(['zombie-hit-1']),
-        volume: .5
+        soundId: _.sample([
+          'zombie-hit-1',
+          'zombie-hit-2',
+          'zombie-hit-3',
+          'zombie-hit-4'
+        ]),
+        volume: .3
       })
     }
   },

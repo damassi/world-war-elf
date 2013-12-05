@@ -35,8 +35,28 @@ var Assets = {
     },
 
     {
-        audioId: 'zombie-hit-1',
+        audioId: 'snowball-hit-1',
         src: audio + 'hit-1.mp3'
+    },
+
+    {
+        audioId: 'zombie-hit-1',
+        src: audio + 'grunt-1.mp3'
+    },
+
+    {
+        audioId: 'zombie-hit-2',
+        src: audio + 'grunt-2.mp3'
+    },
+
+    {
+        audioId: 'zombie-hit-3',
+        src: audio + 'grunt-3.mp3'
+    },
+
+    {
+        audioId: 'zombie-hit-4',
+        src: audio + 'grunt-4.mp3'
     },
 
     {
