@@ -8,6 +8,7 @@
 var Touch            = require('../utils/Touch')
 var MobileController = require('./MobileController')
 
+document.ontouchmove = function(e) {e.preventDefault()};
 
 $(function mobileInitialized () {
   Touch.translateTouchEvents()

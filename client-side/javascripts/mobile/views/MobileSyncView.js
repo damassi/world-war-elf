@@ -59,6 +59,8 @@ var MobileSyncView = MobileView.extend({
   _onSubmitBtnClick: function (event) {
     event.preventDefault()
 
+    this.$syncBtn.focus()
+
     var syncCode = this.$input.val()
       , self = this
 
@@ -109,6 +111,7 @@ var MobileSyncView = MobileView.extend({
 
     TweenMax.to( this.$el, .4, {
       x: -1000,
+      delay: .3,
       ease: Expo.easeIn,
 
 

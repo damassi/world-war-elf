@@ -32,7 +32,7 @@ var MobileController = {
         appModel: this.appModel
       })
 
-      this.showSyncView()
+      this.showGamePlayView()
 
       this.mobileSyncView.on( SocketEvent.SYNCED, this.showCalibrateView )
       this.mobileCalibrateView.on( AppEvent.MOBILE_CALIBRATED, this.showGamePlayView )

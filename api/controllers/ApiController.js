@@ -19,7 +19,7 @@ module.exports = {
    */
 
   'generate-code': function (req, res, next) {
-    var syncCode = Math.random().toString(36).substring(12)
+    var syncCode = (""+Math.random()).substring(2,7) //Math.random().toString(36).substring(12)
       , socket = req.socket
       , io     = sails.io
 

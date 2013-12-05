@@ -53,13 +53,34 @@ var MobileGamePlayView = MobileView.extend({
 
 
   addEventListeners: function () {
-    //window.addEventListener( 'deviceorientation', this._onDeviceOrientationChange )
+    window.addEventListener( 'ondevicemotion', this._onDeviceOrientationChange )
+
     this.$body.on('mousemove', this._onDeviceOrientationChange )
-    this.$body.on('click', this._onFireButtonPress )
+    this.$body.on('touchmove', this._onDeviceOrientationChange )
+    this.$body.on('touchend', this._onFireButtonPress )
 
     window.socket.on( SocketEvent.TOGGLE_MODE, function(message) {
       console.log('WORKING', message)
     })
+
+    window.ondevicemotion = function(event) {
+
+      var orientation = {
+        x: Math.floor( event.accelerationIncludingGravity.x ),
+        y: Math.floor( event.accelerationIncludingGravity.y )
+      }
+
+      $('.debug').html(orientation.x + '<br/>' + orientation.y)
+
+      window.socket.post( AppConfig.ENDPOINTS.orientation, {
+        sessionId: this.sessionId,
+        orientation: JSON.stringify( orientation )
+      },
+
+        function onResponse (response) {
+          //console.log(response.orientation)
+        })
+    }
   },
 
 
@@ -71,15 +92,27 @@ var MobileGamePlayView = MobileView.extend({
 
 
   _onDeviceOrientationChange: function (event) {
-    var orientation = {
-      x: event.beta,
-      y: event.gamma,
-      z: event.alpha,
+
+    var orientation = {}
+
+    try {
+      orientation = {
+        x: event.originalEvent.touches[0].pageX,
+        y: event.originalEvent.touches[0].pageY
+      }
     }
+    catch (e) {
+      orientation = {
+        x: event.pageX,
+        y: event.pageY
+      }
+    }
+
+    $('.debug').html( orientation.x + ', ' + orientation.y + ' ' + orientation.z )
 
     window.socket.post( AppConfig.ENDPOINTS.orientation, {
       sessionId: this.sessionId,
-      orientation: JSON.stringify({ x: event.pageX, y: event.pageY })
+      orientation: JSON.stringify( orientation )
     },
 
       function onResponse (response) {
