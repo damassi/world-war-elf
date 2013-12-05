@@ -7,14 +7,26 @@
  */
 
 var MobileView = require('./supers/MobileView')
+var AppEvent   = require('../../events/AppEvent')
 
 
-var MobileCalibrateView = Backbone.View.extend({
+var MobileCalibrateView = MobileView.extend({
 
 
   render: function () {
     this.$el = $('.calibrate')
+    this.$startBtn = this.$el.find('.start-btn')
+
+    this.show()
+
+    this.$startBtn.on('touchend', this._onStartBtnClick )
   },
+
+
+
+  _onStartBtnClick: function (event) {
+    this.trigger( AppEvent.MOBILE_CALIBRATED )
+  }
 
 })
 

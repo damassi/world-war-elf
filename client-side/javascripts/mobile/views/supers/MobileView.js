@@ -11,11 +11,16 @@ var MobileView = Backbone.View.extend({
 
   initialize: function (options) {
     _.bindAll(this)
+
+    for (var option in options)
+      this[option] = options[option]
   },
 
 
 
   show: function () {
+    this.$el.removeClass('hidden')
+
     TweenMax.fromTo( this.$el, .4, { x: 1000 }, {
       x: 0,
       delay: 1,

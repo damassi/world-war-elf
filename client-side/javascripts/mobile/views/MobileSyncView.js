@@ -16,16 +16,9 @@ var MobileView  = require('./supers/MobileView')
 
 var MobileSyncView = MobileView.extend({
 
-  el: '.synching',
-
-  events: {
-    'touchstart .sync-btn': '_onSyncBtnClick'
-  },
-
 
   render: function (options) {
     this.$el = $('.syncing')
-    this.el = this.$el.selector
     this.$syncingMessage = $('.syncing-wait')
     this.$syncBtn = this.$el.find('.sync-btn')
     this.$input = this.$el.find('.sync-input')
@@ -34,9 +27,25 @@ var MobileSyncView = MobileView.extend({
 
     this.delegateEvents()
 
-    //this.$syncBtn.on('touchstart', this._onSubmitBtnClick )
+    this.$syncBtn.on('touchstart', this._onSubmitBtnClick )
 
     return this
+  },
+
+
+
+  hide: function() {
+    var self = this
+
+    TweenMax.to( this.$syncingMessage, .4, {
+      x: -1000,
+      ease: Expo.easeIn,
+
+      onComplete: function() {
+        self.remove()
+      }
+    })
+
   },
 
 

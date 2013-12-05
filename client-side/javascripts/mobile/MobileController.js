@@ -5,11 +5,13 @@
  * @date   12.4.13
  */
 
-var SocketEvent        = require('../../../shared/events/SocketEvent')
-var AppModel           = require('../models/AppModel')
-var SocketIO           = require('../utils/SocketIO')
-var MobileSyncView     = require('./views/MobileSyncView')
-var MobileGamePlayView = require('./views/MobileGamePlayView')
+var SocketEvent         = require('../../../shared/events/SocketEvent')
+var AppEvent            = require('../events/AppEvent')
+var AppModel            = require('../models/AppModel')
+var SocketIO            = require('../utils/SocketIO')
+var MobileSyncView      = require('./views/MobileSyncView')
+var MobileCalibrateView = require('./views/MobileCalibrateView')
+var MobileGamePlayView  = require('./views/MobileGamePlayView')
 
 
 var MobileController = {
@@ -20,8 +22,11 @@ var MobileController = {
 
       this.appModel = new AppModel()
 
-      this.mobileSyncView = new MobileSyncView()
-      this.mobileGamePlayView = new MobileGamePlayView()
+      this.mobileSyncView      = new MobileSyncView()
+      this.mobileCalibrateView = new MobileCalibrateView()
+      this.mobileGamePlayView  = new MobileGamePlayView({
+        appModel: this.appModel
+      })
 
       SocketIO.initialize({
         appModel: this.appModel
@@ -29,7 +34,8 @@ var MobileController = {
 
       this.showSyncView()
 
-      this.mobileSyncView.on( SocketEvent.SYNCED, this.showGamePlayView )
+      this.mobileSyncView.on( SocketEvent.SYNCED, this.showCalibrateView )
+      this.mobileCalibrateView.on( AppEvent.MOBILE_CALIBRATED, this.showGamePlayView )
     },
 
 
@@ -40,11 +46,16 @@ var MobileController = {
 
 
 
-    showGamePlayView: function () {
+    showCalibrateView: function () {
       this.mobileSyncView.hide()
-      //this.mobileGamePlayView.render()
+      this.mobileCalibrateView.render()
+    },
 
-      console.log('shoudl be showing gameplay view')
+
+
+    showGamePlayView: function () {
+      this.mobileCalibrateView.hide()
+      this.mobileGamePlayView.render()
     }
 
 }

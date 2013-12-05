@@ -9,17 +9,10 @@ var SocketEvent = require('../../../../shared/events/SocketEvent')
 var AppConfig   = require('../../config/AppConfig')
 var AppEvent    = require('../../events/AppEvent')
 var PubSub      = require('../../utils/PubSub')
-var View        = require('../../supers/View')
-var template    = '' //require('./mobile-gameplay-template.hbs')
+var MobileView  = require('./supers/MobileView')
 
 
-var MobileGamePlayView = Backbone.View.extend({
-
-
-  /**
-   * @type {Function}
-   */
-  template: template,
+var MobileGamePlayView = MobileView.extend({
 
 
   /**
@@ -50,7 +43,9 @@ var MobileGamePlayView = Backbone.View.extend({
       self.addEventListeners()
     })
 
-    this.addDebugWindow()
+    this.show()
+
+    //this.addDebugWindow()
 
     return this
   },
@@ -65,15 +60,6 @@ var MobileGamePlayView = Backbone.View.extend({
     window.socket.on( SocketEvent.TOGGLE_MODE, function(message) {
       console.log('WORKING', message)
     })
-  },
-
-
-
-  addDebugWindow: function () {
-    $('.desktop .message').html('desktop client connected')
-    $('.mobile .message').html('mobile client connected')
-    $('.btn-submit').remove()
-    $('.input-sync').remove()
   },
 
 

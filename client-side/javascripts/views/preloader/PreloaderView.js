@@ -18,6 +18,7 @@ var PreloaderView = Backbone.View.extend({
   template: template,
 
 
+
   initialize: function () {
     _.bindAll(this)
 
@@ -37,7 +38,7 @@ var PreloaderView = Backbone.View.extend({
       autoAlpha: 1,
       scale: 1,
       rotation: 0,
-      ease: Back.easeOut,
+      ease: Expo.easeOut,
       delay: .4,
       onComplete: this.loadSite
     })
