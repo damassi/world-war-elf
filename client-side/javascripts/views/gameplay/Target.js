@@ -110,6 +110,25 @@ var Target = View.extend({
   hit: function () {
     Easel.animateOnce( this.instance, 'hit' )
 
+    if (this.type === 'good') {
+      Sound.play({
+        soundId: 'bonus-hit-candycane',
+        volume: .2
+      })
+    }
+
+    if (this.type == 'bad') {
+      Sound.play({
+        soundId: _.sample([
+          'zombie-hit-1',
+          'zombie-hit-2',
+          'zombie-hit-3',
+          'zombie-hit-4'
+        ]),
+        volume: .3
+      })
+    }
+
     if (this.type === 'bad')
       Easel.cache( this.instance )
 
@@ -131,25 +150,6 @@ var Target = View.extend({
         }
       }
     })
-
-    if (this.type === 'good') {
-      Sound.play({
-        soundId: 'bonus-hit-candycane',
-        volume: .2
-      })
-    }
-
-    if (this.type == 'bad') {
-      Sound.play({
-        soundId: _.sample([
-          'zombie-hit-1',
-          'zombie-hit-2',
-          'zombie-hit-3',
-          'zombie-hit-4'
-        ]),
-        volume: .3
-      })
-    }
   },
 
 
