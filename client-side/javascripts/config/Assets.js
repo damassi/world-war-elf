@@ -134,6 +134,18 @@ var Assets = {
     },
 
     {
+        name: 'splat',
+        src: path + 'spritesheets/splat.png',
+        spritesheet: {
+          framerate: 14,
+
+          "images": [path + 'spritesheets/splat.png'],
+          "frames": [[2, 2, 60, 124, 0, -5, -7], [66, 2, 60, 124, 0, -5, -7], [130, 2, 60, 124, 0, -5, -7], [194, 2, 60, 124, 0, -5, -7], [258, 2, 60, 124, 0, -5, -7], [322, 2, 60, 124, 0, -5, -7], [386, 2, 60, 124, 0, -5, -7]],
+          "animations": {"hit": {"frames": [0, 1, 2, 3, 4, 5, 6]}, "all": {"frames": [6]}}
+        }
+    },
+
+    {
       name: 'sign-gift',
       src: path + 'spritesheets/sign-gift.png',
 

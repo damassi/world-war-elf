@@ -249,7 +249,11 @@ var GamePlayView = View.extend({
       target.scurryAway()
     })
 
-    this.hide()
+    //this.hide()
+    setTimeout(function() {
+      window.location.hash = '#/submit-score'
+    }, 1000)
+
   },
 
 

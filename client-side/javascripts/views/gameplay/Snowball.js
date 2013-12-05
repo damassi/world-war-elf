@@ -111,7 +111,7 @@ var Snowball = View.extend({
       onComplete: function() {
 
         if (self._checkHit()) {
-          self.remove()
+          //self.remove()
         }
         else {
           TweenMax.to(this.target, .2, { alpha: 0, onComplete: function () {
@@ -152,11 +152,41 @@ var Snowball = View.extend({
           target: target
         })
 
+        this._addSplat()
+
         return true
       }
     }
 
     return false
+  },
+
+
+
+  _addSplat: function () {
+    var splat = Easel.createSprite('splat', 0, { x: this.snowball.x, y: this.snowball.y + 30 }, { center: true })
+
+    this.container.addChild( splat )
+    this.container.removeChild( this.snowball )
+
+    Easel.animateOnce(splat, 'hit')
+
+    TweenMax.to(splat, .1, {
+      alpha: 0,
+      delay: .2,
+      ease: Linear.easeNone
+    })
+
+    var self = this
+
+    TweenMax.to(splat, .3, {
+      scaleX: 1.2,
+      scaleY: 1.2,
+      ease: Expo.easeOut,
+      onComplete: function() {
+        self.remove()
+      }
+    })
   }
 
 })

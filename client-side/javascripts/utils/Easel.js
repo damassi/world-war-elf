@@ -324,8 +324,13 @@ var Easel = {
    * @param  {String} frameLabel the frame label
    */
 
-  animateOnce: function (spritesheet, frameLabel) {
-    spritesheet.on('animationend', function() { this.gotoAndStop( frameLabel ) });
+  animateOnce: function (spritesheet, frameLabel, callback) {
+    spritesheet.on('animationend', function() {
+      if(callback)
+        callback()
+
+      this.gotoAndStop( frameLabel )
+    });
     spritesheet.gotoAndPlay( frameLabel );
   },
 
