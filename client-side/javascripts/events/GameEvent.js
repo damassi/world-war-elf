@@ -17,7 +17,9 @@ var GameEvent = {
 
   // PubSub updates
 
-  TARGET_HIT  : 'onTargetHit'
+  TARGET_HIT  : 'onTargetHit',
+
+  KILL_ALL_TARGETS: 'onKillAllTargets'
 
 }
 

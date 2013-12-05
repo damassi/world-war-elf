@@ -102,6 +102,7 @@ var Target = View.extend({
       rotation: 0,
       ease: Back.easeOut,
       delay: 2 + ( Math.random() * 1 ),
+
       onComplete: function () {
         self.hide()
       }
@@ -117,6 +118,7 @@ var Target = View.extend({
       rotation: -180,
       ease: Back.easeIn,
       delay: AppConfig.TARGET_PAUSE_TIME + ( Math.random() * 1 ),
+
       onComplete: function () {
         self.show()
       }
@@ -128,7 +130,11 @@ var Target = View.extend({
 
   hit: function () {
 
+    // Hit a bad elf.  Check energy levels and
+    // update and return
+
     if (this.type === 'bad') {
+
       Sound.play({
         soundId: _.sample([
           'zombie-hit-1',
@@ -160,17 +166,36 @@ var Target = View.extend({
       }
     }
 
-    Easel.animateOnce( this.instance, 'hit' )
+
+    // Good target hit.  Enable supermode or dispatch
+    // event to TargetFactory to clear all targets and refresh
 
     if (this.type === 'good') {
+
       Sound.play({
         soundId: 'bonus-hit-candycane',
         volume: .2
       })
+
+      // If candycane target
+      if (this.targetProps.bonus === 'supermode')
+        this.appModel.enableSupermode()
+
+      // If Gift target
+      else
+        PubSub.trigger( GameEvent.KILL_ALL_TARGETS )
     }
 
+
+    // Cache to turn into good elf
     if (this.type === 'bad')
       Easel.cache( this.instance )
+
+
+    // Animate target off the screen and dispatch
+    // to TargetFactory
+
+    Easel.animateOnce( this.instance, 'hit' )
 
     var self = this
 
@@ -179,6 +204,7 @@ var Target = View.extend({
       ease: Back.easeIn,
       delay: .1,
       overwrite: 'concurrent',
+
       onComplete: function () {
         if (this.target && this.target.parent) {
           this.target.parent.removeChild( this.target )

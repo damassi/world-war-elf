@@ -81,12 +81,14 @@ var TargetFactory = Backbone.View.extend({
 
   addEventListeners: function ()  {
     PubSub.on( GameEvent.TARGET_HIT, this._onTargetHit )
+    PubSub.on( GameEvent.KILL_ALL_TARGETS, this._onKillAllTargets )
   },
 
 
 
   removeEventListeners: function () {
     PubSub.off( GameEvent.TARGET_HIT, this._onTargetHit )
+    PubSub.off( GameEvent.KILL_ALL_TARGETS, this._onKillAllTargets )
   },
 
 
@@ -171,6 +173,21 @@ var TargetFactory = Backbone.View.extend({
     this.occupiedPositions = _.without( this.occupiedPositions, target )
 
     this.createTarget()
+  },
+
+
+
+  _onKillAllTargets: function () {
+    this.appModel.set('supermode', true )
+
+    var i, len, target
+
+    for (i = 0, len = this.occupiedPositions.length; i < len; ++i) {
+      target = this.occupiedPositions[i]
+
+      if (target.type === 'bad')
+        target.hit()
+    }
   }
 
 

@@ -314,10 +314,6 @@ var GamePlayView = View.extend({
 
     // Reset fire interval interval
     TweenMax.delayedCall( .5, function() {
-
-      if (target.targetView.type === 'good')
-        self.appModel.enableSupermode()
-
       self.appModel.increaseHits()
     })
   },
