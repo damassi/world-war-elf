@@ -67,7 +67,15 @@ var AppConfig = {
    * The time which the player is in supermode.
    * @type {Number}
    */
-  SUPERMODE_TIME: 5
+  SUPERMODE_TIME: 5,
+
+
+  /**
+   * The time which the target should remain on the screen before hiding
+   *
+   * @type {Number}
+   */
+  TARGET_PAUSE_TIME: 4
 
 }
 

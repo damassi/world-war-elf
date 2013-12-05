@@ -97,10 +97,13 @@ module.exports = {
   /**
    * The orientation endpoint receives a websocket POST request which then dispatches
    * updates to registered clients within a room
+   *
+   * // TODO: Clean up debug mode
    */
 
   orientation: function (req, res, next) {
     var sessionId = req.param('sessionId')
+      , mobile    = req.param('mobile')
       , socket    = req.socket
 
     Session.findOne({
@@ -116,6 +119,7 @@ module.exports = {
         var orientation = JSON.parse( req.param( 'orientation' ))
 
         socket.broadcast.to(sessionId).emit( SocketEvent.ORIENTATION, {
+          mobile: mobile,
           orientation: orientation
         })
 

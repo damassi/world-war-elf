@@ -7,6 +7,7 @@
 
 var GameEvent = require('../../events/GameEvent')
 var AppEvent  = require('../../events/AppEvent')
+var AppConfig = require('../../config/AppConfig')
 var Easel     = require('../../utils/Easel')
 var PubSub    = require('../../utils/PubSub')
 var View      = require('../../supers/View')
@@ -95,7 +96,7 @@ var Target = View.extend({
     TweenMax.to( this.instance, .4, {
       rotation: -180,
       ease: Back.easeIn,
-      delay: 1 + ( Math.random() * 1 ),
+      delay: AppConfig.TARGET_PAUSE_TIME + ( Math.random() * 1 ),
       onComplete: function () {
         self.show()
       }

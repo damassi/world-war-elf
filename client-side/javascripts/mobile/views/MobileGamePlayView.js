@@ -54,36 +54,11 @@ var MobileGamePlayView = MobileView.extend({
 
   addEventListeners: function () {
 
-    window.addEventListener( 'ondevicemotion', this._onDeviceOrientationChange )
-
     this.$body.on('mousemove', this._onDeviceOrientationChange )
-    //this.$body.on('touchmove', this._onDeviceOrientationChange )
     this.$body.on('touchend', this._onFireButtonPress )
 
-    window.socket.on( SocketEvent.TOGGLE_MODE, function(message) {
-      console.log('WORKING', message)
-    })
-
-    var self = this
-
-    window.ondevicemotion = function(event) {
-
-      var orientation = {
-        x: ~~event.accelerationIncludingGravity.x,
-        y: ~~event.accelerationIncludingGravity.y
-      }
-
-      $('.debug').html(orientation.x + '<br/>' + orientation.y)
-
-      window.socket.post( AppConfig.ENDPOINTS.orientation, {
-        sessionId: self.sessionId,
-        orientation: JSON.stringify( orientation )
-      },
-
-        function onResponse (response) {
-          //console.log(response.orientation)
-        })
-    }
+    window.ondevicemotion = this._onDeviceMotion
+    window.socket.on( SocketEvent.TOGGLE_MODE, this._onToggleMode )
   },
 
 
@@ -91,6 +66,42 @@ var MobileGamePlayView = MobileView.extend({
 
   //+ EVENT HANDLERS
   // ------------------------------------------------------------
+
+
+  _onDeviceMotion: function (event) {
+    var self = this
+
+    var orientation = {
+      x: ~~event.accelerationIncludingGravity.x,
+      y: ~~event.accelerationIncludingGravity.y
+    }
+
+    $('.debug').html(orientation.x + '<br/>' + orientation.y)
+
+    window.socket.post( AppConfig.ENDPOINTS.orientation, {
+      sessionId: self.sessionId,
+      mobile: true,
+      orientation: JSON.stringify( orientation )
+    },
+
+      function onResponse (response) {
+        //console.log(response.orientation)
+      })
+  },
+
+
+
+  /**
+   * Received from API service which tells the mobile client to update view to super snowball
+   *
+   * @param  {Object} message Message containing prop .supermode (boolean)
+   */
+  _onToggleMode: function (message) {
+    if (message.supermode) {
+
+    }
+
+  },
 
 
 
@@ -111,10 +122,13 @@ var MobileGamePlayView = MobileView.extend({
       }
     }
 
-    $('.debug').html( orientation.x + ', ' + orientation.y + ' ' + orientation.z )
+    $('.debug').html( orientation.x + ', ' + orientation.y )
+
+    // TODO: Clean up debug mode
 
     window.socket.post( AppConfig.ENDPOINTS.orientation, {
       sessionId: this.sessionId,
+      mobile: false,
       orientation: JSON.stringify( orientation )
     },
 

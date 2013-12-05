@@ -170,7 +170,6 @@
             <filename>../home-btn-play-snow.png</filename>
             <filename>../home-btn-scores-shadow.png</filename>
             <filename>../home-btn-scores-snow.png</filename>
-            <filename>../home-elf.png</filename>
             <filename>../home-ground-back.png</filename>
             <filename>../home-ground-front.png</filename>
             <filename>../home-ground-middle.png</filename>
@@ -178,6 +177,7 @@
             <filename>../home-text-E-w-drift.png</filename>
             <filename>../home-title-ww.png</filename>
             <filename>../home-grass-sprouts.png</filename>
+            <filename>../home-good-elf.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
