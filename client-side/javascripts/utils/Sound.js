@@ -17,7 +17,7 @@ var Sound = {
 
 
 
-  play: function( soundID, delay, offset, loop, volume ) {
+  play: function (soundID, delay, offset, loop, volume) {
     if (this.appModel.get('mute'))
       return
 
@@ -31,7 +31,7 @@ var Sound = {
 
 
 
-  mute: function( doMute ) {
+  mute: function (doMute) {
     c.Sound.setMute( doMute )
   },
 

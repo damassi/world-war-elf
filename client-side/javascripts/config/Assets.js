@@ -29,6 +29,42 @@ var Assets = {
         src: audio + 'whoosh2.mp3'
     },
 
+    {
+        audioId: 'bonus-hit-candycane',
+        src: audio + 'bonus-hit.mp3'
+    },
+
+    {
+        audioId: 'zombie-hit-1',
+        src: audio + 'hit-1.mp3'
+    },
+
+    {
+        audioId: 'zombie-hit-2',
+        src: audio + 'hit-2.mp3'
+    },
+
+    {
+        audioId: 'zombie-hit-3',
+        src: audio + 'hit-3.mp3'
+    },
+
+    {
+        audioId: 'low-energy',
+        src: audio + 'low-energy.mp3'
+    },
+
+    {
+        audioId: 'player-hit-1',
+        src: audio + 'player-hit.mp3'
+    },
+
+    {
+        audioId: 'player-hit-2',
+        src: audio + 'player-hit-2.mp3'
+    },
+
+
 
     // Visual assets
 

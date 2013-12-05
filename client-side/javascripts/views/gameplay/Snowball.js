@@ -10,6 +10,7 @@ var GameEvent = require('../../events/GameEvent')
 var AppEvent  = require('../../events/AppEvent')
 var Easel     = require('../../utils/Easel')
 var PubSub    = require('../../utils/PubSub')
+var Sound     = require('../../utils/Sound')
 var View      = require('../../supers/View')
 
 
@@ -105,6 +106,8 @@ var Snowball = View.extend({
         }
       }
     })
+
+    Sound.play( _.sample(['audio-throw-1', 'audio-throw-2']) )
   },
 
 

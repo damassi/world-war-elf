@@ -50,10 +50,6 @@ var PreloaderView = Backbone.View.extend({
 
     loadQueue.installPlugin( c.Sound )
 
-    loadQueue.addEventListener( 'error', this._onLoadError )
-    loadQueue.addEventListener( 'progress', this._onLoadProgress )
-    loadQueue.addEventListener( 'complete', this._onLoadComplete )
-
     var manifest = _.map( Assets.manifest, function (asset) {
       return asset.src
     })
@@ -65,8 +61,12 @@ var PreloaderView = Backbone.View.extend({
     })
 
     _.each( audioManifest, function (asset) {
-      c.Sound.registerSound(asset.src, asset.audioId)
+      c.Sound.registerSound( asset.src, asset.audioId )
     })
+
+    loadQueue.addEventListener( 'error', this._onLoadError )
+    loadQueue.addEventListener( 'progress', this._onLoadProgress )
+    loadQueue.addEventListener( 'complete', this._onLoadComplete )
 
     loadQueue.loadManifest( manifest )
   },

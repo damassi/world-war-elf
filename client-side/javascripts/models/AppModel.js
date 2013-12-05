@@ -47,7 +47,7 @@ var AppModel = Backbone.Model.extend({
      * Globally mute or unmute sound
      * @type {Boolean}
      */
-    mute: true,
+    mute: false,
 
 
     /**

@@ -125,7 +125,7 @@ var AppController = {
     c.Ticker.addEventListener( 'tick', this.tick )
 
     Sound.initialize({ appModel: this.appModel })
-    Sound.play('audio-bg', 0, 0, -1 )
+    //Sound.play('audio-bg', 0, 0, -1 )
   },
 
 
