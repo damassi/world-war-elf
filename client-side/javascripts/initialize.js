@@ -7,6 +7,7 @@
 
 var Touch         = require('./utils/Touch')
 var PreloaderView = require('./views/preloader/PreloaderView')
+var AppController = require('./AppController')
 
 // Convenience ref
 c = createjs
@@ -15,6 +16,14 @@ $(function siteInitialized () {
 
   Touch.translateTouchEvents()
 
-  new PreloaderView()
+  var preloader = new PreloaderView()
+
+  preloader.on( 'loadComplete', function() {
+    AppController.initialize()
+
+    Backbone.history.start({
+      pushState: false
+    })
+  })
 
 })

@@ -5,8 +5,7 @@
  * @date   12.4.13
  */
 
-var AppController = require('../../AppController')
-var Assets        = require('../../config/Assets')
+var Assets   = require('../../config/Assets')
 var template = require('./preloader-template.hbs')
 
 
@@ -86,11 +85,7 @@ var PreloaderView = Backbone.View.extend({
       ease: Back.easeIn,
       delay: .5,
       onComplete: function() {
-        AppController.initialize()
-
-        Backbone.history.start({
-          pushState: false
-        })
+        self.trigger('loadComplete')
 
         self.remove()
       }

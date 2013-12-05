@@ -66,7 +66,7 @@ var HomeView = View.extend({
     this.fatElf.gotoAndPlay('start')
     this.skinnyElf.gotoAndPlay('start')
 
-    Easel.dragObject( this.children )
+    //Easel.dragObject( this.children )
 
   },
 
