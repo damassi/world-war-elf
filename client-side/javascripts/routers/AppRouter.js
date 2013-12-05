@@ -30,22 +30,13 @@ var AppRouter = Backbone.Router.extend({
 
 
   routes: {
-
-    // Desktop Routes
-
     ''              : 'homeRoute',
     'instructions'  : 'instructionsRoute',
     'sync'          : 'syncRoute',
     'calibrate'     : 'calibrateRoute',
     'play'          : 'gamePlayRoute',
     'submit-score'  : 'submitScoreRoute',
-    'high-scores'   : 'highScoresRoute',
-
-
-    // Mobile Routes
-
-    'mobile/sync' : 'mobileSyncRoute',
-    'mobile/play' : 'mobileGamePlayRoute'
+    'high-scores'   : 'highScoresRoute'
   },
 
 

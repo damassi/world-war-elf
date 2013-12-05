@@ -5,12 +5,12 @@
  * @since  11.19.13
  */
 
-var SocketEvent = require('../../../../../shared/events/SocketEvent')
-var AppConfig   = require('../../../config/AppConfig')
-var AppEvent    = require('../../../events/AppEvent')
-var PubSub      = require('../../../utils/PubSub')
-var View        = require('../../../supers/View')
-var template    = require('./mobile-gameplay-template.hbs')
+var SocketEvent = require('../../../../shared/events/SocketEvent')
+var AppConfig   = require('../../config/AppConfig')
+var AppEvent    = require('../../events/AppEvent')
+var PubSub      = require('../../utils/PubSub')
+var View        = require('../../supers/View')
+var template    = '' //require('./mobile-gameplay-template.hbs')
 
 
 var MobileGamePlayView = View.extend({

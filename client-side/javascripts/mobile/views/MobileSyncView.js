@@ -5,21 +5,13 @@
  * @since  11.19.13
  */
 
-var AppConfig = require('../../../config/AppConfig')
-var AppEvent = require('../../../events/AppEvent')
-var PubSub   = require('../../../utils/PubSub')
-var SocketIO = require('../../../utils/SocketIO')
-var View     = require('../../../supers/View')
-var template = require('./mobile-sync-template.hbs')
+var AppConfig = require('../../config/AppConfig')
+var AppEvent = require('../../events/AppEvent')
+var PubSub   = require('../../utils/PubSub')
+var SocketIO = require('../../utils/SocketIO')
 
 
-var MobileSyncView = View.extend({
-
-
-  /**
-   * @type {Function}
-   */
-  template: template,
+var MobileSyncView = Backbone.View.extend({
 
 
 
@@ -30,9 +22,13 @@ var MobileSyncView = View.extend({
 
 
   render: function (options) {
-    this._super()
+    _.bindAll(this)
 
-    $('.btn-submit').on('touchstart', this._onSubmitBtnClick )
+    this.$el = $('.syncing')
+    this.$syncBtn = this.$el.find('.sync-btn')
+    this.$input = this.$el.find('.sync-input')
+
+    this.$syncBtn.on('touchstart', this._onSubmitBtnClick )
 
     return this
   },
@@ -42,20 +38,21 @@ var MobileSyncView = View.extend({
   _onSubmitBtnClick: function (event) {
     event.preventDefault()
 
-    var self = this
-      , syncCode = $('.input-sync').val()
+    var syncCode = this.$input.val()
 
     window.socket.post( AppConfig.ENDPOINTS.sync, {
       syncCode: syncCode
     },
 
       function onResponse (response) {
-
+        console.log(response)
         // If anything but an OK from the server
         if (response.status !== 200 ) {
           $('.mobile .message').html('Error entering code: ' + JSON.stringify( response ))
         }
       })
+
+    return false
   }
 
 })

@@ -20,8 +20,6 @@ var AppConfig          = require('./config/AppConfig')
   , GamePlayView       = require('./views/gameplay/GamePlayView')
   , SubmitScoreView    = require('./views/SubmitScoreView')
   , HighScoresView     = require('./views/HighScoresView')
-  , MobileGamePlayView = require('./mobile/views/gameplay/MobileGamePlayView')
-  , MobileSyncView     = require('./mobile/views/sync/MobileSyncView')
 
 
 var AppController = {
@@ -101,19 +99,6 @@ var AppController = {
 
     this.submitScoreView = new SubmitScoreView({
       stage: this.stage,
-      appModel: this.appModel
-    })
-
-
-
-    // Initialize Mobile Views
-
-    this.mobileSyncView = new MobileSyncView({
-      appController: this,
-      appModel: this.appModel
-    })
-
-    this.mobileGamePlayView = new MobileGamePlayView({
       appModel: this.appModel
     })
 

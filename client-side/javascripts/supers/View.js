@@ -6,7 +6,6 @@
  * @since  11.17.13
  */
 
-var AppController = require('../AppController')
 var AppConfig = require('../config/AppConfig')
 
 
