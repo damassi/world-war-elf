@@ -53,27 +53,30 @@ var MobileGamePlayView = MobileView.extend({
 
 
   addEventListeners: function () {
+
     window.addEventListener( 'ondevicemotion', this._onDeviceOrientationChange )
 
     this.$body.on('mousemove', this._onDeviceOrientationChange )
-    this.$body.on('touchmove', this._onDeviceOrientationChange )
+    //this.$body.on('touchmove', this._onDeviceOrientationChange )
     this.$body.on('touchend', this._onFireButtonPress )
 
     window.socket.on( SocketEvent.TOGGLE_MODE, function(message) {
       console.log('WORKING', message)
     })
 
+    var self = this
+
     window.ondevicemotion = function(event) {
 
       var orientation = {
-        x: Math.floor( event.accelerationIncludingGravity.x ),
-        y: Math.floor( event.accelerationIncludingGravity.y )
+        x: ~~event.accelerationIncludingGravity.x,
+        y: ~~event.accelerationIncludingGravity.y
       }
 
       $('.debug').html(orientation.x + '<br/>' + orientation.y)
 
       window.socket.post( AppConfig.ENDPOINTS.orientation, {
-        sessionId: this.sessionId,
+        sessionId: self.sessionId,
         orientation: JSON.stringify( orientation )
       },
 
