@@ -347,6 +347,8 @@ var GamePlayView = View.extend({
       repeat: 3,
       overwrite: 'all'
     })
+
+    Easel.rattleScreen($('#game-play'))
   },
 
 

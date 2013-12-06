@@ -570,6 +570,24 @@ var Easel = {
       yoyo: true,
       repeat: 3
     })
+  },
+
+
+
+  rattleScreen: function ($el) {
+    TweenMax.to($el, .1, {
+      rotation: -5,
+      onComplete: function() {
+        TweenMax.to($el, .1, {
+          rotation: 5,
+          onComplete: function() {
+            TweenMax.to($el, .1, {
+              rotation: 0,
+            })
+          }
+        })
+      }
+    })
   }
 }
 
