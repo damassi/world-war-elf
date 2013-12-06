@@ -19,6 +19,13 @@ var Target = View.extend({
 
 
   /**
+   * The delay before the fat little elf throws his ball
+   * @type {Number}
+   */
+  SNOWBALL_ATTACK_DELAY: 1.5,
+
+
+  /**
    * Array of target ids pulled from the Asset manifest to be loaded
    * when a new enemy or target is called
    * @type {Array}
@@ -69,8 +76,9 @@ var Target = View.extend({
    */
   type: null,
 
+
   /**
-   * has the target already been hit - prevents multiple strikes
+   * Has the target already been hit - prevents multiple strikes
    * @type {Boolean}
    */
   hasBeenHit: false,
@@ -120,7 +128,9 @@ var Target = View.extend({
 
       onComplete: function () {
         if (self.targetProps.attacker) {
-          self.attack()
+          TweenMax.delayedCall( self.SNOWBALL_ATTACK_DELAY, function() {
+            self.attackPlayer()
+          })
         }
 
         self.hide()
@@ -147,27 +157,30 @@ var Target = View.extend({
 
 
 
-  attack: function () {
+  attackPlayer: function () {
+    if (this.hasBeenHit)
+      return
+
     this.instance.gotoAndStop('throw')
 
-    var snowball = Easel.createSprite( 'snowballs', 'snowball-plain' )
+    this.attackSnowball = Easel.createSprite( 'snowballs', 'snowball-plain' )
     var pos = this.instance.localToGlobal(0, 0)
 
-    snowball.x = pos.x + 40
-    snowball.y = pos.y + 70
-    snowball.scaleX = .3
-    snowball.scaleY = .3
+    this.attackSnowball.x = pos.x + 40
+    this.attackSnowball.y = pos.y + 70
+    this.attackSnowball.scaleX = .3
+    this.attackSnowball.scaleY = .3
 
-    Easel.centerRegistrationPoint( snowball )
-    this.stage.addChild(snowball)
+    Easel.centerRegistrationPoint( this.attackSnowball )
+    this.stage.addChild( this.attackSnowball )
 
     var self = this
 
-    TweenMax.delayedCall( .5, function() {
+    TweenMax.delayedCall( .7, function() {
       self.instance.gotoAndPlay('start')
     })
 
-    TweenMax.to(snowball, .5, {
+    TweenMax.to(this.attackSnowball, .5, {
       x: AppConfig.DIMENSIONS.width * .5,
       y: AppConfig.DIMENSIONS.height * .5,
       scaleX: 3,
@@ -175,6 +188,8 @@ var Target = View.extend({
       ease: Expo.easeIn,
       onComplete: function() {
         self.stage.removeChild( this.target )
+
+        PubSub.trigger( GameEvent.PLAYER_HIT )
       }
     })
   },
@@ -253,8 +268,9 @@ var Target = View.extend({
 
 
     // Cache to turn into good elf
-    if (this.type === 'bad')
+    if (this.type === 'bad') {
       Easel.cache( this.instance )
+    }
 
     var self = this
 

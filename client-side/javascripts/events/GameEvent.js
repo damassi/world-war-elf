@@ -19,6 +19,8 @@ var GameEvent = {
 
   TARGET_HIT  : 'onTargetHit',
 
+  PLAYER_HIT  : 'onPlayerHit',
+
   KILL_ALL_TARGETS: 'onKillAllTargets'
 
 }

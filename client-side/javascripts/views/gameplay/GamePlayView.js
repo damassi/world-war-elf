@@ -102,7 +102,7 @@ var GamePlayView = View.extend({
       // The user-controlled target
       this.crossHairs   = Easel.createSprite('gameplaySprite', 'game-crosshairs', { x: 468, y: 245 }, { center: true }),
 
-      //this.redHitArea = new c.Shape( new c.Graphics().beginFill("#ff0000").drawRect( 0, 0, AppConfig.DIMENSIONS.width, AppConfig.DIMENSIONS.height ))
+      this.redHitArea = new c.Shape( new c.Graphics().beginFill("#ff0000").drawRect( 0, 0, AppConfig.DIMENSIONS.width, AppConfig.DIMENSIONS.height ))
     ]
 
 
@@ -120,6 +120,8 @@ var GamePlayView = View.extend({
       y: this.crossHairs.y
     }
 
+    this.redHitArea.alpha = 0
+
     this.addChildren( this.children )
     this.addEventListeners()
 
@@ -134,6 +136,7 @@ var GamePlayView = View.extend({
 
     PubSub.on( AppEvent.START_GAMEPLAY, this._onStartGamePlay )
     PubSub.on( AppEvent.STOP_GAMEPLAY, this._onStopGamePlay )
+    PubSub.on( GameEvent.PLAYER_HIT, this._onPlayerHit )
 
     $(canvas).on( 'mousemove', this._onMouseMove )
     $(canvas).on( 'mousedown', this._onPrepareTarget )
@@ -145,6 +148,10 @@ var GamePlayView = View.extend({
   removeEventListeners: function () {
     window.socket.removeListener( SocketEvent.ORIENTATION, this._onOrientationUpdate )
     window.socket.removeListener( SocketEvent.SHOOT, this._onShoot )
+
+    PubSub.off( AppEvent.START_GAMEPLAY, this._onStartGamePlay )
+    PubSub.off( AppEvent.STOP_GAMEPLAY, this._onStopGamePlay )
+    PubSub.off( GameEvent.PLAYER_HIT, this._onPlayerHit )
 
     $(canvas).off( 'mousemove', this._onMouseMove )
     $(canvas).off( 'click', this._onShoot )
@@ -326,6 +333,19 @@ var GamePlayView = View.extend({
     // Reset fire interval interval
     TweenMax.delayedCall( .5, function() {
       self.appModel.increaseHits()
+    })
+  },
+
+
+
+  _onPlayerHit: function (params) {
+    TweenMax.killTweensOf(this.redHitArea)
+
+    TweenMax.fromTo(this.redHitArea, .1, { alpha: 0 }, {
+      alpha: .4,
+      yoyo: true,
+      repeat: 3,
+      overwrite: 'all'
     })
   },
 
