@@ -1,0 +1,17 @@
+{
+"images": ["mute.png"],
+"frames": [
+
+    [53, 2, 49, 35], 
+    [2, 2, 49, 35]
+],
+"animations": {
+    
+        "shell-mute-off":[0], 
+        "shell-mute-on":[1]
+},
+"texturepacker": [
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:5fc2c70f2bac629028325d5457f785a1:5859e930d0e117a493e1e6560ae704c6:188a70e9c9b20bd98d6990e39ce7ee6a$",
+        "Created with TexturePacker (http://www.texturepacker.com) for EaselJS"
+]
+}

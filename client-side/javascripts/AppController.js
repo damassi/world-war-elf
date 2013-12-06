@@ -103,6 +103,9 @@ var AppController = {
       appModel: this.appModel
     })
 
+    this.muteBtn = Easel.createSprite( 'mute', 0, { x: 30, y: 25 }, { center: true })
+    this.muteBtn.gotoAndStop(1)
+    //Easel.cache(this.muteBtn)
 
 
     // Initialize Routing and Events
@@ -118,19 +121,19 @@ var AppController = {
     })
 
     this.stage.addChild( Easel.createBitmap( 'frame-background' ))
+    this.stage.addChild( this.muteBtn )
 
     this._addGround()
     this._animateIn()
 
-    c.Ticker.addEventListener( 'tick', this.tick )
-
     Sound.initialize({ appModel: this.appModel })
+    Sound.play({ soundId: 'audio-bg', repeat: -1, volume: 0 })
 
-    // Sound.play({
-    //   soundId: 'audio-bg',
-    //   repeat: -1,
-    //   volume: 0
-    // })
+    c.Ticker.addEventListener( 'tick', this.tick )
+    this.appModel.on( 'change:mute', this._onMuteChange )
+    this.muteBtn.on( 'mouseover', this._onMuteOver )
+    this.muteBtn.on( 'mouseout', this._onMuteOut )
+    this.muteBtn.on( 'click', this._onMuteClick )
   },
 
 
@@ -211,7 +214,53 @@ var AppController = {
     view.render().show({
       animated: true
     })
+  },
 
+
+
+  _onMuteOver: function (event) {
+    if (this.gamePlayView.crossHairs)
+      this.gamePlayView.hideCrossHairs()
+
+    var target = event.currentTarget
+    target.cursor = 'pointer'
+
+    TweenMax.to(target, .3, {
+      opacity: .5
+    })
+  },
+
+
+
+  _onMuteOut: function (event) {
+    if (this.gamePlayView.crossHairs)
+      this.gamePlayView.showCrossHairs()
+
+    TweenMax.to(event.currentTarget, .3, {
+      opacity: 1
+    })
+  },
+
+
+
+  _onMuteClick: function (event) {
+    if (this.gamePlayView.crossHairs)
+      this.gamePlayView.hideCrossHairs()
+
+    var mute = this.appModel.get('mute')
+
+    this.appModel.set({
+      mute: !mute
+    })
+  },
+
+
+
+  _onMuteChange: function (model) {
+    var mute = model.changed.mute
+      , frame = mute ? 0 : 1
+
+    this.muteBtn.gotoAndStop( frame )
   },
 
 

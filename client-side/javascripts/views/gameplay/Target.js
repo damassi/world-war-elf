@@ -187,15 +187,15 @@ var Target = View.extend({
     }
 
 
-    // Cache to turn into good elf
-    if (this.type === 'bad')
-      Easel.cache( this.instance )
-
-
     // Animate target off the screen and dispatch
     // to TargetFactory
 
     Easel.animateOnce( this.instance, 'hit' )
+
+
+    // Cache to turn into good elf
+    if (this.type === 'bad')
+      Easel.cache( this.instance )
 
     var self = this
 

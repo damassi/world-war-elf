@@ -134,6 +134,24 @@ var Assets = {
     },
 
     {
+        name: 'mute',
+        src: path + 'spritesheets/mute.png',
+        spritesheet: {
+            "images": [path + 'spritesheets/mute.png'],
+            "frames": [
+
+                [53, 2, 49, 35],
+                [2, 2, 49, 35]
+            ],
+            "animations": {
+
+                    "shell-mute-off":[0],
+                    "shell-mute-on":[1]
+            },
+        }
+    },
+
+    {
         name: 'splat',
         src: path + 'spritesheets/splat.png',
         spritesheet: {

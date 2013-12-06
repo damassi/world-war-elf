@@ -191,7 +191,6 @@ var GamePlayView = View.extend({
 
 
 
-
   addEventListeners: function () {
     window.socket.on( SocketEvent.ORIENTATION, this._onOrientationUpdate )
     window.socket.on( SocketEvent.SHOOT, this._onShoot )
@@ -221,6 +220,24 @@ var GamePlayView = View.extend({
     $('.mobile .message').html('mobile client connected')
     $('.btn-submit').remove()
     $('.input-sync').remove()
+  },
+
+
+
+  hideCrossHairs: function() {
+    TweenMax.to(this.crossHairs, .3, {
+      alpha: 0,
+      ease: Expo.easeOut
+    })
+  },
+
+
+
+  showCrossHairs: function() {
+    TweenMax.to(this.crossHairs, .3, {
+      alpha: 1,
+      ease: Expo.easeOut
+    })
   },
 
 
@@ -282,6 +299,9 @@ var GamePlayView = View.extend({
 
 
   _onShoot: function (event) {
+    if (this.crossHairs.alpha !== 1)
+      return
+
     var fireTweenTime = .4
 
     TweenMax.to( this.crossHairs, fireTweenTime * .5, {
@@ -296,7 +316,6 @@ var GamePlayView = View.extend({
     })
 
     this._throwSnowball()
-
     this.appModel.increaseShots()
   },
 
