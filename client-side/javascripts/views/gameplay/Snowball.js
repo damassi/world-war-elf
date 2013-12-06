@@ -30,8 +30,12 @@ var Snowball = View.extend({
   initialize: function (options) {
     this._super(options)
 
-    this.snowball = Easel.createBitmap( this.types[ options.snowballType ])
+    var snowballType = this.types[ options.snowballType || 'normal' ]
+
+    this.snowball = Easel.createBitmap( snowballType )
     this.snowball.alpha = 0
+
+    //console.log( snowballType, this.snowball)
 
     Easel.centerRegistrationPoint( this.snowball )
 
@@ -63,23 +67,6 @@ var Snowball = View.extend({
     this.container.removeChild( this.snowball )
     this.parentContainer.removeChild( this.container )
     this.stage.removeChild( this.container )
-  },
-
-
-
-  throwZombieSnowball: function (params) {
-    this.snowball.x = params.x
-    this.snowball.y = params.y
-
-    TweenMax.fromTo( this.snowball, .6, { scaleX: .2, scaleY: .2 }, {
-      immediateRender: true,
-      rotation: 360,
-      scaleX: 6,
-      scaleY: 6,
-      x: this.stageCenter.x,
-      y: this.stageCenter.y,
-      ease: Expo.easeOut
-    })
   },
 
 
@@ -181,7 +168,7 @@ var Snowball = View.extend({
 
 
 
-  _addSplat: function () {
+  _addSplat: function (params) {
     var splat = Easel.createSprite('splat', 0, { x: this.snowball.x, y: this.snowball.y + 30 }, { center: true })
 
     this.container.addChild( splat )

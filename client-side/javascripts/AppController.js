@@ -21,6 +21,7 @@ var AppConfig          = require('./config/AppConfig')
   , GamePlayView       = require('./views/gameplay/GamePlayView')
   , SubmitScoreView    = require('./views/SubmitScoreView')
   , HighScoresView     = require('./views/HighScoresView')
+  , Snowball           = require('./views/gameplay/Snowball')
 
 
 var AppController = {

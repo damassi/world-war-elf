@@ -12,6 +12,7 @@ var Easel     = require('../../utils/Easel')
 var PubSub    = require('../../utils/PubSub')
 var Sound     = require('../../utils/Sound')
 var View      = require('../../supers/View')
+var Snowball  = require('./Snowball')
 
 
 var Target = View.extend({
@@ -94,17 +95,18 @@ var Target = View.extend({
   },
 
 
+  remove: function() {
+    this._super()
+  },
+
+
 
   show: function() {
     var self = this
 
-    setTimeout(function() {
+    TweenMax.delayedCall( 1, function() {
       self.instance.gotoAndPlay('start')
-      if (self.targetProps.attacker) {
-        self.attack()
-      }
-    }, 1000 )
-
+    })
 
     TweenMax.fromTo( this.instance, .4, { alpha: 0, rotation: 180 }, {
       immediateRender: true,
@@ -114,6 +116,10 @@ var Target = View.extend({
       delay: 2 + ( Math.random() * 1 ),
 
       onComplete: function () {
+        if (self.targetProps.attacker) {
+          self.attack()
+        }
+
         self.hide()
       }
     })
@@ -139,19 +145,34 @@ var Target = View.extend({
 
 
   attack: function () {
-    var delay = 2000 + (Math.random() * 1000)
+    return
 
     var self = this
 
-    setTimeout(function() {
-      self.instance.gotoAndStop('throw')
+    self.instance.gotoAndStop('throw')
 
-      setTimeout(function() {
-        self.instance.gotoAndPlay('start')
-        self.attack()
-      }, 1000)
-    }, delay)
+    var snowball = Easel.createBitmap( 'snowball-plain' )
+    var pos = self.instance.localToGlobal(0, 0)
 
+    snowball.x = pos.x + 40
+    snowball.y = pos.y + 70
+    snowball.scaleX = .3
+    snowball.scaleY = .3
+
+    Easel.centerRegistrationPoint( snowball )
+
+    this.stage.addChild(snowball)
+
+    TweenMax.to(snowball, .5, {
+      x: AppConfig.DIMENSIONS.width * .5,
+      y: AppConfig.DIMENSIONS.height * .5,
+      scaleX: 3,
+      scaleY: 3,
+      ease: Expo.easeIn,
+      onComplete: function() {
+        self.stage.removeChild( this.target )
+      }
+    })
   },
 
 
@@ -243,6 +264,7 @@ var Target = View.extend({
         onComplete: function () {
           if (this.target && this.target.parent) {
             this.target.parent.removeChild( this.target )
+            self.remove()
 
             // Dispatch hit to factory to create new enemy
             PubSub.trigger( GameEvent.TARGET_HIT, {

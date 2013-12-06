@@ -104,6 +104,7 @@ var TargetFactory = Backbone.View.extend({
 
     var target = new Target({
       appModel: this.appModel,
+      stage: this.gamePlayView.stage,
       type: type,
       orientation: {
         x: orientation.x,
