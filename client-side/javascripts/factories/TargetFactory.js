@@ -115,8 +115,10 @@ var TargetFactory = Backbone.View.extend({
     // Store ref to the actual TargetView container for hit detection delegation
     target.instance.targetView = target
 
-    // Push position into game matrix
+    // Push position into game matrix - reversing array to make sure 'front' items are always evaluated first
     this.occupiedPositions.push( target )
+    this.occupiedPositions = _.sortBy(this.occupiedPositions, function(r){ return r.orientation.y; })
+    this.occupiedPositions.reverse()
 
     // Find the proper container on the view and add child to in
     // This resolves issues with depth sorting and dirty indexes

@@ -137,8 +137,9 @@ var HomeView = View.extend({
 
     target.cursor = 'pointer'
 
-    TweenMax.to( target, .1, {
-      y: target.y -5,
+    TweenMax.to( target, .15, {
+      y: target.y - 10,
+      ease: Strong.easeOut,
       yoyo: true,
       repeat: 1
     })
