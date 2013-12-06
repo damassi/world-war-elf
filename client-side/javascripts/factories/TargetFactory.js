@@ -178,7 +178,13 @@ var TargetFactory = Backbone.View.extend({
 
 
   _onKillAllTargets: function () {
-    this.appModel.set('supermode', true )
+    this.appModel.enableSupermode()
+
+    TweenMax.to($('#game-play'), .1, {
+      scale: 1.1,
+      yoyo: true,
+      repeat: 3
+    })
 
     var i, len, target
 
