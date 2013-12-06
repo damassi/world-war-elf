@@ -101,6 +101,8 @@ var GamePlayView = View.extend({
 
       // The user-controlled target
       this.crossHairs   = Easel.createSprite('gameplaySprite', 'game-crosshairs', { x: 468, y: 245 }, { center: true }),
+
+      //this.redHitArea = new c.Shape( new c.Graphics().beginFill("#ff0000").drawRect( 0, 0, AppConfig.DIMENSIONS.width, AppConfig.DIMENSIONS.height ))
     ]
 
 
@@ -119,10 +121,33 @@ var GamePlayView = View.extend({
     }
 
     this.addChildren( this.children )
-    this.addDebugWindow()
     this.addEventListeners()
 
     return this
+  },
+
+
+
+  addEventListeners: function () {
+    window.socket.on( SocketEvent.ORIENTATION, this._onOrientationUpdate )
+    window.socket.on( SocketEvent.SHOOT, this._onShoot )
+
+    PubSub.on( AppEvent.START_GAMEPLAY, this._onStartGamePlay )
+    PubSub.on( AppEvent.STOP_GAMEPLAY, this._onStopGamePlay )
+
+    $(canvas).on( 'mousemove', this._onMouseMove )
+    $(canvas).on( 'mousedown', this._onPrepareTarget )
+    $(canvas).on( 'mouseup', this._onShoot )
+  },
+
+
+
+  removeEventListeners: function () {
+    window.socket.removeListener( SocketEvent.ORIENTATION, this._onOrientationUpdate )
+    window.socket.removeListener( SocketEvent.SHOOT, this._onShoot )
+
+    $(canvas).off( 'mousemove', this._onMouseMove )
+    $(canvas).off( 'click', this._onShoot )
   },
 
 
@@ -187,39 +212,6 @@ var GamePlayView = View.extend({
     this._super({
       remove: true
     })
-  },
-
-
-
-  addEventListeners: function () {
-    window.socket.on( SocketEvent.ORIENTATION, this._onOrientationUpdate )
-    window.socket.on( SocketEvent.SHOOT, this._onShoot )
-
-    PubSub.on( AppEvent.START_GAMEPLAY, this._onStartGamePlay )
-    PubSub.on( AppEvent.STOP_GAMEPLAY, this._onStopGamePlay )
-
-    $(canvas).on( 'mousemove', this._onMouseMove )
-    $(canvas).on( 'mousedown', this._onPrepareTarget )
-    $(canvas).on( 'mouseup', this._onShoot )
-  },
-
-
-
-  removeEventListeners: function () {
-    window.socket.removeListener( SocketEvent.ORIENTATION, this._onOrientationUpdate )
-    window.socket.removeListener( SocketEvent.SHOOT, this._onShoot )
-
-    $(canvas).off( 'mousemove', this._onMouseMove )
-    $(canvas).off( 'click', this._onShoot )
-  },
-
-
-
-  addDebugWindow: function () {
-    $('.desktop .message').html('desktop client connected')
-    $('.mobile .message').html('mobile client connected')
-    $('.btn-submit').remove()
-    $('.input-sync').remove()
   },
 
 
@@ -420,6 +412,7 @@ var GamePlayView = View.extend({
 
     // Add listeners to trigger hit animations
     snowball.on( GameEvent.TARGET_HIT, this._onTargetHit )
+
   },
 
 })

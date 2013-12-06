@@ -343,6 +343,9 @@ var Easel = {
    */
 
   centerRegistrationPoint: function (displayObject) {
+    if (typeof displayObject === 'undefined')
+      return
+
     if (displayObject instanceof Array) {
       _.each( displayObject, function (obj) {
         var bounds = obj.getBounds()
@@ -556,6 +559,17 @@ var Easel = {
     }
 
     return transformedArray;
+  },
+
+
+
+
+  bounceScreen: function ($el) {
+    TweenMax.to($el, .1, {
+      scale: 1.1,
+      yoyo: true,
+      repeat: 3
+    })
   }
 }
 

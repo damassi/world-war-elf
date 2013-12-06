@@ -119,13 +119,20 @@ var Assets = {
     },
 
     {
-      name: 'snowball-plain',
-      src: path + 'snowball-plain.png',
-    },
+      name: 'snowballs',
+      src: path + 'spritesheets/snowballs.png',
+      spritesheet: {
+        "images": [path + 'spritesheets/snowballs.png'],
+        "frames": [
 
-    {
-      name: 'snowball-candycane',
-      src: path + 'snowball-candycane.png',
+            [169, 2, 165, 165],
+            [2, 2, 165, 165]
+        ],
+        "animations": {
+                "snowball-candycane":[0],
+                "snowball-plain":[1]
+        },
+      }
     },
 
     {

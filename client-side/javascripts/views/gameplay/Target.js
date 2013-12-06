@@ -150,7 +150,7 @@ var Target = View.extend({
   attack: function () {
     this.instance.gotoAndStop('throw')
 
-    var snowball = Easel.createBitmap( 'snowball-plain' )
+    var snowball = Easel.createSprite( 'snowballs', 'snowball-plain' )
     var pos = this.instance.localToGlobal(0, 0)
 
     snowball.x = pos.x + 40
@@ -162,6 +162,10 @@ var Target = View.extend({
     this.stage.addChild(snowball)
 
     var self = this
+
+    TweenMax.delayedCall( .5, function() {
+      self.instance.gotoAndPlay('start')
+    })
 
     TweenMax.to(snowball, .5, {
       x: AppConfig.DIMENSIONS.width * .5,

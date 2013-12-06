@@ -104,7 +104,7 @@ var AppController = {
       appModel: this.appModel
     })
 
-    this.muteBtn = Easel.createSprite( 'mute', 0, { x: 30, y: 25 }, { center: true })
+    this.muteBtn = Easel.createSprite( 'mute', 0, { x: 32, y: 25 }, { center: true })
     this.muteBtn.gotoAndStop(1)
 
 
@@ -129,7 +129,9 @@ var AppController = {
     Sound.initialize({ appModel: this.appModel })
     //Sound.play({ soundId: 'audio-bg', loop: -1, volume: 0 })
 
-    c.Ticker.addEventListener( 'tick', this.tick )
+    //c.Ticker.addEventListener( 'tick', this.tick )
+    TweenMax.ticker.addEventListener("tick", this.tick);
+
     this.appModel.on( 'change:mute', this._onMuteChange )
     this.muteBtn.on( 'mouseover', this._onMuteOver )
     this.muteBtn.on( 'mouseout', this._onMuteOut )
@@ -156,7 +158,7 @@ var AppController = {
 
   tick: function (event) {
     PubSub.trigger( AppEvent.TICK )
-    this.stage.update(event)
+    this.stage.update()
   },
 
 

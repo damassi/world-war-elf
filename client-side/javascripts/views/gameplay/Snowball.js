@@ -30,12 +30,7 @@ var Snowball = View.extend({
   initialize: function (options) {
     this._super(options)
 
-    var snowballType = this.types[ options.snowballType || 'normal' ]
-
-    this.snowball = Easel.createBitmap( snowballType )
-    this.snowball.alpha = 0
-
-    //console.log( snowballType, this.snowball)
+    this.snowball = Easel.createSprite( 'snowballs', this.types[ options.snowballType ])
 
     Easel.centerRegistrationPoint( this.snowball )
 
@@ -46,6 +41,7 @@ var Snowball = View.extend({
 
     this.snowball.x = this.stageCenter.x
     this.snowball.y = this.stageCenter.y
+    this.snowball.alpha = 0
 
     this.render()
   },
@@ -67,6 +63,7 @@ var Snowball = View.extend({
     this.container.removeChild( this.snowball )
     this.parentContainer.removeChild( this.container )
     this.stage.removeChild( this.container )
+    this.snowball = null
   },
 
 
