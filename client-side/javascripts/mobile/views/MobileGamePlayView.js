@@ -43,6 +43,8 @@ var MobileGamePlayView = MobileView.extend({
       self.addEventListeners()
     })
 
+    Draggable.create(".balls-wrapper", {type:"y", bounds:".balls-bounds"});
+
     this.show()
 
     //this.addDebugWindow()
@@ -145,6 +147,10 @@ var MobileGamePlayView = MobileView.extend({
       function onResponse (response) {
         //console.log(response, 'successfully fired')
       })
+  },
+
+  _onToggleBall: function () {
+    var $balls = this.$('.ball').toggleClass('.hide')
   }
 
 

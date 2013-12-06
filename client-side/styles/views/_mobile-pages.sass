@@ -39,3 +39,39 @@ body.mobile
 				text-align: center
 				outline: none
 
+		&.gameplay
+			background: url("#{$images}/mobile/gameplay-arrows.png") center 30% no-repeat
+			background-size: 25%
+
+			.balls-bounds
+				position: absolute
+				bottom: 0
+				right: 0
+				left: 0
+				top: 0
+				height: 80%
+
+				.balls-wrapper
+					position: relative
+					height: 80%
+					top: 13%
+
+					.ball
+						position: absolute
+						-webkit-transform: scale(0.8)
+						-webkit-transition: opacity 0.3s ease-out
+						transition: opacity 0.3s ease-out
+						opacity: 1
+
+						&.super
+							margin-top: -32px
+
+						&.hide
+							opacity: 0
+
+			.text
+				position: absolute
+				bottom: 15%
+
+
+
