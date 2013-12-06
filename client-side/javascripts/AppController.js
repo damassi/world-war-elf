@@ -105,7 +105,6 @@ var AppController = {
 
     this.muteBtn = Easel.createSprite( 'mute', 0, { x: 30, y: 25 }, { center: true })
     this.muteBtn.gotoAndStop(1)
-    //Easel.cache(this.muteBtn)
 
 
     // Initialize Routing and Events
@@ -127,7 +126,7 @@ var AppController = {
     this._animateIn()
 
     Sound.initialize({ appModel: this.appModel })
-    Sound.play({ soundId: 'audio-bg', loop: -1, volume: 0 })
+    //Sound.play({ soundId: 'audio-bg', loop: -1, volume: 0 })
 
     c.Ticker.addEventListener( 'tick', this.tick )
     this.appModel.on( 'change:mute', this._onMuteChange )

@@ -17,6 +17,9 @@ var View      = require('../../supers/View')
 var Snowball = View.extend({
 
 
+  parentContainer: null,
+
+
   types: {
     normal: 'snowball-plain',
     supermode: 'snowball-candycane'
@@ -60,6 +63,23 @@ var Snowball = View.extend({
     this.container.removeChild( this.snowball )
     this.parentContainer.removeChild( this.container )
     this.stage.removeChild( this.container )
+  },
+
+
+
+  throwZombieSnowball: function (params) {
+    this.snowball.x = params.x
+    this.snowball.y = params.y
+
+    TweenMax.fromTo( this.snowball, .6, { scaleX: .2, scaleY: .2 }, {
+      immediateRender: true,
+      rotation: 360,
+      scaleX: 6,
+      scaleY: 6,
+      x: this.stageCenter.x,
+      y: this.stageCenter.y,
+      ease: Expo.easeOut
+    })
   },
 
 

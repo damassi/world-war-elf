@@ -72,7 +72,7 @@ var Target = View.extend({
    * has the target already been hit - prevents multiple strikes
    * @type {Boolean}
    */
-  hasBeenHit: false, 
+  hasBeenHit: false,
 
 
 
@@ -100,7 +100,11 @@ var Target = View.extend({
 
     setTimeout(function() {
       self.instance.gotoAndPlay('start')
+      if (self.targetProps.attacker) {
+        self.attack()
+      }
     }, 1000 )
+
 
     TweenMax.fromTo( this.instance, .4, { alpha: 0, rotation: 180 }, {
       immediateRender: true,
@@ -130,6 +134,24 @@ var Target = View.extend({
       }
 
     })
+  },
+
+
+
+  attack: function () {
+    var delay = 2000 + (Math.random() * 1000)
+
+    var self = this
+
+    setTimeout(function() {
+      self.instance.gotoAndStop('throw')
+
+      setTimeout(function() {
+        self.instance.gotoAndPlay('start')
+        self.attack()
+      }, 1000)
+    }, delay)
+
   },
 
 

@@ -47,8 +47,6 @@ var MobileGamePlayView = MobileView.extend({
 
     this.show()
 
-    //this.addDebugWindow()
-
     return this
   },
 
