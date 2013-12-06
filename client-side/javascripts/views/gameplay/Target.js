@@ -96,7 +96,10 @@ var Target = View.extend({
 
 
   remove: function() {
-    this._super()
+
+    TweenMax.killTweensOf( this.instance )
+    this.container.removeAllChildren()
+    this.stage.removeChild( this.container )
   },
 
 
@@ -145,14 +148,10 @@ var Target = View.extend({
 
 
   attack: function () {
-    return
-
-    var self = this
-
-    self.instance.gotoAndStop('throw')
+    this.instance.gotoAndStop('throw')
 
     var snowball = Easel.createBitmap( 'snowball-plain' )
-    var pos = self.instance.localToGlobal(0, 0)
+    var pos = this.instance.localToGlobal(0, 0)
 
     snowball.x = pos.x + 40
     snowball.y = pos.y + 70
@@ -160,8 +159,9 @@ var Target = View.extend({
     snowball.scaleY = .3
 
     Easel.centerRegistrationPoint( snowball )
-
     this.stage.addChild(snowball)
+
+    var self = this
 
     TweenMax.to(snowball, .5, {
       x: AppConfig.DIMENSIONS.width * .5,
