@@ -68,6 +68,12 @@ var Target = View.extend({
    */
   type: null,
 
+  /**
+   * has the target already been hit - prevents multiple strikes
+   * @type {Boolean}
+   */
+  hasBeenHit: false, 
+
 
 
 
@@ -130,6 +136,8 @@ var Target = View.extend({
 
   hit: function () {
 
+
+
     // Hit a bad elf.  Check energy levels and
     // update and return
 
@@ -150,7 +158,7 @@ var Target = View.extend({
       // simulate energy hits
 
       if (!this.appModel.get('supermode')) {
-        if (this.targetProps.energy !== 0) {
+        if (this.targetProps.energy > 0) {
           this.targetProps.energy--
 
           var scale = this.instance.scaleX
@@ -171,19 +179,23 @@ var Target = View.extend({
     // event to TargetFactory to clear all targets and refresh
 
     if (this.type === 'good') {
+      //only allow one hit for good targets...maybe multiples on bad is okay
+      if(!this.hasBeenHit){
 
-      Sound.play({
-        soundId: 'bonus-hit-candycane',
-        volume: .2
-      })
+        Sound.play({
+          soundId: 'bonus-hit-candycane',
+          volume: .2
+        })
 
-      // If candycane target
-      if (this.targetProps.bonus === 'supermode')
-        this.appModel.enableSupermode()
+        // If candycane target
+        if (this.targetProps.bonus === 'supermode')
+          this.appModel.enableSupermode()
 
-      // If Gift target
-      else
-        PubSub.trigger( GameEvent.KILL_ALL_TARGETS )
+        // If Gift target
+        else
+          PubSub.trigger( GameEvent.KILL_ALL_TARGETS )
+
+      }
     }
 
 
@@ -199,23 +211,28 @@ var Target = View.extend({
 
     var self = this
 
-    TweenMax.to( this.instance, .4, {
-      y: this.instance.y + 300,
-      ease: Back.easeIn,
-      delay: .1,
-      overwrite: 'concurrent',
+    if(!this.hasBeenHit || this.targetProps.energy > 0){
+      TweenMax.to( this.instance, .4, {
+        y: this.instance.y + 300,
+        ease: Back.easeIn,
+        delay: .1,
+        overwrite: 'concurrent',
 
-      onComplete: function () {
-        if (this.target && this.target.parent) {
-          this.target.parent.removeChild( this.target )
+        onComplete: function () {
+          if (this.target && this.target.parent) {
+            this.target.parent.removeChild( this.target )
 
-          // Dispatch hit to factory to create new enemy
-          PubSub.trigger( GameEvent.TARGET_HIT, {
-            targetView: self
-          })
+            // Dispatch hit to factory to create new enemy
+            PubSub.trigger( GameEvent.TARGET_HIT, {
+              targetView: self
+            })
+          }
         }
-      }
-    })
+      })
+    }
+
+    if(!this.hasBeenHit) this.hasBeenHit = true
+
   },
 
 

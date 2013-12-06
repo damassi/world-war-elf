@@ -127,7 +127,7 @@ var AppController = {
     this._animateIn()
 
     Sound.initialize({ appModel: this.appModel })
-    Sound.play({ soundId: 'audio-bg', repeat: -1, volume: 0 })
+    Sound.play({ soundId: 'audio-bg', loop: -1, volume: 0 })
 
     c.Ticker.addEventListener( 'tick', this.tick )
     this.appModel.on( 'change:mute', this._onMuteChange )

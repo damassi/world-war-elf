@@ -88,8 +88,8 @@ var Snowflakes = {
    */
   animateFlake: function ($snowflake) {
     var timeline = new TimelineLite();
-    var duration = this._randomNumber(10, 15);
-    var right = this._randomNumber(this.winWidth / 2, this.winWidth) /* go left */ * - 1;
+    var duration = this._randomNumber(7, 15);
+    var right = this._randomNumber(this.winWidth / 3, this.winWidth) /* go left */ * - 1;
 
     //make it fall
     timeline.to($snowflake, duration, {
