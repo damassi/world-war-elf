@@ -64,7 +64,7 @@ var HUD = View.extend({
 
     this.children = [
       this.hudClock = Easel.createSprite('gameplaySprite', 'game-hud-clock', { x: 820, y: 15 }),
-      this.hudGift  = Easel.createSprite('gameplaySprite', 'game-hud-gift', { x: 820, y: 76 }),
+      //this.hudGift  = Easel.createSprite('gameplaySprite', 'game-hud-gift', { x: 820, y: 76 }),
 
       this.timeText.container,
       this.presentsText.container,

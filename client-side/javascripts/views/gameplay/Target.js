@@ -5,14 +5,15 @@
  * @date   11.29.13
  */
 
-var GameEvent = require('../../events/GameEvent')
-var AppEvent  = require('../../events/AppEvent')
-var AppConfig = require('../../config/AppConfig')
-var Easel     = require('../../utils/Easel')
-var PubSub    = require('../../utils/PubSub')
-var Sound     = require('../../utils/Sound')
-var View      = require('../../supers/View')
-var Snowball  = require('./Snowball')
+var GameEvent   = require('../../events/GameEvent')
+var AppEvent    = require('../../events/AppEvent')
+var AppConfig   = require('../../config/AppConfig')
+var Easel       = require('../../utils/Easel')
+var PubSub      = require('../../utils/PubSub')
+var Sound       = require('../../utils/Sound')
+var View        = require('../../supers/View')
+var Snowball    = require('./Snowball')
+var PointsPopup = require('./PointsPopup')
 
 
 var Target = View.extend({
@@ -33,31 +34,36 @@ var Target = View.extend({
   targetIds: {
 
     bad: [
+     {
+        id: 'elf2',
+        energy: 0,
+        attacker: false,
+        points: 5
+      },
       {
         id: 'elf1',
         energy: 1,
-        attacker: false
-      },
-      {
-        id: 'elf2',
-        energy: 0,
-        attacker: false
+        attacker: false,
+        points: 10
       },
       {
         id: 'elf3',
         energy: 2,
-        attacker: true
+        attacker: true,
+        points: 20
       }
     ],
 
     good: [
       {
         id: 'sign-gift',
-        bonus: 'clear-screen'
+        bonus: 'clear-screen',
+        points: 100,
       },
       {
         id: 'sign-candycane',
-        bonus: 'supermode'
+        bonus: 'supermode',
+        points: 50,
       }
     ]
   },
@@ -198,8 +204,6 @@ var Target = View.extend({
 
   hit: function () {
 
-
-
     // Hit a bad elf.  Check energy levels and
     // update and return
 
@@ -261,6 +265,11 @@ var Target = View.extend({
     }
 
 
+
+    // Kill Sequence
+    // ------------------------------------------
+
+
     // Animate target off the screen and dispatch
     // to TargetFactory
 
@@ -270,6 +279,17 @@ var Target = View.extend({
     // Cache to turn into good elf
     if (this.type === 'bad') {
       Easel.cache( this.instance )
+
+      // Add in points display
+      var pos = this.instance.localToGlobal(0, 0)
+
+      var pointsPopup = new PointsPopup({
+        stage: this.stage,
+        pointValue: this.targetProps.points,
+        x: pos.x,
+        y: pos.y
+
+      }).render().show()
     }
 
     var self = this

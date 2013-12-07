@@ -140,7 +140,23 @@ var Easel = {
         if (textStroke) {
           textStroke.textAlign = align
         }
-      }
+      },
+
+      getX: function() {
+        return text.x
+      },
+
+      getY: function() {
+        return text.y
+      },
+
+      getWidth: function() {
+        return text.getMeasuredWidth()
+      },
+
+      getHeight: function() {
+        text.getMeasuredHeight()
+      },
     }
   },
 
@@ -571,6 +587,7 @@ var Easel = {
       repeat: 3
     })
   },
+
 
 
 

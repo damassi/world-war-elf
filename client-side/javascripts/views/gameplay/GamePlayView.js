@@ -330,7 +330,6 @@ var GamePlayView = View.extend({
 
     var self = this
 
-    // Reset fire interval interval
     TweenMax.delayedCall( .5, function() {
       self.appModel.increaseHits()
     })
@@ -363,7 +362,6 @@ var GamePlayView = View.extend({
 
 
   _onOrientationUpdate: function (message) {
-
     this.phoneOrientation = {
       x: message.orientation.x * 2,
       y: message.orientation.y * 2
