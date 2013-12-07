@@ -157,7 +157,22 @@ var HUD = View.extend({
   _onChangeHits: function (model) {
     var hits = model.changed.hits
 
-    this.presentsText.setText( hits )
+    var points = {
+      start: model._previousAttributes.hits,
+      end: hits
+    }
+
+    var self = this
+
+    TweenMax.to( points, .2, {
+      start: points.end,
+      ease: Linear.easeNone,
+      onUpdate: function() {
+        self.presentsText.setText( ~~this.target.start )
+      }
+    })
+
+
   }
 
 
