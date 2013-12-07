@@ -192,7 +192,9 @@ var Target = View.extend({
       scaleX: 3,
       scaleY: 3,
       ease: Expo.easeIn,
+
       onComplete: function() {
+        self.updatePoints( -50 )
         self.stage.removeChild( this.target )
 
         PubSub.trigger( GameEvent.PLAYER_HIT )
@@ -202,7 +204,8 @@ var Target = View.extend({
 
 
 
-  hit: function () {
+  hit: function (options) {
+    options = options || {}
 
     // Hit a bad elf.  Check energy levels and
     // update and return
@@ -278,19 +281,28 @@ var Target = View.extend({
 
     // Cache to turn into good elf
     if (this.type === 'bad') {
+
       Easel.cache( this.instance )
 
-      // Add in points display
-      var pos = this.instance.localToGlobal(0, 0)
+      // Add in points display.  But if user hits the kill all gift
+      // supress the points popup
 
-      var pointsPopup = new PointsPopup({
-        stage: this.stage,
-        pointValue: this.targetProps.points,
-        x: pos.x,
-        y: pos.y
+      if (!options.supressPoints) {
+        var pos = this.instance.localToGlobal(0, 0)
 
-      }).render().show()
+        var pointsPopup = new PointsPopup({
+          stage: this.stage,
+          pointValue: this.targetProps.points,
+          x: pos.x,
+          y: pos.y
+
+        }).render().show()
+      }
     }
+
+
+    this.updatePoints( this.targetProps.points )
+
 
     var self = this
 
@@ -315,7 +327,9 @@ var Target = View.extend({
       })
     }
 
-    if(!this.hasBeenHit) this.hasBeenHit = true
+    if (!this.hasBeenHit) {
+      this.hasBeenHit = true
+    }
 
   },
 
@@ -331,6 +345,14 @@ var Target = View.extend({
       ease: Back.easeIn,
       delay: (Math.random() * .3) + .1,
       overwrite: 'all'
+    })
+  },
+
+
+
+  updatePoints: function (points) {
+    this.appModel.set({
+      hits: this.appModel.get('hits') + points
     })
   }
 

@@ -315,7 +315,7 @@ var GamePlayView = View.extend({
     })
 
     this._throwSnowball()
-    this.appModel.increaseShots()
+    //this.appModel.increaseShots()
   },
 
 

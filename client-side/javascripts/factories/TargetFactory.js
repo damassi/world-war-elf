@@ -190,8 +190,11 @@ var TargetFactory = Backbone.View.extend({
     for (i = 0, len = this.occupiedPositions.length; i < len; ++i) {
       target = this.occupiedPositions[i]
 
-      if (target.type === 'bad')
-        target.hit()
+      if (target.type === 'bad') {
+        target.hit({
+          supressPoints: true
+        })
+      }
     }
   }
 
