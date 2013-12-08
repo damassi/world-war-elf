@@ -35,9 +35,9 @@ var MuteBtn = View.extend({
 
 
   canvasEvents: {
-    'mouseover muteBtn' : '_onMuteOver',
-    'mouseout muteBtn'  : '_onMuteOut',
-    'click muteBtn'     : '_onClick'
+    'muteBtn mouseover' : '_onMuteOver',
+    'muteBtn mouseout'  : '_onMuteOut',
+    'muteBtn click'     : '_onMuteClick'
   },
 
 

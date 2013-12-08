@@ -129,7 +129,7 @@ var AppController = {
     })
 
     this.stage.addChild( Easel.createBitmap( 'frame-background' ))
-    this.stage.addChild( this.muteBtn.container )
+    this.stage.addChild( this.muteBtn.render().container )
 
     this._addGround()
     this._animateIn()
