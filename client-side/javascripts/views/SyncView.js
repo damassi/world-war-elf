@@ -15,6 +15,9 @@ var AppConfig = require('../config/AppConfig')
 var SyncView = View.extend({
 
 
+  syncLabel: 'Visit {{ url }} on your \nsmartphone and enter {{ code }} or scan the \nQR code to the right!',
+
+
   /**
    * @type {$}
    */
@@ -32,21 +35,23 @@ var SyncView = View.extend({
   initialize: function (options) {
     this._super(options)
 
+    this.syncText = new Easel.Text( 'Requesting Sync Code', 'Luckiest Guy', '29px', '#fff', {
+      x: 156,
+      y: 170,
+    }, {
+      size: 5,
+      color: '#333'
+    })
+
     this.children = [
-      this.placeholder  = Easel.createBitmap('placeholder-sync'),
-      this.syncMsg = new c.Text("", "20px Arial", "#fff"),
-      this.clientMsg = new c.Text("Client not connected", "20px Arial", "#fff")
+      this.syncHeader = Easel.createSprite('miscSprite', 'sync-text-sync', { x: 152, y: 113 }),
+      this.syncPhone = Easel.createSprite('miscSprite', 'sync-phone', { x: -176, y: 300 }),
+
+      this.syncText.container
     ]
 
+    Easel.dragObject( this.children )
 
-    this.syncMsg.x = 100
-    this.syncMsg.y = 100
-
-
-    this.clientMsg.x = this.syncMsg.x
-    this.clientMsg.y = this.syncMsg.y + 50
-
-    $('.desktop .message').html('Client not connected')
   },
 
 
@@ -54,10 +59,25 @@ var SyncView = View.extend({
   render: function (options) {
     this._super()
 
+    var self = this
+
     this.addEventListeners()
-    this.requestSyncId()
+    this.requestSyncId(function (params) {
+
+      var templateText = _.template(self.syncLabel, {
+        url: 'http://localhost:3000/mobile',
+        code: params.syncCode
+      });
+
+      self.syncText.setText( templateText )
+    })
 
     return this
+  },
+
+
+  show: function () {
+    this._super()
   },
 
 
@@ -68,14 +88,17 @@ var SyncView = View.extend({
 
 
 
-  requestSyncId: function () {
+  requestSyncId: function (callback) {
     var self = this
 
     window.socket.get( AppConfig.ENDPOINTS.generateCode, {},
 
       function onResponse (response) {
+        callback({
+          syncCode: response.syncCode
+        })
+
         console.log(response.syncCode)
-        self.syncMsg.text = 'Please enter this code in your mobile phone: ' + response.syncCode
         $('.debug').html('Please enter this code in your mobile phone: ' + response.syncCode)
       })
   },

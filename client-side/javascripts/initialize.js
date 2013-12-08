@@ -15,6 +15,11 @@ c = createjs
 
 $(function siteInitialized () {
 
+  // Mustache regex for templates
+  _.templateSettings = {
+    'interpolate': /{{([\s\S]+?)}}/g
+  }
+
   Touch.translateTouchEvents()
 
   var preloader = new PreloaderView()

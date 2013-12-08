@@ -86,6 +86,7 @@ var AppController = {
     })
 
     this.syncView = new SyncView({
+      stage: this.stage,
       appController: this,
       appModel: this.appModel
     })

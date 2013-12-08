@@ -383,6 +383,10 @@ var Assets = {
         }
     },
 
+
+
+    // GAMEPLAY Spritesheets
+
     {
       name: 'gameplaySprite',
       src: path + 'spritesheets/sprites-game.png',
@@ -418,6 +422,10 @@ var Assets = {
       }
     },
 
+
+
+    // INSTRUCTIONS Spritesheet
+
     {
         name: 'instructionsSprite',
         src: path + 'spritesheets/sprites-instructions.png',
@@ -450,6 +458,10 @@ var Assets = {
             },
         }
     },
+
+
+
+    // HOME Spritesheet
 
     {
       name: 'homeSprite',
@@ -488,6 +500,38 @@ var Assets = {
                 "home-title-ww":[11]
             }
       }
+    },
+
+
+
+    // MISC Spritesheets
+
+    {
+      name: 'miscSprite',
+      src: path + 'spritesheets/sprites-misc.png',
+
+      spritesheet: {
+        "images": [path + 'spritesheets/sprites-misc.png'],
+        "frames": [
+
+            [1127, 113, 429, 39],
+            [1127, 2, 451, 109],
+            [1127, 154, 310, 71],
+            [553, 2, 572, 187],
+            [2, 2, 549, 251],
+            [553, 191, 335, 39]
+        ],
+        "animations": {
+
+                "calibrate-text-calibrate":[0],
+                "highscores-text":[1],
+                "submit-btn":[2],
+                "submit-text":[3],
+                "sync-phone":[4],
+                "sync-text-sync":[5]
+            }
+      }
+
     },
 
     {
