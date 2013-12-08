@@ -37,6 +37,9 @@ var MobileGamePlayView = MobileView.extend({
     this.$body   = $('body')
     this.$bounds = $('.balls-bounds')
     this.$balls  = $('.balls-wrapper')
+    this.$ball   = $('.ball')
+
+    TweenMax.set( this.$balls, { y: '25%' })
 
     TweenMax.set( this.$bounds, {
       top: -300,
@@ -49,9 +52,6 @@ var MobileGamePlayView = MobileView.extend({
       self.sessionId = self.appModel.get('session').sessionId
       self.addEventListeners()
     })
-
-    TweenMax.set( this.$balls, { y: '25%' })
-
 
     //this.setBall()
     this.show()
@@ -97,6 +97,29 @@ var MobileGamePlayView = MobileView.extend({
       alpha: 1,
       ease: Expo.easeOut,
       delay: .5
+    })
+  },
+
+
+
+  toggleBall: function () {
+    var self = this
+
+    TweenMax.to( this.$ball, .3, {
+      scale: 0,
+      ease: Back.easeIn,
+      onComplete: function () {
+
+        self.$ball.toggleClass('hide')
+
+        TweenMax.to( self.$ball, .3, {
+          scale: 1,
+          ease: Back.easeOut,
+          onComplete: function () {
+
+          }
+        })
+      }
     })
   },
 
@@ -168,6 +191,7 @@ var MobileGamePlayView = MobileView.extend({
 
     }
 
+    this.toggleBall()
   },
 
 
