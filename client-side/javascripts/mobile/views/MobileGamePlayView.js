@@ -80,76 +80,10 @@ var MobileGamePlayView = MobileView.extend({
       y: -800,
       ease: Expo.easeIn,
       onComplete: function () {
-        self.resetBall()
+        self._sendFireRequestToDesktop()
+        self._resetBall()
       }
     })
-  },
-
-
-
-  resetBall: function () {
-    TweenMax.set( this.$balls, { alpha: 0 })
-    TweenMax.set( this.$balls, { clearProps: 'y' })
-
-    TweenMax.fromTo( this.$balls, .6, { alpha: 0, top: '100%' }, {
-      immediateRender: true,
-      top: '25%',
-      alpha: 1,
-      ease: Expo.easeOut,
-      delay: .5
-    })
-  },
-
-
-
-  toggleBall: function () {
-    var self = this
-
-    TweenMax.to( this.$ball, .3, {
-      scale: 0,
-      ease: Back.easeIn,
-      onComplete: function () {
-
-        self.$ball.toggleClass('hide')
-
-        TweenMax.to( self.$ball, .3, {
-          scale: 1,
-          ease: Back.easeOut,
-          onComplete: function () {
-
-          }
-        })
-      }
-    })
-  },
-
-
-
-  setBall: function() {
-    TweenMax.set( this.$balls, { clearProps: 'y' })
-    TweenMax.fromTo( this.$balls, .4, {top: 500}, {
-      top: '25%',
-      ease: Expo.easeOut,
-      delay: .3
-    })
-
-    var self = this
-
-    this.draggableBall = Draggable.create( this.$balls, {
-      type:"y",
-      bounds: '.balls-bounds',
-      throwProps: true,
-      onThrowUpdate: function() {
-        var y = GreenProp.y(this.target)
-        var upperBounds = -600
-
-        if (y < upperBounds) {
-          TweenMax.killTweensOf( self.$balls )
-          self.setBall()
-        }
-
-      }
-    });
   },
 
 
@@ -191,7 +125,7 @@ var MobileGamePlayView = MobileView.extend({
 
     }
 
-    this.toggleBall()
+    this._toggleBall()
   },
 
 
@@ -229,7 +163,12 @@ var MobileGamePlayView = MobileView.extend({
 
 
 
-  _onFireButtonPress: function (event) {
+
+  //+ EVENT HANDLERS
+  // ------------------------------------------------------------
+
+
+  _sendFireRequestToDesktop: function () {
     window.socket.post( AppConfig.ENDPOINTS.fire, {
       sessionId: this.sessionId
     },
@@ -239,9 +178,72 @@ var MobileGamePlayView = MobileView.extend({
       })
   },
 
-  _onToggleBall: function () {
-    var $balls = this.$('.ball').toggleClass('.hide')
-  }
+
+
+  _resetBall: function () {
+    TweenMax.set( this.$balls, { alpha: 0 })
+    TweenMax.set( this.$balls, { clearProps: 'y' })
+
+    TweenMax.fromTo( this.$balls, .6, { alpha: 0, top: '100%' }, {
+      immediateRender: true,
+      top: '25%',
+      alpha: 1,
+      ease: Expo.easeOut,
+      delay: .5
+    })
+  },
+
+
+
+  _toggleBall: function () {
+    var self = this
+
+    TweenMax.to( this.$ball, .3, {
+      scale: 0,
+      ease: Back.easeIn,
+      onComplete: function () {
+
+        self.$ball.toggleClass('hide')
+
+        TweenMax.to( self.$ball, .3, {
+          scale: 1,
+          ease: Back.easeOut,
+          onComplete: function () {
+
+          }
+        })
+      }
+    })
+  },
+
+
+
+  _setBall: function() {
+    TweenMax.set( this.$balls, { clearProps: 'y' })
+    TweenMax.fromTo( this.$balls, .4, {top: 500}, {
+      top: '25%',
+      ease: Expo.easeOut,
+      delay: .3
+    })
+
+    var self = this
+
+    this.draggableBall = Draggable.create( this.$balls, {
+      type:"y",
+      bounds: '.balls-bounds',
+      throwProps: true,
+      onThrowUpdate: function() {
+        var y = GreenProp.y(this.target)
+        var upperBounds = -600
+
+        if (y < upperBounds) {
+          TweenMax.killTweensOf( self.$balls )
+          self._setBall()
+        }
+
+      }
+    });
+  },
 
 
 })

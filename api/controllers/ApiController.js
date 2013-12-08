@@ -108,19 +108,25 @@ module.exports = {
     },
 
       function foundSession (err, session) {
-        if (err) next(err)
+        if (err) return next(err)
+
         if (!session) {
           return next('Session not found!')
         }
 
         var orientation = JSON.parse( req.param( 'orientation' ))
 
+
+        // TODO: Remove debug
+
         socket.broadcast.to(sessionId).emit( SocketEvent.ORIENTATION, {
-          orientation: orientation
+          orientation: orientation,
+          mouse: true
         })
 
         res.json({
-          orientation: orientation
+          orientation: orientation,
+          mouse: true
         })
       })
   },
@@ -136,6 +142,12 @@ module.exports = {
     },
 
       function foundSession (err, session) {
+        if (err) return next(err)
+
+        if (!session) {
+          return next('Session not found!')
+        }
+
         socket.broadcast.to(sessionId).emit( SocketEvent.SHOOT, {
           fire: true
         })
@@ -156,12 +168,21 @@ module.exports = {
     },
 
       function foundSession (err, session) {
+        if (err) return next(err)
+
+        if (!session) {
+          return next('Session not found!')
+        }
 
         socket.broadcast.to(sessionId).emit( SocketEvent.TOGGLE_MODE, {
           supermode: supermode
         })
 
-        next()
+        res.json({
+          success: true
+        })
+
+        //next()
       })
   },
 

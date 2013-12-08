@@ -362,6 +362,15 @@ var GamePlayView = View.extend({
 
 
   _onOrientationUpdate: function (message) {
+
+    // If DEBUG `mouse` param passed back from API
+    if (message.mouse) {
+      this._moveCroshairs(message.orientation)
+      return
+    }
+
+    //console.log(message.orientation.x, message.orientation.y)
+
     this.phoneOrientation = {
       x: message.orientation.x * 2,
       y: message.orientation.y * 2

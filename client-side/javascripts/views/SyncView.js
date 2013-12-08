@@ -74,8 +74,9 @@ var SyncView = View.extend({
     window.socket.get( AppConfig.ENDPOINTS.generateCode, {},
 
       function onResponse (response) {
+        console.log(response.syncCode)
         self.syncMsg.text = 'Please enter this code in your mobile phone: ' + response.syncCode
-        $('.desktop .message').html('Please enter this code in your mobile phone: ' + response.syncCode)
+        $('.debug').html('Please enter this code in your mobile phone: ' + response.syncCode)
       })
   },
 
