@@ -33,8 +33,15 @@ var MobileGamePlayView = MobileView.extend({
   render: function () {
     _.bindAll(this)
 
-    this.$el = $('.gameplay')
-    this.$body = $('body')
+    this.$el     = $('.gameplay')
+    this.$body   = $('body')
+    this.$bounds = $('.balls-bounds')
+    this.$balls  = $('.balls-wrapper')
+
+    TweenMax.set( this.$bounds, {
+      top: -300,
+      height: $(document).innerHeight() * 3.3
+    })
 
     var self = this
 
@@ -43,20 +50,10 @@ var MobileGamePlayView = MobileView.extend({
       self.addEventListeners()
     })
 
-    Draggable.create(".balls-wrapper", {
-      type:"y",
-      bounds: {
-        x: 0,
-        y: -300,
-        width: 0,
-        height: '120%'
-      },
-      throwProps: true,
-      onThrowUpdate: function() {
-        console.log( GreenProp.x(this.target) )
-      }
-    });
+    TweenMax.set( this.$balls, { y: '25%' })
 
+
+    //this.setBall()
     this.show()
 
     return this
@@ -68,9 +65,68 @@ var MobileGamePlayView = MobileView.extend({
 
     this.$body.on('mousemove', this._onDeviceOrientationChange )
     this.$body.on('touchend', this._onFireButtonPress )
+    this.$balls.on('touchend', this.fireBall )
 
     window.ondevicemotion = this._onDeviceMotion
     window.socket.on( SocketEvent.TOGGLE_MODE, this._onToggleMode )
+  },
+
+
+
+  fireBall: function () {
+    var self = this
+
+    TweenMax.to( this.$balls, .4, {
+      y: -800,
+      ease: Expo.easeIn,
+      onComplete: function () {
+        self.resetBall()
+      }
+    })
+  },
+
+
+
+  resetBall: function () {
+    TweenMax.set( this.$balls, { alpha: 0 })
+    TweenMax.set( this.$balls, { clearProps: 'y' })
+
+    TweenMax.fromTo( this.$balls, .6, { alpha: 0, top: '100%' }, {
+      immediateRender: true,
+      top: '25%',
+      alpha: 1,
+      ease: Expo.easeOut,
+      delay: .5
+    })
+  },
+
+
+
+  setBall: function() {
+    TweenMax.set( this.$balls, { clearProps: 'y' })
+    TweenMax.fromTo( this.$balls, .4, {top: 500}, {
+      top: '25%',
+      ease: Expo.easeOut,
+      delay: .3
+    })
+
+    var self = this
+
+    this.draggableBall = Draggable.create( this.$balls, {
+      type:"y",
+      bounds: '.balls-bounds',
+      throwProps: true,
+      onThrowUpdate: function() {
+        var y = GreenProp.y(this.target)
+        var upperBounds = -600
+
+        if (y < upperBounds) {
+          TweenMax.killTweensOf( self.$balls )
+          self.setBall()
+        }
+
+      }
+    });
   },
 
 
