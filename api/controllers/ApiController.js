@@ -178,11 +178,7 @@ module.exports = {
           supermode: supermode
         })
 
-        res.json({
-          success: true
-        })
-
-        //next()
+        next()
       })
   },
 

@@ -6,10 +6,10 @@
  */
 
 var AppConfig  = require('../config/AppConfig')
-var AppEvent   = require('../events/AppEvent')
-var PubSub     = require('../utils/PubSub')
-var View       = require('../supers/View')
-var Easel      = require('../utils/Easel')
+  , AppEvent   = require('../events/AppEvent')
+  , PubSub     = require('../utils/PubSub')
+  , View       = require('../supers/View')
+  , Easel      = require('../utils/Easel')
 
 
 var HomeView = View.extend({

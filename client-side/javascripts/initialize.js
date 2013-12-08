@@ -6,11 +6,12 @@
  */
 
 var Touch         = require('./utils/Touch')
-var PreloaderView = require('./views/preloader/PreloaderView')
-var AppController = require('./AppController')
+  , PreloaderView = require('./views/preloader/PreloaderView')
+  , AppController = require('./AppController')
 
-// Convenience ref
+
 c = createjs
+
 
 $(function siteInitialized () {
 
