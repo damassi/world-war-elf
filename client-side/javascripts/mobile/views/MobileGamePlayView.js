@@ -16,6 +16,12 @@ var MobileGamePlayView = MobileView.extend({
 
 
   /**
+   * Amount of scale to be applied to the snowball on render
+   * @type {Number}
+   */
+  DEFAULT_SNOWBALL_SCALE: .8,
+
+  /**
    * Cached global session id for sending POST data to server
    * @type {String}
    */
@@ -206,7 +212,7 @@ var MobileGamePlayView = MobileView.extend({
         self.$ball.toggleClass('hide')
 
         TweenMax.to( self.$ball, .3, {
-          scale: 1,
+          scale: self.DEFAULT_SNOWBALL_SCALE,
           ease: Back.easeOut,
           onComplete: function () {
 
