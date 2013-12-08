@@ -43,7 +43,19 @@ var MobileGamePlayView = MobileView.extend({
       self.addEventListeners()
     })
 
-    Draggable.create(".balls-wrapper", {type:"y", bounds:".balls-bounds"});
+    Draggable.create(".balls-wrapper", {
+      type:"y",
+      bounds: {
+        x: 0,
+        y: -300,
+        width: 0,
+        height: '120%'
+      },
+      throwProps: true,
+      onThrowUpdate: function() {
+        console.log( GreenProp.x(this.target) )
+      }
+    });
 
     this.show()
 

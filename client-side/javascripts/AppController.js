@@ -129,13 +129,14 @@ var AppController = {
     Sound.initialize({ appModel: this.appModel })
     //Sound.play({ soundId: 'audio-bg', loop: -1, volume: 0 })
 
-    //c.Ticker.addEventListener( 'tick', this.tick )
-    TweenMax.ticker.addEventListener("tick", this.tick);
+    c.Ticker.addEventListener( 'tick', this.tick )
 
     this.appModel.on( 'change:mute', this._onMuteChange )
     this.muteBtn.on( 'mouseover', this._onMuteOver )
     this.muteBtn.on( 'mouseout', this._onMuteOut )
     this.muteBtn.on( 'click', this._onMuteClick )
+
+    this.appModel.set('mute', true)
   },
 
 
