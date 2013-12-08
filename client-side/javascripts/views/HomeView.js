@@ -53,6 +53,15 @@ var HomeView = View.extend({
 
     Easel.cache([ this.playBtn, this.scoreBtn ])
 
+
+
+    //Easel.dragObject( this.children )
+
+  },
+
+
+
+  render: function (options) {
     this.lElf.x = 40
     this.rElf.x = 85
 
@@ -67,14 +76,6 @@ var HomeView = View.extend({
 
     this.fatElf.gotoAndPlay('start')
     this.skinnyElf.gotoAndPlay('start')
-
-    //Easel.dragObject( this.children )
-
-  },
-
-
-
-  render: function (options) {
     this._super()
 
     this.addChildren( this.children )
