@@ -15,6 +15,9 @@ var AppConfig  = require('../config/AppConfig')
 var HomeView = View.extend({
 
 
+  _playBtnY: 0, 
+  _highScoreBtnY: 0, 
+
   canvasEvents: {
     'playBtn mouseover' : '_onBtnOver',
     'playBtn rollout'   : '_onBtnOut',
@@ -28,6 +31,9 @@ var HomeView = View.extend({
 
   initialize: function (options) {
     this._super(options)
+    
+    this._playBtnY = 464;
+    this._highScoreBtnY = 510;
 
     this.children = [
 
@@ -39,11 +45,11 @@ var HomeView = View.extend({
       this.rElf = new c.Container(),
 
       this.playBtnShadow   = Easel.createSprite('homeSprite', 'home-btn-play-shadow', { x: 314, y: 526 } ),
-      this.playBtn         = Easel.createSprite('home-btn-play', 0, { x: 317, y: 464 }),
+      this.playBtn         = Easel.createSprite('home-btn-play', 0, { x: 317, y: this._playBtnY }),
       this.playBtnSnow     = Easel.createSprite('homeSprite', 'home-btn-play-snow', { x: 335, y: 524 } ),
 
       this.scoreBtnShadow   = Easel.createSprite('homeSprite', 'home-btn-scores-shadow', { x: 21, y: 553 } ),
-      this.scoreBtn         = Easel.createSprite('home-btn-score', 0, { x: 18, y: 510 } ),
+      this.scoreBtn         = Easel.createSprite('home-btn-score', 0, { x: 18, y: this._highScoreBtnY } ),
       this.scoreBtnSnow     = Easel.createSprite('homeSprite', 'home-btn-scores-snow', { x: 41, y: 557 } ),
 
       this.grassSprouts = Easel.createSprite('homeSprite', 'home-grass-sprouts', { x: 7, y: 486 }),
@@ -135,11 +141,15 @@ var HomeView = View.extend({
 
   _onBtnOver: function (event) {
     var target = event.currentTarget
+    var targetY;
+    targetY = (target === this.playBtn) ? this._playBtnY : this._highScoreBtnY;
 
     target.cursor = 'pointer'
+    TweenMax.killTweensOf(target)
+    target.y = targetY
 
     TweenMax.to( target, .15, {
-      y: target.y - 10,
+      y: targetY - 10,
       ease: Strong.easeOut,
       yoyo: true,
       repeat: 1

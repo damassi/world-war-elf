@@ -12,7 +12,7 @@ var Easel = require('../utils/Easel')
 
 var HighScoresView = View.extend({
 
-
+  _backToMainBtnY: 0, 
   canvasEvents: {
     'backBtn mouseover' : '_onBtnOver',
     'backBtn rollout'   : '_onBtnOut',
@@ -23,12 +23,12 @@ var HighScoresView = View.extend({
 
   initialize: function (options) {
     this._super(options)
-
+    this._backToMainBtnY = 519
     this.children = [
       //this.placeholder = Easel.createBitmap('placeholder-highscores'),
 
       Easel.createSprite('miscSprite', 'highscores-text', { x: 152, y: 54 }),
-      this.backBtn = Easel.createSprite('miscSprite', 'highscores-btn-btn', { x: 26, y: 519 }),
+      this.backBtn = Easel.createSprite('miscSprite', 'highscores-btn-btn', { x: 26, y: this._backToMainBtnY }),
       Easel.createSprite('miscSprite', 'highscores-btn-misc', { x: 20, y: 519 }),
     ]
 
@@ -43,6 +43,8 @@ var HighScoresView = View.extend({
     var target = event.currentTarget
 
     target.cursor = 'pointer'
+    TweenMax.killTweensOf(target)
+    target.y = this._backToMainBtnY
 
     TweenMax.to( target, .15, {
       y: target.y - 10,

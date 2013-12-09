@@ -14,6 +14,8 @@ var AppConfig  = require('../config/AppConfig')
 
 var InstructionsView = View.extend({
 
+  _smartphoneBtnY: 0, 
+  _mouseBtnY: 0, 
 
   canvasEvents: {
     'mouseBtn mouseover' : '_onBtnOver',
@@ -29,6 +31,8 @@ var InstructionsView = View.extend({
 
   initialize: function (options) {
     this._super(options)
+    this._smartphoneBtnY = 469
+    this._mouseBtnY = 461
 
     this.children = [
       //this.placeholder  = Easel.createBitmap('placeholder-instructions'),
@@ -36,13 +40,13 @@ var InstructionsView = View.extend({
       this.instructionsText = Easel.createSprite('instructionsSprite', 'instructions-text-instructions', { x: 154, y: 54 }),
       this.missionText = Easel.createSprite('instructionsSprite', 'instructions-text-mission', { x: 154, y: 285 }),
 
-      this.mouseBtn = Easel.createSprite('instructionsSprite', 'instructions-btn-mouse', { x: 617, y: 461 }),
+      this.mouseBtn = Easel.createSprite('instructionsSprite', 'instructions-btn-mouse', { x: 617, y: this._mouseBtnY }),
       this.mouseGfx = Easel.createSprite('instructionsSprite', 'instructions-mouse-gfx', { x: 619, y: 459 }),
 
       Easel.createSprite('instructionsSprite', 'instructions-btn-mouse-snow', { x: 636, y: 511 }),
       Easel.createSprite('instructionsSprite', 'instructions-btn-mouse-grass', { x: 615, y: 495 }),
 
-      this.phoneBtn = Easel.createSprite('instructionsSprite', 'instructions-btn-phone', { x: 154, y: 469 }),
+      this.phoneBtn = Easel.createSprite('instructionsSprite', 'instructions-btn-phone', { x: 154, y: this._smartphoneBtnY }),
       this.phongGfx = Easel.createSprite('instructionsSprite', 'instructions-phone-gfx', { x: 114, y: 453 }),
 
       Easel.createSprite('instructionsSprite', 'instructions-btn-phone-snow', { x: 204, y: 532 }),
@@ -76,6 +80,11 @@ var InstructionsView = View.extend({
 
   _onBtnOver: function (event) {
     var target = event.currentTarget
+    var targetY;
+    targetY = (target === this.phoneBtn) ? this._smartphoneBtnY : this._mouseBtnY;
+
+    TweenMax.killTweensOf(target)
+    target.y = targetY
 
     target.cursor = 'pointer'
 
