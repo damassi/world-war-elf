@@ -79,8 +79,9 @@ var SyncView = View.extend({
       self.syncText.setText( templateText )
 
       self.$qrCode.qrcode({
-        text: AppConfig.MOBILE_URL + '/' + params.syncCode
+        text: AppConfig.MOBILE_SYNC + '/' + params.syncCode
       })
+      console.log(AppConfig.MOBILE_SYNC + '/' + params.syncCode)
 
       TweenMax.to( self.$qrCode, .4, {
         autoAlpha: 1,

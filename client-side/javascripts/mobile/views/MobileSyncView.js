@@ -23,11 +23,23 @@ var MobileSyncView = MobileView.extend({
     this.$syncBtn = this.$el.find('.sync-btn')
     this.$input = this.$el.find('.sync-input')
 
+    this.$syncBtn.on('touchstart', this._onSubmitBtnClick )
+
     this.show()
 
-    this.delegateEvents()
 
-    this.$syncBtn.on('touchstart', this._onSubmitBtnClick )
+    // Check if sync code is being passed into the url bar and
+    // then auto-forward user
+
+    var syncCode = window.location.pathname.split('/').pop()
+
+    if (syncCode.length === 5) {
+      this.$input.val(syncCode)
+
+      TweenMax.set( this.$el, { alpha: 0 })
+
+      this.$syncBtn.trigger('touchstart')
+    }
 
     return this
   },

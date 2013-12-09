@@ -11,6 +11,8 @@ var AppConfig = {
 
   MOBILE_URL: 'http://localhost:3000/mobile',
 
+  MOBILE_SYNC: 'http://localhost:3000/mobile/sync',
+
   /**
    * Ovarall game dimensions
    * @type {Object}
