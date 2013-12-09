@@ -69,7 +69,7 @@ var AppConfig = {
    * Amount of gameplay time
    * @type {String}
    */
-  DEFAULT_GAMEPLAY_TIME: '22:00',
+  DEFAULT_GAMEPLAY_TIME: '0:20',
 
 
   /**

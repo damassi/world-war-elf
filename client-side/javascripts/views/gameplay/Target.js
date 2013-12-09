@@ -89,6 +89,12 @@ var Target = View.extend({
    */
   hasBeenHit: false,
 
+  /**
+   * have our points been triggered? Should only fired once
+   * @type {Boolean}
+   */
+  hasPointsTriggered: false,
+
 
 
 
@@ -288,21 +294,25 @@ var Target = View.extend({
       // supress the points popup
 
       if (!options.supressPoints) {
-        var pos = this.instance.localToGlobal(0, 0)
+        //only fire if we've yet to trigger points - we update it below so we're not constantly updating
+        if(!this.hasPointsTriggered) {
+          var pos = this.instance.localToGlobal(0, 0)
+          var newXPos = pos.x + 120
+          var pointsPopup = new PointsPopup({
+            stage: this.stage,
+            pointValue: this.targetProps.points,
+            x: newXPos,
+            y: pos.y
 
-        var pointsPopup = new PointsPopup({
-          stage: this.stage,
-          pointValue: this.targetProps.points,
-          x: pos.x,
-          y: pos.y
-
-        }).render().show()
+          }).render().show()
+        }
       }
     }
 
-
-    this.updatePoints( this.targetProps.points )
-
+    if(!this.hasPointsTriggered){
+      this.updatePoints( this.targetProps.points )
+      this.hasPointsTriggered = true
+    }
 
     var self = this
 

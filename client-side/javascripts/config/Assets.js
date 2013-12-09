@@ -136,6 +136,11 @@ var Assets = {
     },
 
     {
+      name: 'txt-game-over',
+      src: path + 'txt-game-over.png',
+    },
+
+    {
       name: 'frame-background',
       src: path + 'frame-background.jpg',
     },
