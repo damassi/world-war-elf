@@ -3,9 +3,7 @@
  *
  */
 
-
 module.exports = {
-
 
   mobile: function (req, res) {
     res.view({

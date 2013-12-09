@@ -54,7 +54,7 @@ var SyncView = View.extend({
       this.syncText.container
     ]
 
-    Easel.dragObject( this.children )
+    //Easel.dragObject( this.children )
 
   },
 
@@ -64,13 +64,19 @@ var SyncView = View.extend({
     this._super()
 
     this.$qrCode = $('<div id="qr-code" />').appendTo('.game-wrapper')
-    TweenMax.set( this.$qrCode, { autoAlpha: 0, x: 1000 })
 
-    var self = this
+    TweenMax.set( this.$qrCode, {
+      autoAlpha: 0,
+      x: 1000
+    })
 
     this.addEventListeners()
-    this.requestSyncId(function (params) {
 
+
+    // Call API and create QR code with response
+    var self = this
+
+    this.requestSyncId(function (params) {
       var templateText = _.template(self.syncLabel, {
         url: AppConfig.MOBILE_URL,
         code: params.syncCode
@@ -130,7 +136,7 @@ var SyncView = View.extend({
           syncCode: response.syncCode
         })
 
-        console.log(response.syncCode)
+        console.log('SyncCode: ', response.syncCode)
         $('.debug').html('Please enter this code in your mobile phone: ' + response.syncCode)
       })
   },
