@@ -19,7 +19,7 @@ var SyncView = View.extend({
    * The default text that will be rendered to the message on API sync
    * @type {String}
    */
-  syncLabel: 'Visit {{ url }} on your \nsmartphone and enter {{ code }} or scan the \nQR code to the right!',
+  syncLabel: 'Visit {{url}} on your \nsmartphone and enter {{code}} or scan the \nQR code to the right!',
 
 
   /**

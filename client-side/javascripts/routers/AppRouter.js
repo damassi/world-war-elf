@@ -31,6 +31,7 @@ var AppRouter = Backbone.Router.extend({
 
   routes: {
     ''              : 'homeRoute',
+    'home'          : 'homeRoute',
     'instructions'  : 'instructionsRoute',
     'sync'          : 'syncRoute',
     'calibrate'     : 'calibrateRoute',
