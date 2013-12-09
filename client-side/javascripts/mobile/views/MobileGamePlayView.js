@@ -40,7 +40,11 @@ var MobileGamePlayView = MobileView.extend({
    */
   $body: null,
 
-
+  /**
+   * keep track of our current orientation for tweening
+   * @type {Object}
+   */
+  _curOrientation: {x:0,y:0}, 
 
 
   render: function () {
@@ -104,11 +108,8 @@ var MobileGamePlayView = MobileView.extend({
   },
 
 
-
-
   //+ EVENT HANDLERS
   // ------------------------------------------------------------
-
 
   _onDeviceMotion: function (event) {
     var self = this
@@ -118,11 +119,15 @@ var MobileGamePlayView = MobileView.extend({
       y: ~~event.accelerationIncludingGravity.y
     }
 
+    TweenMax.to(this._curOrientation, .6, 
+      {x:event.accelerationIncludingGravity.x, y:event.accelerationIncludingGravity.y}
+    )
+
     $('.debug').html(orientation.x + '<br/>' + orientation.y)
 
     window.socket.post( AppConfig.ENDPOINTS.orientation, {
       sessionId: self.sessionId,
-      orientation: JSON.stringify( orientation )
+      orientation: JSON.stringify( this._curOrientation )
     },
 
       function onResponse (response) {
@@ -237,8 +242,6 @@ var MobileGamePlayView = MobileView.extend({
       }
     })
   },
-
-
 
   _setBall: function() {
     TweenMax.set( this.$balls, { clearProps: 'y' })
