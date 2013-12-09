@@ -11,7 +11,8 @@
     "sails-mongo": "~0.9.5",
     "node-monkey": "~0.2.8",
     "q": "~0.9.7",
-    "time-counter": "0.0.2"
+    "time-counter": "0.0.2",
+    "qrcode-terminal": "~0.9.4"
   },
   "main": "app.js",
   "devDependencies": {

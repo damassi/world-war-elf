@@ -15,6 +15,10 @@ var AppConfig = require('../config/AppConfig')
 var SyncView = View.extend({
 
 
+  /**
+   * The default text that will be rendered to the message on API sync
+   * @type {String}
+   */
   syncLabel: 'Visit {{ url }} on your \nsmartphone and enter {{ code }} or scan the \nQR code to the right!',
 
 
@@ -34,6 +38,9 @@ var SyncView = View.extend({
 
   initialize: function (options) {
     this._super(options)
+
+    this.$qrCode = $('<div id="qr-code" />').appendTo('.game-wrapper')
+    TweenMax.set( this.$qrCode, { autoAlpha: 0, x: 1000 })
 
     this.syncText = new Easel.Text( 'Requesting Sync Code', 'Luckiest Guy', '29px', '#fff', {
       x: 156,
@@ -65,11 +72,22 @@ var SyncView = View.extend({
     this.requestSyncId(function (params) {
 
       var templateText = _.template(self.syncLabel, {
-        url: 'http://localhost:3000/mobile',
+        url: AppConfig.MOBILE_URL,
         code: params.syncCode
       });
 
       self.syncText.setText( templateText )
+
+      self.$qrCode.qrcode({
+        text: AppConfig.MOBILE_URL + '/' + params.syncCode
+      })
+
+      TweenMax.to( self.$qrCode, .4, {
+        autoAlpha: 1,
+        x: 0,
+        ease: Expo.easeOut,
+        delay: .3
+      })
     })
 
     return this
@@ -77,6 +95,11 @@ var SyncView = View.extend({
 
 
   show: function () {
+    this._super()
+  },
+
+
+  hide: function() {
     this._super()
   },
 

@@ -9,6 +9,8 @@
 var AppConfig = {
 
 
+  MOBILE_URL: 'http://localhost:3000/mobile',
+
   /**
    * Ovarall game dimensions
    * @type {Object}
