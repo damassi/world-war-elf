@@ -29,6 +29,13 @@ var MobileGamePlayView = MobileView.extend({
 
 
   /**
+   * Flag to prevent repeat animations
+   * @type {Boolean}
+   */
+  isThrowing: false,
+
+
+  /**
    * @type {$}
    */
   $body: null,
@@ -70,8 +77,7 @@ var MobileGamePlayView = MobileView.extend({
   addEventListeners: function () {
 
     this.$body.on('mousemove', this._onDeviceOrientationChange )
-    this.$body.on('touchend', this._onFireButtonPress )
-    this.$balls.on('touchend', this.fireBall )
+    this.$body.on('touchend', this.fireBall )
 
     window.ondevicemotion = this._onDeviceMotion
     window.socket.on( SocketEvent.TOGGLE_MODE, this._onToggleMode )
@@ -80,16 +86,21 @@ var MobileGamePlayView = MobileView.extend({
 
 
   fireBall: function () {
+    this._sendFireRequestToDesktop()
+
     var self = this
 
-    TweenMax.to( this.$balls, .4, {
-      y: -800,
-      ease: Expo.easeIn,
-      onComplete: function () {
-        self._sendFireRequestToDesktop()
-        self._resetBall()
-      }
-    })
+    if (!this.isThrowing) {
+      this.isThrowing = true
+
+      TweenMax.to( this.$balls, .4, {
+        y: -800,
+        ease: Expo.easeIn,
+        onComplete: function () {
+          self._resetBall()
+        }
+      })
+    }
   },
 
 
@@ -190,12 +201,17 @@ var MobileGamePlayView = MobileView.extend({
     TweenMax.set( this.$balls, { alpha: 0 })
     TweenMax.set( this.$balls, { clearProps: 'y' })
 
-    TweenMax.fromTo( this.$balls, .6, { alpha: 0, top: '100%' }, {
+    var self = this
+
+    TweenMax.fromTo( this.$balls, .4, { alpha: 0, top: '100%' }, {
       immediateRender: true,
       top: '25%',
       alpha: 1,
       ease: Expo.easeOut,
-      delay: .5
+      delay: .5,
+      onComplete: function() {
+        self.isThrowing = false
+      }
     })
   },
 

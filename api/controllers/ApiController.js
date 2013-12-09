@@ -121,12 +121,12 @@ module.exports = {
 
         socket.broadcast.to(sessionId).emit( SocketEvent.ORIENTATION, {
           orientation: orientation,
-          mouse: true
+          mouse: false
         })
 
         res.json({
           orientation: orientation,
-          mouse: true
+          mouse: false
         })
       })
   },

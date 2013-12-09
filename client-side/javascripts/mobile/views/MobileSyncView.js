@@ -157,6 +157,7 @@ var MobileSyncView = MobileView.extend({
 
         TweenMax.fromTo( self.$el, .4, { x: 1000 }, {
           immediateRender: true,
+          alpha: 1,
           x: 0,
           ease: Expo.easeOut
         })

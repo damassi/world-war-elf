@@ -9,7 +9,7 @@
 var AppConfig = {
 
 
-  MOBILE_URL: 'http://localhost:3000/mobile',
+  MOBILE_URL: 'http://192.168.2.20:3000/mobile',
 
   /**
    * Ovarall game dimensions
