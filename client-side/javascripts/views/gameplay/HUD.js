@@ -148,6 +148,11 @@ var HUD = View.extend({
   _onTimerUpdate: function (time) {
     this.timeText.setText( time )
 
+    var array = time.split(':')
+    var seconds = parseInt(array[0]*60) + parseInt(array[1])
+
+    AppConfig.gameplaySeconds = seconds
+
     if (time === '0:00')
       PubSub.trigger( AppEvent.STOP_GAMEPLAY )
   },

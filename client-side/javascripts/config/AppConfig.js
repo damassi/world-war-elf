@@ -71,6 +71,11 @@ var AppConfig = {
    */
   DEFAULT_GAMEPLAY_TIME: '2:00',
 
+  /**
+   * the current gameplay time; modified via HUD.js (timer)
+   * @type {number}
+   */
+  gameplaySeconds: 120, 
 
   /**
    * The time which the player is in supermode.
@@ -85,7 +90,6 @@ var AppConfig = {
    * @type {Number}
    */
   TARGET_PAUSE_TIME: 4
-
 }
 
 module.exports = AppConfig

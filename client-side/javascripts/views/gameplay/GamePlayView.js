@@ -261,6 +261,12 @@ var GamePlayView = View.extend({
 
 
   _onStartGamePlay: function () {
+    var array = AppConfig.DEFAULT_GAMEPLAY_TIME.split(':')
+    var seconds = parseInt(array[0]*60) + parseInt(array[1])
+
+    AppConfig.gameplaySeconds = seconds
+
+
     this.targetFactory = new TargetFactory({
       appModel: this.appModel,
       gamePlayView: this
@@ -350,11 +356,6 @@ var GamePlayView = View.extend({
       return
 
     var self = this
-
-    /* We no longer increase hits, we add points
-    TweenMax.delayedCall( .5, function() {
-      self.appModel.increaseHits()
-    })*/
   },
 
 

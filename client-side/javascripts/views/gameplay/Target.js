@@ -25,6 +25,13 @@ var Target = View.extend({
    */
   SNOWBALL_ATTACK_DELAY: 1.5,
 
+  /**
+   * What time should we release the medium/hard targets, (in seconds)
+   */
+  MEDIUM_TARGET_TIME: 90, 
+
+  HARD_TARGET_TIME: 60, 
+
 
   /**
    * Array of target ids pulled from the Asset manifest to be loaded
@@ -101,7 +108,18 @@ var Target = View.extend({
   initialize: function (options) {
     this._super(options)
 
-    this.targetProps = _.clone(_.sample( this.targetIds[this.type] ))
+    var targetArray = this.targetIds[this.type].concat()
+    
+    if(this.type==="bad"){
+      //release harder targets depending on timing
+      if(AppConfig.gameplaySeconds > this.MEDIUM_TARGET_TIME){
+        targetArray.splice(1,2)
+      }else if(AppConfig.gameplaySeconds > this.HARD_TARGET_TIME){
+        targetArray.splice(2,1)
+      }
+    }
+
+    this.targetProps = _.clone(_.sample( targetArray ))
     this.instance = Easel.createSprite( this.targetProps.id, 0 )
 
     var bounds = this.instance.getBounds()
