@@ -14,7 +14,7 @@
  *
  *		Good news is, that means you can specify configuration for your local
  *		machine in this file without inadvertently committing personal information
- *		(like database passwords) to the repo.  Plus, this prevents other members
+ *		(like database passwords) to the reepo.  Plus, this prvents other members
  *		of your team from commiting their local configuration changes on top of yours.
  *
  *
