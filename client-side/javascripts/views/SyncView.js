@@ -39,9 +39,6 @@ var SyncView = View.extend({
   initialize: function (options) {
     this._super(options)
 
-    this.$qrCode = $('<div id="qr-code" />').appendTo('.game-wrapper')
-    TweenMax.set( this.$qrCode, { autoAlpha: 0, x: 1000 })
-
     this.syncText = new Easel.Text( 'Requesting Sync Code', 'Luckiest Guy', '29px', '#fff', {
       x: 156,
       y: 170,
@@ -66,6 +63,9 @@ var SyncView = View.extend({
   render: function (options) {
     this._super()
 
+    this.$qrCode = $('<div id="qr-code" />').appendTo('.game-wrapper')
+    TweenMax.set( this.$qrCode, { autoAlpha: 0, x: 1000 })
+
     var self = this
 
     this.addEventListeners()
@@ -79,15 +79,14 @@ var SyncView = View.extend({
       self.syncText.setText( templateText )
 
       self.$qrCode.qrcode({
-        text: AppConfig.MOBILE_SYNC + '/' + params.syncCode
+        text: AppConfig.MOBILE_URL + '/' + params.syncCode
       })
-      console.log(AppConfig.MOBILE_SYNC + '/' + params.syncCode)
 
       TweenMax.to( self.$qrCode, .4, {
         autoAlpha: 1,
         x: 0,
         ease: Expo.easeOut,
-        delay: .3
+        delay: .7
       })
     })
 
@@ -95,13 +94,22 @@ var SyncView = View.extend({
   },
 
 
+
   show: function () {
     this._super()
   },
 
 
+
   hide: function() {
     this._super()
+
+    TweenMax.to(this.$qrCode, .2, {
+      alpha: 0,
+      onComplete: function() {
+        $(this.target).remove()
+      }
+    })
   },
 
 
