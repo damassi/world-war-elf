@@ -113,10 +113,6 @@ var AppController = {
     })
 
 
-    //this.muteBtn = Easel.createSprite( 'mute', 0, { x: 32, y: 25 }, { center: true })
-    //this.muteBtn.gotoAndStop(1)
-
-
     // Initialize Routing and Events
 
     this.delegateEvents()
@@ -139,8 +135,7 @@ var AppController = {
     Sound.play({ soundId: 'audio-bg', loop: -1, volume: 0.5 })
 
     c.Ticker.addEventListener( 'tick', this.tick )
-
-    this.appModel.set('mute', false)
+    this.appModel.set('mute', true)
   },
 
 

@@ -43,7 +43,7 @@ var PointsPopup = View.extend({
 
     Easel.centerRegistrationPoint(this.pointText.container)
 
-    tm.fromTo( this.pointText.container, .4, { alpha: 0, scaleX: 0, scaleY: 0 }, {
+    T.fromTo( this.pointText.container, .4, { alpha: 0, scaleX: 0, scaleY: 0 }, {
       alpha: 1,
       scaleX: 1,
       scaleY: 1,
@@ -51,7 +51,7 @@ var PointsPopup = View.extend({
 
       onComplete: function() {
 
-        tm.to( this.target, .3, {
+        T.to( this.target, .3, {
           scaleX: 2,
           scaleY: 2,
           alpha: 0,

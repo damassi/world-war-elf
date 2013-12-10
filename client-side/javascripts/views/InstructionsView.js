@@ -92,19 +92,19 @@ var InstructionsView = View.extend({
     var targetY;
     targetY = (target === this.phoneBtn) ? this._smartphoneBtnY : this._mouseBtnY;
 
-    tm.killTweensOf(target)
+    T.killTweensOf(target)
     target.y = targetY
 
     target.cursor = 'pointer'
 
-    tm.to( target, .15, {
+    T.to( target, .15, {
       y: target.y - 10,
       ease: Strong.easeOut,
       yoyo: true,
       repeat: 1
     })
 
-    tm.to( target, .2, {
+    T.to( target, .2, {
       easel: {
         tint: '#ffffff',
         tintAmount: .2,
@@ -118,7 +118,7 @@ var InstructionsView = View.extend({
   _onBtnOut: function (event) {
     var target = event.currentTarget
 
-    tm.to( target, .2, {
+    T.to( target, .2, {
       easel: {
         tint: '#ffffff',
         tintAmount: 0,

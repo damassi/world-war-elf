@@ -47,13 +47,6 @@ var TargetFactory = Backbone.View.extend({
 
 
   /**
-   * An array of targets to be pooled during gameplay
-   * @type {Array}
-   */
-  hitTargets: null,
-
-
-  /**
    * Internal reference for all currently occupied positions
    * @type {Array}
    */
@@ -71,10 +64,22 @@ var TargetFactory = Backbone.View.extend({
     this.occupiedPositions = []
 
     for (var i = 0; i < AppConfig.INITIAL_TARGETS; ++i) {
-      var target = this.createTarget()
+      this.createTarget()
     }
 
     this.addEventListeners()
+  },
+
+
+
+  cleanup: function() {
+    this.occupiedPositions = []
+    this.removeEventListeners()
+
+    _.each(this.occupiedPositions, function (target) {
+      console.log(target)
+      target.remove()
+    })
   },
 
 
@@ -180,7 +185,9 @@ var TargetFactory = Backbone.View.extend({
 
 
 
-  _onKillAllTargets: function () {
+  _onKillAllTargets: function (params) {
+    params = params || {}
+
     this.appModel.enableSupermode()
 
     Easel.bounceScreen($('#game-play'))
@@ -190,7 +197,15 @@ var TargetFactory = Backbone.View.extend({
     for (i = 0, len = this.occupiedPositions.length; i < len; ++i) {
       target = this.occupiedPositions[i]
 
-      if (target.type === 'bad') {
+      // Clear the entire screen
+      if (params.gameOver) {
+        target.hit({
+          supressPoints: true
+        })
+      }
+
+      // Just kill the badguys
+      else if (target.type === 'bad' ) {
         target.hit({
           supressPoints: true
         })

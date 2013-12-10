@@ -145,7 +145,7 @@ var Target = View.extend({
 
   remove: function() {
 
-    tm.killTweensOf( this.instance )
+    T.killTweensOf( this.instance )
     this.container.removeAllChildren()
     this.stage.removeChild( this.container )
   },
@@ -155,11 +155,11 @@ var Target = View.extend({
   show: function() {
     var self = this
 
-    tm.delayedCall( 1, function() {
+    T.delayedCall( 1, function() {
       self.instance.gotoAndPlay('start')
     })
 
-    tm.fromTo( this.instance, .4, { alpha: 0, rotation: 180 }, {
+    T.fromTo( this.instance, .4, { alpha: 0, rotation: 180 }, {
       immediateRender: true,
       alpha: 1,
       rotation: 0,
@@ -169,7 +169,7 @@ var Target = View.extend({
       onComplete: function () {
 
         if (self.targetProps.attacker) {
-          tm.delayedCall( self.SNOWBALL_ATTACK_DELAY, function() {
+          T.delayedCall( self.SNOWBALL_ATTACK_DELAY, function() {
             self.attackPlayer()
           })
         }
@@ -184,7 +184,7 @@ var Target = View.extend({
   hide: function() {
     var self = this
 
-    tm.to( this.instance, .4, {
+    T.to( this.instance, .4, {
       rotation: -180,
       ease: Back.easeIn,
       delay: AppConfig.TARGET_PAUSE_TIME + ( Math.random() * 1 ),
@@ -217,11 +217,11 @@ var Target = View.extend({
 
     var self = this
 
-    tm.delayedCall( .7, function() {
+    T.delayedCall( .7, function() {
       self.instance.gotoAndPlay('start')
     })
 
-    tm.to(this.attackSnowball, .5, {
+    T.to(this.attackSnowball, .5, {
       x: AppConfig.DIMENSIONS.width * .5,
       y: AppConfig.DIMENSIONS.height * .5,
       scaleX: 3,
@@ -267,7 +267,7 @@ var Target = View.extend({
 
           var scale = this.instance.scaleX
 
-          tm.to( this.instance, .3, {
+          T.to( this.instance, .3, {
             scaleX: scale + .1,
             scaleY: scale + .1,
             ease: Expo.easeOut
@@ -355,7 +355,7 @@ var Target = View.extend({
 
       var self = this
 
-      tm.to( this.instance, .4, {
+      T.to( this.instance, .4, {
         y: this.instance.y + 300,
         ease: Back.easeIn,
         delay: .1,
@@ -389,7 +389,7 @@ var Target = View.extend({
 
     moveTo = (moveTo > 0) ? 1500 : -1500
 
-    tm.to( this.instance, .6, {
+    T.to( this.instance, .6, {
       x: this.instance.x + moveTo,
       ease: Back.easeIn,
       delay: (Math.random() * .3) + .1,

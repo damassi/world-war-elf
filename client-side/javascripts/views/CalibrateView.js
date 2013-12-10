@@ -122,7 +122,7 @@ var CalibrateView = View.extend({
 
 
   _moveCroshairs: function (position) {
-    tm.to( this.dot, .2, {
+    T.to( this.dot, .2, {
       x: position.x,
       y: position.y,
       ease: Expo.easeOut

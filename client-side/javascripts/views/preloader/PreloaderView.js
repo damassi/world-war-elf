@@ -31,7 +31,7 @@ var PreloaderView = Backbone.View.extend({
 
     this.$preloaderGfx = this.$el.find('img')
 
-    TweenMax.fromTo( this.$preloaderGfx, .6, { x: 2000, autoAlpha: 0, scale: 1, rotation: 220 }, {
+    T.fromTo( this.$preloaderGfx, .6, { x: 2000, autoAlpha: 0, scale: 1, rotation: 220 }, {
       immediateRender: true,
       x: 0,
       autoAlpha: 1,
@@ -59,16 +59,6 @@ var PreloaderView = Backbone.View.extend({
         return asset
       }
     })
-
-    // _.each( audioManifest, function (asset) {
-    //     var fileTypes = file.src.split('|')
-
-    //     file.src = _.map( fileTypes, function( file ) {
-    //       return GameConfig.ASSET_PATH + file
-    //     }).join('|')
-
-    //     return manifest
-    //   })
 
     _.each( audioManifest, function (asset) {
       c.Sound.registerSound( asset.src, asset.audioId )
@@ -98,7 +88,7 @@ var PreloaderView = Backbone.View.extend({
   _onLoadComplete: function () {
     var self = this
 
-    TweenMax.to( this.$preloaderGfx, .6, {
+    T.to( this.$preloaderGfx, .6, {
       x: -2000,
       rotation: -180,
       ease: Back.easeIn,

@@ -11,7 +11,7 @@ var Touch         = require('./utils/Touch')
 
 
 c = createjs
-tm = TweenMax
+T = TweenMax
 
 
 $(function siteInitialized () {

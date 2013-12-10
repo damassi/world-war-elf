@@ -69,12 +69,10 @@ var HomeView = View.extend({
       this.grassSprouts = Easel.createSprite('homeSprite', 'home-grass-sprouts', { x: 7, y: 486 }),
 
       this.elf          = Easel.createSprite('homeSprite', 'home-good-elf', { x: 660, y: 179 }),
+      this.elfShadow    = Easel.createSprite('homeSprite', 'home-btn-scores-shadow', { x: 633, y: 546 }),
     ]
 
     Easel.cache([ this.playBtn, this.scoreBtn ])
-
-
-
     //Easel.dragObject( this.children )
 
   },
@@ -108,7 +106,7 @@ var HomeView = View.extend({
   show: function () {
     this._super()
 
-    tm.fromTo( this.worldWar, .4, { scaleX: .1, scaleY: .1, alpha: 0 }, {
+    T.fromTo( this.worldWar, .4, { scaleX: .1, scaleY: .1, alpha: 0 }, {
       scaleX: 1,
       scaleY: 1,
       alpha: 1,
@@ -116,7 +114,7 @@ var HomeView = View.extend({
       delay: .5
     })
 
-    tm.fromTo( this.bigEShadow, .6, { scaleX: .1, scaleY: .1, alpha: 0}, {
+    T.fromTo( this.bigEShadow, .6, { scaleX: .1, scaleY: .1, alpha: 0}, {
       scaleX: 1,
       scaleY: 1,
       alpha: 1,
@@ -124,14 +122,14 @@ var HomeView = View.extend({
       delay: .7
     })
 
-    tm.from( this.bigE, .6, {
+    T.from( this.bigE, .6, {
       alpha: 0,
       y: -300,
       ease: Bounce.easeOut,
       delay: .7
     })
 
-    tm.from( this.elf, .5, {
+    T.from([this.elf, this.elfShadow], .5, {
       immediateRender: true,
       x: 1000,
       ease: Expo.easeOut,
@@ -159,17 +157,17 @@ var HomeView = View.extend({
     targetY = (target === this.playBtn) ? this._playBtnY : this._highScoreBtnY;
 
     target.cursor = 'pointer'
-    tm.killTweensOf(target)
+    T.killTweensOf(target)
     target.y = targetY
 
-    tm.to( target, .15, {
+    T.to( target, .15, {
       y: targetY - 10,
       ease: Strong.easeOut,
       yoyo: true,
       repeat: 1
     })
 
-    tm.to( target, .2, {
+    T.to( target, .2, {
       easel: {
         tint: '#ffffff',
         tintAmount: .2,
@@ -183,7 +181,7 @@ var HomeView = View.extend({
   _onBtnOut: function (event) {
     var target = event.currentTarget
 
-    tm.to( target, .2, {
+    T.to( target, .2, {
       easel: {
         tint: '#ffffff',
         tintAmount: 0,
