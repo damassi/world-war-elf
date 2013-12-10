@@ -143,9 +143,7 @@ var SyncView = View.extend({
 
 
 
-  _onDesktopClientSynched: function (message) {
-    this.clientMsg.text = message.sessionId
-  }
+  _onDesktopClientSynched: function (message) {}
 
 
 })

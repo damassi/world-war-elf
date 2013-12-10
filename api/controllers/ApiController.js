@@ -19,7 +19,7 @@ module.exports = {
    */
 
   'generate-code': function (req, res, next) {
-    var syncCode = (""+Math.random()).substring(2,7) //Math.random().toString(36).substring(12)
+    var syncCode = ( "" + Math.random() ).substring(2,7)
       , socket = req.socket
       , io     = sails.io
 
@@ -121,12 +121,12 @@ module.exports = {
 
         socket.broadcast.to(sessionId).emit( SocketEvent.ORIENTATION, {
           orientation: orientation,
-          mouse: false
+          mouse: true
         })
 
         res.json({
           orientation: orientation,
-          mouse: false
+          mouse: true
         })
       })
   },

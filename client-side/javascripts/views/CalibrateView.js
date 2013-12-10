@@ -39,7 +39,7 @@ var CalibrateView = View.extend({
       y: this.crossHairs.y
     }
 
-    PubSub.on( AppEvent.TICK, this._onTick )
+    this.addEventListeners()
 
     return this
   },
@@ -49,6 +49,8 @@ var CalibrateView = View.extend({
   addEventListeners: function () {
     window.socket.on( SocketEvent.ORIENTATION, this._onOrientationUpdate )
     window.socket.on( SocketEvent.SHOOT, this._onShoot )
+
+    PubSub.on( AppEvent.TICK, this._onTick )
   },
 
 
@@ -56,6 +58,8 @@ var CalibrateView = View.extend({
   removeEventListeners: function () {
     window.socket.removeListener( SocketEvent.ORIENTATION, this._onOrientationUpdate )
     window.socket.removeListener( SocketEvent.SHOOT, this._onShoot )
+
+    PubSub.off( AppEvent.TICK, this._onTick )
   },
 
 

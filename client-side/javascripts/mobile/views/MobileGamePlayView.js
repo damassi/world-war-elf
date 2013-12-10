@@ -40,11 +40,13 @@ var MobileGamePlayView = MobileView.extend({
    */
   $body: null,
 
+
   /**
-   * keep track of our current orientation for tweening
+   * Keep track of our current orientation for tweening
    * @type {Object}
    */
-  _curOrientation: {x:0,y:0}, 
+  _curOrientation: { x: 0, y: 0 },
+
 
 
   render: function () {
@@ -108,8 +110,11 @@ var MobileGamePlayView = MobileView.extend({
   },
 
 
+
+
   //+ EVENT HANDLERS
   // ------------------------------------------------------------
+
 
   _onDeviceMotion: function (event) {
     var self = this
@@ -119,11 +124,10 @@ var MobileGamePlayView = MobileView.extend({
       y: ~~event.accelerationIncludingGravity.y
     }
 
-    TweenMax.to(this._curOrientation, .6, 
-      {x:event.accelerationIncludingGravity.x, y:event.accelerationIncludingGravity.y}
-    )
-
-    $('.debug').html(orientation.x + '<br/>' + orientation.y)
+    TweenMax.to(this._curOrientation, .6, {
+      x: event.accelerationIncludingGravity.x,
+      y: event.accelerationIncludingGravity.y
+    })
 
     window.socket.post( AppConfig.ENDPOINTS.orientation, {
       sessionId: self.sessionId,
@@ -133,20 +137,19 @@ var MobileGamePlayView = MobileView.extend({
       function onResponse (response) {
         //console.log(response.orientation)
       })
+
+    $('.debug').html( orientation.x + '<br/>' + orientation.y )
   },
 
 
 
   /**
-   * Received from API service which tells the mobile client to update view to super snowball
+   * Received from API service which tells the mobile client to
+   * update view to super snowball
    *
    * @param  {Object} message Message containing prop .supermode (boolean)
    */
   _onToggleMode: function (message) {
-    if (message.supermode) {
-
-    }
-
     this._toggleBall()
   },
 
@@ -169,10 +172,6 @@ var MobileGamePlayView = MobileView.extend({
       }
     }
 
-    $('.debug').html( orientation.x + ', ' + orientation.y )
-
-    // TODO: Clean up debug mode
-
     window.socket.post( AppConfig.ENDPOINTS.orientation, {
       sessionId: this.sessionId,
       orientation: JSON.stringify( orientation )
@@ -181,6 +180,8 @@ var MobileGamePlayView = MobileView.extend({
       function onResponse (response) {
         //console.log(response.orientation)
       })
+
+    $('.debug').html( orientation.x + ', ' + orientation.y )
   },
 
 
@@ -188,6 +189,7 @@ var MobileGamePlayView = MobileView.extend({
 
   //+ EVENT HANDLERS
   // ------------------------------------------------------------
+
 
 
   _sendFireRequestToDesktop: function () {
@@ -243,9 +245,14 @@ var MobileGamePlayView = MobileView.extend({
     })
   },
 
+
+
   _setBall: function() {
-    TweenMax.set( this.$balls, { clearProps: 'y' })
-    TweenMax.fromTo( this.$balls, .4, {top: 500}, {
+    TweenMax.set( this.$balls, {
+      clearProps: 'y'
+    })
+
+    TweenMax.fromTo( this.$balls, .4, { top: 500 }, {
       top: '25%',
       ease: Expo.easeOut,
       delay: .3
