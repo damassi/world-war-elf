@@ -16,7 +16,12 @@ var MobileView = require('./supers/MobileView')
 var MobileCalibrateView = MobileView.extend({
 
 
+  /**
+   * Stores a tweenable position which is pushed over the socket
+   * @type {Object}
+   */
   _curOrientation: { x: 0, y: 0 },
+
 
 
   render: function () {

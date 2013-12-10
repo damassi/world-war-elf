@@ -11,11 +11,12 @@ var Touch         = require('./utils/Touch')
 
 
 c = createjs
+tm = TweenMax
 
 
 $(function siteInitialized () {
 
-  // Mustache regex for templates
+  // Mustache regex for micro templates
   _.templateSettings = {
     'interpolate': /{{([\s\S]+?)}}/g
   }
