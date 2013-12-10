@@ -54,7 +54,8 @@ var MobileController = {
 
     showCalibrateView: function () {
       this.mobileSyncView.hide()
-      this.mobileCalibrateView.render()
+      //this.mobileCalibrateView.render()
+      this.showGamePlayView()
     },
 
 
