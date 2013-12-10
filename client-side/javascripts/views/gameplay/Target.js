@@ -25,12 +25,19 @@ var Target = View.extend({
    */
   SNOWBALL_ATTACK_DELAY: 1.5,
 
+
   /**
    * What time should we release the medium/hard targets, (in seconds)
+   * @type {Number}
    */
-  MEDIUM_TARGET_TIME: 100, 
+  MEDIUM_TARGET_TIME: 100,
 
-  HARD_TARGET_TIME: 75, 
+
+  /**
+   * Time, in seconds, to release the hard targets
+   * @type {Number}
+   */
+  HARD_TARGET_TIME: 75,
 
 
   /**
@@ -109,12 +116,14 @@ var Target = View.extend({
     this._super(options)
 
     var targetArray = this.targetIds[this.type].concat()
-    
-    if(this.type==="bad"){
-      //release harder targets depending on timing
-      if(AppConfig.gameplaySeconds > this.MEDIUM_TARGET_TIME){
+
+    // Release harder targets depending on timing
+    if (this.type === "bad") {
+
+      if (AppConfig.gameplaySeconds > this.MEDIUM_TARGET_TIME) {
         targetArray.splice(1,2)
-      }else if(AppConfig.gameplaySeconds > this.HARD_TARGET_TIME){
+      }
+      else if (AppConfig.gameplaySeconds > this.HARD_TARGET_TIME) {
         targetArray.splice(2,1)
       }
     }
@@ -272,7 +281,8 @@ var Target = View.extend({
     // event to TargetFactory to clear all targets and refresh
 
     if (this.type === 'good') {
-      //only allow one hit for good targets...maybe multiples on bad is okay
+
+      // Only allow one hit for good targets...maybe multiples on bad is okay
       if(!this.hasBeenHit){
 
         Sound.play({
@@ -302,18 +312,20 @@ var Target = View.extend({
 
     Easel.animateOnce( this.instance, 'hit' )
 
-
-    // Cache to turn into good elf
     if (this.type === 'bad') {
 
+      // Cache to turn into good elf
       Easel.cache( this.instance )
 
       // Add in points display.  But if user hits the kill all gift
       // supress the points popup
 
       if (!options.supressPoints) {
-        //only fire if we've yet to trigger points - we update it below so we're not constantly updating
-        if(!this.hasPointsTriggered) {
+
+        // Only fire if we've yet to trigger points - we update
+        // it below so we're not constantly updating
+
+        if (!this.hasPointsTriggered) {
           var pos = this.instance.localToGlobal(0, 0)
           var newXPos = pos.x + 120
           var pointsPopup = new PointsPopup({
@@ -327,14 +339,15 @@ var Target = View.extend({
       }
     }
 
-    if(!this.hasPointsTriggered){
+    if (!this.hasPointsTriggered) {
       this.updatePoints( this.targetProps.points )
       this.hasPointsTriggered = true
     }
 
-    var self = this
+    if (!this.hasBeenHit || this.targetProps.energy > 0) {
 
-    if(!this.hasBeenHit || this.targetProps.energy > 0){
+      var self = this
+
       TweenMax.to( this.instance, .4, {
         y: this.instance.y + 300,
         ease: Back.easeIn,
@@ -342,7 +355,9 @@ var Target = View.extend({
         overwrite: 'concurrent',
 
         onComplete: function () {
+
           if (this.target && this.target.parent) {
+
             this.target.parent.removeChild( this.target )
             self.remove()
 

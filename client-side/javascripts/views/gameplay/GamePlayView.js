@@ -143,21 +143,25 @@ var GamePlayView = View.extend({
     $(canvas).on( 'mouseup', this._onShoot )
   },
 
+
+
   /**
    * remove our game over text and move us on
    * @param  {easel bitmap} bitmap the bitmap text to remove
    */
   removeGameOver: function(bitmap) {
       var self = this
-      TweenMax.to(bitmap, .3, 
+      TweenMax.to(bitmap, .3,
         {y:450, ease:Back.easeIn, onComplete: function(){
           self.stage.removeChild(bitmap)
           setTimeout(function() {
-            window.location.hash = '#/submit-score'     
+            window.location.hash = '#/submit-score'
           }, 500)
         }
       })
-  }, 
+  },
+
+
 
   removeEventListeners: function () {
     window.socket.removeListener( SocketEvent.ORIENTATION, this._onOrientationUpdate )
@@ -278,9 +282,6 @@ var GamePlayView = View.extend({
 
 
   _onStopGamePlay: function () {
-    var self = this
-    var gameOverBitmap = Easel.createBitmap( 'txt-game-over', {x: 200, y:250 } )
-
     this.removeEventListeners()
     this.targetFactory.removeEventListeners()
 
@@ -288,18 +289,29 @@ var GamePlayView = View.extend({
       target.scurryAway()
     })
 
-    //animate our game over screen in, then do something else
+    var gameOverBitmap = Easel.createBitmap( 'txt-game-over', {x: 200, y:250 } )
+
+    // Animate our game over screen in, then do something else
     this.stage.addChild( gameOverBitmap )
 
-    TweenMax.fromTo(gameOverBitmap, .3, 
-      {y:450}, 
-      {y:250, ease:Back.easeOut, onComplete: function(){
+    var self = this
+
+    TweenMax.fromTo(gameOverBitmap, .3, { y: 450 }, {
+      y: 250,
+      ease: Back.easeOut,
+      onComplete: function(){
+
+        // Slight delay and then kill the gameover
         setTimeout(function() {
-          self.removeGameOver(gameOverBitmap)          
-        }, 3000)
+          self.removeGameOver( gameOverBitmap )
+        },
+          3000
+        )
       }
     })
   },
+
+
 
   _onPauseGamePlay: function () {
 
@@ -342,7 +354,6 @@ var GamePlayView = View.extend({
     })
 
     this._throwSnowball()
-    //this.appModel.increaseShots()
   },
 
 

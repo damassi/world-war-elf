@@ -172,6 +172,8 @@
             <filename>../calibrate-text-calibrate.png</filename>
             <filename>../sync-text-sync.png</filename>
             <filename>../sync-phone.png</filename>
+            <filename>../highscores-btn-btn.png</filename>
+            <filename>../highscores-btn-misc.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
