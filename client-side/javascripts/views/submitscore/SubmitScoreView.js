@@ -29,13 +29,15 @@ var SubmitScoreView = View.extend({
 
 
   render: function () {
+    this._super()
+
     this.$form = $('<div id="submit-score" />').appendTo('#game-canvas')
     this.$form.html( formTemplate() )
     this.$submitBtn = this.$form.find('.submit-btn')
 
-    this._super()
-
     TweenMax.set( this.$form, { autoAlpha: 0 })
+
+    this.addEventlisteners()
 
     return this
   },

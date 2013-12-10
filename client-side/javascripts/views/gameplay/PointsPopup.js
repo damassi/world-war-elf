@@ -29,6 +29,7 @@ var PointsPopup = View.extend({
   },
 
 
+
   render: function() {
     this.stage.addChild(this.pointText.container)
 
@@ -36,11 +37,9 @@ var PointsPopup = View.extend({
   },
 
 
+
   show: function() {
     var self = this
-
-    //this.pointText.container.x += 140
-    //this.pointText.container.y -= 20
 
     Easel.centerRegistrationPoint(this.pointText.container)
 
