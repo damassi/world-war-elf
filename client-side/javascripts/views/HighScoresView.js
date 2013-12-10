@@ -12,7 +12,15 @@ var Easel = require('../utils/Easel')
 
 var HighScoresView = View.extend({
 
-  _backToMainBtnY: 0, 
+
+  /**
+   * Start pos for back btn
+   * @type {Number}
+   */
+  _backToMainBtnY: 0,
+
+
+
   canvasEvents: {
     'backBtn mouseover' : '_onBtnOver',
     'backBtn rollout'   : '_onBtnOut',
@@ -23,16 +31,15 @@ var HighScoresView = View.extend({
 
   initialize: function (options) {
     this._super(options)
-    this._backToMainBtnY = 519
-    this.children = [
-      //this.placeholder = Easel.createBitmap('placeholder-highscores'),
 
+    this._backToMainBtnY = 519
+
+    this.children = [
       Easel.createSprite('miscSprite', 'highscores-text', { x: 152, y: 54 }),
       this.backBtn = Easel.createSprite('miscSprite', 'highscores-btn-btn', { x: 26, y: this._backToMainBtnY }),
       Easel.createSprite('miscSprite', 'highscores-btn-misc', { x: 20, y: 519 }),
     ]
 
-    //Easel.dragObject( this.children )
     Easel.cache([ this.backBtn ])
 
   },
@@ -43,17 +50,19 @@ var HighScoresView = View.extend({
     var target = event.currentTarget
 
     target.cursor = 'pointer'
-    TweenMax.killTweensOf(target)
+
+    tm.killTweensOf(target)
+
     target.y = this._backToMainBtnY
 
-    TweenMax.to( target, .15, {
+    tm.to( target, .15, {
       y: target.y - 10,
       ease: Strong.easeOut,
       yoyo: true,
       repeat: 1
     })
 
-    TweenMax.to( target, .2, {
+    tm.to( target, .2, {
       easel: {
         tint: '#ffffff',
         tintAmount: .2,
@@ -67,7 +76,7 @@ var HighScoresView = View.extend({
   _onBtnOut: function (event) {
     var target = event.currentTarget
 
-    TweenMax.to( target, .2, {
+    tm.to( target, .2, {
       easel: {
         tint: '#ffffff',
         tintAmount: 0,

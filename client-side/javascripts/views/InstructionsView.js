@@ -14,8 +14,21 @@ var AppConfig  = require('../config/AppConfig')
 
 var InstructionsView = View.extend({
 
-  _smartphoneBtnY: 0, 
-  _mouseBtnY: 0, 
+  /**
+   * Start pos for start btn
+   * @type {Number}
+   */
+  _smartphoneBtnY: 0,
+
+
+  /**
+   * Start pos for mouse btn
+   * @type {Number}
+   */
+  _mouseBtnY: 0,
+
+
+
 
   canvasEvents: {
     'mouseBtn mouseover' : '_onBtnOver',
@@ -35,8 +48,6 @@ var InstructionsView = View.extend({
     this._mouseBtnY = 461
 
     this.children = [
-      //this.placeholder  = Easel.createBitmap('placeholder-instructions'),
-
       this.instructionsText = Easel.createSprite('instructionsSprite', 'instructions-text-instructions', { x: 154, y: 54 }),
       this.missionText = Easel.createSprite('instructionsSprite', 'instructions-text-mission', { x: 154, y: 285 }),
 
@@ -54,8 +65,6 @@ var InstructionsView = View.extend({
     ]
 
     Easel.cache([ this.mouseBtn, this.phoneBtn ])
-
-    //Easel.dragObject( this.children )
 
   },
 
@@ -83,19 +92,19 @@ var InstructionsView = View.extend({
     var targetY;
     targetY = (target === this.phoneBtn) ? this._smartphoneBtnY : this._mouseBtnY;
 
-    TweenMax.killTweensOf(target)
+    tm.killTweensOf(target)
     target.y = targetY
 
     target.cursor = 'pointer'
 
-    TweenMax.to( target, .15, {
+    tm.to( target, .15, {
       y: target.y - 10,
       ease: Strong.easeOut,
       yoyo: true,
       repeat: 1
     })
 
-    TweenMax.to( target, .2, {
+    tm.to( target, .2, {
       easel: {
         tint: '#ffffff',
         tintAmount: .2,
@@ -109,7 +118,7 @@ var InstructionsView = View.extend({
   _onBtnOut: function (event) {
     var target = event.currentTarget
 
-    TweenMax.to( target, .2, {
+    tm.to( target, .2, {
       easel: {
         tint: '#ffffff',
         tintAmount: 0,

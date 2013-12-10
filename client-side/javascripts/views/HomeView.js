@@ -15,8 +15,21 @@ var AppConfig  = require('../config/AppConfig')
 var HomeView = View.extend({
 
 
-  _playBtnY: 0, 
-  _highScoreBtnY: 0, 
+  /**
+   * The move pos of the playbtn on rollover
+   * @type {Number}
+   */
+  _playBtnY: 0,
+
+
+  /**
+   * The move pos of the high scores btn on rollover
+   * @type {Number}
+   */
+  _highScoreBtnY: 0,
+
+
+
 
   canvasEvents: {
     'playBtn mouseover' : '_onBtnOver',
@@ -29,9 +42,10 @@ var HomeView = View.extend({
   },
 
 
+
   initialize: function (options) {
     this._super(options)
-    
+
     this._playBtnY = 464;
     this._highScoreBtnY = 510;
 
@@ -94,7 +108,7 @@ var HomeView = View.extend({
   show: function () {
     this._super()
 
-    TweenMax.fromTo( this.worldWar, .4, { scaleX: .1, scaleY: .1, alpha: 0 }, {
+    tm.fromTo( this.worldWar, .4, { scaleX: .1, scaleY: .1, alpha: 0 }, {
       scaleX: 1,
       scaleY: 1,
       alpha: 1,
@@ -102,7 +116,7 @@ var HomeView = View.extend({
       delay: .5
     })
 
-    TweenMax.fromTo( this.bigEShadow, .6, { scaleX: .1, scaleY: .1, alpha: 0}, {
+    tm.fromTo( this.bigEShadow, .6, { scaleX: .1, scaleY: .1, alpha: 0}, {
       scaleX: 1,
       scaleY: 1,
       alpha: 1,
@@ -110,14 +124,14 @@ var HomeView = View.extend({
       delay: .7
     })
 
-    TweenMax.from( this.bigE, .6, {
+    tm.from( this.bigE, .6, {
       alpha: 0,
       y: -300,
       ease: Bounce.easeOut,
       delay: .7
     })
 
-    TweenMax.from( this.elf, .5, {
+    tm.from( this.elf, .5, {
       immediateRender: true,
       x: 1000,
       ease: Expo.easeOut,
@@ -145,17 +159,17 @@ var HomeView = View.extend({
     targetY = (target === this.playBtn) ? this._playBtnY : this._highScoreBtnY;
 
     target.cursor = 'pointer'
-    TweenMax.killTweensOf(target)
+    tm.killTweensOf(target)
     target.y = targetY
 
-    TweenMax.to( target, .15, {
+    tm.to( target, .15, {
       y: targetY - 10,
       ease: Strong.easeOut,
       yoyo: true,
       repeat: 1
     })
 
-    TweenMax.to( target, .2, {
+    tm.to( target, .2, {
       easel: {
         tint: '#ffffff',
         tintAmount: .2,
@@ -169,7 +183,7 @@ var HomeView = View.extend({
   _onBtnOut: function (event) {
     var target = event.currentTarget
 
-    TweenMax.to( target, .2, {
+    tm.to( target, .2, {
       easel: {
         tint: '#ffffff',
         tintAmount: 0,

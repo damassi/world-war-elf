@@ -43,18 +43,22 @@ var PointsPopup = View.extend({
 
     Easel.centerRegistrationPoint(this.pointText.container)
 
-    TweenMax.fromTo( this.pointText.container, .4, { alpha: 0, scaleX: 0, scaleY: 0 }, {
+    tm.fromTo( this.pointText.container, .4, { alpha: 0, scaleX: 0, scaleY: 0 }, {
       alpha: 1,
       scaleX: 1,
       scaleY: 1,
       ease: Back.easeOut,
+
       onComplete: function() {
-        TweenMax.to( this.target, .3, {
+
+        tm.to( this.target, .3, {
           scaleX: 2,
           scaleY: 2,
           alpha: 0,
           ease: Back.easeOut,
+
           onComplete: function () {
+
             this.target.parent.removeChild( this.target )
             self.remove()
           }

@@ -80,7 +80,7 @@ var HUD = View.extend({
     this.startTimer()
     this.addChildren( this.children )
 
-    TweenMax.set( this.container, { alpha: 0, x: 200 })
+    tm.set( this.container, { alpha: 0, x: 200 })
 
     return this
   },
@@ -103,7 +103,7 @@ var HUD = View.extend({
 
 
   show: function () {
-    TweenMax.to( this.container, .6, {
+    tm.to( this.container, .6, {
       alpha: 1,
       x: 0,
       ease: Expo.easeOut,
@@ -118,7 +118,7 @@ var HUD = View.extend({
 
     var self = this
 
-    TweenMax.to( this.container, .3, {
+    tm.to( this.container, .3, {
       alpha: 0,
       onComplete: function () {
         self.remove()
@@ -169,7 +169,7 @@ var HUD = View.extend({
 
     var self = this
 
-    TweenMax.to( points, .2, {
+    tm.to( points, .2, {
       start: points.end,
       ease: Linear.easeNone,
       onUpdate: function() {

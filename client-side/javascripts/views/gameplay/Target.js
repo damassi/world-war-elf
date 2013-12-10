@@ -145,7 +145,7 @@ var Target = View.extend({
 
   remove: function() {
 
-    TweenMax.killTweensOf( this.instance )
+    tm.killTweensOf( this.instance )
     this.container.removeAllChildren()
     this.stage.removeChild( this.container )
   },
@@ -155,11 +155,11 @@ var Target = View.extend({
   show: function() {
     var self = this
 
-    TweenMax.delayedCall( 1, function() {
+    tm.delayedCall( 1, function() {
       self.instance.gotoAndPlay('start')
     })
 
-    TweenMax.fromTo( this.instance, .4, { alpha: 0, rotation: 180 }, {
+    tm.fromTo( this.instance, .4, { alpha: 0, rotation: 180 }, {
       immediateRender: true,
       alpha: 1,
       rotation: 0,
@@ -168,7 +168,7 @@ var Target = View.extend({
 
       onComplete: function () {
         if (self.targetProps.attacker) {
-          TweenMax.delayedCall( self.SNOWBALL_ATTACK_DELAY, function() {
+          tm.delayedCall( self.SNOWBALL_ATTACK_DELAY, function() {
             self.attackPlayer()
           })
         }
@@ -183,7 +183,7 @@ var Target = View.extend({
   hide: function() {
     var self = this
 
-    TweenMax.to( this.instance, .4, {
+    tm.to( this.instance, .4, {
       rotation: -180,
       ease: Back.easeIn,
       delay: AppConfig.TARGET_PAUSE_TIME + ( Math.random() * 1 ),
@@ -216,11 +216,11 @@ var Target = View.extend({
 
     var self = this
 
-    TweenMax.delayedCall( .7, function() {
+    tm.delayedCall( .7, function() {
       self.instance.gotoAndPlay('start')
     })
 
-    TweenMax.to(this.attackSnowball, .5, {
+    tm.to(this.attackSnowball, .5, {
       x: AppConfig.DIMENSIONS.width * .5,
       y: AppConfig.DIMENSIONS.height * .5,
       scaleX: 3,
@@ -266,7 +266,7 @@ var Target = View.extend({
 
           var scale = this.instance.scaleX
 
-          TweenMax.to( this.instance, .3, {
+          tm.to( this.instance, .3, {
             scaleX: scale + .1,
             scaleY: scale + .1,
             ease: Expo.easeOut
@@ -354,7 +354,7 @@ var Target = View.extend({
 
       var self = this
 
-      TweenMax.to( this.instance, .4, {
+      tm.to( this.instance, .4, {
         y: this.instance.y + 300,
         ease: Back.easeIn,
         delay: .1,
@@ -388,7 +388,7 @@ var Target = View.extend({
 
     moveTo = (moveTo > 0) ? 1500 : -1500
 
-    TweenMax.to( this.instance, .6, {
+    tm.to( this.instance, .6, {
       x: this.instance.x + moveTo,
       ease: Back.easeIn,
       delay: (Math.random() * .3) + .1,

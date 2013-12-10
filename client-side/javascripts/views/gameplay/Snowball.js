@@ -86,7 +86,7 @@ var Snowball = View.extend({
     Easel.cache( this.snowball )
 
     // Tint snowball as it recedes
-    TweenMax.to( this.snowball, .6, {
+    tm.to( this.snowball, .6, {
       easel: {
         tint: '#000000',
         tintAmount: .4,
@@ -96,14 +96,14 @@ var Snowball = View.extend({
     })
 
     // Fade snowball in
-    TweenMax.fromTo( this.snowball, .2, { alpha: 0 }, {
+    tm.fromTo( this.snowball, .2, { alpha: 0 }, {
       alpha: 1
     })
 
     var self = this
 
     // Spin and scale back towards target
-    TweenMax.fromTo( this.snowball, .6, { scaleX: 6, scaleY: 6 }, {
+    tm.fromTo( this.snowball, .6, { scaleX: 6, scaleY: 6 }, {
       immediateRender: true,
       rotation: 360,
       scaleX: .2,
@@ -116,7 +116,7 @@ var Snowball = View.extend({
 
         if (self._checkHit()) {}
         else {
-          TweenMax.to(this.target, .2, { alpha: 0, onComplete: function () {
+          tm.to(this.target, .2, { alpha: 0, onComplete: function () {
             self.remove()
           }})
         }
@@ -173,7 +173,7 @@ var Snowball = View.extend({
 
     Easel.animateOnce(splat, 'hit')
 
-    TweenMax.to(splat, .1, {
+    tm.to(splat, .1, {
       alpha: 0,
       delay: .2,
       ease: Linear.easeNone
@@ -181,7 +181,7 @@ var Snowball = View.extend({
 
     var self = this
 
-    TweenMax.to(splat, .3, {
+    tm.to(splat, .3, {
       scaleX: 1.2,
       scaleY: 1.2,
       ease: Expo.easeOut,

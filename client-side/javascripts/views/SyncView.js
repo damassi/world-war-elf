@@ -65,7 +65,7 @@ var SyncView = View.extend({
 
     this.$qrCode = $('<div id="qr-code" />').appendTo('.game-wrapper')
 
-    TweenMax.set( this.$qrCode, {
+    tm.set( this.$qrCode, {
       autoAlpha: 0,
       x: 1000
     })
@@ -89,7 +89,7 @@ var SyncView = View.extend({
         text: AppConfig.MOBILE_URL + '/' + params.syncCode
       })
 
-      TweenMax.to( self.$qrCode, .4, {
+      tm.to( self.$qrCode, .4, {
         autoAlpha: 1,
         x: 0,
         ease: Expo.easeOut,
@@ -111,7 +111,7 @@ var SyncView = View.extend({
   hide: function() {
     this._super()
 
-    TweenMax.to(this.$qrCode, .2, {
+    tm.to(this.$qrCode, .2, {
       alpha: 0,
       onComplete: function() {
         $(this.target).remove()

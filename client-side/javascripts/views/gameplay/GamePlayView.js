@@ -175,32 +175,32 @@ var GamePlayView = View.extend({
     this.container.addChild( this.hud.render().container )
     this.hud.show()
 
-    TweenMax.from( this.backGround, .3, {
+    tm.from( this.backGround, .3, {
       y: height,
       ease: Expo.easeOut,
       delay: delay + .2
     })
 
-    TweenMax.from( this.middleGround, .3, {
+    tm.from( this.middleGround, .3, {
       y: height,
       ease: Expo.easeOut,
       delay: delay + .1
     })
 
-    TweenMax.from( this.frontGround, .3, {
+    tm.from( this.frontGround, .3, {
       y: height,
       ease: Expo.easeOut,
       delay: delay
     })
 
-    TweenMax.fromTo( this.crossHairs, .2, { alpha: 0 }, {
+    tm.fromTo( this.crossHairs, .2, { alpha: 0 }, {
       immediateRender: true,
       alpha: 1,
       ease: Linear.easeNone,
       delay: 1
     })
 
-    TweenMax.fromTo( this.crossHairs, .4, { scaleX: 0, scaleY: 0 }, {
+    tm.fromTo( this.crossHairs, .4, { scaleX: 0, scaleY: 0 }, {
       immediateRender: true,
       scaleX: 1,
       scaleY: 1,
@@ -225,7 +225,7 @@ var GamePlayView = View.extend({
 
 
   hideCrossHairs: function() {
-    TweenMax.to(this.crossHairs, .3, {
+    tm.to(this.crossHairs, .3, {
       alpha: 0,
       ease: Expo.easeOut
     })
@@ -234,7 +234,7 @@ var GamePlayView = View.extend({
 
 
   showCrossHairs: function() {
-    TweenMax.to(this.crossHairs, .3, {
+    tm.to(this.crossHairs, .3, {
       alpha: 1,
       ease: Expo.easeOut
     })
@@ -250,7 +250,7 @@ var GamePlayView = View.extend({
   removeGameOver: function(bitmap) {
       var self = this
 
-      TweenMax.to( bitmap, .3, {
+      tm.to( bitmap, .3, {
         y: 450,
         ease: Back.easeIn,
         onComplete: function(){
@@ -302,7 +302,7 @@ var GamePlayView = View.extend({
 
     var self = this
 
-    TweenMax.fromTo(gameOverBitmap, .3, { y: 450 }, {
+    tm.fromTo(gameOverBitmap, .3, { y: 450 }, {
       y: 250,
       ease: Back.easeOut,
       onComplete: function(){
@@ -328,13 +328,13 @@ var GamePlayView = View.extend({
   _onPrepareTarget: function (event) {
     var fireTweenTime = .4
 
-     TweenMax.to( this.crossHairs, fireTweenTime * .5, {
+     tm.to( this.crossHairs, fireTweenTime * .5, {
       scaleX: .8,
       scaleY: .8,
       ease: Back.easeOut
     })
 
-    TweenMax.to( this.crossHairs, fireTweenTime, {
+    tm.to( this.crossHairs, fireTweenTime, {
       rotation: 90,
       ease: Back.easeOut
     })
@@ -348,13 +348,13 @@ var GamePlayView = View.extend({
 
     var fireTweenTime = .4
 
-    TweenMax.to( this.crossHairs, fireTweenTime * .5, {
+    tm.to( this.crossHairs, fireTweenTime * .5, {
       scaleX: 1,
       scaleY: 1,
       ease: Back.easeInOut
     })
 
-    TweenMax.to( this.crossHairs, fireTweenTime, {
+    tm.to( this.crossHairs, fireTweenTime, {
       rotation: 0,
       ease: Back.easeOut
     })
@@ -378,9 +378,9 @@ var GamePlayView = View.extend({
 
 
   _onPlayerHit: function (params) {
-    TweenMax.killTweensOf(this.redHitArea)
+    tm.killTweensOf(this.redHitArea)
 
-    TweenMax.fromTo(this.redHitArea, .1, { alpha: 0 }, {
+    tm.fromTo(this.redHitArea, .1, { alpha: 0 }, {
       alpha: .4,
       yoyo: true,
       repeat: 3,
@@ -451,7 +451,7 @@ var GamePlayView = View.extend({
 
 
   _moveCroshairs: function (position) {
-    TweenMax.to( this.crossHairs, .2, {
+    tm.to( this.crossHairs, .2, {
       x: position.x,
       y: position.y,
       ease: Expo.easeOut
