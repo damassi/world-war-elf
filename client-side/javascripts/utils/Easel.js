@@ -605,6 +605,25 @@ var Easel = {
         })
       }
     })
+  },
+
+
+
+  /**
+   * Takes a string of the format `path.mp3|path.ogg' and returns a fully qualified
+   * url for AudioJS to load
+   * @param  {String} fileName the formatted filename to parse
+   * @param  {String} basePath the base url path
+   * @return {String}
+   */
+
+  returnFullAudioPath: function (fileName, basePath) {
+    var fileTypes = fileName.split('|')
+    fileName = _.map(fileTypes, function (file) {
+      return basePath + file
+    }).join('|')
+
+    return fileName
   }
 }
 

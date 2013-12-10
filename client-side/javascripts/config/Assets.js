@@ -4,7 +4,16 @@
  */
 
 var path  = require('./AppConfig').ASSET_PATH
-var audio = require('./AppConfig').AUDIO_PATH
+var audioPath = require('./AppConfig').AUDIO_PATH
+
+var returnAudioPath = function (fileName) {
+    var fileTypes = fileName.split('|')
+    fileName = _.map(fileTypes, function (file) {
+      return audioPath + file
+    }).join('|')
+
+    return fileName
+}
 
 
 var Assets = {
@@ -16,62 +25,62 @@ var Assets = {
 
     {
         audioId: 'audio-bg',
-        src: audio + 'bg-carolbells.mp3'
+        src: returnAudioPath('bg-carolbells.mp3|bg-carolbells.ogg')
     },
 
     {
         audioId: 'audio-throw-1',
-        src: audio + 'whoosh.mp3'
+        src: returnAudioPath('whoosh.mp3|whoosh.ogg')
     },
 
     {
         audioId: 'audio-throw-2',
-        src: audio + 'whoosh2.mp3'
+        src: returnAudioPath('whoosh2.mp3|whoosh2.ogg')
     },
 
     {
         audioId: 'bonus-hit-candycane',
-        src: audio + 'bonus-hit.mp3'
+        src: returnAudioPath('bonus-hit.mp3|bonus-hit.ogg')
     },
 
     {
         audioId: 'snowball-hit-1',
-        src: audio + 'hit-1.mp3'
+        src: returnAudioPath('hit-1.mp3|hit-1.ogg')
     },
 
     {
         audioId: 'zombie-hit-1',
-        src: audio + 'grunt-1.mp3'
+        src: returnAudioPath('grunt-1.mp3|grunt-1.ogg')
     },
 
     {
         audioId: 'zombie-hit-2',
-        src: audio + 'grunt-2.mp3'
+        src: returnAudioPath('grunt-2.mp3|grunt-2.ogg')
     },
 
     {
         audioId: 'zombie-hit-3',
-        src: audio + 'grunt-3.mp3'
+        src: returnAudioPath('grunt-3.mp3|grunt-3.ogg')
     },
 
     {
         audioId: 'zombie-hit-4',
-        src: audio + 'grunt-4.mp3'
+        src: returnAudioPath('grunt-4.mp3|grunt-4.ogg')
     },
 
     {
         audioId: 'low-energy',
-        src: audio + 'low-energy.mp3'
+        src: returnAudioPath('low-energy.mp3|low-energy.mp3')
     },
 
     {
         audioId: 'player-hit-1',
-        src: audio + 'player-hit.mp3'
+        src: returnAudioPath('player-hit.mp3|player-hit.mp3')
     },
 
     {
         audioId: 'player-hit-2',
-        src: audio + 'player-hit-2.mp3'
+        src: returnAudioPath('player-hit-2.mp3')
     },
 
 

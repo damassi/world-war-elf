@@ -60,6 +60,16 @@ var PreloaderView = Backbone.View.extend({
       }
     })
 
+    // _.each( audioManifest, function (asset) {
+    //     var fileTypes = file.src.split('|')
+
+    //     file.src = _.map( fileTypes, function( file ) {
+    //       return GameConfig.ASSET_PATH + file
+    //     }).join('|')
+
+    //     return manifest
+    //   })
+
     _.each( audioManifest, function (asset) {
       c.Sound.registerSound( asset.src, asset.audioId )
     })
