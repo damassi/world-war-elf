@@ -76,7 +76,8 @@ var SyncView = View.extend({
     // Call API and create QR code with response
     var self = this
 
-    this.requestSyncId(function (params) {
+    this.requestSyncId( function (params) {
+
       var templateText = _.template(self.syncLabel, {
         url: AppConfig.MOBILE_URL,
         code: params.syncCode

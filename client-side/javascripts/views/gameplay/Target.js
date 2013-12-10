@@ -142,6 +142,7 @@ var Target = View.extend({
   },
 
 
+
   remove: function() {
 
     TweenMax.killTweensOf( this.instance )
@@ -283,7 +284,7 @@ var Target = View.extend({
     if (this.type === 'good') {
 
       // Only allow one hit for good targets...maybe multiples on bad is okay
-      if(!this.hasBeenHit){
+      if (!this.hasBeenHit) {
 
         Sound.play({
           soundId: 'bonus-hit-candycane',
@@ -344,6 +345,11 @@ var Target = View.extend({
       this.hasPointsTriggered = true
     }
 
+
+    // Hit target and animate him out.  Once animation completes
+    // trigger a PubSub back to AppController and TargetFactory
+    // with the target which was hit.
+
     if (!this.hasBeenHit || this.targetProps.energy > 0) {
 
       var self = this
@@ -357,7 +363,6 @@ var Target = View.extend({
         onComplete: function () {
 
           if (this.target && this.target.parent) {
-
             this.target.parent.removeChild( this.target )
             self.remove()
 

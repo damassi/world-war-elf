@@ -150,7 +150,6 @@ var AppController = {
 
     PubSub.on( AppEvent.SOCKET_IO_CONNECTED, this._onSocketIOConnected )
     PubSub.on( AppEvent.DESKTOP_CLIENT_SYNCED, this._onDesktopClientSynched )
-    PubSub.on( AppEvent.MOBILE_CLIENT_SYNCED, this._onMobileClientSynched )
   },
 
 
@@ -196,18 +195,7 @@ var AppController = {
     if (sessionId !== this.appModel.get('session').desktopSocketId)
       return
 
-    window.location.href = '#/play'
-  },
-
-
-
-  _onMobileClientSynched: function () {
-    var sessionId = window.socket.socket.sessionid
-
-    if (sessionId !== this.appModel.get('session').mobileSocketId)
-      return
-
-    window.location.href = '#/mobile/play'
+    window.location.href = '#/calibrate'
   },
 
 

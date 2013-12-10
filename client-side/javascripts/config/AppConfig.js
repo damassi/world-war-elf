@@ -9,7 +9,12 @@
 var AppConfig = {
 
 
-  MOBILE_URL: 'http://192.168.2.20:3000/mobile',
+  /**
+   * Mobile url
+   * @type {String}
+   */
+  MOBILE_URL: window.location.origin + '/mobile',
+
 
   /**
    * Ovarall game dimensions
@@ -75,7 +80,7 @@ var AppConfig = {
    * the current gameplay time; modified via HUD.js (timer)
    * @type {number}
    */
-  gameplaySeconds: 120, 
+  gameplaySeconds: 120,
 
   /**
    * The time which the player is in supermode.
@@ -86,7 +91,6 @@ var AppConfig = {
 
   /**
    * The time which the target should remain on the screen before hiding
-   *
    * @type {Number}
    */
   TARGET_PAUSE_TIME: 4
