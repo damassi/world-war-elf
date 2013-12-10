@@ -38,7 +38,12 @@ var MobileSyncView = MobileView.extend({
 
       TweenMax.set( this.$el, { alpha: 0 })
 
-      this.$syncBtn.trigger('touchstart')
+      var self = this
+
+      TweenMax.delayedCall( 1.3, function() {
+        self.$syncBtn.trigger('touchstart')
+      })
+
     }
 
     return this
