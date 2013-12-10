@@ -101,8 +101,6 @@ var CalibrateView = View.extend({
 
 
   _onTick: function() {
-    if (!this.connected)
-      return
 
     var dimensions = AppConfig.DIMENSIONS
 
