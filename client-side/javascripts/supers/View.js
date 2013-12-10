@@ -131,6 +131,7 @@ var View = Backbone.View.extend({
 
     this.container.removeAllChildren()
 		this.stage.removeChild( this.container )
+    this.removeEventListeners()
 	},
 
 
@@ -144,6 +145,14 @@ var View = Backbone.View.extend({
 			this.container.addChild( children[i] )
 
 	},
+
+
+
+  addEventListeners: function () {},
+
+
+
+  removeEventListeners: function () {},
 
 
 

@@ -140,7 +140,7 @@ var AppController = {
 
     c.Ticker.addEventListener( 'tick', this.tick )
 
-    this.appModel.set('mute', false)
+    this.appModel.set('mute', true)
   },
 
 
@@ -195,7 +195,7 @@ var AppController = {
     if (sessionId !== this.appModel.get('session').desktopSocketId)
       return
 
-    window.location.href = '#/play'
+    window.location.href = '#/calibrate'
   },
 
 

@@ -21,12 +21,22 @@ var CalibrateView = View.extend({
   initialize: function (options) {
     this._super(options)
 
-    this.children = [
-      this.placeholder = Easel.createBitmap('placeholder-calibrate'),
+    this.dot = new c.Shape()
+    this.dot.graphics.beginFill("#ffffff").drawCircle(0, 0, 12, 12);
+    this.dot.x = AppConfig.DIMENSIONS.width * .5
+    this.dot.y = AppConfig.DIMENSIONS.height * .5
 
-      // The user-controlled target
-      this.crossHairs = Easel.createSprite('gameplaySprite', 'game-crosshairs', { x: 468, y: 245 }, { center: true }),
+    this.children = [
+      //this.placeholder = Easel.createBitmap('placeholder-calibrate'),
+
+      Easel.createSprite('gameplaySprite', 'game-crosshairs', { x: 481, y: 302 }, { center: true }),
+
+      Easel.createSprite('miscSprite', 'calibrate-text-calibrate', { x: 215, y: 126 }),
+      this.dot
     ]
+
+    Easel.dragObject( this.children )
+
   },
 
 
@@ -35,8 +45,8 @@ var CalibrateView = View.extend({
     this._super()
 
     this.phoneOrientation = {
-      x: this.crossHairs.x,
-      y: this.crossHairs.y
+      x: this.dot.x,
+      y: this.dot.y
     }
 
     this.addEventListeners()
@@ -96,26 +106,26 @@ var CalibrateView = View.extend({
 
     var dimensions = AppConfig.DIMENSIONS
 
-    this.crossHairs.x += this.phoneOrientation.x
-    this.crossHairs.y += this.phoneOrientation.y
+    this.dot.x += this.phoneOrientation.x
+    this.dot.y += this.phoneOrientation.y
 
-    if (this.crossHairs.x < 0)
-      this.crossHairs.x = 0
+    if (this.dot.x < 0)
+      this.dot.x = 0
 
-    if (this.crossHairs.x > dimensions.width)
-      this.crossHairs.x = dimensions.width
+    if (this.dot.x > dimensions.width)
+      this.dot.x = dimensions.width
 
-    if (this.crossHairs.y < 0)
-      this.crossHairs.y = 0
+    if (this.dot.y < 0)
+      this.dot.y = 0
 
-    if (this.crossHairs.y > dimensions.height)
-      this.crossHairs.y = dimensions.height
+    if (this.dot.y > dimensions.height)
+      this.dot.y = dimensions.height
   },
 
 
 
   _moveCroshairs: function (position) {
-    TweenMax.to( this.crossHairs, .2, {
+    TweenMax.to( this.dot, .2, {
       x: position.x,
       y: position.y,
       ease: Expo.easeOut

@@ -40,19 +40,48 @@ var MobileCalibrateView = MobileView.extend({
 
   addEventListeners: function() {
     this.$startBtn.on('touchend', this._onStartBtnClick )
-    this.$body.on('mousemove', this._onDeviceOrientationChange )
+    this.$body.on('mousemove', this._onMouseMove )
+    window.ondevicemotion = this._onDeviceMotion
   },
 
 
 
   removeEventListeners: function() {
     this.$startBtn.off('touchend', this._onStartBtnClick )
-    this.$body.off('mousemove', this._onDeviceOrientationChange )
+    this.$body.off('mousemove', this._onMouseMove )
+    window.ondevicemotion = null
   },
 
 
 
-  _onDeviceOrientationChange: function (event) {
+  _onDeviceMotion: function (event) {
+    var self = this
+
+    var orientation = {
+      x: ~~event.accelerationIncludingGravity.x,
+      y: ~~event.accelerationIncludingGravity.y
+    }
+
+    TweenMax.to(this._curOrientation, .6, {
+      x: event.accelerationIncludingGravity.x,
+      y: event.accelerationIncludingGravity.y
+    })
+
+    window.socket.post( AppConfig.ENDPOINTS.orientation, {
+      sessionId: self.sessionId,
+      orientation: JSON.stringify( this._curOrientation )
+    },
+
+      function onResponse (response) {
+        //console.log(response.orientation)
+      })
+
+    $('.debug').html( orientation.x + '<br/>' + orientation.y )
+  },
+
+
+
+  _onMouseMove: function (event) {
 
     var orientation = {}
 
@@ -69,14 +98,15 @@ var MobileCalibrateView = MobileView.extend({
       }
     }
 
-    TweenMax.to(this._curOrientation, .6, {
+    TweenMax.to(this._curOrientation, .8, {
       x: orientation.x,
-      y: orientation.y
+      y: orientation.y,
+      ease: Expo.easeOut
     })
 
     window.socket.post( AppConfig.ENDPOINTS.orientation, {
       sessionId: this.sessionId,
-      orientation: JSON.stringify( orientation )
+      orientation: JSON.stringify( this._curOrientation )
     },
 
       function onResponse (response) {

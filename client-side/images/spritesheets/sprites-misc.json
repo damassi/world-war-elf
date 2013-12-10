@@ -2,14 +2,14 @@
 "images": ["sprites-misc.png"],
 "frames": [
 
-    [553, 191, 429, 39], 
-    [1439, 113, 228, 56], 
-    [1321, 186, 245, 68], 
-    [1127, 2, 451, 109], 
-    [1127, 113, 310, 71], 
-    [553, 2, 572, 187], 
-    [2, 2, 549, 251], 
-    [984, 191, 335, 39]
+    [1127, 2, 524, 78], 
+    [339, 191, 228, 56], 
+    [1580, 155, 245, 68], 
+    [1127, 82, 451, 109], 
+    [1580, 82, 310, 71], 
+    [2, 2, 572, 187], 
+    [576, 2, 549, 251], 
+    [2, 191, 335, 39]
 ],
 "animations": {
     
@@ -23,7 +23,7 @@
         "sync-text-sync":[7]
 },
 "texturepacker": [
-        "SmartUpdateHash: $TexturePacker:SmartUpdate:447517423d07fe707a29935101955ec7:95276dd487ef3c2005d4ab2e5d9af0b0:e1e9ae439b362dd91ad6050889d0c585$",
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:dad73d55a4691d8218dc437de76fd48f:612660308b9a6abbf48970f64ac15079:e1e9ae439b362dd91ad6050889d0c585$",
         "Created with TexturePacker (http://www.texturepacker.com) for EaselJS"
 ]
 }
