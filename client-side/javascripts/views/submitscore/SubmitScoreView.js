@@ -89,7 +89,7 @@ var SubmitScoreView = View.extend({
 
   _submitForm: function (event) {
     console.log('here?')
-    window.location.href = '#/home'
+    window.location.href = '#/high-scores'
   }
 
 })
