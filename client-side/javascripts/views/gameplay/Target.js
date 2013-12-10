@@ -167,6 +167,7 @@ var Target = View.extend({
       delay: 2 + ( Math.random() * 1 ),
 
       onComplete: function () {
+
         if (self.targetProps.attacker) {
           tm.delayedCall( self.SNOWBALL_ATTACK_DELAY, function() {
             self.attackPlayer()

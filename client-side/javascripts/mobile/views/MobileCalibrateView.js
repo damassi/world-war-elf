@@ -44,17 +44,17 @@ var MobileCalibrateView = MobileView.extend({
 
 
   addEventListeners: function() {
-    this.$startBtn.on('touchend', this._onStartBtnClick )
-    this.$body.on('mousemove', this._onMouseMove )
-    window.ondevicemotion = this._onDeviceMotion
+    this.$body.on('touchend', this._onStartBtnClick )
+    window.addEventListener( 'devicemotion', this._onDeviceMotion )
+    //window.ondevicemotion = this._onDeviceMotion
   },
 
 
 
   removeEventListeners: function() {
-    this.$startBtn.off('touchend', this._onStartBtnClick )
-    this.$body.off('mousemove', this._onMouseMove )
-    window.ondevicemotion = null
+    alert('firing here!')
+    this.$body.off('touchend', this._onStartBtnClick )
+    window.removeEventListener( 'devicemotion', this._onDeviceMotion )
   },
 
 
@@ -62,10 +62,10 @@ var MobileCalibrateView = MobileView.extend({
   _onDeviceMotion: function (event) {
     var self = this
 
-    var orientation = {
-      x: ~~event.accelerationIncludingGravity.x,
-      y: ~~event.accelerationIncludingGravity.y
-    }
+    // var orientation = {
+    //   x: ~~event.accelerationIncludingGravity.x,
+    //   y: ~~event.accelerationIncludingGravity.y
+    // }
 
     TweenMax.to(this._curOrientation, .6, {
       x: event.accelerationIncludingGravity.x,
@@ -82,43 +82,6 @@ var MobileCalibrateView = MobileView.extend({
       })
 
     $('.debug').html( orientation.x + '<br/>' + orientation.y )
-  },
-
-
-
-  _onMouseMove: function (event) {
-
-    var orientation = {}
-
-    try {
-      orientation = {
-        x: event.originalEvent.touches[0].pageX,
-        y: event.originalEvent.touches[0].pageY
-      }
-    }
-    catch (e) {
-      orientation = {
-        x: event.pageX,
-        y: event.pageY
-      }
-    }
-
-    TweenMax.to(this._curOrientation, .8, {
-      x: orientation.x,
-      y: orientation.y,
-      ease: Expo.easeOut
-    })
-
-    window.socket.post( AppConfig.ENDPOINTS.orientation, {
-      sessionId: this.sessionId,
-      orientation: JSON.stringify( this._curOrientation )
-    },
-
-      function onResponse (response) {
-        //console.log(response.orientation)
-      })
-
-    $('.debug').html( orientation.x + ', ' + orientation.y )
   },
 
 

@@ -409,8 +409,6 @@ var GamePlayView = View.extend({
       return
     }
 
-    //console.log(message.orientation.x, message.orientation.y)
-
     this.phoneOrientation = {
       x: message.orientation.x * 2,
       y: message.orientation.y * 2

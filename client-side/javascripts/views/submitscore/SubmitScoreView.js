@@ -19,7 +19,6 @@ var SubmitScoreView = View.extend({
     this._super(options)
 
     this.children = [
-      //this.placeholder = Easel.createBitmap('placeholder-submit-score'),
       Easel.createSprite('miscSprite', 'submit-text', { x: 152, y: 53 }),
     ]
 

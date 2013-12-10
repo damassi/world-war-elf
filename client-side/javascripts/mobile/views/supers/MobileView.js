@@ -42,6 +42,17 @@ var MobileView = Backbone.View.extend({
     })
   },
 
+
+
+  remove: function() {
+    this.removeEventListeners()
+    this._super()
+  },
+
+
+
+  removeEventListeners: function() {}
+
 })
 
 module.exports = MobileView

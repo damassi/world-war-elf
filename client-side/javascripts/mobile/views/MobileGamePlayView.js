@@ -21,6 +21,13 @@ var MobileGamePlayView = MobileView.extend({
    */
   DEFAULT_SNOWBALL_SCALE: .8,
 
+
+  /**
+   * Shoot animation time
+   * @type {Number}
+   */
+  FIRE_TIME: .2,
+
   /**
    * Cached global session id for sending POST data to server
    * @type {String}
@@ -72,7 +79,6 @@ var MobileGamePlayView = MobileView.extend({
       self.addEventListeners()
     })
 
-    //this.setBall()
     this.show()
 
     return this
@@ -81,11 +87,18 @@ var MobileGamePlayView = MobileView.extend({
 
 
   addEventListeners: function () {
-
-    this.$body.on('mousemove', this._onDeviceOrientationChange )
     this.$body.on('touchend', this.fireBall )
 
-    window.ondevicemotion = this._onDeviceMotion
+    window.addEventListener( 'devicemotion', this._onDeviceMotion )// = this._onDeviceMotion
+    window.socket.on( SocketEvent.TOGGLE_MODE, this._onToggleMode )
+  },
+
+
+
+  removeEventListeners: function () {
+    this.$body.on('touchend', this.fireBall )
+
+    window.removeEventListener( 'devicemotion', this._onDeviceMotion )
     window.socket.on( SocketEvent.TOGGLE_MODE, this._onToggleMode )
   },
 
@@ -99,7 +112,7 @@ var MobileGamePlayView = MobileView.extend({
     if (!this.isThrowing) {
       this.isThrowing = true
 
-      TweenMax.to( this.$balls, .4, {
+      TweenMax.to( this.$balls, this.FIRE_TIME, {
         y: -800,
         ease: Expo.easeIn,
         onComplete: function () {
@@ -158,37 +171,6 @@ var MobileGamePlayView = MobileView.extend({
 
 
 
-  _onDeviceOrientationChange: function (event) {
-
-    var orientation = {}
-
-    try {
-      orientation = {
-        x: event.originalEvent.touches[0].pageX,
-        y: event.originalEvent.touches[0].pageY
-      }
-    }
-    catch (e) {
-      orientation = {
-        x: event.pageX,
-        y: event.pageY
-      }
-    }
-
-    window.socket.post( AppConfig.ENDPOINTS.orientation, {
-      sessionId: this.sessionId,
-      orientation: JSON.stringify( orientation )
-    },
-
-      function onResponse (response) {
-        //console.log(response.orientation)
-      })
-
-    $('.debug').html( orientation.x + ', ' + orientation.y )
-  },
-
-
-
 
   //+ EVENT HANDLERS
   // ------------------------------------------------------------
@@ -218,12 +200,12 @@ var MobileGamePlayView = MobileView.extend({
 
     var self = this
 
-    TweenMax.fromTo( this.$balls, .4, { alpha: 0, top: '100%' }, {
+    TweenMax.fromTo( this.$balls, this.FIRE_TIME, { alpha: 0, top: '100%' }, {
       immediateRender: true,
       top: '25%',
       alpha: 1,
       ease: Expo.easeOut,
-      delay: .5,
+      delay: this.FIRE_TIME,
       onComplete: function() {
         self.isThrowing = false
       }
@@ -251,39 +233,7 @@ var MobileGamePlayView = MobileView.extend({
         })
       }
     })
-  },
-
-
-
-  _setBall: function() {
-    TweenMax.set( this.$balls, {
-      clearProps: 'y'
-    })
-
-    TweenMax.fromTo( this.$balls, .4, { top: 500 }, {
-      top: '25%',
-      ease: Expo.easeOut,
-      delay: .3
-    })
-
-    var self = this
-
-    this.draggableBall = Draggable.create( this.$balls, {
-      type:"y",
-      bounds: '.balls-bounds',
-      throwProps: true,
-      onThrowUpdate: function() {
-        var y = GreenProp.y(this.target)
-        var upperBounds = -600
-
-        if (y < upperBounds) {
-          TweenMax.killTweensOf( self.$balls )
-          self._setBall()
-        }
-
-      }
-    });
-  },
+  }
 
 
 })
