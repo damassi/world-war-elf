@@ -37,7 +37,7 @@ var SubmitScoreView = View.extend({
 
     TweenMax.set( this.$form, { autoAlpha: 0 })
 
-    this.addEventlisteners()
+    this.addEventListeners()
 
     return this
   },
