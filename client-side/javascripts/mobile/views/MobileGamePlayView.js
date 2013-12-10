@@ -126,17 +126,20 @@ var MobileGamePlayView = MobileView.extend({
 
     TweenMax.to(this._curOrientation, .6, {
       x: event.accelerationIncludingGravity.x,
-      y: event.accelerationIncludingGravity.y
+      y: event.accelerationIncludingGravity.y,
+      ease: Expo.easeOut,
+      onUpdate: function() {
+
+        window.socket.post( AppConfig.ENDPOINTS.orientation, {
+          sessionId: self.sessionId,
+          orientation: JSON.stringify( self._curOrientation )
+        },
+
+          function onResponse (response) {
+            //console.log(response.orientation)
+          })
+      }
     })
-
-    window.socket.post( AppConfig.ENDPOINTS.orientation, {
-      sessionId: self.sessionId,
-      orientation: JSON.stringify( orientation )
-    },
-
-      function onResponse (response) {
-        //console.log(response.orientation)
-      })
 
     $('.debug').html( orientation.x + '<br/>' + orientation.y )
   },

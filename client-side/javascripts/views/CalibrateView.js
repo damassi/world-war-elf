@@ -30,7 +30,6 @@ var CalibrateView = View.extend({
       //this.placeholder = Easel.createBitmap('placeholder-calibrate'),
 
       Easel.createSprite('gameplaySprite', 'game-crosshairs', { x: 481, y: 302 }, { center: true }),
-
       Easel.createSprite('miscSprite', 'calibrate-text-calibrate', { x: 215, y: 126 }),
       this.dot
     ]
