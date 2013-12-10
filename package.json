@@ -46,7 +46,7 @@
   ],
   "readmeFilename": "README.md",
   "scripts": {
-    "start-prod": "IP=10.1.1.91 NODE_ENV=production PORT=80 forever -a -l /var/log/upstart/holiday-app.log --minUptime 5000 --spinSleepTime 2000 start app.js --prod",
+    "start-prod": "IP=10.1.1.91 NODE_ENV=production PORT=80 forever -a -l /var/log/upstart/holiday-app.log --minUptime 5000 --spinSleepTime 2000 start app.js",
     "stop-prod": "forever stop app.js >> /var/log/upstart/holiday-app.log"
   }
 }
