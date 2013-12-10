@@ -28,8 +28,16 @@
 =bg-gradient( $endColor, $startColor )
 	background: $startColor
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$startColor), color-stop(0%,$endColor), color-stop(100%,$startColor))
+	background: -moz-gradient(linear, left top, left bottom, color-stop(0%,$startColor), color-stop(0%,$endColor), color-stop(100%,$startColor))
+	background: -ms-gradient(linear, left top, left bottom, color-stop(0%,$startColor), color-stop(0%,$endColor), color-stop(100%,$startColor))
+	background: -o-gradient(linear, left top, left bottom, color-stop(0%,$startColor), color-stop(0%,$endColor), color-stop(100%,$startColor))
+	background: gradient(linear, left top, left bottom, color-stop(0%,$startColor), color-stop(0%,$endColor), color-stop(100%,$startColor))
+
 
 =bg-gradient-radial( $endColor, $startColor, $colorStop: 50% )
 	background: $startColor
 	background: -webkit-radial-gradient(center center, ellipse farthest-corner, $startColor 0%, $endColor $colorStop)
+	background: -moz-radial-gradient(center center, ellipse farthest-corner, $startColor 0%, $endColor $colorStop)
+	background: -ms-radial-gradient(center center, ellipse farthest-corner, $startColor 0%, $endColor $colorStop)
+	background: -o-radial-gradient(center center, ellipse farthest-corner, $startColor 0%, $endColor $colorStop)
 	background:         radial-gradient(center center, ellipse farthest-corner, $startColor 0%, $endColor $colorStop)

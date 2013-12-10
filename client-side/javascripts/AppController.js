@@ -140,7 +140,7 @@ var AppController = {
 
     c.Ticker.addEventListener( 'tick', this.tick )
 
-    this.appModel.set('mute', true)
+    this.appModel.set('mute', false)
   },
 
 

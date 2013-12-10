@@ -124,6 +124,7 @@ var GamePlayView = View.extend({
     this.redHitArea.alpha = 0
 
     this.addChildren( this.children )
+
     this.addEventListeners()
 
     return this
@@ -139,9 +140,9 @@ var GamePlayView = View.extend({
     PubSub.on( AppEvent.STOP_GAMEPLAY, this._onStopGamePlay )
     PubSub.on( GameEvent.PLAYER_HIT, this._onPlayerHit )
 
-    $(canvas).on( 'mousemove', this._onMouseMove )
-    $(canvas).on( 'mousedown', this._onPrepareTarget )
-    $(canvas).on( 'mouseup', this._onShoot )
+    $('#canvas').on( 'mousemove', this._onMouseMove )
+    $('#canvas').on( 'mousedown', this._onPrepareTarget )
+    $('#canvas').on( 'mouseup', this._onShoot )
   },
 
 
@@ -154,8 +155,9 @@ var GamePlayView = View.extend({
     PubSub.off( AppEvent.STOP_GAMEPLAY, this._onStopGamePlay )
     PubSub.off( GameEvent.PLAYER_HIT, this._onPlayerHit )
 
-    $(canvas).off( 'mousemove', this._onMouseMove )
-    $(canvas).off( 'click', this._onShoot )
+    $('#canvas').off( 'mousemove', this._onMouseMove )
+    $('#canvas').off( 'mousedown', this._onPrepareTarget )
+    $('#canvas').off( 'mouseup', this._onShoot )
   },
 
 
@@ -393,9 +395,12 @@ var GamePlayView = View.extend({
 
 
   _onMouseMove: function (event) {
+    var x = (event.offsetX || event.clientX - $(event.target).offset().left)
+      , y = (event.offsetY || event.clientY - $(event.target).offset().top)
+
     this._moveCroshairs({
-      x: event.offsetX,
-      y: event.offsetY
+      x: x,
+      y: y
     })
   },
 
