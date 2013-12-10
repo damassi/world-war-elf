@@ -35,6 +35,7 @@ var AppConfig = {
   ENDPOINTS: {
     generateCode    : '/api/generate-code',
     sync            : '/api/sync',
+    startGame       : '/api/start-game',
     orientation     : '/api/orientation',
     fire            : '/api/fire',
     toggleMode      : '/api/toggle-mode'

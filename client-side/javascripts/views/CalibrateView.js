@@ -48,7 +48,7 @@ var CalibrateView = View.extend({
 
   addEventListeners: function () {
     window.socket.on( SocketEvent.ORIENTATION, this._onOrientationUpdate )
-    window.socket.on( SocketEvent.SHOOT, this._onShoot )
+    window.socket.on( SocketEvent.START_GAME, this._onStartGame )
 
     PubSub.on( AppEvent.TICK, this._onTick )
   },
@@ -57,7 +57,7 @@ var CalibrateView = View.extend({
 
   removeEventListeners: function () {
     window.socket.removeListener( SocketEvent.ORIENTATION, this._onOrientationUpdate )
-    window.socket.removeListener( SocketEvent.SHOOT, this._onShoot )
+    window.socket.removeListener( SocketEvent.START_GAME, this._onPlayGame )
 
     PubSub.off( AppEvent.TICK, this._onTick )
   },
@@ -76,6 +76,16 @@ var CalibrateView = View.extend({
       x: message.orientation.x * 2,
       y: message.orientation.y * 2
     }
+  },
+
+
+  /**
+   * Socket event received from the backend
+   * @param  {Object} message
+   * @return {void}
+   */
+  _onStartGame: function (message) {
+    window.location.href = '#/play'
   },
 
 

@@ -22,9 +22,15 @@ var MobileController = {
 
       this.appModel = new AppModel()
 
-      this.mobileSyncView      = new MobileSyncView()
-      this.mobileCalibrateView = new MobileCalibrateView()
-      this.mobileGamePlayView  = new MobileGamePlayView({
+      this.mobileSyncView = new MobileSyncView({
+        appModel: this.appModel
+      })
+
+      this.mobileCalibrateView = new MobileCalibrateView({
+        appModel: this.appModel
+      })
+
+      this.mobileGamePlayView = new MobileGamePlayView({
         appModel: this.appModel
       })
 

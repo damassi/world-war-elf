@@ -62,7 +62,7 @@ module.exports = {
     },
 
       function foundSession (err, session) {
-        if (err) next(err)
+        if (err) return next(err)
         if (!session) {
           return next( ErrorEvent.SESSION_NOT_FOUND )
         }
@@ -74,7 +74,7 @@ module.exports = {
         },
 
         function sessionUpdated (err, session) {
-          if (err) next(err)
+          if (err) return next(err)
 
           session = session.pop()
 
@@ -89,6 +89,35 @@ module.exports = {
             session: session
           })
         })
+      })
+  },
+
+
+
+  'start-game': function (req, res, next) {
+    var sessionId = req.param('sessionId')
+      , socket = req.socket
+      , io     = sails.io
+
+    Session.findOne({
+      sessionId: sessionId
+    },
+
+      function foundSession (err, session) {
+        if (err) return next(err)
+        if (!session) {
+          return next( ErrorEvent.SESSION_NOT_FOUND )
+        }
+
+        io.sockets.in(sessionId).emit( SocketEvent.START_GAME, {
+          playGame: true
+        })
+
+        res.json({
+          status: 200,
+          session: session
+        })
+
       })
   },
 

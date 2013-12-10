@@ -205,8 +205,13 @@ var MobileGamePlayView = MobileView.extend({
 
 
   _resetBall: function () {
-    TweenMax.set( this.$balls, { alpha: 0 })
-    TweenMax.set( this.$balls, { clearProps: 'y' })
+    TweenMax.set( this.$balls, {
+      alpha: 0
+    })
+
+    TweenMax.set( this.$balls, {
+      clearProps: 'y'
+    })
 
     var self = this
 
