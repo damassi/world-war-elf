@@ -137,8 +137,7 @@ var SyncView = View.extend({
           syncCode: response.syncCode
         })
 
-        console.log('SyncCode: ', response.syncCode)
-        $('.debug').html('Please enter this code in your mobile phone: ' + response.syncCode)
+        $('.debug').html('Please enter this code in your mobile phone: ' + AppConfig.MOBILE_URL + '/' + response.syncCode)
       })
   },
 

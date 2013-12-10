@@ -102,6 +102,7 @@ var GamePlayView = View.extend({
       // The user-controlled target
       this.crossHairs   = Easel.createSprite('gameplaySprite', 'game-crosshairs', { x: 468, y: 245 }, { center: true }),
 
+      // The flash that is triggered when the player gets hit
       this.redHitArea = new c.Shape( new c.Graphics().beginFill("#ff0000").drawRect( 0, 0, AppConfig.DIMENSIONS.width, AppConfig.DIMENSIONS.height ))
     ]
 
@@ -141,24 +142,6 @@ var GamePlayView = View.extend({
     $(canvas).on( 'mousemove', this._onMouseMove )
     $(canvas).on( 'mousedown', this._onPrepareTarget )
     $(canvas).on( 'mouseup', this._onShoot )
-  },
-
-
-
-  /**
-   * remove our game over text and move us on
-   * @param  {easel bitmap} bitmap the bitmap text to remove
-   */
-  removeGameOver: function(bitmap) {
-      var self = this
-      TweenMax.to(bitmap, .3,
-        {y:450, ease:Back.easeIn, onComplete: function(){
-          self.stage.removeChild(bitmap)
-          setTimeout(function() {
-            window.location.hash = '#/submit-score'
-          }, 500)
-        }
-      })
   },
 
 
@@ -255,6 +238,29 @@ var GamePlayView = View.extend({
       alpha: 1,
       ease: Expo.easeOut
     })
+  },
+
+
+
+  /**
+   * Remove our game over popup text and move us on
+   * @param  {c.Bitmap} bitmap the bitmap text to remove
+   */
+
+  removeGameOver: function(bitmap) {
+      var self = this
+
+      TweenMax.to( bitmap, .3, {
+        y: 450,
+        ease: Back.easeIn,
+        onComplete: function(){
+          self.stage.removeChild(bitmap)
+
+          setTimeout(function() {
+            window.location.hash = '#/submit-score'
+          }, 500)
+        }
+      })
   },
 
 

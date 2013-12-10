@@ -6,8 +6,13 @@
  */
 
 
-var View  = require('../supers/View')
-var Easel = require('../utils/Easel')
+var SocketEvent = require('../../../shared/events/SocketEvent')
+var AppConfig   = require('../config/AppConfig')
+var AppEvent    = require('../events/AppEvent')
+var GameEvent   = require('../events/GameEvent')
+var PubSub      = require('../utils/PubSub')
+var View        = require('../supers/View')
+var Easel       = require('../utils/Easel')
 
 
 var CalibrateView = View.extend({
@@ -17,9 +22,91 @@ var CalibrateView = View.extend({
     this._super(options)
 
     this.children = [
-      this.placeholder = Easel.createBitmap('placeholder-calibrate')
+      this.placeholder = Easel.createBitmap('placeholder-calibrate'),
+
+      // The user-controlled target
+      this.crossHairs = Easel.createSprite('gameplaySprite', 'game-crosshairs', { x: 468, y: 245 }, { center: true }),
     ]
-  }
+  },
+
+
+
+  render: function () {
+    this._super()
+
+    this.phoneOrientation = {
+      x: this.crossHairs.x,
+      y: this.crossHairs.y
+    }
+
+    PubSub.on( AppEvent.TICK, this._onTick )
+
+    return this
+  },
+
+
+
+  addEventListeners: function () {
+    window.socket.on( SocketEvent.ORIENTATION, this._onOrientationUpdate )
+    window.socket.on( SocketEvent.SHOOT, this._onShoot )
+  },
+
+
+
+  removeEventListeners: function () {
+    window.socket.removeListener( SocketEvent.ORIENTATION, this._onOrientationUpdate )
+    window.socket.removeListener( SocketEvent.SHOOT, this._onShoot )
+  },
+
+
+
+  _onOrientationUpdate: function (message) {
+
+    // If DEBUG `mouse` param passed back from API
+    if (message.mouse) {
+      this._moveCroshairs(message.orientation)
+      return
+    }
+
+    this.phoneOrientation = {
+      x: message.orientation.x * 2,
+      y: message.orientation.y * 2
+    }
+  },
+
+
+
+  _onTick: function() {
+    if (!this.connected)
+      return
+
+    var dimensions = AppConfig.DIMENSIONS
+
+    this.crossHairs.x += this.phoneOrientation.x
+    this.crossHairs.y += this.phoneOrientation.y
+
+    if (this.crossHairs.x < 0)
+      this.crossHairs.x = 0
+
+    if (this.crossHairs.x > dimensions.width)
+      this.crossHairs.x = dimensions.width
+
+    if (this.crossHairs.y < 0)
+      this.crossHairs.y = 0
+
+    if (this.crossHairs.y > dimensions.height)
+      this.crossHairs.y = dimensions.height
+  },
+
+
+
+  _moveCroshairs: function (position) {
+    TweenMax.to( this.crossHairs, .2, {
+      x: position.x,
+      y: position.y,
+      ease: Expo.easeOut
+    })
+  },
 
 })
 
