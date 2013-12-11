@@ -93,12 +93,39 @@ var PreloaderView = Backbone.View.extend({
       rotation: -180,
       ease: Back.easeIn,
       delay: .5,
-      onComplete: function() {
-        self.trigger('loadComplete')
 
-        self.remove()
+      onComplete: function() {
+        self._loadScoreboardData()
       }
     })
+  },
+
+
+
+  _loadScoreboardData: function () {
+    var self = this
+
+    function proceed() {
+      self.trigger('loadComplete')
+      self.remove()
+    }
+
+    $.getJSON('http://dev-vs-wfiis1/usherrusher/organization.ashx')
+      .error( function (error) {
+
+      })
+      .success( function (data) {
+        console.log(data)
+      })
+
+    $.getJSON('http://dev-vs-wfiis1/usherrusher/view.ashx')
+      .error( function (data) {
+      })
+      .success( function (data) {
+        console.log(data)
+      })
+
+    proceed()
   }
 
 })

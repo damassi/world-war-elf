@@ -42,6 +42,14 @@ var AppConfig = {
   },
 
 
+  SCOREBOARD_ENDPOINTS: {
+    organizations: 'http://dev-vs-wfiis1/usherrusher/organization.ashx',
+    topscores: 'http://dev-vs-wfiis1/usherrusher/view.ashx',
+    topByOrg: 'http://dev-vs-wfiis1/usherrusher/view.ashx?org=yes',
+    postScore: 'http://dev-vs-wfiis1/usherrusher/submit.ashx?name={{ name }}&organizationId={{ organization }}'
+  },
+
+
   /**
    * Base asset path
    * @type {String}

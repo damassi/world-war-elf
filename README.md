@@ -19,3 +19,14 @@ Project Setup
 
 
 (Please note that depending upon your setup you may need `sudo` permissions to execute the above commands.)
+
+
+Organizations:
+http://dev-vs-wfiis1/usherrusher/organization.ashx
+
+Scoreboards:
+http://dev-vs-wfiis1/usherrusher/view.ashx
+http://dev-vs-wfiis1/usherrusher/view.ashx?org=yes
+
+Submitting scores:
+http://dev-vs-wfiis1/usherrusher/submit.ashx?name=Me&organizationId=134
