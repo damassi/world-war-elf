@@ -21,8 +21,6 @@ var SubmitScoreView = View.extend({
     this.children = [
       Easel.createSprite('miscSprite', 'submit-text', { x: 152, y: 53 }),
     ]
-
-    //Easel.dragObject( this.children )
   },
 
 

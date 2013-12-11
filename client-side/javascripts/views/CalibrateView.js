@@ -56,28 +56,28 @@ var CalibrateView = View.extend({
 
 
   addEventListeners: function () {
-    window.socket.on( SocketEvent.ORIENTATION, this._onOrientationUpdate )
-    window.socket.on( SocketEvent.START_GAME, this._onStartGame )
+    window.socket.on( SocketEvent.ORIENTATION, this.onOrientationUpdate )
+    window.socket.on( SocketEvent.START_GAME, this.onStartGame )
 
-    PubSub.on( AppEvent.TICK, this._onTick )
+    PubSub.on( AppEvent.TICK, this.onTick )
   },
 
 
 
   removeEventListeners: function () {
-    window.socket.removeListener( SocketEvent.ORIENTATION, this._onOrientationUpdate )
-    window.socket.removeListener( SocketEvent.START_GAME, this._onPlayGame )
+    window.socket.removeListener( SocketEvent.ORIENTATION, this.onOrientationUpdate )
+    window.socket.removeListener( SocketEvent.START_GAME, this.onPlayGame )
 
-    PubSub.off( AppEvent.TICK, this._onTick )
+    PubSub.off( AppEvent.TICK, this.onTick )
   },
 
 
 
-  _onOrientationUpdate: function (message) {
+  onOrientationUpdate: function (message) {
 
     // If DEBUG `mouse` param passed back from API
     if (message.mouse) {
-      this._moveCroshairs(message.orientation)
+      this.moveCroshairs(message.orientation)
       return
     }
 
@@ -93,13 +93,13 @@ var CalibrateView = View.extend({
    * @param  {Object} message
    * @return {void}
    */
-  _onStartGame: function (message) {
+  onStartGame: function (message) {
     window.location.href = '#/play'
   },
 
 
 
-  _onTick: function() {
+  onTick: function() {
 
     var dimensions = AppConfig.DIMENSIONS
 
@@ -121,7 +121,7 @@ var CalibrateView = View.extend({
 
 
 
-  _moveCroshairs: function (position) {
+  moveCroshairs: function (position) {
     T.to( this.dot, .2, {
       x: position.x,
       y: position.y,

@@ -112,37 +112,56 @@ var PreloaderView = Backbone.View.extend({
 
 
   _loadScoreboardData: function () {
+    var orgData = {}
+
+    // Load Organization data
+    var req = $.ajax({
+      url: AppConfig.SCOREBOARD_ENDPOINTS.organizations,
+      async: false
+    })
+
+    req.error( function (error) {})
+
+    req.done( function (data) {
+      orgData = data
+    })
+
+
+    // Load Top Scores
+    req = $.ajax({
+      url: AppConfig.SCOREBOARD_ENDPOINTS.topscores,
+      async: false
+    })
+
+
+    // No connection or working from Dev, kick
+    // off with dummy data
+
     var self = this
 
-    // Load scoreboard data from dev server
-    $.getJSON( AppConfig.SCOREBOARD_ENDPOINTS.organizations)
-      .error( function (error) {})
+    req.error( function (error) {
+      var scoreboard = {
+        organizations: [{ Name: 'A', Id: 1 }],
+        scores: [{ Score: '12345', Name: 'Chris', Organization: 'POP'}]
+      }
 
-      // Organizations have loaded
-      .done( function (orgData) {
-        //console.log(orgData)
-
-        $.getJSON( AppConfig.SCOREBOARD_ENDPOINTS.topscores )
-          .error( function (data) {})
+      self.trigger('loadComplete', scoreboard)
+      self.remove()
+    })
 
 
-          // Scoreboard has loaded.  Kick off the app
-          // and pass the data into the AppController for use
+    // Scoreboard has loaded.  Kick off the app
+    // and pass the data into the AppController for use
 
-          .done( function (scoreboardData) {
+    req.done( function (scoreboardData) {
 
-            var scoreboard = {
-              organizations: orgData.Organizations,
-              scores: scoreboardData.Scores
-            }
+      var scoreboard = {
+        organizations: orgData.Organizations,
+        scores: scoreboardData.Scores
+      }
 
-            console.log( scoreboard )
-
-            self.trigger('loadComplete', scoreboard)
-
-            self.remove()
-          })
-      })
+      console.log( scoreboard )
+    })
   }
 
 })
