@@ -152,7 +152,6 @@ var Target = View.extend({
 
 
   remove: function() {
-    //console.log('firing remve?')
     T.killTweensOf( this.instance )
 
     if (this.attackSnowball){

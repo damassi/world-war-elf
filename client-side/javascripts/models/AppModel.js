@@ -137,7 +137,7 @@ var AppModel = Backbone.Model.extend({
 
   _postModeToMobile: function (mode) {
     if (!this.get('connected'))
-      return
+      return mode
 
     window.socket.post( AppConfig.ENDPOINTS.toggleMode, {
       sessionId: this.get('session').sessionId,
