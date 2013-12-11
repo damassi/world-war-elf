@@ -139,31 +139,31 @@ var GamePlayView = View.extend({
 
 
   addEventListeners: function () {
-    window.socket.on( SocketEvent.ORIENTATION, this._onOrientationUpdate )
-    window.socket.on( SocketEvent.SHOOT, this._onShoot )
+    window.socket.on( SocketEvent.ORIENTATION, this.onOrientationUpdate )
+    window.socket.on( SocketEvent.SHOOT, this.onShoot )
 
-    PubSub.on( AppEvent.START_GAMEPLAY, this._onStartGamePlay )
-    PubSub.on( AppEvent.STOP_GAMEPLAY, this._onStopGamePlay )
-    PubSub.on( GameEvent.PLAYER_HIT, this._onPlayerHit )
+    PubSub.on( AppEvent.START_GAMEPLAY, this.onStartGamePlay )
+    PubSub.on( AppEvent.STOP_GAMEPLAY, this.onStopGamePlay )
+    PubSub.on( GameEvent.PLAYER_HIT, this.onPlayerHit )
 
-    $('#canvas').on( 'mousemove', this._onMouseMove )
-    $('#canvas').on( 'mousedown', this._onPrepareTarget )
-    $('#canvas').on( 'mouseup', this._onShoot )
+    $('#canvas').on( 'mousemove', this.onMouseMove )
+    $('#canvas').on( 'mousedown', this.onPrepareTarget )
+    $('#canvas').on( 'mouseup', this.onShoot )
   },
 
 
 
   removeEventListeners: function () {
-    window.socket.removeListener( SocketEvent.ORIENTATION, this._onOrientationUpdate )
-    window.socket.removeListener( SocketEvent.SHOOT, this._onShoot )
+    window.socket.removeListener( SocketEvent.ORIENTATION, this.onOrientationUpdate )
+    window.socket.removeListener( SocketEvent.SHOOT, this.onShoot )
 
-    PubSub.off( AppEvent.START_GAMEPLAY, this._onStartGamePlay )
-    PubSub.off( AppEvent.STOP_GAMEPLAY, this._onStopGamePlay )
-    PubSub.off( GameEvent.PLAYER_HIT, this._onPlayerHit )
+    PubSub.off( AppEvent.START_GAMEPLAY, this.onStartGamePlay )
+    PubSub.off( AppEvent.STOP_GAMEPLAY, this.onStopGamePlay )
+    PubSub.off( GameEvent.PLAYER_HIT, this.onPlayerHit )
 
-    $('#canvas').off( 'mousemove', this._onMouseMove )
-    $('#canvas').off( 'mousedown', this._onPrepareTarget )
-    $('#canvas').off( 'mouseup', this._onShoot )
+    $('#canvas').off( 'mousemove', this.onMouseMove )
+    $('#canvas').off( 'mousedown', this.onPrepareTarget )
+    $('#canvas').off( 'mouseup', this.onShoot )
   },
 
 
@@ -340,7 +340,7 @@ var GamePlayView = View.extend({
   // ------------------------------------------------------------
 
 
-  _onStartGamePlay: function () {
+  onStartGamePlay: function () {
     var array = AppConfig.DEFAULT_GAMEPLAY_TIME.split(':')
     var seconds = parseInt(array[0]*60) + parseInt(array[1])
 
@@ -351,12 +351,12 @@ var GamePlayView = View.extend({
       gamePlayView: this
     })
 
-    PubSub.on( AppEvent.TICK, this._onTick )
+    PubSub.on( AppEvent.TICK, this.onTick )
   },
 
 
 
-  _onStopGamePlay: function () {
+  onStopGamePlay: function () {
     this.hideCrossHairs()
     this.hud.hide()
     this.removeEventListeners()
@@ -390,13 +390,13 @@ var GamePlayView = View.extend({
 
 
 
-  _onPauseGamePlay: function () {
+  onPauseGamePlay: function () {
 
   },
 
 
 
-  _onPrepareTarget: function (event) {
+  onPrepareTarget: function (event) {
     var fireTweenTime = .4
 
      T.to( this.crossHairs, fireTweenTime * .5, {
@@ -413,7 +413,7 @@ var GamePlayView = View.extend({
 
 
 
-  _onShoot: function (event) {
+  onShoot: function (event) {
     if (this.crossHairs.alpha !== 1)
       return
 
@@ -430,12 +430,12 @@ var GamePlayView = View.extend({
       ease: Back.easeOut
     })
 
-    this._throwSnowball()
+    this.throwSnowball()
   },
 
 
 
-  _onTargetHit: function (params) {
+  onTargetHit: function (params) {
     var target = params.target
 
     if (target && target.parent)
@@ -448,7 +448,7 @@ var GamePlayView = View.extend({
 
 
 
-  _onPlayerHit: function (params) {
+  onPlayerHit: function (params) {
     T.killTweensOf(this.redHitArea)
 
     T.fromTo(this.redHitArea, .1, { alpha: 0 }, {
@@ -463,11 +463,11 @@ var GamePlayView = View.extend({
 
 
 
-  _onMouseMove: function (event) {
+  onMouseMove: function (event) {
     var x = (event.offsetX || event.clientX - $(event.target).offset().left)
       , y = (event.offsetY || event.clientY - $(event.target).offset().top)
 
-    this._moveCroshairs({
+    this.moveCroshairs({
       x: x,
       y: y
     })
@@ -475,11 +475,11 @@ var GamePlayView = View.extend({
 
 
 
-  _onOrientationUpdate: function (message) {
+  onOrientationUpdate: function (message) {
 
     // If DEBUG `mouse` param passed back from API
     if (message.mouse) {
-      this._moveCroshairs(message.orientation)
+      this.moveCroshairs(message.orientation)
       return
     }
 
@@ -492,7 +492,7 @@ var GamePlayView = View.extend({
 
 
 
-  _onTick: function() {
+  onTick: function() {
     if (!this.connected)
       return
 
@@ -522,7 +522,7 @@ var GamePlayView = View.extend({
 
 
 
-  _moveCroshairs: function (position) {
+  moveCroshairs: function (position) {
     T.to( this.crossHairs, .2, {
       x: position.x,
       y: position.y,
@@ -532,7 +532,7 @@ var GamePlayView = View.extend({
 
 
 
-  _throwSnowball: function () {
+  throwSnowball: function () {
     var snowballType = this.appModel.get('supermode') ? 'supermode' : 'normal'
 
     var snowball = new Snowball({
@@ -552,7 +552,7 @@ var GamePlayView = View.extend({
     })
 
     // Add listeners to trigger hit animations
-    snowball.on( GameEvent.TARGET_HIT, this._onTargetHit )
+    snowball.on( GameEvent.TARGET_HIT, this.onTargetHit )
 
   },
 

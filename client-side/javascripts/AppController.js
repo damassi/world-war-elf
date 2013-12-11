@@ -133,8 +133,8 @@ var AppController = {
     this.stage.addChild( Easel.createBitmap( 'frame-background' ))
     this.stage.addChild( this.muteBtn.render().container )
 
-    this._addGround()
-    this._animateIn()
+    this.addGround()
+    this.animateIn()
 
     Sound.initialize({ appModel: this.appModel })
     Sound.play({ soundId: 'audio-bg', loop: -1, volume: 0.5 })
@@ -146,10 +146,9 @@ var AppController = {
 
 
   delegateEvents: function () {
-    this.appModel.on( 'change:view', this._onViewChange )
-
-    PubSub.on( AppEvent.SOCKET_IO_CONNECTED, this._onSocketIOConnected )
-    PubSub.on( AppEvent.DESKTOP_CLIENT_SYNCED, this._onDesktopClientSynched )
+    this.appModel.on( 'change:view', this.onViewChange )
+    PubSub.on( AppEvent.SOCKET_IO_CONNECTED, this.onSocketIOConnected )
+    PubSub.on( AppEvent.DESKTOP_CLIENT_SYNCED, this.onDesktopClientSynched )
   },
 
 
@@ -185,11 +184,11 @@ var AppController = {
 
 
 
-  _onSocketIOConnected: function (message) {},
+  onSocketIOConnected: function (message) {},
 
 
 
-  _onDesktopClientSynched: function () {
+  onDesktopClientSynched: function () {
     var sessionId = window.socket.socket.sessionid
 
     if (sessionId !== this.appModel.get('session').desktopSocketId)
@@ -200,7 +199,7 @@ var AppController = {
 
 
 
-  _onViewChange: function (appModel) {
+  onViewChange: function (appModel) {
     var view         = appModel.changed.view
       , previousView = appModel._previousAttributes.view
 
@@ -218,7 +217,7 @@ var AppController = {
   // ------------------------------------------------------------
 
 
-  _addGround: function () {
+  addGround: function () {
     this.ground = [
       this.backGround   = Easel.createSprite('homeSprite', 'home-ground-back', { x: -7, y: 410 }),
       this.middleGround = Easel.createSprite('homeSprite', 'home-ground-middle', { x: 232, y: 440 }),
@@ -233,7 +232,7 @@ var AppController = {
 
 
 
-  _animateIn: function () {
+  animateIn: function () {
     TweenMax.to( this.$contentContainer, .5, { autoAlpha: 1, ease: Linear.easeNone })
   },
 

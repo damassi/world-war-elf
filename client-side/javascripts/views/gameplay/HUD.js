@@ -88,15 +88,14 @@ var HUD = View.extend({
 
 
   addEventListeners: function () {
-    this.timer.on( 'change', this._onTimerUpdate )
-
-    this.listenTo( this.appModel, GameEvent.HITS, this._onChangeHits )
+    this.timer.on( 'change', this.onTimerUpdate )
+    this.listenTo( this.appModel, GameEvent.HITS, this.onChangeHits )
   },
 
 
 
   removeEventListeners: function () {
-    this.timer.off( 'change', this._onTimerUpdate )
+    this.timer.off( 'change', this.onTimerUpdate )
     this.stopListening()
   },
 
@@ -147,7 +146,7 @@ var HUD = View.extend({
    * @param  {String} time the current time
    */
 
-  _onTimerUpdate: function (time) {
+  onTimerUpdate: function (time) {
     this.timeText.setText( time )
 
     var array = time.split(':')
@@ -161,7 +160,7 @@ var HUD = View.extend({
 
 
 
-  _onChangeHits: function (model) {
+  onChangeHits: function (model) {
     var hits = model.changed.hits
 
     var points = {

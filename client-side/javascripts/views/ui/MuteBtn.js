@@ -36,9 +36,9 @@ var MuteBtn = View.extend({
 
 
   canvasEvents: {
-    'muteBtn mouseover' : '_onMuteOver',
-    'muteBtn mouseout'  : '_onMuteOut',
-    'muteBtn click'     : '_onMuteClick'
+    'muteBtn mouseover' : 'onMuteOver',
+    'muteBtn mouseout'  : 'onMuteOut',
+    'muteBtn click'     : 'onMuteClick'
   },
 
 
@@ -57,7 +57,7 @@ var MuteBtn = View.extend({
 
 
 
-  _onMuteOver: function (event) {
+  onMuteOver: function (event) {
     if (this.gamePlayView.crossHairs)
       this.gamePlayView.hideCrossHairs()
 
@@ -71,7 +71,7 @@ var MuteBtn = View.extend({
 
 
 
-  _onMuteOut: function (event) {
+  onMuteOut: function (event) {
     if (this.gamePlayView.crossHairs)
       this.gamePlayView.showCrossHairs()
 
@@ -82,7 +82,7 @@ var MuteBtn = View.extend({
 
 
 
-  _onMuteClick: function (event) {
+  onMuteClick: function (event) {
     if (this.gamePlayView.crossHairs)
       this.gamePlayView.hideCrossHairs()
 
@@ -95,7 +95,7 @@ var MuteBtn = View.extend({
 
 
 
-  _onMuteChange: function (model) {
+  onMuteChange: function (model) {
     var mute = model.changed.mute
       , frame = mute ? 0 : 1
 

@@ -12,6 +12,7 @@ var template  = require('./preloader-template.hbs')
 
 var PreloaderView = Backbone.View.extend({
 
+
   /**
    * @type {String}
    */
@@ -103,8 +104,12 @@ var PreloaderView = Backbone.View.extend({
       ease: Back.easeIn,
       delay: .5,
 
+
+      // Once game assets are finished loading
+      // kick off the scoreboard data
+
       onComplete: function() {
-        self._loadScoreboardData()
+        self.loadScoreboardData()
       }
     })
   },

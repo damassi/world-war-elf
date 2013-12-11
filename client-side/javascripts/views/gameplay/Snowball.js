@@ -81,8 +81,6 @@ var Snowball = View.extend({
       y: this.snowball.y
     }
 
-    //var bezierValues = Easel.returnPointsBetweenPoints( startpoint, endpoint, 4 )
-
     Easel.cache( this.snowball )
 
     // Tint snowball as it recedes
@@ -114,7 +112,7 @@ var Snowball = View.extend({
 
       onComplete: function() {
 
-        if (self._checkHit()) {}
+        if (self.checkHit()) {}
         else {
           T.to(this.target, .2, { alpha: 0, onComplete: function () {
             self.remove()
@@ -128,7 +126,7 @@ var Snowball = View.extend({
 
 
 
-  _checkHit: function() {
+  checkHit: function() {
     var i = 0
       , len = this.occupiedPositions.length
 
@@ -154,7 +152,7 @@ var Snowball = View.extend({
           target: target
         })
 
-        this._addSplat()
+        this.addSplat()
 
         return true
       }
@@ -165,7 +163,7 @@ var Snowball = View.extend({
 
 
 
-  _addSplat: function (params) {
+  addSplat: function (params) {
     var splat = Easel.createSprite('splat', 0, { x: this.snowball.x, y: this.snowball.y + 30 }, { center: true })
 
     this.container.addChild( splat )

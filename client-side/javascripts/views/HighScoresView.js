@@ -17,7 +17,7 @@ var HighScoresView = View.extend({
    * Start pos for back btn
    * @type {Number}
    */
-  _backToMainBtnY: 519,
+  BACK_POS_Y: 519,
 
 
 
@@ -36,7 +36,7 @@ var HighScoresView = View.extend({
       Easel.createSprite('miscSprite', 'highscores-text', { x: 152, y: 54 }),
       Easel.createSprite('miscSprite', 'highscores-btn-misc', { x: 20, y: 519 }),
 
-      this.backBtn = Easel.createSprite('miscSprite', 'highscores-btn-btn', { x: 26, y: this._backToMainBtnY }),
+      this.backBtn = Easel.createSprite('miscSprite', 'highscores-btn-btn', { x: 26, y: this.BACK_POS_Y }),
       this.scoresContainer = new c.Container()
     ]
 
@@ -102,7 +102,7 @@ var HighScoresView = View.extend({
 
     T.killTweensOf(target)
 
-    target.y = this._backToMainBtnY
+    target.y = this.BACK_POS_Y
 
     T.to( target, .15, {
       y: target.y - 10,

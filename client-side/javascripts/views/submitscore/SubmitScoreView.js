@@ -48,13 +48,13 @@ var SubmitScoreView = View.extend({
 
 
   addEventListeners: function() {
-    this.$submitBtn.on('touchend', this._submitForm)
+    this.$submitBtn.on('touchend', this.onSubmitForm)
   },
 
 
 
   removeEventListeners: function() {
-    this.$submitBtn.off('touchend', this._submitForm)
+    this.$submitBtn.off('touchend', this.onSubmitForm)
   },
 
 
@@ -91,7 +91,7 @@ var SubmitScoreView = View.extend({
 
 
 
-  _submitForm: function (event) {
+  onSubmitForm: function (event) {
     var postUrl = _.template( AppConfig.SCOREBOARD_ENDPOINTS.postScore, {
       name: this.$nameInput.val(),
       organization: this.$organization.val()
