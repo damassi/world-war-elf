@@ -5,11 +5,10 @@
  * @date   12.2.13
  */
 
-
 var AppConfig    = require('../../config/AppConfig')
-var View         = require('../../supers/View')
-var Easel        = require('../../utils/Easel')
-var formTemplate = require('./submit-form-template.hbs')
+  , View         = require('../../supers/View')
+  , Easel        = require('../../utils/Easel')
+  , formTemplate = require('./submit-form-template.hbs')
 
 
 var SubmitScoreView = View.extend({

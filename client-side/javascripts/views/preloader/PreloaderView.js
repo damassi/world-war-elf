@@ -6,8 +6,8 @@
  */
 
 var AppConfig = require('../../config/AppConfig')
-var Assets    = require('../../config/Assets')
-var template  = require('./preloader-template.hbs')
+  , Assets    = require('../../config/Assets')
+  , template  = require('./preloader-template.hbs')
 
 
 var PreloaderView = Backbone.View.extend({

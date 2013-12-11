@@ -5,8 +5,8 @@
  * @date   12.6.13
  */
 
-var View = require('../../supers/View')
-var Easel = require('../../utils/Easel')
+var View  = require('../../supers/View')
+  , Easel = require('../../utils/Easel')
 
 
 var PointsPopup = View.extend({

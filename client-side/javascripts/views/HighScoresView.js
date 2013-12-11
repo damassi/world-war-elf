@@ -5,9 +5,8 @@
  * @date   12.2.13
  */
 
-
 var View  = require('../supers/View')
-var Easel = require('../utils/Easel')
+  , Easel = require('../utils/Easel')
 
 
 var HighScoresView = View.extend({

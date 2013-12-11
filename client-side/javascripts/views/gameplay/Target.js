@@ -6,14 +6,14 @@
  */
 
 var GameEvent   = require('../../events/GameEvent')
-var AppEvent    = require('../../events/AppEvent')
-var AppConfig   = require('../../config/AppConfig')
-var Easel       = require('../../utils/Easel')
-var PubSub      = require('../../utils/PubSub')
-var Sound       = require('../../utils/Sound')
-var View        = require('../../supers/View')
-var Snowball    = require('./Snowball')
-var PointsPopup = require('./PointsPopup')
+  , AppEvent    = require('../../events/AppEvent')
+  , AppConfig   = require('../../config/AppConfig')
+  , Easel       = require('../../utils/Easel')
+  , PubSub      = require('../../utils/PubSub')
+  , Sound       = require('../../utils/Sound')
+  , View        = require('../../supers/View')
+  , Snowball    = require('./Snowball')
+  , PointsPopup = require('./PointsPopup')
 
 
 var Target = View.extend({

@@ -6,15 +6,15 @@
  */
 
 var SocketEvent        = require('../../../../shared/events/SocketEvent')
-var AppConfig          = require('../../config/AppConfig')
-var AppEvent           = require('../../events/AppEvent')
-var GameEvent          = require('../../events/GameEvent')
-var TargetFactory      = require('../../factories/TargetFactory')
-var PubSub             = require('../../utils/PubSub')
-var Easel              = require('../../utils/Easel')
-var View               = require('../../supers/View')
-var HUD                = require('./HUD')
-var Snowball           = require('./Snowball')
+  , AppConfig          = require('../../config/AppConfig')
+  , AppEvent           = require('../../events/AppEvent')
+  , GameEvent          = require('../../events/GameEvent')
+  , TargetFactory      = require('../../factories/TargetFactory')
+  , PubSub             = require('../../utils/PubSub')
+  , Easel              = require('../../utils/Easel')
+  , View               = require('../../supers/View')
+  , HUD                = require('./HUD')
+  , Snowball           = require('./Snowball')
 
 
 var GamePlayView = View.extend({

@@ -12,7 +12,7 @@ var Sound = {
     _.bindAll(this)
 
     this.appModel = options.appModel
-    this.appModel.on( 'change:mute', this._onMuteChange )
+    this.appModel.on( 'change:mute', this.onMuteChange )
   },
 
 
@@ -36,7 +36,7 @@ var Sound = {
 
 
 
-  _onMuteChange: function (model) {
+  onMuteChange: function (model) {
     var muted = model.changed.mute
 
     this.mute( muted )

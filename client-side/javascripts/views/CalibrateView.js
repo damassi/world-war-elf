@@ -5,14 +5,13 @@
  * @date   12.2.13
  */
 
-
 var SocketEvent = require('../../../shared/events/SocketEvent')
-var AppConfig   = require('../config/AppConfig')
-var AppEvent    = require('../events/AppEvent')
-var GameEvent   = require('../events/GameEvent')
-var PubSub      = require('../utils/PubSub')
-var View        = require('../supers/View')
-var Easel       = require('../utils/Easel')
+  , AppConfig   = require('../config/AppConfig')
+  , AppEvent    = require('../events/AppEvent')
+  , GameEvent   = require('../events/GameEvent')
+  , PubSub      = require('../utils/PubSub')
+  , View        = require('../supers/View')
+  , Easel       = require('../utils/Easel')
 
 
 var CalibrateView = View.extend({
