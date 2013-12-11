@@ -73,7 +73,22 @@ module.exports = function( grunt ) {
           var result = uglify.minify(src, {fromString: true});
           return result.code;
         }
-      }
+      },
+
+      dist_mobile: {
+        entry: [ '<%= frontend %>/javascripts/mobile/initialize.js'],
+        compile: '<%= output %>/assets/javascripts/mobile.js',
+        debug: false,
+
+        beforeHook: function( bundle ) {
+          bundle.transform( handleify )
+        },
+
+        afterHook: function(src){
+          var result = uglify.minify(src, {fromString: true});
+          return result.code;
+        }
+      },
     },
 
 
@@ -133,16 +148,6 @@ module.exports = function( grunt ) {
     //
 
     'copy': {
-
-      // PIXI examples for reference
-      examples: {
-        files: [{
-          expand: true,
-          cwd: '<%= frontend %>/vendor/examples',
-          src: '**',
-          dest: '<%= output %>/assets/examples'
-        }]
-      },
 
       images: {
         files: [
@@ -373,8 +378,8 @@ module.exports = function( grunt ) {
     'uglify': {
 
       vendor: {
-        src: '<%= dist %>/javascripts/vendor.js',
-        dest: '<%= dist %>assets//javascripts/vendor.js'
+        src: '<%= output %>/assets/javascripts/vendor.js',
+        dest: '<%= output %>/assets/javascripts/vendor.js'
       }
     }
 
@@ -404,6 +409,19 @@ module.exports = function( grunt ) {
     'browserify2:mobile',
     'sass:compile',
     'concat:vendor'
+  ])
+
+  grunt.registerTask( 'build', [
+    'clean:output',
+    'copy:images',
+    'copy:audio',
+    'copy:sails',
+    'copy:webfonts',
+    'browserify2:dist',
+    'browserify2:dist_mobile',
+    'sass:dist',
+    'concat:vendor',
+    'uglify'
   ])
 
 
