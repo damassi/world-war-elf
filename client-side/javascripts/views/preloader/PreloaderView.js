@@ -73,28 +73,28 @@ var PreloaderView = Backbone.View.extend({
       c.Sound.registerSound( asset.src, asset.audioId )
     })
 
-    loadQueue.addEventListener( 'error', this._onLoadError )
-    loadQueue.addEventListener( 'progress', this._onLoadProgress )
-    loadQueue.addEventListener( 'complete', this._onLoadComplete )
+    loadQueue.addEventListener( 'error', this.onLoadError )
+    loadQueue.addEventListener( 'progress', this.onLoadProgress )
+    loadQueue.addEventListener( 'complete', this.onLoadComplete )
 
     loadQueue.loadManifest( manifest )
   },
 
 
 
-  _onLoadError: function (error) {
+  onLoadError: function (error) {
      console.error('LoadError: ', error)
   },
 
 
 
-  _onLoadProgress: function (event) {
+  onLoadProgress: function (event) {
     var progress = Math.round( event.progress * 100 ) + '%'
   },
 
 
 
-  _onLoadComplete: function () {
+  onLoadComplete: function () {
     var self = this
 
     T.to( this.$preloaderGfx, .6, {
@@ -111,7 +111,7 @@ var PreloaderView = Backbone.View.extend({
 
 
 
-  _loadScoreboardData: function () {
+  loadScoreboardData: function () {
     var orgData = {}
 
     // Load Organization data
