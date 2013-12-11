@@ -50,7 +50,7 @@ var MuteBtn = View.extend({
       this.muteBtn = Easel.createSprite( 'mute', 0, { x: 32, y: 25 }, { center: true })
     ]
 
-    this.appModel.on( 'change:mute', this._onMuteChange )
+    this.appModel.on( 'change:mute', this.onMuteChange )
 
     this.muteBtn.gotoAndStop(1)
   },
