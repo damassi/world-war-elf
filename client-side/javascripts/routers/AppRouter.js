@@ -15,10 +15,12 @@ var AppRouter = Backbone.Router.extend({
    */
   appController: null,
 
+
   /**
    * @type {AppModel}
    */
   appModel: null,
+
 
   /**
    * Array of primary views
@@ -28,19 +30,16 @@ var AppRouter = Backbone.Router.extend({
 
 
 
+
   routes: {
-
-    // Desktop Routes
-
-    ''       : 'landingRoute',
-    'sync'   : 'syncRoute',
-    'play'   : 'gamePlayRoute',
-
-
-    // Mobile Routes
-
-    'mobile/sync' : 'mobileSyncRoute',
-    'mobile/play' : 'mobileGamePlayRoute'
+    ''              : 'homeRoute',
+    'home'          : 'homeRoute',
+    'instructions'  : 'instructionsRoute',
+    'sync'          : 'syncRoute',
+    'calibrate'     : 'calibrateRoute',
+    'play'          : 'gamePlayRoute',
+    'submit-score'  : 'submitScoreRoute',
+    'high-scores'   : 'highScoresRoute'
   },
 
 
@@ -55,8 +54,8 @@ var AppRouter = Backbone.Router.extend({
 
 
 
-  landingRoute: function (options) {
-    var view = this.appController.landingView
+  homeRoute: function () {
+    var view = this.appController.homeView
 
     this.appModel.set({
       view: view
@@ -66,18 +65,37 @@ var AppRouter = Backbone.Router.extend({
 
 
 
-  syncRoute: function (options) {
+  instructionsRoute: function () {
+    var view = this.appController.instructionsView
+
+    this.appModel.set({
+      view: view
+    })
+  },
+
+
+
+  syncRoute: function () {
     var view = this.appController.syncView
 
     this.appModel.set({
       view: view
     })
-
   },
 
 
 
-  gamePlayRoute: function (options) {
+  calibrateRoute: function () {
+    var view = this.appController.calibrateView
+
+    this.appModel.set({
+      view: view
+    })
+  },
+
+
+
+  gamePlayRoute: function () {
     var view = this.appController.gamePlayView
 
     this.appModel.set({
@@ -87,29 +105,22 @@ var AppRouter = Backbone.Router.extend({
 
 
 
-
-  // * MOBILE ROUTES
-  // ------------------------------------------------------------
-
-
-  mobileSyncRoute: function (options) {
-    var view = this.appController.mobileSyncView
+  submitScoreRoute: function () {
+    var view = this.appController.submitScoreView
 
     this.appModel.set({
       view: view
     })
-
   },
 
 
 
-  mobileGamePlayRoute: function (options) {
-    var view = this.appController.mobileGamePlayView
+  highScoresRoute: function () {
+    var view = this.appController.highScoresView
 
     this.appModel.set({
       view: view
     })
-
   }
 
 

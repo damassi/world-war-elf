@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mobile HTML</title>
+
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <link rel='shortcut icon' href='/assets/favicon.ico' type='image/x-icon'/ >
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/assets/styles/app.css" />
+
+    <!-- Scripts -->
+    <script src="/assets/javascripts/vendor.js"></script>
+    <script src="/assets/javascripts/mobile.js"></script>
+
+  </head>
+
+  <body class="mobile">
+    <p class='debug'>debug</p>
+
+    <div class="page gameplay hidden">
+      <div class="content-wrapper">
+        <div class="balls-bounds">
+          <div class="balls-wrapper">
+            <img src="/assets/images/mobile/gameplay-snowball-normal.png" class="ball normal" draggable=false>
+            <img src="/assets/images/mobile/gameplay-snowball-super.png" class="ball super hide" draggable=false>
+          </div>
+        </div>
+        <img src="/assets/images/mobile/gameplay-text.png" class="text">
+      </div>
+    </div>
+
+    <div class="page calibrate hidden">
+      <div class="content-wrapper">
+        <img src="/assets/images/mobile/calibrate-text.png">
+        <a class='start-btn' href="#">
+          <img src="/assets/images/mobile/calibrate-button.png">
+        </a>
+      </div>
+    </div>
+
+    <div class="page syncing-wait hidden">
+      <div class="content-wrapper">
+        <img src="/assets/images/mobile/syncing-text.png">
+      </div>
+    </div>
+
+    <div class="page syncing hidden">
+      <div class="content-wrapper">
+        <img src="/assets/images/mobile/code-text.png">
+        <div>
+          <input class='sync-input' type="text" pattern="\d*">
+        </div>
+        <a href="#" class="sync-btn">
+          <img src="/assets/images/mobile/code-button.png">
+        </a>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="/assets/javascripts/socket.io.js"></script>
+    <script type="text/javascript" src="/assets/javascripts/sails.io.js"></script>
+
+  </body>
+</html>

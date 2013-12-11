@@ -20,12 +20,14 @@ module.exports = function( grunt ) {
 
     // + ---------------------------------------------
 
+    pkg      : grunt.file.readJSON('package.json'),
 
     basePath : '.',
     sources  : '<%= basePath %>',
     frontend : '<%= basePath %>/client-side',
     output   : '<%= basePath %>/.tmp/public',
-    dist     : '<%= basePath %>/www',
+    dist     : '<%= basePath %>/dist',
+    zip_dest : '<%= dist %>/wordfly-holiday-dist.zip',
     port     : 3001,
 
 
@@ -49,6 +51,17 @@ module.exports = function( grunt ) {
         debug: true
       },
 
+      mobile: {
+        entry: [ '<%= frontend %>/javascripts/mobile/initialize.js'],
+        compile: '<%= output %>/assets/javascripts/mobile.js',
+
+        beforeHook: function( bundle ) {
+          bundle.transform( handleify )
+        },
+
+        debug: true
+      },
+
       dist: {
         entry: [ '<%= frontend %>/javascripts/initialize.js'],
         compile: '<%= output %>/assets/javascripts/app.js',
@@ -62,7 +75,22 @@ module.exports = function( grunt ) {
           var result = uglify.minify(src, {fromString: true});
           return result.code;
         }
-      }
+      },
+
+      dist_mobile: {
+        entry: [ '<%= frontend %>/javascripts/mobile/initialize.js'],
+        compile: '<%= output %>/assets/javascripts/mobile.js',
+        debug: false,
+
+        beforeHook: function( bundle ) {
+          bundle.transform( handleify )
+        },
+
+        afterHook: function(src){
+          var result = uglify.minify(src, {fromString: true});
+          return result.code;
+        }
+      },
     },
 
 
@@ -82,11 +110,16 @@ module.exports = function( grunt ) {
           '<%= frontend %>/vendor/scripts/lodash.js',
           '<%= frontend %>/vendor/scripts/backbone.js',
           '<%= frontend %>/vendor/scripts/backbone.mods.js',
-          '<%= frontend %>/vendor/scripts/pixi.dev.js',
+          '<%= frontend %>/vendor/scripts/createjs-2013.09.25.min.js',
+          '<%= frontend %>/vendor/scripts/jquery.qrcode.min.js',
           '<%= frontend %>/vendor/scripts/greensock/TweenMax.js',
           '<%= frontend %>/vendor/scripts/greensock/easing/EasePack.js',
-          '<%= frontend %>/vendor/scripts/greensock/plugins/CSSPlugin.js',
           '<%= frontend %>/vendor/scripts/greensock/plugins/GreenProp.js',
+          '<%= frontend %>/vendor/scripts/greensock/plugins/CSSPlugin.js',
+          '<%= frontend %>/vendor/scripts/greensock/plugins/EaselPlugin.js',
+          '<%= frontend %>/vendor/scripts/greensock/plugins/BezierPlugin.js',
+          '<%= frontend %>/vendor/scripts/greensock/plugins/ThrowPropsPlugin.min.js',
+          '<%= frontend %>/vendor/scripts/greensock/utils/Draggable.js',
         ],
 
         dest: '<%= output %>/assets/javascripts/vendor.js'
@@ -133,6 +166,17 @@ module.exports = function( grunt ) {
               '**'
             ],
             dest: '<%= output %>/assets/images/'
+          }
+        ]
+      },
+
+      audio: {
+        files: [
+          {
+            expand: true,
+            cwd: '<%= frontend %>/audio/',
+            src: ['**'],
+            dest: '<%= output %>/assets/audio/'
           }
         ]
       },
@@ -307,9 +351,14 @@ module.exports = function( grunt ) {
         tasks: ['copy:images']
       },
 
+      audio: {
+        files: '<%= frontend %>/audio/**',
+        tasks: ['copy:audio']
+      },
+
       javascripts: {
         files: '<%= frontend %>/javascripts/**/*',
-        tasks: ['browserify2:compile']
+        tasks: ['browserify2:compile', 'browserify2:mobile']
       },
 
       styles: {
@@ -331,9 +380,31 @@ module.exports = function( grunt ) {
     'uglify': {
 
       vendor: {
-        src: '<%= dist %>/javascripts/vendor.js',
-        dest: '<%= dist %>assets//javascripts/vendor.js'
+        src: '<%= output %>/assets/javascripts/vendor.js',
+        dest: '<%= output %>/assets/javascripts/vendor.js'
       }
+    },
+
+
+    //
+    // Zip files for move to production server
+    //
+
+    'zip': {
+      package: {
+        src: [
+          '**',
+          '!**/client-side/**'
+        ],
+        dest: '<%= zip_dest %>',
+        dot: false
+      }
+    },
+
+
+    'revgithash': {
+      options: {},
+      files: ['<%= zip_dest %>']
     }
 
 
@@ -355,12 +426,28 @@ module.exports = function( grunt ) {
   grunt.registerTask( 'compileAssets', [
     'clean:output',
     'copy:images',
+    'copy:audio',
     'copy:sails',
     'copy:webfonts',
     'browserify2:compile',
+    'browserify2:mobile',
     'sass:compile',
-    //'sass:vendor',
     'concat:vendor'
+  ])
+
+  grunt.registerTask( 'build', [
+    'clean:output',
+    'copy:images',
+    'copy:audio',
+    'copy:sails',
+    'copy:webfonts',
+    'browserify2:dist',
+    'browserify2:dist_mobile',
+    'sass:dist',
+    'concat:vendor',
+    'uglify',
+    'zip',
+    'revgithash'
   ])
 
 

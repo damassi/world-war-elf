@@ -1,0 +1,33 @@
+{
+"images": ["sprites-game.png"],
+"frames": [
+
+    [1449, 192, 112, 113], 
+    [1354, 192, 93, 144], 
+    [1115, 192, 113, 184], 
+    [1230, 192, 122, 142], 
+    [2, 2, 960, 255], 
+    [2, 259, 960, 165], 
+    [964, 2, 960, 188], 
+    [1001, 371, 33, 36], 
+    [964, 371, 35, 39], 
+    [964, 192, 149, 177]
+],
+"animations": {
+    
+        "game-crosshairs":[0], 
+        "game-enemy-1":[1], 
+        "game-enemy-2":[2], 
+        "game-enemy-3":[3], 
+        "game-ground-back":[4], 
+        "game-ground-front":[5], 
+        "game-ground-middle":[6], 
+        "game-hud-clock":[7], 
+        "game-hud-gift":[8], 
+        "game-sign-popup":[9]
+},
+"texturepacker": [
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:1ff459fc46b13e8a4c556b985cfeacca:cccea0e806e13a617c5789c0623dd051:5f863f882a2c31824c9c13d9da5e2d91$",
+        "Created with TexturePacker (http://www.texturepacker.com) for EaselJS"
+]
+}

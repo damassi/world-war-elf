@@ -13,12 +13,8 @@ module.exports.routes = {
     view: 'desktop/index'
   },
 
-  '/:route': {
-    view: 'desktop/index'
-  },
-
   '/mobile/:id': {
-    view: 'mobile/index'
+    controller: 'MobileController'
   }
 
 };

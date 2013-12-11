@@ -3,33 +3,52 @@
 // ---------------------------------------+
 //
 
+html
+	height: 100%
+
 body
-	background-color: #000000
 	color: #fff
 	font-family: $font-primary
 	overflow: hidden
+	height: 100%
+	width: 100%
+	background: $body-bg-color
+	min-width: 1050px
+	+bg-gradient-radial($body-bg-color, lighten($body-bg-color, 35%), 85%)
 
 
 img
 	pointer-events: none
 
 
+.status
+	font-size: 10px
+	position: absolute
+	top: 0
+	left: 0
+	background: black
+	z-index: 100
+
+
 #container-content
 	color: #fff
 
-	margin: auto
-	position: absolute
+#game-play
 
-	top: 0
-	left: 0
-	right: 0
-	bottom: 0
+	.view
+		position: absolute
+		top: 20px
+		left: 50px
 
-	width: 960px
-	height: 600px
+#main-footer
+	.holiday-text
+		width: 351px
+		height: 28px
+		margin: 50px auto
+		background: transparent url("#{$images}/frame-holiday-text.png") no-repeat
+			
+a.link-block
+	display: block
+	height: 100%
+	width: 100%
 
-
-.view
-	width: 960px
-	height: 600px
-	margin-top: 80px

@@ -18,24 +18,30 @@
   </head>
 
   <body>
+    <div class='debug'>
+        Debug
+    </div>
 
     <div id='container'>
-        <div id='container-content'>
+        <div id='game-play'>
+            <div class="game-wrapper">
+                <div id="game-canvas">
+                    <canvas id='canvas' width='960' height='600'></canvas>
+                </div>
+            </div>
+            <div class="clouds"></div>
+
             {{{body}}}
+
+            <footer id="main-footer">
+                <div class="holiday-text"><a class="link-block" href="http://wordfly.com/" target="_blank"></a></div>
+            </footer>
         </div>
     </div>
 
 
     <script type="text/javascript" src="/assets/javascripts/socket.io.js"></script>
     <script type="text/javascript" src="/assets/javascripts/sails.io.js"></script>
-
-    {{!-- Nodemonkey node inspection --}}
-    <!--
-    <script type="text/javascript" src="http://0.0.0.0:50500/socket.io/socket.io.js"></script>
-    <script type="text/javascript" src="http://0.0.0.0:50500/lodash.js"></script>
-    <script type="text/javascript" src="http://0.0.0.0:50500/cycle.js"></script>
-    <script type="text/javascript" src="http://0.0.0.0:50500/client.js"></script>
-    -->
 
     </body>
 </html>

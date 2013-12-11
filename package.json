@@ -9,7 +9,10 @@
     "ejs": "0.8.4",
     "optimist": "0.3.4",
     "sails-mongo": "~0.9.5",
-    "node-monkey": "~0.2.8"
+    "node-monkey": "~0.2.8",
+    "q": "~0.9.7",
+    "time-counter": "0.0.2",
+    "qrcode-terminal": "~0.9.4"
   },
   "main": "app.js",
   "devDependencies": {
@@ -29,7 +32,12 @@
     "grunt-contrib-watch": "~0.5.3",
     "grunt-browserify2": "~0.1.8",
     "uglify-js": "~2.4.2",
-    "handleify": "~0.1.2"
+    "handleify": "~0.1.2",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-zip": "~0.11.0",
+    "grunt-contrib-imagemin": "~0.4.0",
+    "grunt-release": "~0.6.0",
+    "grunt-revgithash": "~0.1.0"
   },
   "repository": {
     "type": "git",
@@ -41,5 +49,9 @@
       "email": "christopher.pappas@popagency.com"
     }
   ],
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "scripts": {
+    "start-prod": "IP=10.1.1.91 NODE_ENV=production PORT=80 forever -a -l /var/log/upstart/holiday-app.log --minUptime 5000 --spinSleepTime 2000 start app.js",
+    "stop-prod": "forever stop app.js >> /var/log/upstart/holiday-app.log"
+  }
 }

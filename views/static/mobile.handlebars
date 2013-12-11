@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mobile HTML</title>
+
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <link rel='shortcut icon' href='/assets/favicon.ico' type='image/x-icon'/ >
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/assets/styles/app.css" />
+
+  </head>
+
+  <body class="mobile">
+
+    <div class="page gameplay hidden">
+      <div class="content-wrapper">
+        <img src="/assets/images/mobile/gameplay-image.png">
+        <img src="/assets/images/mobile/gameplay-text.png">
+      </div>
+    </div>
+
+    <div class="page calibrate hidden">
+      <div class="content-wrapper">
+        <img src="/assets/images/mobile/calibrate-text.png">
+        <a href="#">
+          <img src="/assets/images/mobile/calibrate-button.png">
+        </a>
+      </div>
+    </div>
+
+    <div class="page syncing hidden">
+      <div class="content-wrapper">
+        <img src="/assets/images/mobile/syncing-text.png">
+      </div>
+    </div>
+
+    <div class="page syncing ">
+      <div class="content-wrapper">
+        <img src="/assets/images/mobile/code-text.png">
+        <div>
+          <input type="text">
+        </div>
+        <a href="#" class="sync">
+          <img src="/assets/images/mobile/code-button.png">
+        </a>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="/assets/javascripts/socket.io.js"></script>
+    <script type="text/javascript" src="/assets/javascripts/sails.io.js"></script>
+
+  </body>
+</html>

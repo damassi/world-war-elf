@@ -1,0 +1,31 @@
+{
+"images": ["sprites-instructions.png"],
+"frames": [
+
+    [1134, 171, 245, 32], 
+    [933, 182, 199, 13], 
+    [1134, 105, 231, 64], 
+    [640, 182, 291, 20], 
+    [640, 100, 399, 80], 
+    [1041, 100, 62, 51], 
+    [1270, 2, 65, 101], 
+    [2, 2, 636, 204], 
+    [640, 2, 628, 96]
+],
+"animations": {
+    
+        "instructions-btn-mouse-grass":[0], 
+        "instructions-btn-mouse-snow":[1], 
+        "instructions-btn-mouse":[2], 
+        "instructions-btn-phone-snow":[3], 
+        "instructions-btn-phone":[4], 
+        "instructions-mouse-gfx":[5], 
+        "instructions-phone-gfx":[6], 
+        "instructions-text-instructions":[7], 
+        "instructions-text-mission":[8]
+},
+"texturepacker": [
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:a92ed8019913d3111f0c4f539b6f12d2:ba14f8ad36595f61667238c6bdd4be23:b17c48a2e799a4968726fe8dc4cbd4f0$",
+        "Created with TexturePacker (http://www.texturepacker.com) for EaselJS"
+]
+}

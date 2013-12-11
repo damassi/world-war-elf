@@ -17,6 +17,7 @@ var PubSub      = require('./PubSub')
 
 var SocketIO = {
 
+
   appModel: null,
 
 
@@ -24,24 +25,22 @@ var SocketIO = {
     _.bindAll(this)
 
     this.appModel = options.appModel
-
     window.socket = io.connect()
-
     this.delegateEvents()
   },
 
 
 
   delegateEvents: function () {
-    window.socket.on( SocketEvent.CONNECT, this._onConnect )
-    window.socket.on( SocketEvent.DISCONNECT, this._onDisconnect )
-    window.socket.on( SocketEvent.MESSAGE, this._onMessage )
-    window.socket.on( SocketEvent.SYNCED, this._onSynced )
+    window.socket.on( SocketEvent.CONNECT, this.onConnect )
+    window.socket.on( SocketEvent.DISCONNECT, this.onDisconnect )
+    window.socket.on( SocketEvent.MESSAGE, this.onMessage )
+    window.socket.on( SocketEvent.SYNCED, this.onSynced )
   },
 
 
 
-  _onConnect: function (socket) {
+  onConnect: function (socket) {
     console.log( 'Socket.IO connected' )
 
     PubSub.trigger( AppEvent.SOCKET_IO_CONNECTED )
@@ -49,19 +48,20 @@ var SocketIO = {
 
 
 
-  _onDisconnect: function (socket) {},
+  onDisconnect: function (socket) {},
 
 
 
-  _onMessage: function (message) {
+  onMessage: function (message) {
     PubSub.trigger( AppEvent.SOCKET_IO_MESSAGE, message )
   },
 
 
 
-  _onSynced: function (message) {
+  onSynced: function (message) {
     this.appModel.set({
-      'session': message.session
+      'connected' : true,
+      'session'   : message.session
     })
 
     PubSub.trigger( AppEvent.MOBILE_CLIENT_SYNCED, message )

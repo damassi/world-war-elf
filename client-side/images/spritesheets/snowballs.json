@@ -1,0 +1,17 @@
+{
+"images": ["snowballs.png"],
+"frames": [
+
+    [169, 2, 165, 165], 
+    [2, 2, 165, 165]
+],
+"animations": {
+    
+        "snowball-candycane":[0], 
+        "snowball-plain":[1]
+},
+"texturepacker": [
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:26ade37597404028b739ffd8ae12cf5a:040dae7a5550eb448bf9cd62a70918f8:7b643f4b5aeb2eb0a1a5bb285f65ad99$",
+        "Created with TexturePacker (http://www.texturepacker.com) for EaselJS"
+]
+}

@@ -6,6 +6,7 @@
  */
 
 var SocketEvent = require('../../shared/events/SocketEvent')
+var ErrorEvent  = require('../../shared/events/ErrorEvent')
 
 
 module.exports = {
@@ -18,7 +19,7 @@ module.exports = {
    */
 
   'generate-code': function (req, res, next) {
-    var syncCode = Math.random().toString(36).substring(12)
+    var syncCode = ( "" + Math.random() ).substring(2,7)
       , socket = req.socket
       , io     = sails.io
 
@@ -61,9 +62,9 @@ module.exports = {
     },
 
       function foundSession (err, session) {
-        if (err) next(err)
+        if (err) return next(err)
         if (!session) {
-          return next('Session not found!')
+          return next( ErrorEvent.SESSION_NOT_FOUND )
         }
 
         socket.join( syncCode )
@@ -73,7 +74,7 @@ module.exports = {
         },
 
         function sessionUpdated (err, session) {
-          if (err) next(err)
+          if (err) return next(err)
 
           session = session.pop()
 
@@ -93,6 +94,35 @@ module.exports = {
 
 
 
+  'start-game': function (req, res, next) {
+    var sessionId = req.param('sessionId')
+      , socket = req.socket
+      , io     = sails.io
+
+    Session.findOne({
+      sessionId: sessionId
+    },
+
+      function foundSession (err, session) {
+        if (err) return next(err)
+        if (!session) {
+          return next( ErrorEvent.SESSION_NOT_FOUND )
+        }
+
+        io.sockets.in(sessionId).emit( SocketEvent.START_GAME, {
+          playGame: true
+        })
+
+        res.json({
+          status: 200,
+          session: session
+        })
+
+      })
+  },
+
+
+
   /**
    * The orientation endpoint receives a websocket POST request which then dispatches
    * updates to registered clients within a room
@@ -101,27 +131,83 @@ module.exports = {
   orientation: function (req, res, next) {
     var sessionId = req.param('sessionId')
       , socket    = req.socket
-      , io        = sails.io
 
     Session.findOne({
       sessionId: sessionId
     },
 
       function foundSession (err, session) {
-        if (err) next(err)
+        if (err) return next(err)
+
         if (!session) {
           return next('Session not found!')
         }
 
         var orientation = JSON.parse( req.param( 'orientation' ))
 
+
+        // TODO: Remove debug
+
         socket.broadcast.to(sessionId).emit( SocketEvent.ORIENTATION, {
-          orientation: orientation
+          orientation: orientation,
+          mouse: false
         })
 
         res.json({
-          orientation: orientation
+          orientation: orientation,
+          mouse: false
         })
+      })
+  },
+
+
+
+  fire: function (req, res, next) {
+    var sessionId = req.param('sessionId')
+      , socket    = req.socket
+
+    Session.findOne({
+      sessionId: sessionId
+    },
+
+      function foundSession (err, session) {
+        if (err) return next(err)
+
+        if (!session) {
+          return next('Session not found!')
+        }
+
+        socket.broadcast.to(sessionId).emit( SocketEvent.SHOOT, {
+          fire: true
+        })
+
+        next()
+      })
+  },
+
+
+
+  'toggle-mode': function (req, res, next) {
+    var sessionId = req.param('sessionId')
+      , supermode = req.param('supermode')
+      , socket    = req.socket
+
+    Session.findOne({
+      sessionId: sessionId
+    },
+
+      function foundSession (err, session) {
+        if (err) return next(err)
+
+        if (!session) {
+          return next('Session not found!')
+        }
+
+        socket.broadcast.to(sessionId).emit( SocketEvent.TOGGLE_MODE, {
+          supermode: supermode
+        })
+
+        next()
       })
   },
 

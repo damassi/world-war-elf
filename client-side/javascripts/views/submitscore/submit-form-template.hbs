@@ -1,0 +1,17 @@
+
+<ul>
+	<li>
+		<input class='name' placeholder='Name' />
+	</li>
+	<li>
+		<select class='organization'>
+			{{#each organizations}}
+				<option value='{{Id}}'>{{Name}}</option>
+			{{/each}}
+		</select>
+	</li>
+</ul>
+
+<div class='submit-btn'>
+	<img src='/assets/images/submit-btn.png' />
+</div>

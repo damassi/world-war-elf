@@ -1,0 +1,37 @@
+{
+"images": ["home.png"],
+"frames": [
+
+    [1317, 312, 277, 21], 
+    [1317, 335, 258, 18], 
+    [1317, 288, 229, 22], 
+    [1317, 355, 199, 13], 
+    [1317, 2, 310, 284], 
+    [2, 293, 693, 87], 
+    [2, 382, 554, 120], 
+    [2, 2, 960, 156], 
+    [2, 160, 740, 131], 
+    [1077, 412, 413, 51], 
+    [964, 2, 351, 408], 
+    [558, 412, 517, 75]
+],
+"animations": {
+    
+        "home-btn-play-shadow":[0], 
+        "home-btn-play-snow":[1], 
+        "home-btn-scores-shadow":[2], 
+        "home-btn-scores-snow":[3], 
+        "home-elf":[4], 
+        "home-grass-sprouts":[5], 
+        "home-ground-back":[6], 
+        "home-ground-front":[7], 
+        "home-ground-middle":[8], 
+        "home-shadow-E":[9], 
+        "home-text-E-w-drift":[10], 
+        "home-title-ww":[11]
+},
+"texturepacker": [
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:0204a4916adfb9d17e2bd9552a9c25dc:1b81a2318cdb2451e4db29143400871f:32ba9df0123f1fe37ca3ecbc16485b3d$",
+        "Created with TexturePacker (http://www.texturepacker.com) for EaselJS"
+]
+}

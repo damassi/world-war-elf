@@ -5,25 +5,33 @@
  * @since  11.18.13
  */
 
-var AppController = require('./AppController');
+var Touch         = require('./utils/Touch')
+  , PreloaderView = require('./views/preloader/PreloaderView')
+  , AppController = require('./AppController')
 
-$(function() {
 
-  AppController.initialize()
+c = createjs
+T = TweenMax
 
-  Backbone.history.start({
-    pushState: false
-  })
 
-  // Delegate touch events to mouse if not on a touch device
-  if (! ('ontouchstart' in window )) {
-    $(document).delegate( 'body', 'mousedown', function(e) {
-      $(e.target).trigger( 'touchstart' )
-    })
+$(function siteInitialized () {
 
-    $(document).delegate( 'body', 'mouseup', function(e) {
-      $(e.target).trigger( 'touchend' )
-    })
+  Touch.translateTouchEvents()
+
+  // Mustache regex for micro templates
+  _.templateSettings = {
+    'interpolate': /{{([\s\S]+?)}}/g
   }
+
+  new PreloaderView().on( 'loadComplete', function( scoreboard ) {
+
+    AppController.initialize({
+      scoreboard: scoreboard
+    })
+
+    Backbone.history.start({
+      pushState: false
+    })
+  })
 
 })

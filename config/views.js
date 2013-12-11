@@ -11,7 +11,7 @@
 
 module.exports.views = {
 
-  engine      : 'handlebars',
-  layout      : 'default-layout'
+  engine       : 'handlebars',
+  layout       : 'default-layout'
 
 };
