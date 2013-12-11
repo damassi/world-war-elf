@@ -20,12 +20,14 @@ module.exports = function( grunt ) {
 
     // + ---------------------------------------------
 
+    pkg      : grunt.file.readJSON('package.json'),
 
     basePath : '.',
     sources  : '<%= basePath %>',
     frontend : '<%= basePath %>/client-side',
     output   : '<%= basePath %>/.tmp/public',
-    dist     : '<%= basePath %>/www',
+    dist     : '<%= basePath %>/dist',
+    zip_dest : '<%= dist %>/wordfly-holiday-dist.zip',
     port     : 3001,
 
 
@@ -390,10 +392,19 @@ module.exports = function( grunt ) {
 
     'zip': {
       package: {
-        src: ['**'],
-        dest: '',
-        dot: true
+        src: [
+          '**',
+          '!**/client-side/**'
+        ],
+        dest: '<%= zip_dest %>',
+        dot: false
       }
+    },
+
+
+    'revgithash': {
+      options: {},
+      files: ['<%= zip_dest %>']
     }
 
 
@@ -434,7 +445,9 @@ module.exports = function( grunt ) {
     'browserify2:dist_mobile',
     'sass:dist',
     'concat:vendor',
-    'uglify'
+    'uglify',
+    'zip',
+    'revgithash'
   ])
 
 

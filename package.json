@@ -34,7 +34,10 @@
     "uglify-js": "~2.4.2",
     "handleify": "~0.1.2",
     "grunt-contrib-uglify": "~0.2.7",
-    "grunt-zip": "~0.11.0"
+    "grunt-zip": "~0.11.0",
+    "grunt-contrib-imagemin": "~0.4.0",
+    "grunt-release": "~0.6.0",
+    "grunt-revgithash": "~0.1.0"
   },
   "repository": {
     "type": "git",
