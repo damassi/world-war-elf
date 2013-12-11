@@ -22,7 +22,7 @@ var SubmitScoreView = View.extend({
       Easel.createSprite('miscSprite', 'submit-text', { x: 152, y: 53 }),
     ]
 
-    Easel.dragObject( this.children )
+    //Easel.dragObject( this.children )
   },
 
 
@@ -33,7 +33,7 @@ var SubmitScoreView = View.extend({
     this.$form = $('<div id="submit-score" />').appendTo('#game-canvas')
 
     this.$form.html( formTemplate({
-      orgs: this.scoreboard.orgData.Organizations
+      organizations: this.scoreboard.organizations
     }))
 
     this.$nameInput    = this.$form.find('.name')
@@ -68,7 +68,7 @@ var SubmitScoreView = View.extend({
       x: 0,
       autoAlpha: 1,
       ease: Linear.easeNone,
-      delay: AppConfig.TRANSITION_TIME + .2
+      delay: AppConfig.TRANSITION_TIME + .4
     })
 
   },

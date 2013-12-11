@@ -36,12 +36,53 @@ var HighScoresView = View.extend({
 
     this.children = [
       Easel.createSprite('miscSprite', 'highscores-text', { x: 152, y: 54 }),
-      this.backBtn = Easel.createSprite('miscSprite', 'highscores-btn-btn', { x: 26, y: this._backToMainBtnY }),
       Easel.createSprite('miscSprite', 'highscores-btn-misc', { x: 20, y: 519 }),
+
+      this.backBtn = Easel.createSprite('miscSprite', 'highscores-btn-btn', { x: 26, y: this._backToMainBtnY }),
+      this.scoresContainer = new c.Container()
     ]
 
-    Easel.cache([ this.backBtn ])
+    this.scoresContainer.x = 154
+    this.scoresContainer.y = 186
 
+    this.buildScoreboard()
+
+    Easel.cache([ this.backBtn ])
+    Easel.dragObject( this.children )
+
+  },
+
+
+
+  buildScoreboard: function () {
+    var scores = this.scoreboard.scores
+      , scoreStartPos = { x: 0, y: 0}
+      , nameStartPos = { x: 100, y: 0 }
+      , orgStartPos = { x: 327, y: 0}
+      , spacing = 20
+
+    var user, score, name, org
+
+    for (var i = 0, len = scores.length; i < len; ++i) {
+      user = scores[i]
+
+      score = new Easel.Text( user.Score, 'Luckiest Guy', '18px', '#ffffff', {
+        x: scoreStartPos.x,
+        y: scoreStartPos.y + (i * spacing),
+      })
+
+      name = new Easel.Text( user.Name, 'Luckiest Guy', '18px', '#ffffff', {
+        x: nameStartPos.x,
+        y: nameStartPos.y + (i * spacing),
+      })
+
+      org = new Easel.Text( user.Organization, 'Luckiest Guy', '18px', '#ffffff', {
+        x: orgStartPos.x,
+        y: orgStartPos.y + (i * spacing),
+      })
+
+      this.scoresContainer.addChild( score.container, name.container, org.container )
+    }
   },
 
 

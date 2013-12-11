@@ -16,12 +16,12 @@ T = TweenMax
 
 $(function siteInitialized () {
 
+  Touch.translateTouchEvents()
+
   // Mustache regex for micro templates
   _.templateSettings = {
     'interpolate': /{{([\s\S]+?)}}/g
   }
-
-  Touch.translateTouchEvents()
 
   new PreloaderView().on( 'loadComplete', function( scoreboard ) {
 

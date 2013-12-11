@@ -130,12 +130,13 @@ var PreloaderView = Backbone.View.extend({
           // and pass the data into the AppController for use
 
           .done( function (scoreboardData) {
-            //console.log(scoreboardData)
 
             var scoreboard = {
-              orgData: orgData,
-              scoreboardData: scoreboardData
+              organizations: orgData.Organizations,
+              scores: scoreboardData.Scores
             }
+
+            console.log( scoreboard )
 
             self.trigger('loadComplete', scoreboard)
 
