@@ -47,8 +47,11 @@ var AppController = {
 
 
 
-  initialize: function () {
+  initialize: function (scoreboard) {
     _.bindAll(this)
+
+    // Store score data returned from service
+    this.scoreboard = scoreboard
 
     this.$contentContainer = $('#game-play')
     this.$canvas = $('#game-canvas')
@@ -82,7 +85,8 @@ var AppController = {
 
     this.highScoresView = new HighScoresView({
       stage: this.stage,
-      appModel: this.appModel
+      appModel: this.appModel,
+      scoreboard: this.scoreboard
     })
 
     this.syncView = new SyncView({
@@ -103,7 +107,8 @@ var AppController = {
 
     this.submitScoreView = new SubmitScoreView({
       stage: this.stage,
-      appModel: this.appModel
+      appModel: this.appModel,
+      scoreboard: this.scoreboard
     })
 
     this.muteBtn = new MuteBtn({

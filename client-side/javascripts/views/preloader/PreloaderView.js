@@ -5,15 +5,22 @@
  * @date   12.4.13
  */
 
-var Assets   = require('../../config/Assets')
-var template = require('./preloader-template.hbs')
+var AppConfig = require('../../config/AppConfig')
+var Assets    = require('../../config/Assets')
+var template  = require('./preloader-template.hbs')
 
 
 var PreloaderView = Backbone.View.extend({
 
-
+  /**
+   * @type {String}
+   */
   id: 'preloader',
 
+
+  /**
+   * @type {Function}
+   */
   template: template,
 
 
@@ -22,6 +29,8 @@ var PreloaderView = Backbone.View.extend({
     _.bindAll(this)
 
     this.render()
+
+    return this
   },
 
 
@@ -105,27 +114,34 @@ var PreloaderView = Backbone.View.extend({
   _loadScoreboardData: function () {
     var self = this
 
-    function proceed() {
-      self.trigger('loadComplete')
-      self.remove()
-    }
+    // Load scoreboard data from dev server
+    $.getJSON( AppConfig.SCOREBOARD_ENDPOINTS.organizations)
+      .error( function (error) {})
 
-    $.getJSON('http://dev-vs-wfiis1/usherrusher/organization.ashx')
-      .error( function (error) {
+      // Organizations have loaded
+      .done( function (orgData) {
+        console.log(orgData)
 
-      })
-      .success( function (data) {
-        console.log(data)
-      })
+        $.getJSON( AppConfig.SCOREBOARD_ENDPOINTS.topscores )
+          .error( function (data) {})
 
-    $.getJSON('http://dev-vs-wfiis1/usherrusher/view.ashx')
-      .error( function (data) {
-      })
-      .success( function (data) {
-        console.log(data)
-      })
 
-    proceed()
+          // Scoreboard has loaded.  Kick off the app
+          // and pass the data into the AppController for use
+
+          .done( function (scoreboardData) {
+            console.log(scoreboardData)
+
+            var scoreboard = {
+              orgData: orgData,
+              scoreboardData: scoreboardData
+            }
+
+            self.trigger('loadComplete', scoreboard)
+
+            self.remove()
+          })
+      })
   }
 
 })

@@ -23,10 +23,11 @@ $(function siteInitialized () {
 
   Touch.translateTouchEvents()
 
-  var preloader = new PreloaderView()
+  new PreloaderView().on( 'loadComplete', function( scoreboard ) {
 
-  preloader.on( 'loadComplete', function() {
-    AppController.initialize()
+    AppController.initialize({
+      scoreboard: scoreboard
+    })
 
     Backbone.history.start({
       pushState: false
