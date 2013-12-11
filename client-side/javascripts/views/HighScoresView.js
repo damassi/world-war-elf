@@ -17,22 +17,20 @@ var HighScoresView = View.extend({
    * Start pos for back btn
    * @type {Number}
    */
-  _backToMainBtnY: 0,
+  _backToMainBtnY: 519,
 
 
 
   canvasEvents: {
-    'backBtn mouseover' : '_onBtnOver',
-    'backBtn rollout'   : '_onBtnOut',
-    'backBtn click'     : '_onBackBtnClick'
+    'backBtn mouseover' : 'onBtnOver',
+    'backBtn rollout'   : 'onBtnOut',
+    'backBtn click'     : 'onBackBtnClick'
   },
 
 
 
   initialize: function (options) {
     this._super(options)
-
-    this._backToMainBtnY = 519
 
     this.children = [
       Easel.createSprite('miscSprite', 'highscores-text', { x: 152, y: 54 }),
@@ -45,8 +43,6 @@ var HighScoresView = View.extend({
     this.scoresContainer.x = 154
     this.scoresContainer.y = 186
 
-    this.buildScoreboard()
-
     Easel.cache([ this.backBtn ])
     Easel.dragObject( this.children )
 
@@ -54,7 +50,17 @@ var HighScoresView = View.extend({
 
 
 
+  render: function() {
+    this._super()
+    this.buildScoreboard()
+
+    return this
+  },
+
+
+
   buildScoreboard: function () {
+
     var scores = this.scoreboard.scores
       , scoreStartPos = { x: 0, y: 0}
       , nameStartPos = { x: 100, y: 0 }
@@ -89,7 +95,7 @@ var HighScoresView = View.extend({
 
 
 
-  _onBtnOver: function (event) {
+  onBtnOver: function (event) {
     var target = event.currentTarget
 
     target.cursor = 'pointer'
@@ -116,7 +122,7 @@ var HighScoresView = View.extend({
 
 
 
-  _onBtnOut: function (event) {
+  onBtnOut: function (event) {
     var target = event.currentTarget
 
     T.to( target, .2, {
@@ -130,7 +136,7 @@ var HighScoresView = View.extend({
 
 
 
-  _onBackBtnClick: function (event) {
+  onBackBtnClick: function (event) {
     window.location.href ='#/home'
   },
 

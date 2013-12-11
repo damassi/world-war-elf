@@ -19,35 +19,27 @@ var HomeView = View.extend({
    * The move pos of the playbtn on rollover
    * @type {Number}
    */
-  _playBtnY: 0,
-
-
-  /**
-   * The move pos of the high scores btn on rollover
-   * @type {Number}
-   */
-  _highScoreBtnY: 0,
-
+  btnPositions: {
+    playY      : 464,
+    highScoreY : 510
+  },
 
 
 
   canvasEvents: {
-    'playBtn mouseover' : '_onBtnOver',
-    'playBtn rollout'   : '_onBtnOut',
-    'playBtn click'     : '_onPlayBtnClick',
+    'playBtn mouseover' : 'onBtnOver',
+    'playBtn rollout'   : 'onBtnOut',
+    'playBtn click'     : 'onPlayBtnClick',
 
-    'scoreBtn mouseover' : '_onBtnOver',
-    'scoreBtn rollout'   : '_onBtnOut',
-    'scoreBtn click'     : '_onScoreBtnClick',
+    'scoreBtn mouseover' : 'onBtnOver',
+    'scoreBtn rollout'   : 'onBtnOut',
+    'scoreBtn click'     : 'onScoreBtnClick',
   },
 
 
 
   initialize: function (options) {
     this._super(options)
-
-    this._playBtnY = 464;
-    this._highScoreBtnY = 510;
 
     this.children = [
 
@@ -59,11 +51,11 @@ var HomeView = View.extend({
       this.rElf = new c.Container(),
 
       this.playBtnShadow   = Easel.createSprite('homeSprite', 'home-btn-play-shadow', { x: 314, y: 526 } ),
-      this.playBtn         = Easel.createSprite('home-btn-play', 0, { x: 317, y: this._playBtnY }),
+      this.playBtn         = Easel.createSprite('home-btn-play', 0, { x: 317, y: this.btnPositions.playY }),
       this.playBtnSnow     = Easel.createSprite('homeSprite', 'home-btn-play-snow', { x: 335, y: 524 } ),
 
       this.scoreBtnShadow   = Easel.createSprite('homeSprite', 'home-btn-scores-shadow', { x: 21, y: 553 } ),
-      this.scoreBtn         = Easel.createSprite('home-btn-score', 0, { x: 18, y: this._highScoreBtnY } ),
+      this.scoreBtn         = Easel.createSprite('home-btn-score', 0, { x: 18, y: this.btnPositions.highScoreY } ),
       this.scoreBtnSnow     = Easel.createSprite('homeSprite', 'home-btn-scores-snow', { x: 41, y: 557 } ),
 
       this.grassSprouts = Easel.createSprite('homeSprite', 'home-grass-sprouts', { x: 7, y: 486 }),
@@ -151,10 +143,9 @@ var HomeView = View.extend({
 
 
 
-  _onBtnOver: function (event) {
+  onBtnOver: function (event) {
     var target = event.currentTarget
-    var targetY;
-    targetY = (target === this.playBtn) ? this._playBtnY : this._highScoreBtnY;
+    var targetY = (target === this.playBtn) ? this.btnPositions.playY : this.btnPositions.highScoreY;
 
     target.cursor = 'pointer'
     T.killTweensOf(target)
@@ -178,7 +169,7 @@ var HomeView = View.extend({
 
 
 
-  _onBtnOut: function (event) {
+  onBtnOut: function (event) {
     var target = event.currentTarget
 
     T.to( target, .2, {
@@ -192,13 +183,13 @@ var HomeView = View.extend({
 
 
 
-  _onPlayBtnClick: function (event) {
+  onPlayBtnClick: function (event) {
     window.location.href ='#/instructions'
   },
 
 
 
-  _onScoreBtnClick: function (event) {
+  onScoreBtnClick: function (event) {
     window.location.href ='#/high-scores'
   }
 
