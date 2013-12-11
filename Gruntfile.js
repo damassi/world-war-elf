@@ -381,6 +381,19 @@ module.exports = function( grunt ) {
         src: '<%= output %>/assets/javascripts/vendor.js',
         dest: '<%= output %>/assets/javascripts/vendor.js'
       }
+    },
+
+
+    //
+    // Zip files for move to production server
+    //
+
+    'zip': {
+      package: {
+        src: ['**'],
+        dest: '',
+        dot: true
+      }
     }
 
 
