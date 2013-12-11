@@ -120,7 +120,7 @@ var PreloaderView = Backbone.View.extend({
 
       // Organizations have loaded
       .done( function (orgData) {
-        console.log(orgData)
+        //console.log(orgData)
 
         $.getJSON( AppConfig.SCOREBOARD_ENDPOINTS.topscores )
           .error( function (data) {})
@@ -130,7 +130,7 @@ var PreloaderView = Backbone.View.extend({
           // and pass the data into the AppController for use
 
           .done( function (scoreboardData) {
-            console.log(scoreboardData)
+            //console.log(scoreboardData)
 
             var scoreboard = {
               orgData: orgData,

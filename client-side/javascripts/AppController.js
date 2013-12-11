@@ -47,11 +47,11 @@ var AppController = {
 
 
 
-  initialize: function (scoreboard) {
+  initialize: function (options) {
     _.bindAll(this)
 
     // Store score data returned from service
-    this.scoreboard = scoreboard
+    this.scoreboard = options.scoreboard
 
     this.$contentContainer = $('#game-play')
     this.$canvas = $('#game-canvas')

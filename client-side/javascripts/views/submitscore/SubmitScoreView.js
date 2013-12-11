@@ -31,7 +31,10 @@ var SubmitScoreView = View.extend({
     this._super()
 
     this.$form = $('<div id="submit-score" />').appendTo('#game-canvas')
-    this.$form.html( formTemplate() )
+    console.log(this.scoreboard.orgData)
+    this.$form.html( formTemplate({
+      orgs: this.scoreboard.orgData.Organizations
+    }))
     this.$submitBtn = this.$form.find('.submit-btn')
 
     TweenMax.set( this.$form, { autoAlpha: 0 })

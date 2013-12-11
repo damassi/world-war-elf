@@ -5,11 +5,9 @@
 	</li>
 	<li>
 		<select>
-			<option value='a'>Hey</option>
-			<option value='b'>Hi!</option>
-			<option value='c'>Uh</option>
-			<option value='d'>Uhhh</option>
-			<option value='e'>Oh no</option>
+			{{#each orgs}}
+				<option value='{{Id}}'>{{Name}}</option>
+			{{/each}}
 		</select>
 	</li>
 </ul>
