@@ -157,7 +157,7 @@ var Target = View.extend({
 
     if (this.attackSnowball){
       T.killTweensOf( this.attackSnowball )
-      this.stage.removeChild(this.attackSnowball)
+      this.stage.removeChild( this.attackSnowball )
       this.attackSnowball = null
     }
 

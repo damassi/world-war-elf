@@ -285,6 +285,7 @@ var GamePlayView = View.extend({
       var target = this.targetFactory.occupiedPositions[i]
 
       T.killDelayedCallsTo( target.attackPlayer )
+      T.killTweensOf( target.instance )
 
       if (target.attackSnowball) {
         this.stage.removeChild( target.attackSnowball )
