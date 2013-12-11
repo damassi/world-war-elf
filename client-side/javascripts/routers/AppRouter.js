@@ -15,10 +15,12 @@ var AppRouter = Backbone.Router.extend({
    */
   appController: null,
 
+
   /**
    * @type {AppModel}
    */
   appModel: null,
+
 
   /**
    * Array of primary views
@@ -119,33 +121,6 @@ var AppRouter = Backbone.Router.extend({
     this.appModel.set({
       view: view
     })
-  },
-
-
-
-
-  // * MOBILE ROUTES
-  // ------------------------------------------------------------
-
-
-  mobileSyncRoute: function (options) {
-    var view = this.appController.mobileSyncView
-
-    this.appModel.set({
-      view: view
-    })
-
-  },
-
-
-
-  mobileGamePlayRoute: function (options) {
-    var view = this.appController.mobileGamePlayView
-
-    this.appModel.set({
-      view: view
-    })
-
   }
 
 
