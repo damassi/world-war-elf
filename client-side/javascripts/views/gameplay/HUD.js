@@ -49,7 +49,7 @@ var HUD = View.extend({
       color: '#333'
     })
 
-    this.presentsText = new Easel.Text('0', 'Luckiest Guy', '49px', '#ff0000', {
+    this.pointsText = new Easel.Text('0', 'Luckiest Guy', '69px', '#ff0000', {
       x: this.TEXT_POS.presents.x,
       y: this.TEXT_POS.presents.y,
     }, {
@@ -59,7 +59,7 @@ var HUD = View.extend({
 
 
     this.timeText.textAlign('right')
-    this.presentsText.textAlign('right')
+    this.pointsText.textAlign('right')
 
 
     this.children = [
@@ -67,7 +67,7 @@ var HUD = View.extend({
       //this.hudGift  = Easel.createSprite('gameplaySprite', 'game-hud-gift', { x: 820, y: 76 }),
 
       this.timeText.container,
-      this.presentsText.container,
+      this.pointsText.container,
     ]
 
 
@@ -120,6 +120,8 @@ var HUD = View.extend({
 
     T.to( this.container, .3, {
       alpha: 0,
+      x: 100,
+      ease: Expo.easeIn,
       onComplete: function () {
         self.remove()
       }
@@ -173,7 +175,7 @@ var HUD = View.extend({
       start: points.end,
       ease: Linear.easeNone,
       onUpdate: function() {
-        self.presentsText.setText( ~~this.target.start )
+        self.pointsText.setText( ~~this.target.start )
       }
     })
 

@@ -111,6 +111,14 @@ var Target = View.extend({
 
 
 
+  /**
+   * If enemy has attack powers this property is populated
+   * @type {c.Sprite}
+   */
+  attackSnowball: null,
+
+
+
 
   initialize: function (options) {
     this._super(options)
@@ -144,10 +152,18 @@ var Target = View.extend({
 
 
   remove: function() {
-
+    //console.log('firing remve?')
     T.killTweensOf( this.instance )
+
+    if (this.attackSnowball){
+      T.killTweensOf( this.attackSnowball )
+      this.stage.removeChild(this.attackSnowball)
+      this.attackSnowball = null
+    }
+
     this.container.removeAllChildren()
     this.stage.removeChild( this.container )
+    this._super()
   },
 
 
@@ -168,11 +184,8 @@ var Target = View.extend({
 
       onComplete: function () {
 
-        if (self.targetProps.attacker) {
-          T.delayedCall( self.SNOWBALL_ATTACK_DELAY, function() {
-            self.attackPlayer()
-          })
-        }
+        if (self.targetProps.attacker)
+          T.delayedCall( self.SNOWBALL_ATTACK_DELAY, self.attackPlayer )
 
         self.hide()
       }
@@ -314,6 +327,7 @@ var Target = View.extend({
 
     Easel.animateOnce( this.instance, 'hit' )
 
+
     if (this.type === 'bad') {
 
       // Cache to turn into good elf
@@ -389,11 +403,16 @@ var Target = View.extend({
 
     moveTo = (moveTo > 0) ? 1500 : -1500
 
+    var self = this
+
     T.to( this.instance, .6, {
       x: this.instance.x + moveTo,
       ease: Back.easeIn,
       delay: (Math.random() * .3) + .1,
-      overwrite: 'all'
+      overwrite: 'all',
+      onComplete: function() {
+        self.remove()
+      }
     })
   },
 

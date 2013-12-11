@@ -75,13 +75,15 @@ var AppConfig = {
    * Amount of gameplay time
    * @type {String}
    */
-  DEFAULT_GAMEPLAY_TIME: '2:00',
+  DEFAULT_GAMEPLAY_TIME: '0:5',
+
 
   /**
    * the current gameplay time; modified via HUD.js (timer)
    * @type {number}
    */
   gameplaySeconds: 120,
+
 
   /**
    * The time which the player is in supermode.

@@ -73,13 +73,8 @@ var TargetFactory = Backbone.View.extend({
 
 
   cleanup: function() {
-    this.occupiedPositions = []
     this.removeEventListeners()
-
-    _.each(this.occupiedPositions, function (target) {
-      console.log(target)
-      target.remove()
-    })
+    this.occupiedPositions = []
   },
 
 
@@ -200,7 +195,7 @@ var TargetFactory = Backbone.View.extend({
       // Clear the entire screen
       if (params.gameOver) {
         target.hit({
-          supressPoints: true
+          supressPoints: true,
         })
       }
 

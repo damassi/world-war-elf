@@ -106,6 +106,14 @@ var GamePlayView = View.extend({
       this.redHitArea = new c.Shape( new c.Graphics().beginFill("#ff0000").drawRect( 0, 0, AppConfig.DIMENSIONS.width, AppConfig.DIMENSIONS.height ))
     ]
 
+    // Store position information for animating in and out
+    _.each(this.children, function (child) {
+      child.pos = {
+        x: child.x,
+        y: child.y
+      }
+    })
+
 
   },
 
@@ -178,26 +186,24 @@ var GamePlayView = View.extend({
     this.container.x = 0
     this.container.y = 0
 
-    this.snowballs = []
-
     this.stage.addChild( this.container )
     this.container.addChild( this.hud.render().container )
     this.hud.show()
 
-    T.from( this.backGround, .3, {
-      y: height,
+    T.fromTo( this.backGround, .3, { y: height }, {
+      y: this.backGround.pos.y,
       ease: Expo.easeOut,
       delay: delay + .2
     })
 
-    T.from( this.middleGround, .3, {
-      y: height,
+    T.fromTo( this.middleGround, .3, { y: height }, {
+      y: this.middleGround.pos.y,
       ease: Expo.easeOut,
       delay: delay + .1
     })
 
-    T.from( this.frontGround, .3, {
-      y: height,
+    T.fromTo( this.frontGround, .3, { y: height }, {
+      y: this.frontGround.pos.y,
       ease: Expo.easeOut,
       delay: delay
     })
@@ -227,7 +233,9 @@ var GamePlayView = View.extend({
       , tweenTime = .4
       , height = AppConfig.DIMENSIONS.height * 2
 
-    PubSub.trigger( GameEvent.KILL_ALL_TARGETS, { gameOver: true })
+    this.hideTargets()
+    this.hideCrossHairs()
+    this.hud.hide()
 
     T.to( this.crossHairs, .2, {
       scaleX: 0,
@@ -263,7 +271,7 @@ var GamePlayView = View.extend({
 
 
 
-  hideCrossHairs: function() {
+  hideCrossHairs: function () {
     T.to(this.crossHairs, .3, {
       alpha: 0,
       ease: Expo.easeOut
@@ -272,7 +280,29 @@ var GamePlayView = View.extend({
 
 
 
-  showCrossHairs: function() {
+  hideTargets: function () {
+    for (var i = 0, len = this.targetFactory.occupiedPositions.length; i < len; ++i) {
+      var target = this.targetFactory.occupiedPositions[i]
+
+      T.killDelayedCallsTo( target.attackPlayer )
+
+      if (target.attackSnowball) {
+        this.stage.removeChild( target.attackSnowball )
+      }
+
+      T.to(target.instance, .2, {
+        alpha: 0,
+        onComplete: function() {
+          this.target.targetView.remove()
+          this.target.targetView = null
+        }
+      })
+    }
+  },
+
+
+
+  showCrossHairs: function () {
     T.to(this.crossHairs, .3, {
       alpha: 1,
       ease: Expo.easeOut
@@ -326,6 +356,11 @@ var GamePlayView = View.extend({
 
 
   _onStopGamePlay: function () {
+    this.hideCrossHairs()
+    this.hud.hide()
+    this.removeEventListeners()
+    this.targetFactory.removeEventListeners()
+
     _.each(this.targetFactory.occupiedPositions, function(target) {
       target.scurryAway()
     })
