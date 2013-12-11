@@ -41,8 +41,6 @@ var PreloaderView = Backbone.View.extend({
 
     this.$preloaderGfx = this.$el.find('img')
 
-    console.log(this.$preloaderGfx)
-
     T.fromTo( this.$preloaderGfx, .6, { x: 2000, autoAlpha: 0, scale: 1, rotation: 220 }, {
       immediateRender: true,
       x: 0,
@@ -51,7 +49,7 @@ var PreloaderView = Backbone.View.extend({
       rotation: 0,
       ease: Expo.easeOut,
       delay: .4,
-      //onComplete: this.loadSite
+      onComplete: this.loadSite
     })
   },
 
