@@ -31,11 +31,14 @@ var SubmitScoreView = View.extend({
     this._super()
 
     this.$form = $('<div id="submit-score" />').appendTo('#game-canvas')
-    console.log(this.scoreboard.orgData)
+
     this.$form.html( formTemplate({
       orgs: this.scoreboard.orgData.Organizations
     }))
-    this.$submitBtn = this.$form.find('.submit-btn')
+
+    this.$nameInput    = this.$form.find('.name')
+    this.$organization = this.$form.find('.organization')
+    this.$submitBtn    = this.$form.find('.submit-btn')
 
     TweenMax.set( this.$form, { autoAlpha: 0 })
 
@@ -76,7 +79,6 @@ var SubmitScoreView = View.extend({
     this._super({ remove: true })
 
     TweenMax.to( this.$form, .2, {
-      //x: -1000,
       autoAlpha: 0,
       ease: Linear.easeNone
     })
@@ -92,7 +94,23 @@ var SubmitScoreView = View.extend({
 
 
   _submitForm: function (event) {
-    console.log('here?')
+    var postUrl = _.template( AppConfig.SCOREBOARD_ENDPOINTS.postScore, {
+      name: this.$nameInput.val(),
+      organization: this.$organization.val()
+    });
+
+    var postReq = $.ajax({
+      url: postUrl
+    })
+
+    postReq.error( function (error, msg) {
+      console.log(msg, error)
+    })
+
+    postReq.success( function (response) {
+      console.log(response)
+    })
+
     window.location.href = '#/high-scores'
   }
 
