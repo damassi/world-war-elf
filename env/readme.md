@@ -22,6 +22,9 @@ If you want to watch it:
 `sudo tail -f /var/log/upstart/holiday-app.log`
 
 **Restarting** the app after code changes:
+`sudo npm run stop-prod; sudo npm run start-prod`
+OR, 
+if that doesn't work, you're paniced, and you don't care about logging:
 `sudo forever restartall`
 
 **Deploying updates**
@@ -37,8 +40,7 @@ If you want to watch it:
 
 * If there are server-side updates, restart the app
 `cd /var/www/games.wordfly.com`
-`sudo forever restartall`
-
+`sudo npm run stop-prod; sudo npm run start-prod`
 
 notes to devs
 =============
