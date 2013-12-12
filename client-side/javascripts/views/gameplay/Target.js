@@ -41,6 +41,13 @@ var Target = View.extend({
 
 
   /**
+   * The distance that good targets move to avoid hits
+   * @type {Number}
+   */
+  TARGET_AVOID_DISTANCE: 100,
+
+
+  /**
    * Array of target ids pulled from the Asset manifest to be loaded
    * when a new enemy or target is called
    * @type {Array}
@@ -103,6 +110,7 @@ var Target = View.extend({
    */
   hasBeenHit: false,
 
+
   /**
    * have our points been triggered? Should only fired once
    * @type {Boolean}
@@ -110,12 +118,18 @@ var Target = View.extend({
   hasPointsTriggered: false,
 
 
-
   /**
    * If enemy has attack powers this property is populated
    * @type {c.Sprite}
    */
   attackSnowball: null,
+
+
+  /**
+   * Initial starting position for paning "good" targets
+   * @type {Number}
+   */
+  startX: null,
 
 
 
@@ -126,7 +140,7 @@ var Target = View.extend({
     var targetArray = this.targetIds[this.type].concat()
 
     // Release harder targets depending on timing
-    if (this.type === "bad") {
+    if (this.type === 'bad') {
 
       if (AppConfig.gameplaySeconds > this.MEDIUM_TARGET_TIME) {
         targetArray.splice(1,2)
@@ -145,6 +159,8 @@ var Target = View.extend({
 
     this.instance.x = this.orientation.x
     this.instance.y = this.orientation.y + bounds.height
+
+    this.startX = this.instance.x
 
     this.show()
   },
@@ -182,6 +198,9 @@ var Target = View.extend({
       delay: 2 + ( Math.random() * 1 ),
 
       onComplete: function () {
+
+        if (self.type === 'good')
+          self.panTarget()
 
         if (self.targetProps.attacker)
           T.delayedCall( self.SNOWBALL_ATTACK_DELAY, self.attackPlayer )
@@ -411,6 +430,29 @@ var Target = View.extend({
       overwrite: 'all',
       onComplete: function() {
         self.remove()
+      }
+    })
+  },
+
+
+
+  panTarget: function () {
+    var self = this
+
+    T.to( this.instance, .8, {
+      x: this.startX - this.TARGET_AVOID_DISTANCE,
+      ease: Expo.easeInOut,
+
+      onComplete: function() {
+
+        T.to( this.target, .8, {
+          x: self.startX + self.TARGET_AVOID_DISTANCE,
+          ease: Expo.easeOut,
+
+          onComplete: function() {
+            self.panTarget()
+          }
+        })
       }
     })
   },

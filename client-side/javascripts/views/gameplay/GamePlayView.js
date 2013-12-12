@@ -391,11 +391,6 @@ var GamePlayView = View.extend({
   },
 
 
-
-
-
-
-
   onPrepareTarget: function (event) {
     var fireTweenTime = .4
 
@@ -535,7 +530,7 @@ var GamePlayView = View.extend({
 
     var self = this
 
-    T.fromTo( powerUpText.container, .3, { y: 1000 }, {
+    T.fromTo( powerUpText.container, .5, { y: -1000 }, {
       y: AppConfig.DIMENSIONS.height * .5,
       ease: Expo.easeOut,
 
@@ -544,7 +539,7 @@ var GamePlayView = View.extend({
         T.to( powerUpText.container, .3, {
           y: -1000,
           ease: Expo.easeIn,
-          delay: 1,
+          delay: .5,
 
           onComplete: function () {
             self.stage.removeChild( this.target )
