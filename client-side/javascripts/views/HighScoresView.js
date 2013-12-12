@@ -34,17 +34,15 @@ var HighScoresView = View.extend({
 
     this.children = [
       Easel.createSprite('miscSprite', 'highscores-text', { x: 152, y: 54 }),
-      Easel.createSprite('miscSprite', 'highscores-btn-misc', { x: 20, y: 519 }),
 
       this.backBtn = Easel.createSprite('miscSprite', 'highscores-btn-btn', { x: 26, y: this.BACK_POS_Y }),
+      Easel.createSprite('miscSprite', 'highscores-btn-misc', { x: 20, y: 519 }),
+
       this.scoresContainer = new c.Container()
     ]
 
     this.scoresContainer.x = 154
     this.scoresContainer.y = 186
-
-    Easel.cache([ this.backBtn ])
-    //Easel.dragObject( this.children )
 
   },
 
@@ -144,6 +142,8 @@ var HighScoresView = View.extend({
       yoyo: true,
       repeat: 1
     })
+
+    Easel.cache([ target ])
 
     T.to( target, .2, {
       easel: {
