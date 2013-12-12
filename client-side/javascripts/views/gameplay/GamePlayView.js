@@ -513,9 +513,17 @@ var GamePlayView = View.extend({
 
     if (!supermode) return
 
-    var powerUpText = new Easel.Text( 'Powerup!', 'Luckiest Guy', '79px', '#ff0000', {
-      x: AppConfig.DIMENSIONS.width * .5,
-      y: 1000,
+    var powerUpText = new Easel.Text({
+      text: 'Powerup!',
+      font: 'Luckiest Guy',
+      size: '79px',
+      color: '#ff0000',
+
+      position: {
+        x: AppConfig.DIMENSIONS.width * .5,
+        y: 1000,
+      },
+
       stroke: {
         size: 5,
         color: '#333'

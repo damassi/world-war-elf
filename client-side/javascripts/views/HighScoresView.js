@@ -73,19 +73,37 @@ var HighScoresView = View.extend({
 
       yPos = (i * spacing)
 
-      score = new Easel.Text( user.Score, 'Luckiest Guy', '18px', '#ffffff', {
-        x: scoreStartPos.x,
-        y: scoreStartPos.y + yPos
+      score = new Easel.Text({
+        text: user.Score,
+        font: 'Luckiest Guy',
+        size: '18px',
+        color: '#ffffff',
+        position: {
+          x: scoreStartPos.x,
+          y: scoreStartPos.y + yPos
+        }
       })
 
-      name = new Easel.Text( user.Name, 'Luckiest Guy', '18px', '#ffffff', {
-        x: nameStartPos.x,
-        y: nameStartPos.y + yPos
+      name = new Easel.Text({
+        text: user.Name,
+        font: 'Luckiest Guy',
+        size: '18px',
+        color: '#ffffff',
+        position: {
+          x: nameStartPos.x,
+          y: nameStartPos.y + yPos
+        }
       })
 
-      org = new Easel.Text( user.Organization, 'Luckiest Guy', '18px', '#ffffff', {
-        x: orgStartPos.x,
-        y: orgStartPos.y + yPos
+      org = new Easel.Text({
+        text: user.Organization,
+        font: 'Luckiest Guy',
+        size: '18px',
+        color: '#ffffff',
+        position: {
+          x: orgStartPos.x,
+          y: orgStartPos.y + yPos
+        }
       })
 
       this.scoresContainer.addChild( score.container, name.container, org.container )

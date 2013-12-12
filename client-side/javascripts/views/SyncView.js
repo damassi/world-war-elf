@@ -39,9 +39,17 @@ var SyncView = View.extend({
   initialize: function (options) {
     this._super(options)
 
-    this.syncText = new Easel.Text( 'Requesting Sync Code', 'Luckiest Guy', '29px', '#fff', {
-      x: 156,
-      y: 170,
+    this.syncText = new Easel.Text({
+      text: 'Requesting Sync Code',
+      font: 'Luckiest Guy',
+      size: '29px',
+      color: '#fff',
+
+      position: {
+        x: 156,
+        y: 170,
+      },
+
       stroke: {
         size: 5,
         color: '#333'

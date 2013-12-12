@@ -15,9 +15,17 @@ var PointsPopup = View.extend({
   initialize: function (options) {
     this._super(options)
 
-    this.pointText = new Easel.Text( options.pointValue, 'Luckiest Guy', '39px', '#ff0000', {
-      x: options.x,
-      y: options.y,
+    this.pointText = new Easel.Text({
+      text: options.pointValue,
+      font: 'Luckiest Guy',
+      size: '39px',
+      color: '#ff0000',
+
+      position: {
+        x: options.x,
+        y: options.y,
+      },
+
       stroke: {
         size: 5,
         color: '#333'

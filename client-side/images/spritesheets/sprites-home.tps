@@ -178,6 +178,8 @@
             <filename>../home-title-ww.png</filename>
             <filename>../home-grass-sprouts.png</filename>
             <filename>../home-good-elf.png</filename>
+            <filename>../home-btn-play-off.png</filename>
+            <filename>../home-btn-scores-off.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
