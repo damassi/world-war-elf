@@ -514,14 +514,14 @@ var GamePlayView = View.extend({
       size: '79px',
       color: '#ff0000',
 
+      stroke: {
+        size: 7,
+        color: '#666'
+      },
+
       position: {
         x: AppConfig.DIMENSIONS.width * .5,
         y: 1000,
-      },
-
-      stroke: {
-        size: 5,
-        color: '#333'
       }
     })
 

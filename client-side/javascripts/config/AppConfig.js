@@ -83,7 +83,7 @@ var AppConfig = {
    * Amount of gameplay time
    * @type {String}
    */
-  DEFAULT_GAMEPLAY_TIME: '0:10',
+  DEFAULT_GAMEPLAY_TIME: '2:00',
 
 
   /**
@@ -105,6 +105,8 @@ var AppConfig = {
    * @type {Number}
    */
   TARGET_PAUSE_TIME: 4
+
 }
+
 
 module.exports = AppConfig
