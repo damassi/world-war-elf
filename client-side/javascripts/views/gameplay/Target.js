@@ -23,7 +23,7 @@ var Target = View.extend({
    * The delay before the fat little elf throws his ball
    * @type {Number}
    */
-  SNOWBALL_ATTACK_DELAY: 1.5,
+  SNOWBALL_ATTACK_DELAY: 2,
 
 
   /**

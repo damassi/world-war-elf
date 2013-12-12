@@ -44,7 +44,7 @@ var HighScoresView = View.extend({
     this.scoresContainer.y = 186
 
     Easel.cache([ this.backBtn ])
-    Easel.dragObject( this.children )
+    //Easel.dragObject( this.children )
 
   },
 
@@ -80,7 +80,8 @@ var HighScoresView = View.extend({
       , scoreStartPos = { x: 0, y: 0}
       , nameStartPos = { x: 100, y: 0 }
       , orgStartPos = { x: 327, y: 0}
-      , spacing = 20
+      , spacing = 25
+      , size = '22px'
 
     var user, yPos, score, name, org
 
@@ -92,7 +93,7 @@ var HighScoresView = View.extend({
       score = new Easel.Text({
         text: user.Score,
         font: 'Luckiest Guy',
-        size: '18px',
+        size: size,
         color: '#ffffff',
         position: {
           x: scoreStartPos.x,
@@ -103,7 +104,7 @@ var HighScoresView = View.extend({
       name = new Easel.Text({
         text: user.Name,
         font: 'Luckiest Guy',
-        size: '18px',
+        size: size,
         color: '#ffffff',
         position: {
           x: nameStartPos.x,
@@ -114,7 +115,7 @@ var HighScoresView = View.extend({
       org = new Easel.Text({
         text: user.Organization,
         font: 'Luckiest Guy',
-        size: '18px',
+        size: size,
         color: '#ffffff',
         position: {
           x: orgStartPos.x,
