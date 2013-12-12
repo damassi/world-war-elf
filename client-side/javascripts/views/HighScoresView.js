@@ -5,8 +5,9 @@
  * @date   12.2.13
  */
 
-var View  = require('../supers/View')
-  , Easel = require('../utils/Easel')
+var View      = require('../supers/View')
+  , Easel     = require('../utils/Easel')
+  , AppConfig = require('../config/AppConfig')
 
 
 var HighScoresView = View.extend({
@@ -50,6 +51,21 @@ var HighScoresView = View.extend({
 
 
   render: function() {
+    req = $.ajax({
+      url: AppConfig.SCOREBOARD_ENDPOINTS.topscores,
+      async: false
+    })
+
+    req.error( function (error) {
+      console.error('Error loading top scores', error)
+    })
+
+    var self = this
+
+    req.done( function (data) {
+      self.scoreboard.scores = data.Scores
+    })
+
     this._super()
     this.buildScoreboard()
 

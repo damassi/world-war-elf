@@ -93,7 +93,8 @@ var SubmitScoreView = View.extend({
   onSubmitForm: function (event) {
     var postUrl = _.template( AppConfig.SCOREBOARD_ENDPOINTS.postScore, {
       name: this.$nameInput.val(),
-      organization: this.$organization.val()
+      organization: this.$organization.val(),
+      score: this.appModel.get('score')
     });
 
     var postReq = $.ajax({

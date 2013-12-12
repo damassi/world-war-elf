@@ -104,7 +104,7 @@ var HUD = View.extend({
 
   addEventListeners: function () {
     this.timer.on( 'change', this.onTimerUpdate )
-    this.listenTo( this.appModel, GameEvent.HITS, this.onChangeHits )
+    this.listenTo( this.appModel, GameEvent.SCORE, this.onChangeScore )
   },
 
 
@@ -175,12 +175,12 @@ var HUD = View.extend({
 
 
 
-  onChangeHits: function (model) {
-    var hits = model.changed.hits
+  onChangeScore: function (model) {
+    var score = model.changed.score
 
     var points = {
-      start: model._previousAttributes.hits,
-      end: hits
+      start: model._previousAttributes.score,
+      end: score
     }
 
     var self = this

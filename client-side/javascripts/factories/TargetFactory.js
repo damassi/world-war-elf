@@ -97,7 +97,7 @@ var TargetFactory = Backbone.View.extend({
     var orientation = this._returnOrientation()
 
     // TODO Frequency generator
-    var type = _.sample([1,1,1,0,0,0,0,0,0,0]) === 0 ? 'bad' : 'good'
+    var type = _.sample([1,1,0,0,0,0,0,0,0,0]) === 0 ? 'bad' : 'good'
 
     if (this.appModel.get('supermode'))
       type = 'bad'

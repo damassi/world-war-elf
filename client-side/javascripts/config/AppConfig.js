@@ -43,10 +43,10 @@ var AppConfig = {
 
 
   SCOREBOARD_ENDPOINTS: {
-    organizations: 'http://dev-vs-wfiis1/usherrusher/organization.ashx',
-    topscores: 'http://dev-vs-wfiis1/usherrusher/view.ashx',
-    topByOrg: 'http://dev-vs-wfiis1/usherrusher/view.ashx?org=yes',
-    postScore: 'http://dev-vs-wfiis1/usherrusher/submit.ashx?name={{ name }}&organizationId={{ organization }}'
+    organizations: 'http://10.100.10.50/zombieelves/organization.ashx',
+    topscores: 'http://10.100.10.50/zombieelves/view.ashx',
+    topByOrg: 'http://10.100.10.50/zombieelves/view.ashx?org=yes',
+    postScore: 'http://10.100.10.50/zombieelves/submit.ashx?name={{ name }}&organizationId={{ organization }}&score={{ score }}'
   },
 
 
@@ -83,7 +83,7 @@ var AppConfig = {
    * Amount of gameplay time
    * @type {String}
    */
-  DEFAULT_GAMEPLAY_TIME: '2:00',
+  DEFAULT_GAMEPLAY_TIME: '0:20',
 
 
   /**

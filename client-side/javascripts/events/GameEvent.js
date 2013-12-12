@@ -11,7 +11,6 @@ var GameEvent = {
   // Model property updates
 
   SCORE     : 'change:score',
-  HITS      : 'change:hits',
   SHOOT     : 'change:shots',
   SUPERMODE : 'change:supermode',
 

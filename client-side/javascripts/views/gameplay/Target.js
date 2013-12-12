@@ -44,7 +44,7 @@ var Target = View.extend({
    * The distance that good targets move to avoid hits
    * @type {Number}
    */
-  TARGET_AVOID_DISTANCE: 100,
+  TARGET_AVOID_DISTANCE: 150,
 
 
   /**
@@ -448,6 +448,7 @@ var Target = View.extend({
         T.to( this.target, .8, {
           x: self.startX + self.TARGET_AVOID_DISTANCE,
           ease: Expo.easeOut,
+          delay: 1,
 
           onComplete: function() {
             self.panTarget()
@@ -461,7 +462,7 @@ var Target = View.extend({
 
   updatePoints: function (points) {
     this.appModel.set({
-      hits: this.appModel.get('hits') + points
+      score: this.appModel.get('score') + points
     })
   }
 
