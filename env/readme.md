@@ -1,15 +1,16 @@
 holiday app production environment
 ==================================
 
-The app is run using the forever module to recover from errors in Node.js. 
-There are npm scripts in the `package.json` to start and stop the app.
+The app is run using the forever module to recover from errors in Node.js. There are npm scripts in the `package.json` to start and stop the app (use sudo).
 
 **Location**
 `/var/www/games.wordfly.com`
 
 **Starting** the app:
-cd to the site's root: `cd /var/www/www.games.com`
-Start app: `sudo npm run start-prod`
+cd to the site's root: 
+`cd /var/www/www.games.com`
+Start the app: 
+`sudo npm run start-prod`
  
 **Stopping** the app:
 `sudo npm run stop-prod` 
@@ -17,16 +18,25 @@ OR `sudo forever stopall`
 
 **Log file** is at:
 `/var/log/upstart/holiday-app.log`
+If you want to watch it:
+`sudo tail -f /var/log/upstart/holiday-app.log`
 
 **Restarting** the app after code changes:
 `sudo forever restartall`
 
 **Deploying updates**
-Deploy a new build by unzipping app into /var/www/games.wordfly.com
 
-If there are node_module updates:
+* Copy the local .zip file to the server
+`scp GITSHA.wordfly-holiday-dist.zip  USERNAME@SERVERNAME:/home/USERNAME1`
+
+* ssh into the server
+`ssh USERNAME@SERVERNAME`
+
+* Unzip the .zip file to the target folder at /var/www/games.wordfly.
+`sudo unzip FILENAME.zip -d /var/www/games.wordfly.com/`
+
+* If there are server-side updates, restart the app
 `cd /var/www/games.wordfly.com`
-`sudo npm install`
 `sudo forever restartall`
 
 
@@ -55,30 +65,3 @@ App to use ip and port passed in from environment:
 
 
 ------------------------------
-
-
-### Deprecated server setup using upstart, which was not working with Sails and the IP env command argument
-
-The holiday-app runs via an Upstart script in:
-
-    /etc/init/holiday-app.conf
-
-Site can be started and stopped using upstart:
-
-    start holiday-app
-    stop holiday-app
-    status holiday-app
-
-Log file is at:
-
-    /var/log/upstart/holiday-app.log
-
-Site lives at:
-
-    /var/www/games.wordfly.com
-
-The app is run using the forever module, with the `-w` option to force an app restart when code changes.
-
-Deploy a new build by unzipping app into /var/www/games.wordfly.com
-
-If there are node_module updates, `sudo npm install` it the app root.
