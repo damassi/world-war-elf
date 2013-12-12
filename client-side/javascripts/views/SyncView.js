@@ -42,9 +42,10 @@ var SyncView = View.extend({
     this.syncText = new Easel.Text( 'Requesting Sync Code', 'Luckiest Guy', '29px', '#fff', {
       x: 156,
       y: 170,
-    }, {
-      size: 5,
-      color: '#333'
+      stroke: {
+        size: 5,
+        color: '#333'
+      }
     })
 
     this.children = [

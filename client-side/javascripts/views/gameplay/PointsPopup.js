@@ -18,9 +18,10 @@ var PointsPopup = View.extend({
     this.pointText = new Easel.Text( options.pointValue, 'Luckiest Guy', '39px', '#ff0000', {
       x: options.x,
       y: options.y,
-    }, {
-      size: 5,
-      color: '#333'
+      stroke: {
+        size: 5,
+        color: '#333'
+      }
     })
 
     this.pointText.textAlign('center')

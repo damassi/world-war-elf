@@ -146,6 +146,8 @@ var GamePlayView = View.extend({
     PubSub.on( AppEvent.STOP_GAMEPLAY, this.onStopGamePlay )
     PubSub.on( GameEvent.PLAYER_HIT, this.onPlayerHit )
 
+    this.listenTo( this.appModel, GameEvent.SUPERMODE, this.onSuperModeChange )
+
     $('#canvas').on( 'mousemove', this.onMouseMove )
     $('#canvas').on( 'mousedown', this.onPrepareTarget )
     $('#canvas').on( 'mouseup', this.onShoot )
@@ -390,9 +392,7 @@ var GamePlayView = View.extend({
 
 
 
-  onPauseGamePlay: function () {
 
-  },
 
 
 
@@ -476,18 +476,10 @@ var GamePlayView = View.extend({
 
 
   onOrientationUpdate: function (message) {
-
-    // If DEBUG `mouse` param passed back from API
-    if (message.mouse) {
-      this.moveCroshairs(message.orientation)
-      return
-    }
-
     this.phoneOrientation = {
       x: message.orientation.x * 2,
       y: message.orientation.y * 2
     }
-
   },
 
 
@@ -514,6 +506,46 @@ var GamePlayView = View.extend({
       this.crossHairs.y = dimensions.height
   },
 
+
+
+  onSuperModeChange: function (model) {
+    var supermode = model.changed.supermode
+
+    if (!supermode) return
+
+    var powerUpText = new Easel.Text( 'Powerup!', 'Luckiest Guy', '79px', '#ff0000', {
+      x: AppConfig.DIMENSIONS.width * .5,
+      y: 1000,
+      stroke: {
+        size: 5,
+        color: '#333'
+      }
+    })
+
+    powerUpText.textAlign('center')
+    this.stage.addChild( powerUpText.container )
+
+    var self = this
+
+    T.fromTo( powerUpText.container, .3, { y: 1000 }, {
+      y: AppConfig.DIMENSIONS.height * .5,
+      ease: Expo.easeOut,
+
+      onComplete: function () {
+
+        T.to( powerUpText.container, .3, {
+          y: -1000,
+          ease: Expo.easeIn,
+          delay: 1,
+
+          onComplete: function () {
+            self.stage.removeChild( this.target )
+          }
+        })
+      }
+    })
+
+  },
 
 
 

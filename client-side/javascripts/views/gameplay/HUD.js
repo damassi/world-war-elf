@@ -44,17 +44,19 @@ var HUD = View.extend({
     this.timeText = new Easel.Text('0:00', 'Luckiest Guy', '39px', '#fff', {
       x: this.TEXT_POS.time.x,
       y: this.TEXT_POS.time.y,
-    }, {
-      size: 5,
-      color: '#333'
+      stroke: {
+        size: 5,
+        color: '#333'
+      }
     })
 
     this.pointsText = new Easel.Text('0', 'Luckiest Guy', '69px', '#ff0000', {
       x: this.TEXT_POS.presents.x,
       y: this.TEXT_POS.presents.y,
-    }, {
-      size: 5,
-      color: '#333'
+      stroke: {
+        size: 5,
+        color: '#333'
+      }
     })
 
 

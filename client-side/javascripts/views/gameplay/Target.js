@@ -71,7 +71,7 @@ var Target = View.extend({
     good: [
       {
         id: 'sign-gift',
-        bonus: 'clear-screen',
+        bonus: 'kill-all',
         points: 100,
       },
       {
@@ -309,8 +309,8 @@ var Target = View.extend({
           this.appModel.enableSupermode()
 
         // If Gift target
-        else
-          PubSub.trigger( GameEvent.KILL_ALL_TARGETS )
+        else if (this.targetProps.bonus === 'kill-all')
+          PubSub.trigger( GameEvent.KILL_ALL_TARGETS, { superMode: false })
 
       }
     }

@@ -10,20 +10,18 @@ var GameEvent = {
 
   // Model property updates
 
-  SCORE  : 'change:score',
-  HITS   : 'change:hits',
-  SHOOT  : 'change:shots',
+  SCORE     : 'change:score',
+  HITS      : 'change:hits',
+  SHOOT     : 'change:shots',
+  SUPERMODE : 'change:supermode',
 
 
   // PubSub updates
 
   TARGET_HIT  : 'onTargetHit',
-
   PLAYER_HIT  : 'onPlayerHit',
-
-  KILL_ALL_TARGETS: 'onKillAllTargets', 
-
-  TIMER_TICK : 'onTimerTick' 
+  TIMER_TICK : 'onTimerTick',
+  KILL_ALL_TARGETS: 'onKillAllTargets',
 
 }
 
