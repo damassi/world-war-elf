@@ -394,10 +394,12 @@ module.exports = function( grunt ) {
       package: {
         src: [
           '**',
-          '!**/client-side/**'
+          '!**/client-side/**',
+          '!**/.git/**',
+          '!**/.sass-cache/**',
         ],
         dest: '<%= zip_dest %>',
-        dot: false
+        dot: true
       }
     },
 
