@@ -105,7 +105,6 @@ var Easel = {
    */
 
   Text: function (textProps) {
-    console.log(textProps)
     var container = new c.Container()
     var text = new c.Text( textProps.text, textProps.size + ' ' + textProps.font, textProps.color )
 
