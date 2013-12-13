@@ -41,7 +41,7 @@ var SocketIO = {
 
 
   onConnect: function (socket) {
-    console.log( 'Socket.IO connected' )
+    //console.log( 'Socket.IO connected' )
 
     PubSub.trigger( AppEvent.SOCKET_IO_CONNECTED )
   },

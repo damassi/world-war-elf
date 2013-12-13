@@ -150,13 +150,9 @@ var MobileGamePlayView = MobileView.extend({
           orientation: JSON.stringify( self.curOrientation )
         },
 
-          function onResponse (response) {
-            //console.log(response.orientation)
-          })
+          function onResponse (response) {})
       }
     })
-
-    $('.debug').html( orientation.x + '<br/>' + orientation.y )
   },
 
 
@@ -190,9 +186,7 @@ var MobileGamePlayView = MobileView.extend({
       sessionId: this.sessionId
     },
 
-      function onResponse (response) {
-        //console.log(response, 'successfully fired')
-      })
+      function onResponse (response) {})
   },
 
 

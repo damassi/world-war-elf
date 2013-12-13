@@ -144,9 +144,7 @@ var AppModel = Backbone.Model.extend({
       supermode: mode
     },
 
-      function onResponse (response) {
-        //console.log(response.orientation)
-      })
+      function onResponse (response) {})
 
     return mode
   }

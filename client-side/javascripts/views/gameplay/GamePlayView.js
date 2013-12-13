@@ -399,9 +399,7 @@ var GamePlayView = View.extend({
         sessionId: this.appModel.get('session').sessionId
       },
 
-        function onResponse (response) {
-          console.log(response)
-        })
+        function onResponse (response) {})
     }
 
   },

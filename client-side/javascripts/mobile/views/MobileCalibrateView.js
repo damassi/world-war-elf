@@ -20,7 +20,7 @@ var MobileCalibrateView = MobileView.extend({
    * Stores a tweenable position which is pushed over the socket
    * @type {Object}
    */
-  _curOrientation: { x: 0, y: 0 },
+  curOrientation: { x: 0, y: 0 },
 
 
 
@@ -44,43 +44,38 @@ var MobileCalibrateView = MobileView.extend({
 
 
   addEventListeners: function() {
-    this.$body.on('touchend', this._onStartBtnClick )
-    window.addEventListener( 'devicemotion', this._onDeviceMotion )
-    //window.ondevicemotion = this._onDeviceMotion
+    this.$body.on('touchend', this.onStartBtnClick )
+    window.addEventListener( 'devicemotion', this.onDeviceMotion )
   },
 
 
 
   removeEventListeners: function() {
-    this.$body.off('touchend', this._onStartBtnClick )
-    window.removeEventListener( 'devicemotion', this._onDeviceMotion )
+    this.$body.off('touchend', this.onStartBtnClick )
+    window.removeEventListener( 'devicemotion', this.onDeviceMotion )
   },
 
 
 
-  _onDeviceMotion: function (event) {
+  onDeviceMotion: function (event) {
     var self = this
 
-    TweenMax.to(this._curOrientation, .6, {
+    TweenMax.to(this.curOrientation, .6, {
       x: event.accelerationIncludingGravity.x,
       y: event.accelerationIncludingGravity.y
     })
 
     window.socket.post( AppConfig.ENDPOINTS.orientation, {
       sessionId: self.sessionId,
-      orientation: JSON.stringify( this._curOrientation )
+      orientation: JSON.stringify( this.curOrientation )
     },
 
-      function onResponse (response) {
-        //console.log(response.orientation)
-      })
-
-    $('.debug').html( orientation.x + '<br/>' + orientation.y )
+      function onResponse (response) {})
   },
 
 
 
-  _onStartBtnClick: function (event) {
+  onStartBtnClick: function (event) {
     var self = this
 
     window.socket.post( AppConfig.ENDPOINTS.startGame, {

@@ -105,11 +105,11 @@ var SubmitScoreView = View.extend({
     })
 
     postReq.error( function (error, msg) {
-      console.log(msg, error)
+      //console.log(msg, error)
     })
 
     postReq.success( function (response) {
-      console.log(response)
+      //console.log(response)
     })
 
     window.location.href = '#/high-scores'

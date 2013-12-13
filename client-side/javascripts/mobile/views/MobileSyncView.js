@@ -96,8 +96,6 @@ var MobileSyncView = MobileView.extend({
 
 
   _onServerResponse: function (response) {
-    console.log(response)
-
     if (response.status === 200) {
       this.trigger( SocketEvent.SYNCED )
     }
