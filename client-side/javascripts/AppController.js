@@ -140,7 +140,7 @@ var AppController = {
     Sound.play({ soundId: 'audio-bg', loop: -1, volume: 0.5 })
 
     c.Ticker.addEventListener( 'tick', this.tick )
-    //this.appModel.set( 'mute', true )
+    this.appModel.set( 'mute', true )
   },
 
 

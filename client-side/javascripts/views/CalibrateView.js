@@ -20,17 +20,10 @@ var CalibrateView = View.extend({
   initialize: function (options) {
     this._super(options)
 
-    this.dot = new c.Shape()
-    this.dot.graphics.beginFill("#ffffff").drawCircle(0, 0, 12, 12);
-    this.dot.x = AppConfig.DIMENSIONS.width * .5
-    this.dot.y = AppConfig.DIMENSIONS.height * .5
-
     this.children = [
-      //this.placeholder = Easel.createBitmap('placeholder-calibrate'),
-
-      Easel.createSprite('gameplaySprite', 'game-crosshairs', { x: 481, y: 302 }, { center: true }),
       Easel.createSprite('miscSprite', 'calibrate-text-calibrate', { x: 215, y: 126 }),
-      this.dot
+      Easel.createSprite('miscSprite', 'calibrate-target', { x: AppConfig.DIMENSIONS.width * .5, y: AppConfig.DIMENSIONS.height * .5 }, { center: true }),
+      this.crossHairs = Easel.createSprite('gameplaySprite', 'game-crosshairs', { x: AppConfig.DIMENSIONS.width * .5, y: AppConfig.DIMENSIONS.height * .5 }, { center: true })
     ]
 
     Easel.dragObject( this.children )
@@ -43,8 +36,8 @@ var CalibrateView = View.extend({
     this._super()
 
     this.phoneOrientation = {
-      x: this.dot.x,
-      y: this.dot.y
+      x: this.crossHairs.x,
+      y: this.crossHairs.y
     }
 
     this.addEventListeners()
@@ -73,13 +66,6 @@ var CalibrateView = View.extend({
 
 
   onOrientationUpdate: function (message) {
-
-    // If DEBUG `mouse` param passed back from API
-    if (message.mouse) {
-      this.moveCroshairs(message.orientation)
-      return
-    }
-
     this.phoneOrientation = {
       x: message.orientation.x * 2,
       y: message.orientation.y * 2
@@ -99,29 +85,31 @@ var CalibrateView = View.extend({
 
 
   onTick: function() {
+    if (! this.appModel.get('connected'))
+      return
 
     var dimensions = AppConfig.DIMENSIONS
 
-    this.dot.x += this.phoneOrientation.x
-    this.dot.y += this.phoneOrientation.y
+    this.crossHairs.x += this.phoneOrientation.x
+    this.crossHairs.y += this.phoneOrientation.y
 
-    if (this.dot.x < 0)
-      this.dot.x = 0
+    if (this.crossHairs.x < 0)
+      this.crossHairs.x = 0
 
-    if (this.dot.x > dimensions.width)
-      this.dot.x = dimensions.width
+    if (this.crossHairs.x > dimensions.width)
+      this.crossHairs.x = dimensions.width
 
-    if (this.dot.y < 0)
-      this.dot.y = 0
+    if (this.crossHairs.y < 0)
+      this.crossHairs.y = 0
 
-    if (this.dot.y > dimensions.height)
-      this.dot.y = dimensions.height
+    if (this.crossHairs.y > dimensions.height)
+      this.crossHairs.y = dimensions.height
   },
 
 
 
   moveCroshairs: function (position) {
-    T.to( this.dot, .2, {
+    T.to( this.crossHairs, .2, {
       x: position.x,
       y: position.y,
       ease: Expo.easeOut

@@ -532,25 +532,27 @@ var Assets = {
         "images": [path + 'spritesheets/sprites-misc.png'],
         "frames": [
 
-            [1127, 2, 524, 78],
-            [339, 191, 228, 56],
+            [1127, 2, 136, 137],
+            [1265, 2, 524, 78],
+            [553, 191, 228, 56],
             [1580, 155, 245, 68],
-            [1127, 82, 451, 109],
+            [1127, 141, 451, 109],
             [1580, 82, 310, 71],
-            [2, 2, 572, 187],
-            [576, 2, 549, 251],
-            [2, 191, 335, 39]
+            [553, 2, 572, 187],
+            [2, 2, 549, 251],
+            [783, 191, 335, 39]
         ],
         "animations": {
 
-                "calibrate-text-calibrate":[0],
-                "highscores-btn-btn":[1],
-                "highscores-btn-misc":[2],
-                "highscores-text":[3],
-                "submit-btn":[4],
-                "submit-text":[5],
-                "sync-phone":[6],
-                "sync-text-sync":[7]
+                "calibrate-target":[0],
+                "calibrate-text-calibrate":[1],
+                "highscores-btn-btn":[2],
+                "highscores-btn-misc":[3],
+                "highscores-text":[4],
+                "submit-btn":[5],
+                "submit-text":[6],
+                "sync-phone":[7],
+                "sync-text-sync":[8]
         },
       }
 
