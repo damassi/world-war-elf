@@ -11,6 +11,7 @@
 
 module.exports = function( grunt ) {
 
+
   var handleify = require('handleify');
   var uglify    = require("uglify-js");
 
@@ -277,8 +278,6 @@ module.exports = function( grunt ) {
       dev: {
         options: {
           file: '<%= sources %>/app.js',
-          //args: ['production'],
-          //nodeArgs: ['--debug-brk'],
           ignoredFiles: [
             'README.md',
             'node_modules/*',

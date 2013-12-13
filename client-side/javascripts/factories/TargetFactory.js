@@ -198,7 +198,8 @@ var TargetFactory = Backbone.View.extend({
       // Just kill the badguys
       else if (target.type === 'bad' ) {
         target.hit({
-          supressPoints: true
+          supressPoints: true,
+          killAll: true
         })
       }
     }

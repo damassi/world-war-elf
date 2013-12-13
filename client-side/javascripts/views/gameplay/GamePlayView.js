@@ -100,7 +100,7 @@ var GamePlayView = View.extend({
       this.frontGround  = Easel.createSprite('gameplaySprite', 'game-ground-front', { x: 0, y: 453 }),
 
       // The user-controlled target
-      this.crossHairs   = Easel.createSprite('gameplaySprite', 'game-crosshairs', { x: 468, y: 245 }, { center: true }),
+      this.crossHairs   = Easel.createSprite('gameplaySprite', 'game-crosshairs', { x: AppConfig.DIMENSIONS.width * .5, y: AppConfig.DIMENSIONS.height * .5 }, { center: true }),
 
       // The flash that is triggered when the player gets hit
       this.redHitArea = new c.Shape( new c.Graphics().beginFill("#ff0000").drawRect( 0, 0, AppConfig.DIMENSIONS.width, AppConfig.DIMENSIONS.height ))
@@ -353,7 +353,11 @@ var GamePlayView = View.extend({
       gamePlayView: this
     })
 
-    PubSub.on( AppEvent.TICK, this.onTick )
+    var self = this
+
+    setTimeout( function() {
+      PubSub.on( AppEvent.TICK, self.onTick )
+    }, 1000 )
   },
 
 

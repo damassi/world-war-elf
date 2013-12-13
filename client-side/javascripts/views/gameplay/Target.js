@@ -108,14 +108,14 @@ var Target = View.extend({
    * Has the target already been hit - prevents multiple strikes
    * @type {Boolean}
    */
-  hasBeenHit: false,
+  beenHit: false,
 
 
   /**
    * have our points been triggered? Should only fired once
    * @type {Boolean}
    */
-  hasPointsTriggered: false,
+  pointsTriggered: false,
 
 
   /**
@@ -230,7 +230,7 @@ var Target = View.extend({
 
 
   attackPlayer: function () {
-    if (this.hasBeenHit)
+    if (this.beenHit)
       return
 
     this.instance.gotoAndStop('throw')
@@ -289,22 +289,28 @@ var Target = View.extend({
       })
 
 
-      // Decrease energy and return if not 0 to
-      // simulate energy hits
+      // Check if user has hit the kill all gift which is
+      // being passed in from TargetFactory#killAll
 
-      if (!this.appModel.get('supermode')) {
-        if (this.targetProps.energy > 0) {
-          this.targetProps.energy--
+      if (! options.killAll) {
 
-          var scale = this.instance.scaleX
+        // Decrease energy and return if not 0 to
+        // simulate energy hits
 
-          T.to( this.instance, .3, {
-            scaleX: scale + .1,
-            scaleY: scale + .1,
-            ease: Expo.easeOut
-          })
+        if (! this.appModel.get('supermode')) {
+          if (this.targetProps.energy > 0) {
+            this.targetProps.energy--
 
-          return
+            var scale = this.instance.scaleX
+
+            T.to( this.instance, .3, {
+              scaleX: scale + .1,
+              scaleY: scale + .1,
+              ease: Expo.easeOut
+            })
+
+            return
+          }
         }
       }
     }
@@ -316,7 +322,7 @@ var Target = View.extend({
     if (this.type === 'good') {
 
       // Only allow one hit for good targets...maybe multiples on bad is okay
-      if (!this.hasBeenHit) {
+      if (!this.beenHit) {
 
         Sound.play({
           soundId: 'bonus-hit-candycane',
@@ -359,7 +365,7 @@ var Target = View.extend({
         // Only fire if we've yet to trigger points - we update
         // it below so we're not constantly updating
 
-        if (!this.hasPointsTriggered) {
+        if (!this.pointsTriggered) {
           var pos = this.instance.localToGlobal(0, 0)
           var newXPos = pos.x + 120
           var pointsPopup = new PointsPopup({
@@ -373,9 +379,9 @@ var Target = View.extend({
       }
     }
 
-    if (!this.hasPointsTriggered) {
+    if (!this.pointsTriggered) {
       this.updatePoints( this.targetProps.points )
-      this.hasPointsTriggered = true
+      this.pointsTriggered = true
     }
 
 
@@ -383,7 +389,7 @@ var Target = View.extend({
     // trigger a PubSub back to AppController and TargetFactory
     // with the target which was hit.
 
-    if (!this.hasBeenHit || this.targetProps.energy > 0) {
+    if (!this.beenHit || this.targetProps.energy > 0) {
 
       var self = this
 
@@ -408,8 +414,8 @@ var Target = View.extend({
       })
     }
 
-    if (!this.hasBeenHit) {
-      this.hasBeenHit = true
+    if (!this.beenHit) {
+      this.beenHit = true
     }
 
   },

@@ -26,8 +26,6 @@ var CalibrateView = View.extend({
       this.crossHairs = Easel.createSprite('gameplaySprite', 'game-crosshairs', { x: AppConfig.DIMENSIONS.width * .5, y: AppConfig.DIMENSIONS.height * .5 }, { center: true })
     ]
 
-    Easel.dragObject( this.children )
-
   },
 
 
@@ -46,12 +44,21 @@ var CalibrateView = View.extend({
   },
 
 
+  show: function() {
+    this._super()
+
+    var self = this
+
+    setTimeout( function() {
+      PubSub.on( AppEvent.TICK, self.onTick )
+    }, 1000 )
+  },
+
+
 
   addEventListeners: function () {
     window.socket.on( SocketEvent.ORIENTATION, this.onOrientationUpdate )
     window.socket.on( SocketEvent.START_GAME, this.onStartGame )
-
-    PubSub.on( AppEvent.TICK, this.onTick )
   },
 
 
