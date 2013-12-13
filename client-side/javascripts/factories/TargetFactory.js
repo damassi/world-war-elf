@@ -80,24 +80,24 @@ var TargetFactory = Backbone.View.extend({
 
 
   addEventListeners: function ()  {
-    PubSub.on( GameEvent.TARGET_HIT, this._onTargetHit )
-    PubSub.on( GameEvent.KILL_ALL_TARGETS, this._onKillAllTargets )
+    PubSub.on( GameEvent.TARGET_HIT, this.onTargetHit )
+    PubSub.on( GameEvent.KILL_ALL_TARGETS, this.onKillAllTargets )
   },
 
 
 
   removeEventListeners: function () {
-    PubSub.off( GameEvent.TARGET_HIT, this._onTargetHit )
-    PubSub.off( GameEvent.KILL_ALL_TARGETS, this._onKillAllTargets )
+    PubSub.off( GameEvent.TARGET_HIT, this.onTargetHit )
+    PubSub.off( GameEvent.KILL_ALL_TARGETS, this.onKillAllTargets )
   },
 
 
 
   createTarget: function () {
-    var orientation = this._returnOrientation()
+    var orientation = this.returnOrientation()
 
     // TODO Frequency generator
-    var type = _.sample([1,1,0,0,0,0,0,0,0,0]) === 0 ? 'bad' : 'good'
+    var type = this.returnTargetType()
 
     if (this.appModel.get('supermode'))
       type = 'bad'
@@ -134,12 +134,36 @@ var TargetFactory = Backbone.View.extend({
 
 
   /**
+   * Ensure that there can only be one 'good' target in the array at any given point
+   * @return {String} The target type, 'good|bad'
+   */
+
+  returnTargetType: function () {
+    var type = _.sample([1,1,1,0,0,0,0,0,0,0]) === 0 ? 'bad' : 'good'
+      , len  = this.occupiedPositions.length
+
+    var i, target
+
+    for (i = 0; i < len; ++i) {
+      var target = this.occupiedPositions[i]
+
+      if (target.type === 'good') {
+        return 'bad'
+      }
+    }
+
+    return type
+  },
+
+
+
+  /**
    * Returns a position based upon the playMatrix defined above
    * @param  {c.DisplayObject} target The target to return the position for
    * @return {Object}
    */
 
-  _returnOrientation: function () {
+  returnOrientation: function () {
     var matrixOrientation = _.sample( this.playMatrix )
       , xPos = _.sample( matrixOrientation.xPositions )
 
@@ -155,7 +179,7 @@ var TargetFactory = Backbone.View.extend({
       orientation = this.occupiedPositions[i].orientation
 
       if (_.isEqual( orientation, newOrientation )) {
-        return this._returnOrientation()
+        return this.returnOrientation()
       }
     }
 
@@ -170,7 +194,7 @@ var TargetFactory = Backbone.View.extend({
 
 
 
-  _onTargetHit: function (params) {
+  onTargetHit: function (params) {
     var target = params.targetView
 
     this.occupiedPositions = _.without( this.occupiedPositions, target )
@@ -180,7 +204,7 @@ var TargetFactory = Backbone.View.extend({
 
 
 
-  _onKillAllTargets: function (params) {
+  onKillAllTargets: function (params) {
     params = params || {}
 
     var i, len, target
