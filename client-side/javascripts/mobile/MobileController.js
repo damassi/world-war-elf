@@ -79,6 +79,7 @@ var MobileController = {
         delay: 1,
 
         onComplete: function () {
+          return
           TweenMax.to( $gameOver, .3, {
             scale: 0,
             ease: Back.easeOut,

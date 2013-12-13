@@ -97,7 +97,7 @@ var MobileGamePlayView = MobileView.extend({
 
 
   removeEventListeners: function () {
-    this.$body.on('touchend', this.fireBall )
+    this.$body.off('touchend', this.fireBall )
 
     window.removeEventListener( 'devicemotion', this.onDeviceMotion )
     window.socket.removeListener( SocketEvent.TOGGLE_MODE, this.onToggleMode )
