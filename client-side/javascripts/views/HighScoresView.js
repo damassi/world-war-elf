@@ -5,8 +5,9 @@
  * @date   12.2.13
  */
 
-var View  = require('../supers/View')
-  , Easel = require('../utils/Easel')
+var View      = require('../supers/View')
+  , Easel     = require('../utils/Easel')
+  , AppConfig = require('../config/AppConfig')
 
 
 var HighScoresView = View.extend({
@@ -33,23 +34,36 @@ var HighScoresView = View.extend({
 
     this.children = [
       Easel.createSprite('miscSprite', 'highscores-text', { x: 152, y: 54 }),
-      Easel.createSprite('miscSprite', 'highscores-btn-misc', { x: 20, y: 519 }),
 
       this.backBtn = Easel.createSprite('miscSprite', 'highscores-btn-btn', { x: 26, y: this.BACK_POS_Y }),
+      Easel.createSprite('miscSprite', 'highscores-btn-misc', { x: 20, y: 519 }),
+
       this.scoresContainer = new c.Container()
     ]
 
     this.scoresContainer.x = 154
     this.scoresContainer.y = 186
 
-    Easel.cache([ this.backBtn ])
-    Easel.dragObject( this.children )
-
   },
 
 
 
   render: function() {
+    req = $.ajax({
+      url: AppConfig.SCOREBOARD_ENDPOINTS.topscores,
+      async: false
+    })
+
+    req.error( function (error) {
+      console.error('Error loading top scores', error)
+    })
+
+    var self = this
+
+    req.done( function (data) {
+      self.scoreboard.scores = data.Scores
+    })
+
     this._super()
     this.buildScoreboard()
 
@@ -64,7 +78,8 @@ var HighScoresView = View.extend({
       , scoreStartPos = { x: 0, y: 0}
       , nameStartPos = { x: 100, y: 0 }
       , orgStartPos = { x: 327, y: 0}
-      , spacing = 20
+      , spacing = 25
+      , size = '22px'
 
     var user, yPos, score, name, org
 
@@ -73,19 +88,37 @@ var HighScoresView = View.extend({
 
       yPos = (i * spacing)
 
-      score = new Easel.Text( user.Score, 'Luckiest Guy', '18px', '#ffffff', {
-        x: scoreStartPos.x,
-        y: scoreStartPos.y + yPos
+      score = new Easel.Text({
+        text: user.Score,
+        font: 'Luckiest Guy',
+        size: size,
+        color: '#ffffff',
+        position: {
+          x: scoreStartPos.x,
+          y: scoreStartPos.y + yPos
+        }
       })
 
-      name = new Easel.Text( user.Name, 'Luckiest Guy', '18px', '#ffffff', {
-        x: nameStartPos.x,
-        y: nameStartPos.y + yPos
+      name = new Easel.Text({
+        text: user.Name,
+        font: 'Luckiest Guy',
+        size: size,
+        color: '#ffffff',
+        position: {
+          x: nameStartPos.x,
+          y: nameStartPos.y + yPos
+        }
       })
 
-      org = new Easel.Text( user.Organization, 'Luckiest Guy', '18px', '#ffffff', {
-        x: orgStartPos.x,
-        y: orgStartPos.y + yPos
+      org = new Easel.Text({
+        text: user.Organization,
+        font: 'Luckiest Guy',
+        size: size,
+        color: '#ffffff',
+        position: {
+          x: orgStartPos.x,
+          y: orgStartPos.y + yPos
+        }
       })
 
       this.scoresContainer.addChild( score.container, name.container, org.container )
@@ -109,6 +142,8 @@ var HighScoresView = View.extend({
       yoyo: true,
       repeat: 1
     })
+
+    Easel.cache([ target ])
 
     T.to( target, .2, {
       easel: {

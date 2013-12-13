@@ -51,11 +51,11 @@ var HomeView = View.extend({
       this.rElf = new c.Container(),
 
       this.playBtnShadow   = Easel.createSprite('homeSprite', 'home-btn-play-shadow', { x: 314, y: 526 } ),
-      this.playBtn         = Easel.createSprite('home-btn-play', 0, { x: 317, y: this.btnPositions.playY }),
+      this.playBtn         = Easel.createSprite('homeSprite', 'home-btn-play-off', { x: 317, y: this.btnPositions.playY }),
       this.playBtnSnow     = Easel.createSprite('homeSprite', 'home-btn-play-snow', { x: 335, y: 524 } ),
 
       this.scoreBtnShadow   = Easel.createSprite('homeSprite', 'home-btn-scores-shadow', { x: 21, y: 553 } ),
-      this.scoreBtn         = Easel.createSprite('home-btn-score', 0, { x: 18, y: this.btnPositions.highScoreY } ),
+      this.scoreBtn         = Easel.createSprite('homeSprite', 'home-btn-scores-off', { x: 18, y: this.btnPositions.highScoreY } ),
       this.scoreBtnSnow     = Easel.createSprite('homeSprite', 'home-btn-scores-snow', { x: 41, y: 557 } ),
 
       this.grassSprouts = Easel.createSprite('homeSprite', 'home-grass-sprouts', { x: 7, y: 486 }),
@@ -64,7 +64,6 @@ var HomeView = View.extend({
       this.elfShadow    = Easel.createSprite('homeSprite', 'home-btn-scores-shadow', { x: 633, y: 546 }),
     ]
 
-    Easel.cache([ this.playBtn, this.scoreBtn ])
     //Easel.dragObject( this.children )
 
   },
@@ -72,6 +71,8 @@ var HomeView = View.extend({
 
 
   render: function (options) {
+    Easel.cache([ this.playBtn, this.scoreBtn ])
+
     this.lElf.x = 40
     this.rElf.x = 85
 

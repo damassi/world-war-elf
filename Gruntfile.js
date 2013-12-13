@@ -20,14 +20,11 @@ module.exports = function( grunt ) {
 
     // + ---------------------------------------------
 
-    pkg      : grunt.file.readJSON('package.json'),
-
     basePath : '.',
     sources  : '<%= basePath %>',
     frontend : '<%= basePath %>/client-side',
     output   : '<%= basePath %>/.tmp/public',
     dist     : '<%= basePath %>/dist',
-    zip_dest : '<%= dist %>/wordfly-holiday-dist.zip',
     port     : 3001,
 
 
@@ -239,6 +236,28 @@ module.exports = function( grunt ) {
     },
 
 
+    //
+    // Optimize images for distribution
+    //
+
+    'imagemin': {
+
+      dist: {
+        options: {
+          pngquant: true,
+          optimizationLevel: 2
+        },
+
+        files: [{
+          expand: true,
+          cwd: '<%= output %>/assets/images/',
+          src: ['**/*.{png,jpg,gif}'],
+          dest: '<%= output %>/assets/images/'
+        }]
+      }
+    },
+
+
 
     //
     // Add the livereload server
@@ -398,15 +417,14 @@ module.exports = function( grunt ) {
           '!**/.git/**',
           '!**/.sass-cache/**',
         ],
-        dest: '<%= zip_dest %>',
+        dest: '<%= dist %>/wordfly-holiday-dist.zip',
         dot: true
       }
     },
 
 
     'revgithash': {
-      options: {},
-      files: ['<%= zip_dest %>']
+      files: ['<%= dist %>/wordfly-holiday-dist.zip']
     }
 
 
@@ -438,6 +456,7 @@ module.exports = function( grunt ) {
   ])
 
   grunt.registerTask( 'build', [
+    'clean:dist',
     'clean:output',
     'copy:images',
     'copy:audio',
@@ -448,6 +467,7 @@ module.exports = function( grunt ) {
     'sass:dist',
     'concat:vendor',
     'uglify',
+    'imagemin:dist',
     'zip',
     'revgithash'
   ])

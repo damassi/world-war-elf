@@ -165,8 +165,6 @@ var PreloaderView = Backbone.View.extend({
         scores: scoreboardData.Scores
       }
 
-      console.log( scoreboard )
-
       self.trigger('loadComplete', scoreboard)
       self.remove()
     })

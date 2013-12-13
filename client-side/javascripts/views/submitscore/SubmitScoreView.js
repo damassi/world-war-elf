@@ -36,6 +36,7 @@ var SubmitScoreView = View.extend({
     this.$nameInput    = this.$form.find('.name')
     this.$organization = this.$form.find('.organization')
     this.$submitBtn    = this.$form.find('.submit-btn')
+    this.$skipBtn      = this.$form.find('.skip-btn')
 
     TweenMax.set( this.$form, { autoAlpha: 0 })
 
@@ -48,12 +49,14 @@ var SubmitScoreView = View.extend({
 
   addEventListeners: function() {
     this.$submitBtn.on('touchend', this.onSubmitForm)
+    this.$skipBtn.on('touchend', this.onSkipBtnClick)
   },
 
 
 
   removeEventListeners: function() {
     this.$submitBtn.off('touchend', this.onSubmitForm)
+    this.$skipBtn.off('touchend', this.onSkipBtnClick)
   },
 
 
@@ -93,7 +96,8 @@ var SubmitScoreView = View.extend({
   onSubmitForm: function (event) {
     var postUrl = _.template( AppConfig.SCOREBOARD_ENDPOINTS.postScore, {
       name: this.$nameInput.val(),
-      organization: this.$organization.val()
+      organization: this.$organization.val(),
+      score: this.appModel.get('score')
     });
 
     var postReq = $.ajax({
@@ -109,7 +113,15 @@ var SubmitScoreView = View.extend({
     })
 
     window.location.href = '#/high-scores'
+  },
+
+
+
+  onSkipBtnClick: function (event) {
+    window.location.href = '#/high-scores'
   }
+
+
 
 })
 

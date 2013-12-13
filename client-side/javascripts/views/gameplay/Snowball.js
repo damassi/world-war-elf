@@ -142,8 +142,8 @@ var Snowball = View.extend({
       targetPoint = target.localToGlobal( 0, 0 )
       bounds = target.getBounds()
 
-      bounds.x = targetPoint.x + 50
-      bounds.y = targetPoint.y + 30
+      bounds.x = targetPoint.x
+      bounds.y = targetPoint.y
 
       // Hit target, dispatch event back to GamePlayView
       if (Easel.isWithinBounds( point, bounds )) {

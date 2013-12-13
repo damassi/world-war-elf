@@ -41,35 +41,50 @@ var HUD = View.extend({
 
   render: function (options) {
 
-    this.timeText = new Easel.Text('0:00', 'Luckiest Guy', '39px', '#fff', {
-      x: this.TEXT_POS.time.x,
-      y: this.TEXT_POS.time.y,
-    }, {
-      size: 5,
-      color: '#333'
+    this.timeText = new Easel.Text({
+      text: '0:00',
+      font: 'Luckiest Guy',
+      size: '39px',
+      color: '#fff',
+
+      position: {
+        x: this.TEXT_POS.time.x,
+        y: this.TEXT_POS.time.y,
+      },
+
+      stroke: {
+        size: 5,
+        color: '#333'
+      }
     })
 
-    this.pointsText = new Easel.Text('0', 'Luckiest Guy', '69px', '#ff0000', {
-      x: this.TEXT_POS.presents.x,
-      y: this.TEXT_POS.presents.y,
-    }, {
-      size: 5,
-      color: '#333'
-    })
 
+    this.pointsText = new Easel.Text({
+      text: '0',
+      font: 'Luckiest Guy',
+      size: '69px',
+      color: '#ff0000',
+
+      position: {
+        x: this.TEXT_POS.presents.x,
+        y: this.TEXT_POS.presents.y,
+      },
+
+      stroke: {
+        size: 5,
+        color: '#333'
+      }
+    })
 
     this.timeText.textAlign('right')
     this.pointsText.textAlign('right')
 
-
     this.children = [
       this.hudClock = Easel.createSprite('gameplaySprite', 'game-hud-clock', { x: 820, y: 15 }),
-      //this.hudGift  = Easel.createSprite('gameplaySprite', 'game-hud-gift', { x: 820, y: 76 }),
 
       this.timeText.container,
       this.pointsText.container,
     ]
-
 
     this.timer = new Timer({
       direction: 'down',
@@ -89,7 +104,7 @@ var HUD = View.extend({
 
   addEventListeners: function () {
     this.timer.on( 'change', this.onTimerUpdate )
-    this.listenTo( this.appModel, GameEvent.HITS, this.onChangeHits )
+    this.listenTo( this.appModel, GameEvent.SCORE, this.onChangeScore )
   },
 
 
@@ -150,7 +165,7 @@ var HUD = View.extend({
     this.timeText.setText( time )
 
     var array = time.split(':')
-    var seconds = parseInt(array[0]*60) + parseInt(array[1])
+    var seconds = parseInt(array[0] * 60) + parseInt(array[1])
 
     AppConfig.gameplaySeconds = seconds
 
@@ -160,12 +175,12 @@ var HUD = View.extend({
 
 
 
-  onChangeHits: function (model) {
-    var hits = model.changed.hits
+  onChangeScore: function (model) {
+    var score = model.changed.score
 
     var points = {
-      start: model._previousAttributes.hits,
-      end: hits
+      start: model._previousAttributes.score,
+      end: score
     }
 
     var self = this

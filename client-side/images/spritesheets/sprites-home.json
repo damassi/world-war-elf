@@ -2,36 +2,40 @@
 "images": ["sprites-home.png"],
 "frames": [
 
-    [558, 382, 300, 24], 
-    [697, 317, 258, 18], 
-    [697, 293, 229, 22], 
-    [744, 160, 199, 13], 
-    [1317, 2, 187, 380], 
-    [2, 293, 693, 87], 
-    [2, 382, 554, 120], 
-    [2, 2, 960, 156], 
-    [2, 160, 740, 131], 
-    [1077, 412, 413, 51], 
-    [964, 2, 351, 408], 
-    [558, 412, 517, 75]
+    [1239, 293, 299, 80], 
+    [355, 384, 300, 24], 
+    [888, 382, 258, 18], 
+    [1506, 79, 231, 65], 
+    [657, 382, 229, 22], 
+    [1148, 382, 199, 13], 
+    [355, 2, 187, 380], 
+    [544, 293, 693, 87], 
+    [1286, 160, 554, 120], 
+    [544, 2, 960, 156], 
+    [544, 160, 740, 131], 
+    [1540, 282, 413, 51], 
+    [2, 2, 351, 408], 
+    [1506, 2, 517, 75]
 ],
 "animations": {
     
-        "home-btn-play-shadow":[0], 
-        "home-btn-play-snow":[1], 
-        "home-btn-scores-shadow":[2], 
-        "home-btn-scores-snow":[3], 
-        "home-good-elf":[4], 
-        "home-grass-sprouts":[5], 
-        "home-ground-back":[6], 
-        "home-ground-front":[7], 
-        "home-ground-middle":[8], 
-        "home-shadow-E":[9], 
-        "home-text-E-w-drift":[10], 
-        "home-title-ww":[11]
+        "home-btn-play-off":[0], 
+        "home-btn-play-shadow":[1], 
+        "home-btn-play-snow":[2], 
+        "home-btn-scores-off":[3], 
+        "home-btn-scores-shadow":[4], 
+        "home-btn-scores-snow":[5], 
+        "home-good-elf":[6], 
+        "home-grass-sprouts":[7], 
+        "home-ground-back":[8], 
+        "home-ground-front":[9], 
+        "home-ground-middle":[10], 
+        "home-shadow-E":[11], 
+        "home-text-E-w-drift":[12], 
+        "home-title-ww":[13]
 },
 "texturepacker": [
-        "SmartUpdateHash: $TexturePacker:SmartUpdate:fab738b5aefb06490c3e176958993657:c3a384070a5e1bdd47378c1d3f3b5c89:39c9b1ba82fe2850bbdaab95c2168eb9$",
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:ad12c2e0604fe307034c4b9f414583cb:924a055bfd0ba803954061c268c5deac:39c9b1ba82fe2850bbdaab95c2168eb9$",
         "Created with TexturePacker (http://www.texturepacker.com) for EaselJS"
 ]
 }

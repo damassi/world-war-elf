@@ -140,15 +140,16 @@ var AppController = {
     Sound.play({ soundId: 'audio-bg', loop: -1, volume: 0.5 })
 
     c.Ticker.addEventListener( 'tick', this.tick )
-    this.appModel.set('mute', false)
+    this.appModel.set( 'mute', true )
   },
 
 
 
   delegateEvents: function () {
-    this.appModel.on( 'change:view', this.onViewChange )
     PubSub.on( AppEvent.SOCKET_IO_CONNECTED, this.onSocketIOConnected )
     PubSub.on( AppEvent.DESKTOP_CLIENT_SYNCED, this.onDesktopClientSynched )
+
+    this.appModel.on( 'change:view', this.onViewChange )
   },
 
 

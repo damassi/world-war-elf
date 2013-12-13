@@ -15,6 +15,7 @@ module.exports = {
   ORIENTATION : 'orientation',
   START_GAME  : 'startGame',
   SYNCED      : 'synced',
-  TOGGLE_MODE : 'toggleMode'
+  TOGGLE_MODE : 'toggleMode',
+  GAME_OVER   : 'gameOver'
 
 }

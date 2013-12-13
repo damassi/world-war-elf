@@ -104,21 +104,21 @@ var Easel = {
    * @return {Class}               A new text object witha few
    */
 
-  Text: function (str, fontFace, fontSize, color, params, strokeParams) {
+  Text: function (textProps) {
     var container = new c.Container()
-    var text = new c.Text( str, fontSize + ' ' + fontFace, color )
+    var text = new c.Text( textProps.text, textProps.size + ' ' + textProps.font, textProps.color )
 
-    if (!_.isUndefined(strokeParams)) {
-      var textStroke = new c.Text( str, fontSize + ' ' + fontFace, strokeParams.color )
-      textStroke.outline = strokeParams.size
+    if (!_.isUndefined(textProps.stroke)) {
+      var textStroke = new c.Text( textProps.text, textProps.size + ' ' + textProps.font, textProps.stroke.color )
+      textStroke.outline = textProps.stroke.size
       container.addChild( textStroke )
     }
 
     container.addChild( text )
 
-    if (!_.isUndefined(params))
-      for (var param in params)
-        container[param] = params[param]
+    if (!_.isUndefined(textProps.position))
+      for (var param in textProps.position)
+        container[param] = textProps.position[param]
 
     return {
 

@@ -146,6 +146,8 @@ var GamePlayView = View.extend({
     PubSub.on( AppEvent.STOP_GAMEPLAY, this.onStopGamePlay )
     PubSub.on( GameEvent.PLAYER_HIT, this.onPlayerHit )
 
+    this.listenTo( this.appModel, GameEvent.SUPERMODE, this.onSuperModeChange )
+
     $('#canvas').on( 'mousemove', this.onMouseMove )
     $('#canvas').on( 'mousedown', this.onPrepareTarget )
     $('#canvas').on( 'mouseup', this.onShoot )
@@ -386,14 +388,23 @@ var GamePlayView = View.extend({
         )
       }
     })
+
+
+    // If playing with a mobile device, send a
+    // gameover notice
+
+    if (this.appModel.get('connected')) {
+
+      window.socket.post( AppConfig.ENDPOINTS.gameOver, {
+        sessionId: this.appModel.get('session').sessionId
+      },
+
+        function onResponse (response) {
+          console.log(response)
+        })
+    }
+
   },
-
-
-
-  onPauseGamePlay: function () {
-
-  },
-
 
 
   onPrepareTarget: function (event) {
@@ -476,18 +487,10 @@ var GamePlayView = View.extend({
 
 
   onOrientationUpdate: function (message) {
-
-    // If DEBUG `mouse` param passed back from API
-    if (message.mouse) {
-      this.moveCroshairs(message.orientation)
-      return
-    }
-
     this.phoneOrientation = {
       x: message.orientation.x * 2,
       y: message.orientation.y * 2
     }
-
   },
 
 
@@ -514,6 +517,54 @@ var GamePlayView = View.extend({
       this.crossHairs.y = dimensions.height
   },
 
+
+
+  onSuperModeChange: function (model) {
+    var supermode = model.changed.supermode
+
+    if (!supermode) return
+
+    var powerUpText = new Easel.Text({
+      text: 'Powerup!',
+      font: 'Luckiest Guy',
+      size: '79px',
+      color: '#ff0000',
+
+      stroke: {
+        size: 7,
+        color: '#666'
+      },
+
+      position: {
+        x: AppConfig.DIMENSIONS.width * .5,
+        y: 1000,
+      }
+    })
+
+    powerUpText.textAlign('center')
+    this.stage.addChild( powerUpText.container )
+
+    var self = this
+
+    T.fromTo( powerUpText.container, .5, { y: -1000 }, {
+      y: AppConfig.DIMENSIONS.height * .5,
+      ease: Expo.easeOut,
+
+      onComplete: function () {
+
+        T.to( powerUpText.container, .3, {
+          y: -1000,
+          ease: Expo.easeIn,
+          delay: .5,
+
+          onComplete: function () {
+            self.stage.removeChild( this.target )
+          }
+        })
+      }
+    })
+
+  },
 
 
 

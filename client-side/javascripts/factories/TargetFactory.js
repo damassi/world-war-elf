@@ -97,7 +97,7 @@ var TargetFactory = Backbone.View.extend({
     var orientation = this._returnOrientation()
 
     // TODO Frequency generator
-    var type = _.sample([1,1,1,0,0,0,0,0,0,0]) === 0 ? 'bad' : 'good'
+    var type = _.sample([1,1,0,0,0,0,0,0,0,0]) === 0 ? 'bad' : 'good'
 
     if (this.appModel.get('supermode'))
       type = 'bad'
@@ -183,10 +183,6 @@ var TargetFactory = Backbone.View.extend({
   _onKillAllTargets: function (params) {
     params = params || {}
 
-    this.appModel.enableSupermode()
-
-    Easel.bounceScreen($('#game-play'))
-
     var i, len, target
 
     for (i = 0, len = this.occupiedPositions.length; i < len; ++i) {
@@ -206,6 +202,11 @@ var TargetFactory = Backbone.View.extend({
         })
       }
     }
+
+    if (params.superMode)
+      this.appModel.enableSupermode()
+
+    Easel.bounceScreen($('#game-play'))
   }
 
 
