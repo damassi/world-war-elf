@@ -30,14 +30,14 @@ var Target = View.extend({
    * What time should we release the medium/hard targets, (in seconds)
    * @type {Number}
    */
-  MEDIUM_TARGET_TIME: 100,
+  MEDIUM_TARGET_TIME: 70,
 
 
   /**
    * Time, in seconds, to release the hard targets
    * @type {Number}
    */
-  HARD_TARGET_TIME: 75,
+  HARD_TARGET_TIME: 50,
 
 
   /**
