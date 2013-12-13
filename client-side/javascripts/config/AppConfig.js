@@ -38,7 +38,8 @@ var AppConfig = {
     startGame       : '/api/start-game',
     orientation     : '/api/orientation',
     fire            : '/api/fire',
-    toggleMode      : '/api/toggle-mode'
+    toggleMode      : '/api/toggle-mode',
+    gameOver        : '/api/game-over'
   },
 
 
@@ -83,7 +84,7 @@ var AppConfig = {
    * Amount of gameplay time
    * @type {String}
    */
-  DEFAULT_GAMEPLAY_TIME: '2:00',
+  DEFAULT_GAMEPLAY_TIME: '0:10',
 
 
   /**

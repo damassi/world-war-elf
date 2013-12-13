@@ -213,8 +213,29 @@ module.exports = {
 
 
 
-  'save-score': function (req, res, next) {
-    next()
+  'game-over': function (req, res, next) {
+    var sessionId = req.param('sessionId')
+      , socket    = req.socket
+
+    Session.findOne({
+      sessionId: sessionId
+    },
+
+      function foundSession (err, session) {
+        if (err) return next(err)
+
+        if (!session) {
+          return next('Session not found!')
+        }
+
+        socket.broadcast.to(sessionId).emit( SocketEvent.GAME_OVER, {
+          gameOver: true
+        })
+
+        res.json({
+          gameOver: true
+        })
+      })
   }
 
 

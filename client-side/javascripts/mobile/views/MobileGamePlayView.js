@@ -52,7 +52,7 @@ var MobileGamePlayView = MobileView.extend({
    * Keep track of our current orientation for tweening
    * @type {Object}
    */
-  _curOrientation: { x: 0, y: 0 },
+  curOrientation: { x: 0, y: 0 },
 
 
 
@@ -89,8 +89,9 @@ var MobileGamePlayView = MobileView.extend({
   addEventListeners: function () {
     this.$body.on('touchend', this.fireBall )
 
-    window.addEventListener( 'devicemotion', this._onDeviceMotion )// = this._onDeviceMotion
-    window.socket.on( SocketEvent.TOGGLE_MODE, this._onToggleMode )
+    window.addEventListener( 'devicemotion', this.onDeviceMotion )
+    window.socket.on( SocketEvent.TOGGLE_MODE, this.onToggleMode )
+    window.socket.on( SocketEvent.GAME_OVER, this.onGameOver )
   },
 
 
@@ -98,14 +99,15 @@ var MobileGamePlayView = MobileView.extend({
   removeEventListeners: function () {
     this.$body.on('touchend', this.fireBall )
 
-    window.removeEventListener( 'devicemotion', this._onDeviceMotion )
-    window.socket.on( SocketEvent.TOGGLE_MODE, this._onToggleMode )
+    window.removeEventListener( 'devicemotion', this.onDeviceMotion )
+    window.socket.removeListener( SocketEvent.TOGGLE_MODE, this.onToggleMode )
+    window.socket.removeListener( SocketEvent.GAME_OVER, this.onGameOver )
   },
 
 
 
   fireBall: function () {
-    this._sendFireRequestToDesktop()
+    this.sendFireRequestToDesktop()
 
     var self = this
 
@@ -116,7 +118,7 @@ var MobileGamePlayView = MobileView.extend({
         y: -800,
         ease: Expo.easeIn,
         onComplete: function () {
-          self._resetBall()
+          self.resetBall()
         }
       })
     }
@@ -129,7 +131,7 @@ var MobileGamePlayView = MobileView.extend({
   // ------------------------------------------------------------
 
 
-  _onDeviceMotion: function (event) {
+  onDeviceMotion: function (event) {
     var self = this
 
     var orientation = {
@@ -137,7 +139,7 @@ var MobileGamePlayView = MobileView.extend({
       y: ~~event.accelerationIncludingGravity.y
     }
 
-    TweenMax.to(this._curOrientation, .6, {
+    TweenMax.to(this.curOrientation, .6, {
       x: event.accelerationIncludingGravity.x,
       y: event.accelerationIncludingGravity.y,
       ease: Expo.easeOut,
@@ -145,7 +147,7 @@ var MobileGamePlayView = MobileView.extend({
 
         window.socket.post( AppConfig.ENDPOINTS.orientation, {
           sessionId: self.sessionId,
-          orientation: JSON.stringify( self._curOrientation )
+          orientation: JSON.stringify( self.curOrientation )
         },
 
           function onResponse (response) {
@@ -165,8 +167,14 @@ var MobileGamePlayView = MobileView.extend({
    *
    * @param  {Object} message Message containing prop .supermode (boolean)
    */
-  _onToggleMode: function (message) {
-    this._toggleBall()
+  onToggleMode: function (message) {
+    this.toggleBall()
+  },
+
+
+
+  onGameOver: function (message) {
+    this.trigger( AppEvent.STOP_GAMEPLAY )
   },
 
 
@@ -177,7 +185,7 @@ var MobileGamePlayView = MobileView.extend({
 
 
 
-  _sendFireRequestToDesktop: function () {
+  sendFireRequestToDesktop: function () {
     window.socket.post( AppConfig.ENDPOINTS.fire, {
       sessionId: this.sessionId
     },
@@ -189,7 +197,7 @@ var MobileGamePlayView = MobileView.extend({
 
 
 
-  _resetBall: function () {
+  resetBall: function () {
     TweenMax.set( this.$balls, {
       alpha: 0
     })
@@ -214,7 +222,7 @@ var MobileGamePlayView = MobileView.extend({
 
 
 
-  _toggleBall: function () {
+  toggleBall: function () {
     var self = this
 
     TweenMax.to( this.$ball, .3, {

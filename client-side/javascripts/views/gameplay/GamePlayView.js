@@ -388,6 +388,22 @@ var GamePlayView = View.extend({
         )
       }
     })
+
+
+    // If playing with a mobile device, send a
+    // gameover notice
+
+    if (this.appModel.get('connected')) {
+
+      window.socket.post( AppConfig.ENDPOINTS.gameOver, {
+        sessionId: this.appModel.get('session').sessionId
+      },
+
+        function onResponse (response) {
+          console.log(response)
+        })
+    }
+
   },
 
 

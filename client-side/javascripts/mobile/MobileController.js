@@ -42,6 +42,7 @@ var MobileController = {
 
       this.mobileSyncView.on( SocketEvent.SYNCED, this.showCalibrateView )
       this.mobileCalibrateView.on( AppEvent.MOBILE_CALIBRATED, this.showGamePlayView )
+      this.mobileGamePlayView.on( AppEvent.STOP_GAMEPLAY, this.stopGameplay )
     },
 
 
@@ -62,6 +63,33 @@ var MobileController = {
     showGamePlayView: function () {
       this.mobileCalibrateView.hide()
       this.mobileGamePlayView.render()
+    },
+
+
+
+    stopGameplay: function () {
+      this.mobileGamePlayView.hide()
+
+      var $gameOver = $('.game-over')
+      $gameOver.removeClass('hidden')
+
+      TweenMax.fromTo( $gameOver, .3, { scale: 0 }, {
+        scale: .8,
+        ease: Back.easeOut,
+        delay: 1,
+
+        onComplete: function () {
+          TweenMax.to( $gameOver, .3, {
+            scale: 0,
+            ease: Back.easeOut,
+            delay: 5,
+
+            onComplete: function() {
+              window.location.reload()
+            }
+          })
+        }
+      })
     }
 
 }

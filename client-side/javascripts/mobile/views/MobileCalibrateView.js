@@ -52,7 +52,6 @@ var MobileCalibrateView = MobileView.extend({
 
 
   removeEventListeners: function() {
-    alert('firing here!')
     this.$body.off('touchend', this._onStartBtnClick )
     window.removeEventListener( 'devicemotion', this._onDeviceMotion )
   },
@@ -61,11 +60,6 @@ var MobileCalibrateView = MobileView.extend({
 
   _onDeviceMotion: function (event) {
     var self = this
-
-    // var orientation = {
-    //   x: ~~event.accelerationIncludingGravity.x,
-    //   y: ~~event.accelerationIncludingGravity.y
-    // }
 
     TweenMax.to(this._curOrientation, .6, {
       x: event.accelerationIncludingGravity.x,
