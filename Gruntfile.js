@@ -250,7 +250,8 @@ module.exports = function( grunt ) {
 
         files: [{
           expand: true,
-          cwd: '<%= output %>/assets/images/'
+          cwd: '<%= output %>/assets/images/',
+          src: ['**/*.{png,jpg,gif}'],
           dest: '<%= output %>/assets/images/'
         }]
       }
