@@ -245,7 +245,7 @@ module.exports = function( grunt ) {
       dist: {
         options: {
           pngquant: true,
-          optimizationLevel: 2
+          optimizationLevel: 5
         },
 
         files: [{
@@ -344,7 +344,7 @@ module.exports = function( grunt ) {
         },
 
         files: [{
-          src: '<%= sources %>/styles/app.sass',
+          src: '<%= frontend %>/styles/app.scss',
           dest: '<%= output %>/assets/styles/app.css'
         }]
       }
