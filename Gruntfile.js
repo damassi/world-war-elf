@@ -236,6 +236,27 @@ module.exports = function( grunt ) {
     },
 
 
+    //
+    // Optimize images for distribution
+    //
+
+    'imagemin': {
+
+      dist: {
+        options: {
+          pngquant: true,
+          optimizationLevel: 2
+        },
+
+        files: [{
+          expand: true,
+          cwd: '<%= output %>/assets/images/'
+          dest: '<%= output %>/assets/images/'
+        }]
+      }
+    },
+
+
 
     //
     // Add the livereload server
@@ -445,6 +466,7 @@ module.exports = function( grunt ) {
     'sass:dist',
     'concat:vendor',
     'uglify',
+    'imagemin:dist',
     'zip',
     'revgithash'
   ])
