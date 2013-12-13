@@ -3,7 +3,7 @@
  * loader.  Dispatches a complete event on complete
  */
 
-var path  = require('./AppConfig').ASSET_PATH
+var path  = require('./AppConfig').IMAGE_PATH
 var audioPath = require('./AppConfig').AUDIO_PATH
 
 var returnAudioPath = function (fileName) {

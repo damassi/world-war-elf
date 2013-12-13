@@ -55,7 +55,7 @@ var AppConfig = {
    * Base asset path
    * @type {String}
    */
-  ASSET_PATH: '/assets/images/',
+  IMAGE_PATH: '/assets/images/',
 
 
   /**
