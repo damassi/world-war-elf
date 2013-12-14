@@ -71,8 +71,6 @@ var HomeView = View.extend({
 
 
   render: function (options) {
-    Easel.cache([ this.playBtn, this.scoreBtn ])
-
     this.lElf.x = 40
     this.rElf.x = 85
 
@@ -147,6 +145,8 @@ var HomeView = View.extend({
   onBtnOver: function (event) {
     var target = event.currentTarget
     var targetY = (target === this.playBtn) ? this.btnPositions.playY : this.btnPositions.highScoreY;
+
+    Easel.cache([ this.playBtn, this.scoreBtn ])
 
     target.cursor = 'pointer'
     T.killTweensOf(target)

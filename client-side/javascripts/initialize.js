@@ -17,6 +17,7 @@ T = TweenMax
 $(function siteInitialized () {
 
   Touch.translateTouchEvents()
+  PointerEventsPolyfill.initialize({})
 
   // Mustache regex for micro templates
   _.templateSettings = {
