@@ -81,7 +81,7 @@ var SyncView = View.extend({
       this.syncText.container
     ]
 
-    Easel.dragObject( this.children )
+    //Easel.dragObject( this.children )
 
   },
 
