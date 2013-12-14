@@ -43,11 +43,16 @@ var AppConfig = {
   },
 
 
-  SCOREBOARD_ENDPOINTS: {
-    organizations: 'http://10.100.10.50/zombieelves/organization.ashx',
-    topscores: 'http://10.100.10.50/zombieelves/view.ashx',
-    topByOrg: 'http://10.100.10.50/zombieelves/view.ashx?org=yes',
-    postScore: 'http://10.100.10.50/zombieelves/submit.ashx?name={{ name }}&organizationId={{ organization }}&score={{ score }}'
+  /**
+   * Proxied WordFly endpoint requests to post and retrieve score data
+   * @type {Object}
+   */
+
+  SCOREBOARD_ENDPOINTSS: {
+    organizations: '/score/organizations',
+    postScore: 'post-score',
+    topByOrg: '/score/top-by-org',
+    topscores: '/score/top-scores',
   },
 
 
@@ -55,6 +60,7 @@ var AppConfig = {
    * Base asset path
    * @type {String}
    */
+
   IMAGE_PATH: '/assets/images/',
 
 
@@ -62,6 +68,7 @@ var AppConfig = {
    * Audio bg path
    * @type {String}
    */
+
   AUDIO_PATH: '/assets/audio/',
 
 
@@ -69,6 +76,7 @@ var AppConfig = {
    * Time between route changes / animate in / animate out
    * @type {Number}
    */
+
   TRANSITION_TIME: .4,
 
 
@@ -77,6 +85,7 @@ var AppConfig = {
    * at the game
    * @type {Number}
    */
+
   INITIAL_TARGETS: 5,
 
 
@@ -84,6 +93,7 @@ var AppConfig = {
    * Amount of gameplay time
    * @type {String}
    */
+
   DEFAULT_GAMEPLAY_TIME: '1:30',
 
 
@@ -91,6 +101,7 @@ var AppConfig = {
    * the current gameplay time; modified via HUD.js (timer)
    * @type {number}
    */
+
   gameplaySeconds: 90,
 
 
@@ -98,6 +109,7 @@ var AppConfig = {
    * The time which the player is in supermode.
    * @type {Number}
    */
+
   SUPERMODE_TIME: 5,
 
 
@@ -105,6 +117,7 @@ var AppConfig = {
    * The time which the target should remain on the screen before hiding
    * @type {Number}
    */
+
   TARGET_PAUSE_TIME: 4
 
 }
