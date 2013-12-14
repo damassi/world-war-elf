@@ -48,9 +48,9 @@ var AppConfig = {
    * @type {Object}
    */
 
-  SCOREBOARD_ENDPOINTSS: {
+  SCOREBOARD_ENDPOINTS: {
     organizations: '/score/organizations',
-    postScore: 'post-score',
+    postScore: '/score/post-score',
     topByOrg: '/score/top-by-org',
     topscores: '/score/top-scores',
   },
@@ -94,7 +94,7 @@ var AppConfig = {
    * @type {String}
    */
 
-  DEFAULT_GAMEPLAY_TIME: '1:30',
+  DEFAULT_GAMEPLAY_TIME: '0:30',
 
 
   /**

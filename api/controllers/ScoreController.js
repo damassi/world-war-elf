@@ -27,7 +27,7 @@ module.exports = {
     }
 
     res.json({
-      organizations: organizations
+      Organizations: organizations
     })
   },
 
@@ -37,6 +37,11 @@ module.exports = {
       , organization = req.param('organization')
       , score        = req.param('score')
 
+    res.json({
+      name: name,
+      organization: organization,
+      score: score
+    })
   },
 
 
@@ -58,7 +63,7 @@ module.exports = {
     }
 
     res.json({
-      scores: scores
+      Scores: scores
     })
   }
 

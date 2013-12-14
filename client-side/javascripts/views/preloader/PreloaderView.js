@@ -126,11 +126,12 @@ var PreloaderView = Backbone.View.extend({
     })
 
     req.error( function (error) {
-      //console.log(error)
+      console.error(error)
     })
 
     req.done( function (data) {
-      orgData = JSON.parse(data)
+      console.log(orgData)
+      orgData = data
     })
 
 
@@ -161,7 +162,6 @@ var PreloaderView = Backbone.View.extend({
     // and pass the data into the AppController for use
 
     req.done( function (scoreboardData) {
-      scoreboardData = $.parseJson.parseJSON( scoreboardData )
 
       var scoreboard = {
         organizations: orgData.Organizations,
