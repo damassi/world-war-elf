@@ -34,6 +34,20 @@ var SyncView = View.extend({
   clientMsg: null,
 
 
+  /**
+   * The move pos of the playbtn on rollover
+   * @type {Number}
+   */
+  btnPositions: { backY : 509 },
+
+
+
+  canvasEvents: {
+    'backBtn mouseover' : 'onBtnOver',
+    'backBtn rollout'   : 'onBtnOut',
+    'backBtn click'     : 'onPlayBtnClick'
+  },
+
 
 
   initialize: function (options) {
@@ -60,10 +74,14 @@ var SyncView = View.extend({
       this.syncHeader = Easel.createSprite('miscSprite', 'sync-text-sync', { x: 152, y: 113 }),
       this.syncPhone = Easel.createSprite('miscSprite', 'sync-phone', { x: -176, y: 300 }),
 
+      Easel.createSprite('miscSprite', 'sync-btn-shadow', { x: 19, y: 549 }),
+      this.backBtn = Easel.createSprite('miscSprite', 'sync-btn-back', {x: 22, y: 509 }),
+      Easel.createSprite('miscSprite', 'sync-btn-grass', { x: 15, y: 535 }),
+
       this.syncText.container
     ]
 
-    //Easel.dragObject( this.children )
+    Easel.dragObject( this.children )
 
   },
 
@@ -150,7 +168,55 @@ var SyncView = View.extend({
 
 
 
-  _onDesktopClientSynched: function (message) {}
+  _onDesktopClientSynched: function (message) {},
+
+
+
+  onBtnOver: function (event) {
+    var target = event.currentTarget
+    var targetY = this.btnPositions.backY
+
+    Easel.cache([ this.backBtn ])
+
+    target.cursor = 'pointer'
+    T.killTweensOf(target)
+    target.y = targetY
+
+    T.to( target, .15, {
+      y: targetY - 10,
+      ease: Strong.easeOut,
+      yoyo: true,
+      repeat: 1
+    })
+
+    T.to( target, .2, {
+      easel: {
+        tint: '#ffffff',
+        tintAmount: .2,
+      },
+      ease: Linear.easeNone
+    })
+  },
+
+
+
+  onBtnOut: function (event) {
+    var target = event.currentTarget
+
+    T.to( target, .2, {
+      easel: {
+        tint: '#ffffff',
+        tintAmount: 0,
+      },
+      ease: Linear.easeNone
+    })
+  },
+
+
+
+  onPlayBtnClick: function (event) {
+    window.location.href ='#/instructions'
+  },
 
 
 })

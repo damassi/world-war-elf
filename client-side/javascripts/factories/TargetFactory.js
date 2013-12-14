@@ -39,6 +39,16 @@ var TargetFactory = Backbone.View.extend({
 
 
   /**
+   * Possible types for popup targets
+   * @type {Object}
+   */
+  targetTypes: {
+    good: 'good',
+    bad: 'bad'
+  },
+
+
+  /**
    * Reference to the gameplay view for pushing targets
    * into the proper containers
    * @type {GamePlayView}
@@ -139,7 +149,7 @@ var TargetFactory = Backbone.View.extend({
    */
 
   returnTargetType: function () {
-    var type = _.sample([1,1,1,0,0,0,0,0,0,0]) === 0 ? 'bad' : 'good'
+    var type = _.sample([1,1,1,0,0,0,0,0,0,0]) === 0 ? this.targetTypes.bad : this.targetTypes.good
       , len  = this.occupiedPositions.length
 
     var i, target
@@ -147,8 +157,8 @@ var TargetFactory = Backbone.View.extend({
     for (i = 0; i < len; ++i) {
       var target = this.occupiedPositions[i]
 
-      if (target.type === 'good') {
-        return 'bad'
+      if (target.type === this.targetTypes.good) {
+        return this.targetTypes.bad
       }
     }
 
