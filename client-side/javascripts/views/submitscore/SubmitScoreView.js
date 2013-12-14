@@ -94,22 +94,21 @@ var SubmitScoreView = View.extend({
 
 
   onSubmitForm: function (event) {
-    var postUrl = _.template( AppConfig.SCOREBOARD_ENDPOINTS.postScore, {
-      name: this.$nameInput.val(),
-      organization: this.$organization.val(),
-      score: this.appModel.get('score')
-    });
-
     var postReq = $.ajax({
-      url: postUrl
+      url: AppConfig.SCOREBOARD_ENDPOINTS.postScore,
+      data: {
+        name: this.$nameInput.val(),
+        organization: this.$organization.val(),
+        score: this.appModel.get('score')
+      }
     })
 
     postReq.error( function (error, msg) {
-      //console.log(msg, error)
+      console.log(msg, error)
     })
 
     postReq.success( function (response) {
-      //console.log(response)
+      console.log(response)
     })
 
     window.location.href = '#/high-scores'
