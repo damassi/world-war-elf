@@ -122,12 +122,11 @@ var PreloaderView = Backbone.View.extend({
     // Load Organization data
     var req = $.ajax({
       url: AppConfig.SCOREBOARD_ENDPOINTS.organizations,
-      dataType: 'jsonp',
-      async: false
+      async: true
     })
 
     req.error( function (error) {
-      console.log(error)
+      //console.log(error)
     })
 
     req.done( function (data) {
@@ -138,8 +137,7 @@ var PreloaderView = Backbone.View.extend({
     // Load Top Scores
     req = $.ajax({
       url: AppConfig.SCOREBOARD_ENDPOINTS.topscores,
-      dataType: 'jsonp',
-      async: false
+      async: true
     })
 
 
