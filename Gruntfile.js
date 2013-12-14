@@ -6,6 +6,7 @@
  *
  * Primary Tasks:
  *   run    :  Development mode, file-watcher
+ *   build  :  Minify all sources and zip for distribution
  */
 
 
