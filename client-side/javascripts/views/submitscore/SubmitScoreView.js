@@ -26,6 +26,7 @@ var SubmitScoreView = View.extend({
 
   render: function () {
     this._super()
+    this.returnData()
 
     this.$form = $('<div id="submit-score" />').appendTo('#game-canvas')
 
@@ -43,6 +44,25 @@ var SubmitScoreView = View.extend({
     this.addEventListeners()
 
     return this
+  },
+
+
+
+  returnData: function () {
+    var req = $.ajax({
+      url: AppConfig.SCOREBOARD_ENDPOINTS.organizations,
+      async: false
+    })
+
+    req.error( function (error) {
+      console.error('Error loading top scores', error)
+    })
+
+    var self = this
+
+    req.done( function (data) {
+      self.scoreboard.organizations = data.Organizations
+    })
   },
 
 
@@ -108,7 +128,7 @@ var SubmitScoreView = View.extend({
     })
 
     postReq.success( function (response) {
-      console.log(response)
+      //console.log(response)
     })
 
     window.location.href = '#/high-scores'
