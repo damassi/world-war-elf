@@ -113,7 +113,8 @@ var InstructionsView = View.extend({
 
   onMouseBtnClick: function (event) {
     this.appModel.set({
-      mouseMode: true
+      mouseMode: true,
+      connected: false
     })
 
     window.location.href = '#/play'

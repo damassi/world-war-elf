@@ -373,7 +373,10 @@ var GamePlayView = View.extend({
       target.scurryAway()
     })
 
-    var gameOverBitmap = Easel.createBitmap( 'txt-game-over', {x: 200, y:250 } )
+    var gameOverBitmap = Easel.createBitmap( 'txt-game-over' )
+    var bounds = gameOverBitmap.getBounds()
+    gameOverBitmap.x = AppConfig.DIMENSIONS.width * .5 - bounds.width * .5
+    gameOverBitmap.y = AppConfig.DIMENSIONS.height * .5 - bounds.height * .5
 
     // Animate our game over screen in, then do something else
     this.stage.addChild( gameOverBitmap )

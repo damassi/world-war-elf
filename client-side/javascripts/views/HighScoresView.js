@@ -21,6 +21,13 @@ var HighScoresView = View.extend({
 
 
   /**
+   * Number of items displayed from the scoreboard backend
+   * @type {Number}
+   */
+  SCOREBOARD_LENGTH: 7,
+
+
+  /**
    * Scoreboard data as returned from the backend
    * @type {Object}
    */
@@ -121,62 +128,66 @@ var HighScoresView = View.extend({
       , truncate
       , orgNameText
 
-    for (var i = 0, len = 7; i < len; ++i) {
-      user = scores[i]
-      org  = organizations[i]
-
+    for (var i = 0, len = this.SCOREBOARD_LENGTH; i < len; ++i) {
       yPos = (i * spacing)
 
-      name = new Easel.Text({
-        text: Easel.truncateText( user.Name, 25 ),
-        font: 'Luckiest Guy',
-        size: size,
-        color: '#ffffff',
-        position: {
-          x: nameStartPos.x,
-          y: nameStartPos.y + yPos
-        },
-        stroke: {
-          size: 2,
-          color: '#666'
-        }
-      })
+      // Set up user high scores
+      user = scores[i]
 
-      score = new Easel.Text({
-        text: user.Score,
-        font: 'Luckiest Guy',
-        size: size,
-        color: '#ffffff',
-        position: {
-          x: scoreStartPos.x,
-          y: scoreStartPos.y + yPos
-        },
-        stroke: {
-          size: 2,
-          color: '#666'
-        }
-      })
+      if (user) {
+        name = new Easel.Text({
+          text: Easel.truncateText( user.Name, 25 ),
+          font: 'Luckiest Guy',
+          size: size,
+          color: '#ffffff',
+          position: {
+            x: nameStartPos.x,
+            y: nameStartPos.y + yPos
+          },
+          stroke: {
+            size: 2,
+            color: '#666'
+          }
+        })
 
-      orgNameText = Easel.truncateText( user.Organization, truncateLen )
+        score = new Easel.Text({
+          text: user.Score,
+          font: 'Luckiest Guy',
+          size: size,
+          color: '#ffffff',
+          position: {
+            x: scoreStartPos.x,
+            y: scoreStartPos.y + yPos
+          },
+          stroke: {
+            size: 2,
+            color: '#666'
+          }
+        })
 
-      playerOrg = new Easel.Text({
-        text: orgNameText,
-        font: 'Luckiest Guy',
-        size: size - 3,
-        color: '#333',
-        position: {
-          x: name.container.x,
-          y: name.container.y + 17
-        },
-        stroke: {
-          size: 1,
-          color: '#333'
-        }
-      })
+        orgNameText = Easel.truncateText( user.Organization, truncateLen )
 
-      // Add player to the canvas
-      this.scoresContainer.addChild( score.container, name.container, playerOrg.container )
+        playerOrg = new Easel.Text({
+          text: orgNameText,
+          font: 'Luckiest Guy',
+          size: size - 3,
+          color: '#333',
+          position: {
+            x: name.container.x,
+            y: name.container.y + 17
+          },
+          stroke: {
+            size: 1,
+            color: '#333'
+          }
+        })
 
+        // Add player to the canvas
+        this.scoresContainer.addChild( score.container, name.container, playerOrg.container )
+      }
+
+      // Set up organization high scores
+      org  = organizations[i]
 
       if (org) {
         orgNameText = Easel.truncateText( org.Name, truncateLen )
