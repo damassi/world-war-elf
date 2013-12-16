@@ -11,8 +11,8 @@
  */
 
 var _       = require('underscore')
-var request = require('request-json')
-var client  = request.newClient('http://10.100.10.50')
+  , request = require('request-json')
+  , client  = request.newClient('http://10.100.10.50')
 
 
 _.templateSettings = {

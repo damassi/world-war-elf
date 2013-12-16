@@ -64,6 +64,19 @@ var HighScoresView = View.extend({
       self.scoreboard.scores = data.Scores
     })
 
+    req = $.ajax({
+      url: AppConfig.SCOREBOARD_ENDPOINTS.topByOrg,
+      async: false
+    })
+
+    req.error( function (error) {
+      console.error('Error loading top scores', error)
+    })
+
+    req.done( function (data) {
+      self.scoreboard.organizations = data.Scores
+    })
+
     this._super()
     this.buildScoreboard()
 
@@ -75,11 +88,11 @@ var HighScoresView = View.extend({
   buildScoreboard: function () {
 
     var scores = this.scoreboard.scores
-      , scoreStartPos = { x: 0, y: 0}
-      , nameStartPos = { x: 100, y: 0 }
-      , orgStartPos = { x: 327, y: 0}
-      , spacing = 25
-      , size = '22px'
+      , nameStartPos = { x: 0, y: 0 }
+      , scoreStartPos = { x: 150, y: 0 }
+      , orgStartPos = { x: 327, y: 0 }
+      , spacing = 35
+      , size = '18px'
 
     var user, yPos, score, name, org
 
@@ -113,7 +126,7 @@ var HighScoresView = View.extend({
       org = new Easel.Text({
         text: user.Organization,
         font: 'Luckiest Guy',
-        size: size,
+        size: size - 5,
         color: '#ffffff',
         position: {
           x: orgStartPos.x,

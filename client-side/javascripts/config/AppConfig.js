@@ -49,10 +49,10 @@ var AppConfig = {
    */
 
   SCOREBOARD_ENDPOINTS: {
-    organizations: '/score/organizations',
-    postScore: '/score/post-score',
-    topByOrg: '/score/top-by-org',
-    topscores: '/score/top-scores',
+    organizations  : '/score/organizations',
+    postScore      : '/score/post-score',
+    topByOrg       : '/score/top-by-org',
+    topscores      : '/score/top-scores',
   },
 
 
