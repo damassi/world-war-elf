@@ -13,7 +13,7 @@ var AppConfig = {
    * Mobile url
    * @type {String}
    */
-  MOBILE_URL: window.location.origin + '/mobile',
+  MOBILE_URL: window.location.protocol + '//' + window.location.host + '/mobile',
 
 
   /**

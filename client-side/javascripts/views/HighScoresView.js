@@ -20,6 +20,13 @@ var HighScoresView = View.extend({
   BACK_POS_Y: 519,
 
 
+  /**
+   * Scoreboard data as returned from the backend
+   * @type {Object}
+   */
+  scoreboard: null,
+
+
 
   canvasEvents: {
     'backBtn mouseover' : 'onBtnOver',
@@ -33,7 +40,7 @@ var HighScoresView = View.extend({
     this._super(options)
 
     this.children = [
-      Easel.createSprite('miscSprite', 'highscores-text', { x: 152, y: 54 }),
+      Easel.createSprite('miscSprite', 'highscores-text', { x: 152, y: 34 }),
 
       this.backBtn = Easel.createSprite('miscSprite', 'highscores-btn-btn', { x: 26, y: this.BACK_POS_Y }),
       Easel.createSprite('miscSprite', 'highscores-btn-misc', { x: 20, y: 519 }),
@@ -42,14 +49,26 @@ var HighScoresView = View.extend({
     ]
 
     this.scoresContainer.x = 154
-    this.scoresContainer.y = 186
+    this.scoresContainer.y = 176
 
   },
 
 
 
   render: function() {
-    req = $.ajax({
+    this.returnData()
+
+    this._super()
+    this.buildScoreboard()
+
+    return this
+  },
+
+
+
+  returnData: function () {
+
+    var req = $.ajax({
       url: AppConfig.SCOREBOARD_ENDPOINTS.topscores,
       async: false
     })
@@ -76,11 +95,6 @@ var HighScoresView = View.extend({
     req.done( function (data) {
       self.scoreboard.organizations = data.Scores
     })
-
-    this._super()
-    this.buildScoreboard()
-
-    return this
   },
 
 
@@ -88,18 +102,45 @@ var HighScoresView = View.extend({
   buildScoreboard: function () {
 
     var scores = this.scoreboard.scores
+      , organizations = this.scoreboard.organizations
       , nameStartPos = { x: 0, y: 0 }
-      , scoreStartPos = { x: 150, y: 0 }
+      , scoreStartPos = { x: 200, y: 0 }
       , orgStartPos = { x: 327, y: 0 }
-      , spacing = 35
+      , spacing = 45
       , size = '18px'
+      , truncateLen = 35
 
-    var user, yPos, score, name, org
+    var user
+      , org
+      , yPos
+      , score
+      , name
+      , playerOrg
+      , orgName
+      , orgScore
+      , truncate
+      , orgNameText
 
-    for (var i = 0, len = scores.length; i < len; ++i) {
+    for (var i = 0, len = 7; i < len; ++i) {
       user = scores[i]
+      org  = organizations[i]
 
       yPos = (i * spacing)
+
+      name = new Easel.Text({
+        text: Easel.truncateText( user.Name, 25 ),
+        font: 'Luckiest Guy',
+        size: size,
+        color: '#ffffff',
+        position: {
+          x: nameStartPos.x,
+          y: nameStartPos.y + yPos
+        },
+        stroke: {
+          size: 2,
+          color: '#666'
+        }
+      })
 
       score = new Easel.Text({
         text: user.Score,
@@ -109,32 +150,73 @@ var HighScoresView = View.extend({
         position: {
           x: scoreStartPos.x,
           y: scoreStartPos.y + yPos
+        },
+        stroke: {
+          size: 2,
+          color: '#666'
         }
       })
 
-      name = new Easel.Text({
-        text: user.Name,
+      orgNameText = Easel.truncateText( user.Organization, truncateLen )
+
+      playerOrg = new Easel.Text({
+        text: orgNameText,
         font: 'Luckiest Guy',
-        size: size,
-        color: '#ffffff',
+        size: size - 3,
+        color: '#333',
         position: {
-          x: nameStartPos.x,
-          y: nameStartPos.y + yPos
+          x: name.container.x,
+          y: name.container.y + 17
+        },
+        stroke: {
+          size: 1,
+          color: '#333'
         }
       })
 
-      org = new Easel.Text({
-        text: user.Organization,
-        font: 'Luckiest Guy',
-        size: size - 5,
-        color: '#ffffff',
-        position: {
-          x: orgStartPos.x,
-          y: orgStartPos.y + yPos
-        }
-      })
+      // Add player to the canvas
+      this.scoresContainer.addChild( score.container, name.container, playerOrg.container )
 
-      this.scoresContainer.addChild( score.container, name.container, org.container )
+
+      if (org) {
+        orgNameText = Easel.truncateText( org.Name, truncateLen )
+
+        orgName = new Easel.Text({
+          text: orgNameText,
+          font: 'Luckiest Guy',
+          size: size,
+          color: '#ffffff',
+          position: {
+            x: 323,
+            y: scoreStartPos.y + yPos
+          },
+          stroke: {
+            size: 2,
+            color: '#666'
+          }
+        })
+
+        orgScore = new Easel.Text({
+          text: org.Score,
+          font: 'Luckiest Guy',
+          size: size,
+          color: '#ffffff',
+          position: {
+            x: orgName.container.x + 350,
+            y: scoreStartPos.y + yPos
+          },
+          stroke: {
+            size: 2,
+            color: '#666'
+          }
+        })
+
+        // Add organization to canvas
+        this.scoresContainer.addChild( orgName.container, orgScore.container )
+
+        Easel.dragObject([orgName.container, orgScore.container])
+      }
+
     }
   },
 

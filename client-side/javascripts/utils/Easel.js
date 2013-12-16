@@ -580,6 +580,18 @@ var Easel = {
 
 
 
+  truncateText: function (str, len) {
+    str = str.substr(0, len)
+
+    if (str.length > (len - 1))
+      str += '...'
+
+    return str
+  },
+
+
+
+
   bounceScreen: function ($el) {
     TweenMax.to($el, .1, {
       scale: 1.1,
