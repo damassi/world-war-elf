@@ -1,10 +1,6 @@
 @font-face {
-  font-family: 'LuckiestGuy';
-  src: url('/assets/webfonts/LuckiestGuy.eot');
- }
-
-@font-face {
-  font-family: 'LuckiestGuy';
-  src: url('/assets/webfonts/LuckiestGuy.woff') format('woff'),
-  url('/assets/webfonts/LuckiestGuy.svg#LuckiestGuy-Regular') format('svg');
- }
+  font-family: 'Luckiest Guy';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Luckiest Guy'), local('LuckiestGuy-Regular'), url(http://themes.googleusercontent.com/static/fonts/luckiestguy/v4/5718gH8nDy3hFVihOpkY5KRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
+}
