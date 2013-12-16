@@ -15,7 +15,7 @@ T = TweenMax
 
 
 $(function siteInitialized () {
-
+  console.log("load files")
   Touch.translateTouchEvents()
   PointerEventsPolyfill.initialize({})
 

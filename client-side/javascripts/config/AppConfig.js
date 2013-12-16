@@ -94,7 +94,7 @@ var AppConfig = {
    * @type {String}
    */
 
-  DEFAULT_GAMEPLAY_TIME: '0:30',
+  DEFAULT_GAMEPLAY_TIME: '1:30',
 
 
   /**
