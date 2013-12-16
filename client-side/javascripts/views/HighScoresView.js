@@ -116,6 +116,8 @@ var HighScoresView = View.extend({
       , spacing = 45
       , size = '18px'
       , truncateLen = 35
+      , curUser = 0
+      , orgSize = '13px'
 
     var user
       , org
@@ -130,13 +132,13 @@ var HighScoresView = View.extend({
 
     for (var i = 0, len = this.SCOREBOARD_LENGTH; i < len; ++i) {
       yPos = (i * spacing)
-
+      curUser = (i+1) + ". "
       // Set up user high scores
       user = scores[i]
 
       if (user) {
         name = new Easel.Text({
-          text: Easel.truncateText( user.Name, 25 ),
+          text: Easel.truncateText( curUser + user.Name, 25 ),
           font: 'Luckiest Guy',
           size: size,
           color: '#ffffff',
@@ -145,8 +147,8 @@ var HighScoresView = View.extend({
             y: nameStartPos.y + yPos
           },
           stroke: {
-            size: 2,
-            color: '#666'
+            size: 3,
+            color: '#084775'
           }
         })
 
@@ -160,8 +162,8 @@ var HighScoresView = View.extend({
             y: scoreStartPos.y + yPos
           },
           stroke: {
-            size: 2,
-            color: '#666'
+            size: 3,
+            color: '#084775'
           }
         })
 
@@ -170,15 +172,15 @@ var HighScoresView = View.extend({
         playerOrg = new Easel.Text({
           text: orgNameText,
           font: 'Luckiest Guy',
-          size: size - 3,
-          color: '#333',
+          size: orgSize,
+          color: '#8edeed',
           position: {
-            x: name.container.x,
-            y: name.container.y + 17
-          },
+            x: name.container.x + 15,
+            y: name.container.y + 20
+          }, 
           stroke: {
-            size: 1,
-            color: '#333'
+            size: 2,
+            color: '#084775'
           }
         })
 
@@ -190,7 +192,7 @@ var HighScoresView = View.extend({
       org  = organizations[i]
 
       if (org) {
-        orgNameText = Easel.truncateText( org.Name, truncateLen )
+        orgNameText = Easel.truncateText( curUser + org.Name, truncateLen )
 
         orgName = new Easel.Text({
           text: orgNameText,
@@ -202,8 +204,8 @@ var HighScoresView = View.extend({
             y: scoreStartPos.y + yPos
           },
           stroke: {
-            size: 2,
-            color: '#666'
+            size: 3,
+            color: '#084775'
           }
         })
 
@@ -217,8 +219,8 @@ var HighScoresView = View.extend({
             y: scoreStartPos.y + yPos
           },
           stroke: {
-            size: 2,
-            color: '#666'
+            size: 3,
+            color: '#084775'
           }
         })
 
