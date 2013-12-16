@@ -98,7 +98,7 @@ var SubmitScoreView = View.extend({
       url: AppConfig.SCOREBOARD_ENDPOINTS.postScore,
       data: {
         name: this.$nameInput.val(),
-        organization: this.$organization.val(),
+        organizationId: this.$organization.val(),
         score: this.appModel.get('score')
       }
     })
