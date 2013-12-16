@@ -24,26 +24,6 @@ var Assets = {
     // Audio assets
 
     {
-        audioId: 'oh-no',
-        src: returnAudioPath('oh-no.mp3|oh-no.ogg')
-    },
-
-    {
-        audioId: 'oh-no-what',
-        src: returnAudioPath('oh-no-what.mp3|oh-no-what.ogg')
-    },
-
-    {
-        audioId: 'here-it-comes',
-        src: returnAudioPath('here-it-comes.mp3|here-it-comes.ogg')
-    },
-
-    {
-        audioId: 'alright',
-        src: returnAudioPath('alright.mp3|alright.ogg')
-    },
-
-    {
         audioId: 'audio-bg',
         src: returnAudioPath('bg-carolbells.mp3|bg-carolbells.ogg')
     },
