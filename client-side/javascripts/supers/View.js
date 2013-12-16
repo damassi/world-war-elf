@@ -170,10 +170,10 @@ var View = Backbone.View.extend({
 
     _.defer(function() {
       if (typeof self.canvasEvents !== 'undefined') {
-        for (event in self.canvasEvents) {
-          var evtName = event.split(' ')
+        for (evt in self.canvasEvents) {
+          var evtName = evt.split(' ')
             , objName = evtName.shift()
-            , handler = self.canvasEvents[event]
+            , handler = self.canvasEvents[evt]
             , displayObject = self[objName]
 
           if (displayObject) {
