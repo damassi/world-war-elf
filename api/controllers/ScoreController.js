@@ -25,7 +25,7 @@ module.exports = {
 
   organizations: function (req, res, next) {
     client.get('/zombieelves/organization.ashx', function (error, response, body) {
-      if (error) return res.json({ error: error })
+      if (error) return res.json({ error: 'Error returning organizations' })
 
       res.json({
         Organizations: body.Organizations
@@ -48,7 +48,7 @@ module.exports = {
     var url = _.template('/zombieelves/submit.ashx?name={{ name }}&organizationId={{ organizationId }}&score={{ score }}', data)
 
     client.get( url, function (error, response, body) {
-      if (error) return res.json({ error: error })
+      if (error) return res.json({ error: 'Error submitting score' })
 
       res.json({
         success: true,
@@ -60,7 +60,7 @@ module.exports = {
 
   'top-by-org': function (req, res, next) {
     client.get('/zombieelves/view.ashx?org=yes', function (error, response, body) {
-      if (error) return res.json({ error: error })
+      if (error) return res.json({ error: 'Error returning score' })
 
       res.json({
         Scores: body.Scores
@@ -71,7 +71,7 @@ module.exports = {
 
   'top-scores': function (req, res, next) {
     client.get('/zombieelves/view.ashx', function (error, response, body) {
-      if (error) return res.json({ error: error })
+      if (error) return res.json({ error: 'Error returning top scores' })
 
       res.json({
         Scores: body.Scores
