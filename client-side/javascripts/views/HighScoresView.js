@@ -177,7 +177,7 @@ var HighScoresView = View.extend({
           position: {
             x: name.container.x + 15,
             y: name.container.y + 20
-          }, 
+          },
           stroke: {
             size: 2,
             color: '#084775'
@@ -226,8 +226,6 @@ var HighScoresView = View.extend({
 
         // Add organization to canvas
         this.scoresContainer.addChild( orgName.container, orgScore.container )
-
-        Easel.dragObject([orgName.container, orgScore.container])
       }
 
     }
