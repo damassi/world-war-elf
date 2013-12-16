@@ -58,8 +58,6 @@ var InstructionsView = View.extend({
       Easel.createSprite('homeSprite', 'home-grass-sprouts', { x: -140, y: 502 }),
     ]
 
-    Easel.cache([ this.mouseBtn, this.phoneBtn ])
-
   },
 
 
@@ -78,6 +76,8 @@ var InstructionsView = View.extend({
     target.cursor = 'pointer'
 
     T.killTweensOf(target)
+
+    Easel.cache([ this.mouseBtn, this.phoneBtn ])
 
     T.to( target, .15, {
       y: target.y - 10,

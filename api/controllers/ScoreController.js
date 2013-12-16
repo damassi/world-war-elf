@@ -10,60 +10,72 @@
  * @date 12.14
  */
 
+var _       = require('underscore')
+var request = require('request-json')
+var client  = request.newClient('http://10.100.10.50')
+
+
+_.templateSettings = {
+  'interpolate': /{{([\s\S]+?)}}/g
+}
+
 
 module.exports = {
 
 
   organizations: function (req, res, next) {
-    //req.pipe('http://10.100.10.50/zombieelves/organization.ashx').pipe( res )
+    client.get('/zombieelves/organization.ashx', function (error, response, body) {
+      if (error) return res.json({ error: error })
 
-    var organizations = []
-
-    for (var i = 0; i < 10; i++){
-      organizations.push({
-        Name: 'Organization ' + i,
-        Id: i
+      res.json({
+        Organizations: body.Organizations
       })
-    }
-
-    res.json({
-      Organizations: organizations
     })
   },
 
 
   'post-score': function (req, res, next) {
-    var name         = req.param('name')
-      , organization = req.param('organization')
-      , score        = req.param('score')
+    var name           = req.param('name')
+      , organizationId = req.param('organizationId')
+      , score          = req.param('score')
 
-    res.json({
+    var data = {
       name: name,
-      organization: organization,
+      organizationId: organizationId,
       score: score
+    }
+
+    var url = _.template('/zombieelves/submit.ashx?name={{ name }}&organizationId={{ organizationId }}&score={{ score }}', data)
+
+    client.get( url, function (error, response, body) {
+      if (error) return res.json({ error: error })
+
+      res.json({
+        success: true,
+        Scores: body.Scores
+      })
     })
   },
 
 
   'top-by-org': function (req, res, next) {
+    client.get('/zombieelves/view.ashx?org=yes', function (error, response, body) {
+      if (error) return res.json({ error: error })
 
+      res.json({
+        Scores: body.Scores
+      })
+    })
   },
 
 
   'top-scores': function (req, res, next) {
+    client.get('/zombieelves/view.ashx', function (error, response, body) {
+      if (error) return res.json({ error: error })
 
-    var scores = []
-
-    for (var i = 0; i < 10; i++){
-      scores.push({
-        Score: i,
-        Name: 'Chris',
-        Organization: 'POP'
+      res.json({
+        Scores: body.Scores
       })
-    }
-
-    res.json({
-      Scores: scores
     })
   }
 

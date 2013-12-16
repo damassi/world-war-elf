@@ -130,7 +130,6 @@ var PreloaderView = Backbone.View.extend({
     })
 
     req.done( function (data) {
-      console.log(orgData)
       orgData = data
     })
 
