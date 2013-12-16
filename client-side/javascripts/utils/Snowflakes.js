@@ -4,7 +4,11 @@
  * @author Charlie
  */
 
+var Easel = require('./Easel')
+
+
 var Snowflakes = {
+
 
   /**
    * window reference
@@ -40,6 +44,9 @@ var Snowflakes = {
    * Initializes Snow
    */
   initialize: function () {
+    if (Easel.isIE)
+      return
+
     this.$container = $('<div>', {'class': 'snowflake-container'}).prependTo(document.body);
     this.winWidth   = this.$window.width();
     this.winHeight  = this.$window.height();

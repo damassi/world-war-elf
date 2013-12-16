@@ -174,6 +174,10 @@
             <filename>../highscores-btn-btn.png</filename>
             <filename>../highscores-btn-misc.png</filename>
             <filename>../calibrate-text-calibrate.png</filename>
+            <filename>../calibrate-target.png</filename>
+            <filename>../sync-btn-back.png</filename>
+            <filename>../sync-btn-grass.png</filename>
+            <filename>../sync-btn-shadow.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
