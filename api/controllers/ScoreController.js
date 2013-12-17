@@ -15,6 +15,14 @@ var _       = require('underscore')
   , client  = request.newClient('http://10.100.10.50')
 
 
+var urls = {
+  organization  : '/zombieelves/organization.ashx',
+  postScore     : '/zombieelves/submit.ashx?name={{ name }}&organizationId={{ organizationId }}&score={{ score }}',
+  topByOrg      : '/zombieelves/view.ashx?org=yes',
+  topScores     : '/zombieelves/view.ashx'
+}
+
+
 _.templateSettings = {
   'interpolate': /{{([\s\S]+?)}}/g
 }
@@ -24,7 +32,7 @@ module.exports = {
 
 
   organizations: function (req, res, next) {
-    client.get('/zombieelves/organization.ashx', function (error, response, body) {
+    client.get( urls.organization, function (error, response, body) {
       if (error) return res.json({
         error: 'Error returning organizations',
         response: response.body
@@ -35,6 +43,7 @@ module.exports = {
       })
     })
   },
+
 
 
   'post-score': function (req, res, next) {
@@ -48,7 +57,7 @@ module.exports = {
       score: score
     }
 
-    var url = _.template('/zombieelves/submit.ashx?name={{ name }}&organizationId={{ organizationId }}&score={{ score }}', data)
+    var url = _.template( urls.postScore, data)
 
     client.get( url, function (error, response, body) {
       if (error)
@@ -65,8 +74,9 @@ module.exports = {
   },
 
 
+
   'top-by-org': function (req, res, next) {
-    client.get('/zombieelves/view.ashx?org=yes', function (error, response, body) {
+    client.get( urls.topByOrg, function (error, response, body) {
       if (error) return res.json({
         error: 'Error returning score',
         response: response.body
@@ -79,8 +89,9 @@ module.exports = {
   },
 
 
+
   'top-scores': function (req, res, next) {
-    client.get('/zombieelves/view.ashx', function (error, response, body) {
+    client.get( urls.topScores, function (error, response, body) {
       if (error) return res.json({
         error: 'Error returning top scores',
         response: response.body

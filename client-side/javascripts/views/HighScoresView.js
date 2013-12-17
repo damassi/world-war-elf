@@ -130,8 +130,10 @@ var HighScoresView = View.extend({
       , orgNameText
 
     for (var i = 0, len = this.SCOREBOARD_LENGTH; i < len; ++i) {
-      yPos = (i * spacing)
-      curUser = (i+1) + ". "
+
+      yPos    = (i * spacing)
+      curUser = (i + 1) + ". "
+
       // Set up user high scores
       user = scores[i]
 
@@ -186,6 +188,7 @@ var HighScoresView = View.extend({
         // Add player to the canvas
         this.scoresContainer.addChild( score.container, name.container, playerOrg.container )
       }
+
 
       // Set up organization high scores
       org  = organizations[i]
