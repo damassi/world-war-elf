@@ -295,6 +295,7 @@ module.exports = function( grunt ) {
           watchedExtensions: ['js'],
           delayTime: .5,
           env: {
+            host: null,
             PORT: '3000'
           }
         }

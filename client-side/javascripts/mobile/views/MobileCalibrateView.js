@@ -10,6 +10,7 @@ var SocketEvent = require('../../../../shared/events/SocketEvent')
 var AppConfig   = require('../../config/AppConfig')
 var AppEvent    = require('../../events/AppEvent')
 var PubSub      = require('../../utils/PubSub')
+var Easel       = require('../../utils/Easel')
 var MobileView = require('./supers/MobileView')
 
 
@@ -58,15 +59,29 @@ var MobileCalibrateView = MobileView.extend({
 
 
   onDeviceMotion: function (event) {
-    var self = this
-
-    TweenMax.to(this.curOrientation, .6, {
+    var orientation = {
       x: event.accelerationIncludingGravity.x,
       y: event.accelerationIncludingGravity.y
+    }
+
+    if (Easel.isIOS()) {
+
+    }
+    else if (Easel.isAndroid()) {
+      orientation.x = orientation.x * -1
+      orientation.y = orientation.y * -1
+    }
+    else {
+
+    }
+
+    TweenMax.to(this.curOrientation, .6, {
+      x: orientation.x,
+      y: orientation.y,
     })
 
     window.socket.post( AppConfig.ENDPOINTS.orientation, {
-      sessionId: self.sessionId,
+      sessionId: this.sessionId,
       orientation: JSON.stringify( this.curOrientation )
     },
 
