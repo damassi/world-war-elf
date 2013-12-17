@@ -457,6 +457,7 @@ var Easel = {
 
 
 
+
   isWithinBounds: function (point, bounds) {
     if (!bounds.width || !bounds.height )
       return

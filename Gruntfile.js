@@ -112,6 +112,7 @@ module.exports = function( grunt ) {
           '<%= frontend %>/vendor/scripts/createjs-2013.09.25.min.js',
           '<%= frontend %>/vendor/scripts/jquery.qrcode.min.js',
           '<%= frontend %>/vendor/scripts/pointer_events_polyfill.js',
+          '<%= frontend %>/vendor/scripts/modernizr.custom.js',
           '<%= frontend %>/vendor/scripts/greensock/TweenMax.js',
           '<%= frontend %>/vendor/scripts/greensock/easing/EasePack.js',
           '<%= frontend %>/vendor/scripts/greensock/plugins/GreenProp.js',
