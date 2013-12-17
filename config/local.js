@@ -25,7 +25,7 @@
 module.exports = {
 
 
-  host: '192.168.6.62',//process.env.IP || 'localhost',
+  host: process.env.IP || 'localhost',
 
 
   // The `port` setting determines which TCP port your app will be deployed on
