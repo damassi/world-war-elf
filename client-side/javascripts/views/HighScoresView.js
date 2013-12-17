@@ -63,9 +63,8 @@ var HighScoresView = View.extend({
 
 
   render: function() {
-    this.returnData()
-
     this._super()
+    this.returnData()
     this.buildScoreboard()
 
     return this
@@ -215,7 +214,7 @@ var HighScoresView = View.extend({
           size: size,
           color: '#ffffff',
           position: {
-            x: orgName.container.x + 350,
+            x: orgName.container.x + 360,
             y: scoreStartPos.y + yPos
           },
           stroke: {
