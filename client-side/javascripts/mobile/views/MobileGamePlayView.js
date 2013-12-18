@@ -136,8 +136,8 @@ var MobileGamePlayView = MobileView.extend({
     var self = this
 
     var orientation = {
-      x: event.accelerationIncludingGravity.x * 2,
-      y: event.accelerationIncludingGravity.y * 2
+      x: event.accelerationIncludingGravity.x * 1.5,
+      y: event.accelerationIncludingGravity.y * 1.5
     }
 
     if (Easel.isIOS()) {
