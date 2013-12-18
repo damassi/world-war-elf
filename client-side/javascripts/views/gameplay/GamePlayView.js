@@ -148,9 +148,16 @@ var GamePlayView = View.extend({
 
     this.listenTo( this.appModel, GameEvent.SUPERMODE, this.onSuperModeChange )
 
+    if (Easel.isIE()) {
+      $('#canvas').on( 'click', this.onShoot )
+    }
+    else {
+      $('#canvas').on( 'mousedown', this.onPrepareTarget )
+      $('#canvas').on( 'mouseup', this.onShoot )
+    }
+
     $('#canvas').on( 'mousemove', this.onMouseMove )
-    $('#canvas').on( 'mousedown', this.onPrepareTarget )
-    $('#canvas').on( 'mouseup', this.onShoot )
+    
   },
 
 
@@ -163,9 +170,15 @@ var GamePlayView = View.extend({
     PubSub.off( AppEvent.STOP_GAMEPLAY, this.onStopGamePlay )
     PubSub.off( GameEvent.PLAYER_HIT, this.onPlayerHit )
 
+    if (Easel.isIE()) {
+      $('#canvas').off( 'click', this.onShoot )
+    }
+    else {
+      $('#canvas').off( 'mousedown', this.onPrepareTarget )
+      $('#canvas').off( 'mouseup', this.onShoot )
+    }
+
     $('#canvas').off( 'mousemove', this.onMouseMove )
-    $('#canvas').off( 'mousedown', this.onPrepareTarget )
-    $('#canvas').off( 'mouseup', this.onShoot )
   },
 
 
