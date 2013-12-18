@@ -454,7 +454,7 @@ var Target = View.extend({
         T.to( this.target, .8, {
           x: self.startX + self.TARGET_AVOID_DISTANCE,
           ease: Expo.easeOut,
-          delay: 1,
+          delay: 2,
 
           onComplete: function() {
             self.panTarget()
