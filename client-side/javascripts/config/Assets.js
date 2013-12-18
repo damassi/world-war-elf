@@ -6,15 +6,6 @@
 var path  = require('./AppConfig').IMAGE_PATH
 var audioPath = require('./AppConfig').AUDIO_PATH
 
-var returnAudioPath = function (fileName) {
-    var fileTypes = fileName.split('|')
-    fileName = _.map(fileTypes, function (file) {
-      return audioPath + file
-    }).join('|')
-
-    return fileName
-}
-
 
 var Assets = {
 
@@ -25,62 +16,47 @@ var Assets = {
 
     {
         audioId: 'audio-bg',
-        src: returnAudioPath('bg-carolbells.mp3|bg-carolbells.ogg')
+        src: audioPath + 'bg-carolbells.mp3'
     },
 
     {
         audioId: 'audio-throw-1',
-        src: returnAudioPath('whoosh.mp3|whoosh.ogg')
+        src: audioPath + 'whoosh.mp3'
     },
 
     {
         audioId: 'audio-throw-2',
-        src: returnAudioPath('whoosh2.mp3|whoosh2.ogg')
+        src: audioPath + 'whoosh2.mp3'
     },
 
     {
         audioId: 'bonus-hit-candycane',
-        src: returnAudioPath('bonus-hit.mp3|bonus-hit.ogg')
+        src: audioPath + 'bonus-hit.mp3'
     },
 
     {
         audioId: 'snowball-hit-1',
-        src: returnAudioPath('hit-1.mp3|hit-1.ogg')
+        src: audioPath + 'hit-1.mp3'
     },
 
     {
         audioId: 'zombie-hit-1',
-        src: returnAudioPath('grunt-1.mp3|grunt-1.ogg')
+        src: audioPath + 'grunt-1.mp3'
     },
 
     {
         audioId: 'zombie-hit-2',
-        src: returnAudioPath('grunt-2.mp3|grunt-2.ogg')
+        src: audioPath + 'grunt-2.mp3'
     },
 
     {
         audioId: 'zombie-hit-3',
-        src: returnAudioPath('grunt-3.mp3|grunt-3.ogg')
+        src: audioPath + 'grunt-3.mp3'
     },
 
     {
         audioId: 'zombie-hit-4',
-        src: returnAudioPath('grunt-4.mp3|grunt-4.ogg')
-    },
-
-    {
-        audioId: 'low-energy',
-        src: returnAudioPath('low-energy.mp3|low-energy.mp3')
-    },
-
-    {
-        audioId: 'player-hit-1',
-        src: returnAudioPath('player-hit.mp3|player-hit.mp3')
-    },
-
-    {
-        audioId: 'player-hit-2',
-        src: returnAudioPath('player-hit-2.mp3')
+        src: audioPath + 'grunt-4.mp3'
     },
 
 
@@ -532,98 +508,38 @@ var Assets = {
         "images": [path + 'spritesheets/sprites-misc.png'],
         "frames": [
 
-            [1900, 75, 136, 137],
-            [1127, 2, 524, 78],
-            [339, 191, 228, 56],
-            [1653, 75, 245, 68],
-            [1127, 82, 451, 109],
-            [1653, 2, 310, 71],
-            [2, 2, 572, 187],
-            [1716, 145, 118, 56],
-            [1580, 145, 134, 32],
-            [1580, 179, 125, 22],
-            [576, 2, 549, 251],
-            [2, 191, 335, 39]
+            [1224, 2, 136, 137],
+            [553, 191, 228, 56],
+            [1693, 180, 245, 68],
+            [1240, 141, 451, 109],
+            [1127, 2, 95, 160],
+            [1693, 107, 310, 71],
+            [553, 2, 572, 187],
+            [783, 191, 118, 56],
+            [1362, 107, 134, 32],
+            [903, 232, 125, 22],
+            [2, 2, 549, 251],
+            [903, 191, 335, 39],
+            [1362, 2, 617, 103]
         ],
         "animations": {
 
                 "calibrate-target":[0],
-                "calibrate-text-calibrate":[1],
-                "highscores-btn-btn":[2],
-                "highscores-btn-misc":[3],
-                "highscores-text":[4],
+                "highscores-btn-btn":[1],
+                "highscores-btn-misc":[2],
+                "highscores-text":[3],
+                "phone-target":[4],
                 "submit-btn":[5],
                 "submit-text":[6],
                 "sync-btn-back":[7],
                 "sync-btn-grass":[8],
                 "sync-btn-shadow":[9],
                 "sync-phone":[10],
-                "sync-text-sync":[11]
+                "sync-text-sync":[11],
+                "txt-calibrate":[12]
         },
       }
 
-    },
-
-    {
-      name: 'home-btn-play',
-      src: path + 'spritesheets/sprite-btn-play.png',
-
-      spritesheet: {
-        "animations": {"out": {"frames": [9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, "all": {"frames": [8]}, "over": {"frames": [0, 1, 2, 3, 4, 5, 6, 7]}},
-        "images": [path + "spritesheets/sprite-btn-play.png"],
-        "frames": [
-            [2, 2, 508, 124, 0, -2, -2],
-            [514, 2, 508, 124, 0, -2, -2],
-            [1026, 2, 508, 124, 0, -2, -2],
-            [1538, 2, 508, 124, 0, -2, -2],
-            [2, 130, 508, 124, 0, -2, -2],
-            [514, 130, 508, 124, 0, -2, -2],
-            [1026, 130, 508, 124, 0, -2, -2],
-            [1538, 130, 508, 124, 0, -2, -2],
-            [2, 258, 508, 124, 0, -2, -2],
-            [514, 258, 508, 124, 0, -2, -2],
-            [1026, 258, 508, 124, 0, -2, -2],
-            [1538, 258, 508, 124, 0, -2, -2],
-            [2, 386, 508, 124, 0, -2, -2],
-            [514, 386, 508, 124, 0, -2, -2],
-            [1026, 386, 508, 124, 0, -2, -2],
-            [1538, 386, 508, 124, 0, -2, -2],
-            [2, 514, 508, 124, 0, -2, -2],
-            [514, 514, 508, 124, 0, -2, -2],
-            [1026, 514, 508, 124, 0, -2, -2]
-        ]
-      }
-    },
-
-    {
-      name: 'home-btn-score',
-      src: path + 'spritesheets/sprite-btn-scores.png',
-
-      spritesheet: {
-        "animations": {"out": {"frames": [9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, "all": {"frames": [8]}, "over": {"frames": [0, 1, 2, 3, 4, 5, 6, 7]}},
-        "images": [path + "spritesheets/sprite-btn-scores.png"],
-        "frames": [
-            [2, 2, 252, 60, 0, -5, -2],
-            [258, 2, 252, 60, 0, -5, -2],
-            [514, 2, 252, 60, 0, -5, -2],
-            [770, 2, 252, 60, 0, -5, -2],
-            [1026, 2, 252, 60, 0, -5, -2],
-            [1282, 2, 252, 60, 0, -5, -2],
-            [1538, 2, 252, 60, 0, -5, -2],
-            [1794, 2, 252, 60, 0, -5, -2],
-            [2, 66, 252, 60, 0, -5, -2],
-            [258, 66, 252, 60, 0, -5, -2],
-            [514, 66, 252, 60, 0, -5, -2],
-            [770, 66, 252, 60, 0, -5, -2],
-            [1026, 66, 252, 60, 0, -5, -2],
-            [1282, 66, 252, 60, 0, -5, -2],
-            [1538, 66, 252, 60, 0, -5, -2],
-            [1794, 66, 252, 60, 0, -5, -2],
-            [2, 130, 252, 60, 0, -5, -2],
-            [258, 130, 252, 60, 0, -5, -2],
-            [514, 130, 252, 60, 0, -5, -2]
-        ]
-      }
     }
   ]
 

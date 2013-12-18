@@ -60,8 +60,8 @@ var MobileCalibrateView = MobileView.extend({
 
   onDeviceMotion: function (event) {
     var orientation = {
-      x: event.accelerationIncludingGravity.x,
-      y: event.accelerationIncludingGravity.y
+      x: event.accelerationIncludingGravity.x * 2,
+      y: event.accelerationIncludingGravity.y * 2
     }
 
     if (Easel.isIOS()) {
