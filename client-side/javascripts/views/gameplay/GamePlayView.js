@@ -361,6 +361,8 @@ var GamePlayView = View.extend({
 
     AppConfig.gameplaySeconds = seconds
 
+    this.appModel.set('score', 0)
+
     this.targetFactory = new TargetFactory({
       appModel: this.appModel,
       gamePlayView: this

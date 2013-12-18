@@ -430,29 +430,37 @@ var Easel = {
    */
 
   isMobile: function () {
-    if(navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iPhone|iPad|iPod/i) || navigator.userAgent.match(/IEMobile/i)){
+    if (navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iPhone|iPad|iPod/i) || navigator.userAgent.match(/IEMobile/i))
       return true;
-    }else{
-      return false;
-    }
+
+    return false;
   },
 
 
 
   isIOS: function () {
-    if(navigator.userAgent.match(/iPhone|iPad|iPod/i)){
+    if (navigator.userAgent.match(/iPhone|iPad|iPod/i))
       return true;
-    }else{
-      return false;
-    }
+
+    return false;
+  },
+
+
+
+  isAndroid: function () {
+    if (navigator.userAgent.match(/Android/i))
+      return true
+
+    return false
   },
 
 
 
   isIE: function (){
-    if( navigator.userAgent.match(/IE/i)){
-      return true;
-    }
+    if (navigator.userAgent.match(/IE/i))
+      return true
+
+    return false
   },
 
 

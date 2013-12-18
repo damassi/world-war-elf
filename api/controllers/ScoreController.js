@@ -34,8 +34,7 @@ module.exports = {
   organizations: function (req, res, next) {
     client.get( urls.organization, function (error, response, body) {
       if (error) return res.json({
-        error: 'Error returning organizations',
-        response: response.body
+        error: 'Error returning organizations'
       })
 
       res.json({
@@ -62,8 +61,7 @@ module.exports = {
     client.get( url, function (error, response, body) {
       if (error)
         return res.json({
-          error: 'Error submitting score',
-          response: response.body
+          error: 'Error submitting score'
         })
 
       res.json({
@@ -78,8 +76,7 @@ module.exports = {
   'top-by-org': function (req, res, next) {
     client.get( urls.topByOrg, function (error, response, body) {
       if (error) return res.json({
-        error: 'Error returning score',
-        response: response.body
+        error: 'Error returning score'
       })
 
       res.json({
@@ -93,8 +90,7 @@ module.exports = {
   'top-scores': function (req, res, next) {
     client.get( urls.topScores, function (error, response, body) {
       if (error) return res.json({
-        error: 'Error returning top scores',
-        response: response.body
+        error: 'Error returning top scores'
       })
 
       res.json({

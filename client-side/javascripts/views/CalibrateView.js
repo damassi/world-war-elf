@@ -21,7 +21,8 @@ var CalibrateView = View.extend({
     this._super(options)
 
     this.children = [
-      Easel.createSprite('miscSprite', 'calibrate-text-calibrate', { x: 215, y: 126 }),
+      Easel.createSprite('miscSprite', 'txt-calibrate', { x: 170, y: 76 }),
+      Easel.createSprite('miscSprite', 'phone-target', { x: 434, y: 422 }),
       Easel.createSprite('miscSprite', 'calibrate-target', { x: AppConfig.DIMENSIONS.width * .5, y: AppConfig.DIMENSIONS.height * .5 }, { center: true }),
       this.crossHairs = Easel.createSprite('gameplaySprite', 'game-crosshairs', { x: AppConfig.DIMENSIONS.width * .5, y: AppConfig.DIMENSIONS.height * .5 }, { center: true })
     ]

@@ -2,36 +2,38 @@
 "images": ["sprites-misc.png"],
 "frames": [
 
-    [1900, 75, 136, 137], 
-    [1127, 2, 524, 78], 
-    [339, 191, 228, 56], 
-    [1653, 75, 245, 68], 
-    [1127, 82, 451, 109], 
-    [1653, 2, 310, 71], 
-    [2, 2, 572, 187], 
-    [1716, 145, 118, 56], 
-    [1580, 145, 134, 32], 
-    [1580, 179, 125, 22], 
-    [576, 2, 549, 251], 
-    [2, 191, 335, 39]
+    [1224, 2, 136, 137], 
+    [553, 191, 228, 56], 
+    [1693, 180, 245, 68], 
+    [1240, 141, 451, 109], 
+    [1127, 2, 95, 160], 
+    [1693, 107, 310, 71], 
+    [553, 2, 572, 187], 
+    [783, 191, 118, 56], 
+    [1362, 107, 134, 32], 
+    [903, 232, 125, 22], 
+    [2, 2, 549, 251], 
+    [903, 191, 335, 39], 
+    [1362, 2, 617, 103]
 ],
 "animations": {
     
         "calibrate-target":[0], 
-        "calibrate-text-calibrate":[1], 
-        "highscores-btn-btn":[2], 
-        "highscores-btn-misc":[3], 
-        "highscores-text":[4], 
+        "highscores-btn-btn":[1], 
+        "highscores-btn-misc":[2], 
+        "highscores-text":[3], 
+        "phone-target":[4], 
         "submit-btn":[5], 
         "submit-text":[6], 
         "sync-btn-back":[7], 
         "sync-btn-grass":[8], 
         "sync-btn-shadow":[9], 
         "sync-phone":[10], 
-        "sync-text-sync":[11]
+        "sync-text-sync":[11], 
+        "txt-calibrate":[12]
 },
 "texturepacker": [
-        "SmartUpdateHash: $TexturePacker:SmartUpdate:0484acb1c5bdc6840b5456227f524978:31e3790d7356aff65c36587a29f9acff:e1e9ae439b362dd91ad6050889d0c585$",
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:bc45a2a88e571b9718b22a820eee3df7:489af9fb11c4d86d3eb589e9c401cef3:e1e9ae439b362dd91ad6050889d0c585$",
         "Created with TexturePacker (http://www.texturepacker.com) for EaselJS"
 ]
 }

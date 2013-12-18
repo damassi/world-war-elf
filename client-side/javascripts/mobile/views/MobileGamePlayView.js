@@ -9,6 +9,7 @@ var SocketEvent = require('../../../../shared/events/SocketEvent')
 var AppConfig   = require('../../config/AppConfig')
 var AppEvent    = require('../../events/AppEvent')
 var PubSub      = require('../../utils/PubSub')
+var Easel       = require('../../utils/Easel')
 var MobileView  = require('./supers/MobileView')
 
 
@@ -74,10 +75,10 @@ var MobileGamePlayView = MobileView.extend({
 
     var self = this
 
-    _.defer( function() {
+    _.delay( function() {
       self.sessionId = self.appModel.get('session').sessionId
       self.addEventListeners()
-    })
+    }, 1000)
 
     this.show()
 
@@ -135,14 +136,24 @@ var MobileGamePlayView = MobileView.extend({
     var self = this
 
     var orientation = {
-      x: ~~event.accelerationIncludingGravity.x,
-      y: ~~event.accelerationIncludingGravity.y
+      x: event.accelerationIncludingGravity.x * 1.5,
+      y: event.accelerationIncludingGravity.y * 1.5
+    }
+
+    if (Easel.isIOS()) {
+
+    }
+    else if (Easel.isAndroid()) {
+      orientation.x = orientation.x * -1
+      orientation.y = orientation.y * -1
+    }
+    else {
+
     }
 
     TweenMax.to(this.curOrientation, .6, {
-      x: event.accelerationIncludingGravity.x,
-      y: event.accelerationIncludingGravity.y,
-      ease: Expo.easeOut,
+      x: orientation.x,
+      y: orientation.y,
       onUpdate: function() {
 
         window.socket.post( AppConfig.ENDPOINTS.orientation, {

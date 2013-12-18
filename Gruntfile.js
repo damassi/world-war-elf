@@ -110,6 +110,7 @@ module.exports = function( grunt ) {
           '<%= frontend %>/vendor/scripts/backbone.js',
           '<%= frontend %>/vendor/scripts/backbone.mods.js',
           '<%= frontend %>/vendor/scripts/createjs-2013.09.25.min.js',
+          //'<%= frontend %>/vendor/scripts/createjs-2013.12.12.combined.js',
           '<%= frontend %>/vendor/scripts/jquery.qrcode.min.js',
           '<%= frontend %>/vendor/scripts/pointer_events_polyfill.js',
           '<%= frontend %>/vendor/scripts/modernizr.custom.js',
@@ -295,6 +296,7 @@ module.exports = function( grunt ) {
           watchedExtensions: ['js'],
           delayTime: .5,
           env: {
+            host: null,
             PORT: '3000'
           }
         }

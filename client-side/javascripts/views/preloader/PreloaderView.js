@@ -58,6 +58,7 @@ var PreloaderView = Backbone.View.extend({
   loadSite: function() {
     var loadQueue = new c.LoadQueue()
 
+    c.Sound.alternateExtensions = ["ogg"];
     loadQueue.installPlugin( c.Sound )
 
     var manifest = _.map( Assets.manifest, function (asset) {
