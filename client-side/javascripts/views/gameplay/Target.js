@@ -44,7 +44,7 @@ var Target = View.extend({
    * The distance that good targets move to avoid hits
    * @type {Number}
    */
-  TARGET_AVOID_DISTANCE: 150,
+  TARGET_AVOID_DISTANCE: 100,
 
 
   /**
@@ -446,13 +446,13 @@ var Target = View.extend({
     var self = this
 
     T.to( this.instance, .8, {
-      x: this.startX - this.TARGET_AVOID_DISTANCE,
+      x: this.startX + this.TARGET_AVOID_DISTANCE,
       ease: Expo.easeInOut,
 
       onComplete: function() {
 
         T.to( this.target, .8, {
-          x: self.startX + self.TARGET_AVOID_DISTANCE,
+          x: self.startX - self.TARGET_AVOID_DISTANCE,
           ease: Expo.easeOut,
           delay: 2,
 
