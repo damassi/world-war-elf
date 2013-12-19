@@ -12,84 +12,84 @@ var AppConfig = require('../config/AppConfig')
 var View = Backbone.View.extend({
 
 
-	/**
-	 * A ref to the primary AppController, passed in during view
-	 * initialization
-	 * @type {AppController}
-	 */
-	appController: null,
+  /**
+   * A ref to the primary AppController, passed in during view
+   * initialization
+   * @type {AppController}
+   */
+  appController: null,
 
 
-	/**
-	 * A ref to the primary AppModel
-	 * @type {AppModel}
-	 */
-	appModel: null,
+  /**
+   * A ref to the primary AppModel
+   * @type {AppModel}
+   */
+  appModel: null,
 
 
-	/**
+  /**
    * A ref to the primary stage located on AppController
    * @type {c.Stage}
    */
-	stage: null,
+  stage: null,
 
 
-	/**
-	 * The views display object container
-	 * @type {c.Container}
-	 */
-	container: null,
+  /**
+   * The views display object container
+   * @type {c.Container}
+   */
+  container: null,
 
 
-	/**
-	 * An array of all child display objects contained within `container`
-	 * @type {Array}
-	 */
-	children: [],
-
-
-
-	initialize: function (options) {
-		_.extend( this, options || {} )
-		_.bindAll( this )
-
-		this.container = new c.Container()
-		this._bindCanvasEvents()
-
-		if (this.appModel)
-			this.appModel = this.appModel
-	},
+  /**
+   * An array of all child display objects contained within `container`
+   * @type {Array}
+   */
+  children: [],
 
 
 
-	render: function (data) {
-		data = data || this.data || {}
+  initialize: function (options) {
+    _.extend( this, options || {} )
+    _.bindAll( this )
 
-		if (data instanceof Backbone.Model)
-			data = this.data.toJSON()
+    this.container = new c.Container()
+    this._bindCanvasEvents()
+
+    if (this.appModel)
+      this.appModel = this.appModel
+  },
+
+
+
+  render: function (data) {
+    data = data || this.data || {}
+
+    if (data instanceof Backbone.Model)
+      data = this.data.toJSON()
 
     this.addChildren( this.children )
 
-		return this
-	},
+    return this
+  },
 
 
 
-	//+ PUBLIC METHODS
-	// ------------------------------------------------------------
+  //+ PUBLIC METHODS
+  // ------------------------------------------------------------
 
 
 
-	show: function (options) {
+  show: function (options) {
     options = options || {}
 
-		if (!this.stage)
-			return
+    if (!this.stage)
+      return
 
-		this.container.x = 0
-		this.container.y = 0
+    this.container.x = 0
+    this.container.y = 0
 
-		this.stage.addChild( this.container )
+    this.stage.addChild( this.container )
 
     TweenMax.from( this.container, AppConfig.TRANSITION_TIME, {
       x: 1500,
@@ -103,23 +103,23 @@ var View = Backbone.View.extend({
   hide: function (options) {
     options = options || {}
 
-		var self = this
+    var self = this
 
     TweenMax.to( this.container, AppConfig.TRANSITION_TIME, {
       x: -1000,
       ease: Expo.easeIn,
       onComplete: function() {
-      	if (options.remove)
-        	self.remove()
+        if (options.remove)
+          self.remove()
       }
     })
   },
 
 
 
-	remove: function (options) {
-		if (!this.stage)
-			return
+  remove: function (options) {
+    if (!this.stage)
+      return
 
     for(var i = 0, len = this.container.children.length; i < len; ++i ) {
       var child = this.container.children[i]
@@ -129,21 +129,21 @@ var View = Backbone.View.extend({
     }
 
     this.container.removeAllChildren()
-		this.stage.removeChild( this.container )
+    this.stage.removeChild( this.container )
     this.removeEventListeners()
-	},
+  },
 
 
 
 
-	addChildren: function (children) {
-		if (!this.stage)
-			return
+  addChildren: function (children) {
+    if (!this.stage)
+      return
 
-		for (var i = 0, len = children.length; i < len; ++i)
-			this.container.addChild( children[i] )
+    for (var i = 0, len = children.length; i < len; ++i)
+      this.container.addChild( children[i] )
 
-	},
+  },
 
 
 
@@ -155,17 +155,17 @@ var View = Backbone.View.extend({
 
 
 
-	//+ EVENT HANDLERS
-	// ------------------------------------------------------------
+  //+ EVENT HANDLERS
+  // ------------------------------------------------------------
 
 
 
-	//+ PRIVATE METHODS
-	// ------------------------------------------------------------
+  //+ PRIVATE METHODS
+  // ------------------------------------------------------------
 
 
-	_bindCanvasEvents: function() {
-		var self = this
+  _bindCanvasEvents: function() {
+    var self = this
 
     _.defer(function() {
       if (typeof self.canvasEvents !== 'undefined') {
@@ -181,7 +181,7 @@ var View = Backbone.View.extend({
         }
       }
     })
-	}
+  }
 
 })
 
