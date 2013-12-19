@@ -59,19 +59,19 @@ var Target = View.extend({
         id: 'elf2',
         energy: 0,
         attacker: false,
-        points: 5
+        points: 15
       },
       {
         id: 'elf1',
         energy: 1,
         attacker: false,
-        points: 10
+        points: 25
       },
       {
         id: 'elf3',
         energy: 2,
         attacker: true,
-        points: 20
+        points: 40
       }
     ],
 
@@ -79,12 +79,12 @@ var Target = View.extend({
       {
         id: 'sign-gift',
         bonus: 'kill-all',
-        points: 100,
+        points: 200,
       },
       {
         id: 'sign-candycane',
         bonus: 'supermode',
-        points: 50,
+        points: 100,
       }
     ]
   },
