@@ -40,7 +40,6 @@ var HUD = View.extend({
 
 
   render: function (options) {
-
     this.timeText = new Easel.Text({
       text: '0:00',
       font: 'Luckiest Guy',

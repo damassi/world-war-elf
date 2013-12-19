@@ -45,6 +45,7 @@ var CalibrateView = View.extend({
   },
 
 
+
   show: function() {
     this._super()
 
@@ -79,6 +80,7 @@ var CalibrateView = View.extend({
       y: message.orientation.y * 2
     }
   },
+
 
 
   /**
@@ -122,7 +124,7 @@ var CalibrateView = View.extend({
       y: position.y,
       ease: Expo.easeOut
     })
-  },
+  }
 
 })
 

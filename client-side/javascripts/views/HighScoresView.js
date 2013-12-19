@@ -73,7 +73,6 @@ var HighScoresView = View.extend({
 
 
   returnData: function () {
-
     var req = $.ajax({
       url: AppConfig.SCOREBOARD_ENDPOINTS.topscores,
       async: false
@@ -106,7 +105,6 @@ var HighScoresView = View.extend({
 
 
   buildScoreboard: function () {
-
     var scores = this.scoreboard.scores
       , organizations = this.scoreboard.organizations
       , nameStartPos = { x: 0, y: 0 }

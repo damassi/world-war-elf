@@ -193,7 +193,6 @@ var GamePlayView = View.extend({
 
 
   show: function (options) {
-
     var delay = 1
       , tweenTime = .8
       , height = AppConfig.DIMENSIONS.height * 2

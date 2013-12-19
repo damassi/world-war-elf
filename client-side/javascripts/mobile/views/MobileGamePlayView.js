@@ -78,7 +78,9 @@ var MobileGamePlayView = MobileView.extend({
     _.delay( function() {
       self.sessionId = self.appModel.get('session').sessionId
       self.addEventListeners()
-    }, 1000)
+    },
+      1000
+    )
 
     this.show()
 
@@ -219,6 +221,7 @@ var MobileGamePlayView = MobileView.extend({
       alpha: 1,
       ease: Expo.easeOut,
       delay: this.FIRE_TIME,
+
       onComplete: function() {
         self.isThrowing = false
       }
@@ -233,16 +236,14 @@ var MobileGamePlayView = MobileView.extend({
     TweenMax.to( this.$ball, .3, {
       scale: 0,
       ease: Back.easeIn,
+
       onComplete: function () {
 
         self.$ball.toggleClass('hide')
 
         TweenMax.to( self.$ball, .3, {
           scale: self.DEFAULT_SNOWBALL_SCALE,
-          ease: Back.easeOut,
-          onComplete: function () {
-
-          }
+          ease: Back.easeOut
         })
       }
     })

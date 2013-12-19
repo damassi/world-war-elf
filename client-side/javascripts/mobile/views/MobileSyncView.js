@@ -18,10 +18,10 @@ var MobileSyncView = MobileView.extend({
 
 
   render: function (options) {
-    this.$el = $('.syncing')
+    this.$el             = $('.syncing')
     this.$syncingMessage = $('.syncing-wait')
-    this.$syncBtn = this.$el.find('.sync-btn')
-    this.$input = this.$el.find('.sync-input')
+    this.$syncBtn        = this.$el.find('.sync-btn')
+    this.$input          = this.$el.find('.sync-input')
 
     this.$syncBtn.on('touchstart', this._onSubmitBtnClick )
 

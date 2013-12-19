@@ -68,7 +68,6 @@ var View = Backbone.View.extend({
 		if (data instanceof Backbone.Model)
 			data = this.data.toJSON()
 
-    //this.addEventListeners()
     this.addChildren( this.children )
 
 		return this

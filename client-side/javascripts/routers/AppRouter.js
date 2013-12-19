@@ -50,13 +50,7 @@ var AppRouter = Backbone.Router.extend({
     this.appController = options.appController
     this.appModel      = this.appController.appModel
     this.views         = this.appController.views
-
-    this.on( 'change:all', this.onRouteChange )
   },
-
-
-
-  onRouteChange: function (event) {},
 
 
 
