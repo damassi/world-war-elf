@@ -157,7 +157,7 @@ var GamePlayView = View.extend({
     }
 
     $('#canvas').on( 'mousemove', this.onMouseMove )
-    
+
   },
 
 
@@ -387,24 +387,52 @@ var GamePlayView = View.extend({
       target.scurryAway()
     })
 
-    var gameOverBitmap = Easel.createBitmap( 'txt-game-over', {x: 210, y:206} )
+    // var gameOverBitmap = Easel.createBitmap( 'txt-game-over', {x: 210, y:206} )
 
-    // Animate our game over screen in, then do something else
-    this.stage.addChild( gameOverBitmap )
+    // // Animate our game over screen in, then do something else
+    // this.stage.addChild( gameOverBitmap )
+
+    var gameOverText = new Easel.Text({
+      text: 'Game Over!',
+      font: 'Luckiest Guy',
+      size: '79px',
+      color: '#ff0000',
+
+      stroke: {
+        size: 7,
+        color: '#333'
+      },
+
+      position: {
+        x: AppConfig.DIMENSIONS.width * .5,
+        y: 1000,
+      }
+    })
+
+    gameOverText.textAlign('center')
+    this.stage.addChild( gameOverText.container )
 
     var self = this
 
-    T.fromTo(gameOverBitmap, .3, { y: 450 }, {
-      y: 250,
-      ease: Back.easeOut,
-      onComplete: function(){
+    T.fromTo( gameOverText.container, .5, { y: -1000 }, {
+      y: AppConfig.DIMENSIONS.height * .5,
+      ease: Expo.easeOut,
 
-        // Slight delay and then kill the gameover
-        setTimeout(function() {
-          self.removeGameOver( gameOverBitmap )
-        },
-          3000
-        )
+      onComplete: function () {
+
+        T.to( gameOverText.container, .3, {
+          y: 1000,
+          ease: Expo.easeIn,
+          delay: 3,
+
+          onComplete: function () {
+            self.stage.removeChild( this.target )
+
+            setTimeout(function() {
+              window.location.hash = '#/submit-score'
+            }, 500)
+          }
+        })
       }
     })
 
@@ -549,7 +577,7 @@ var GamePlayView = View.extend({
 
       stroke: {
         size: 7,
-        color: '#666'
+        color: '#333'
       },
 
       position: {

@@ -17,8 +17,26 @@ var SubmitScoreView = View.extend({
   initialize: function (options) {
     this._super(options)
 
+    this.powerUpText = new Easel.Text({
+      text: 'Nice Work!  You scored 1800 points',
+      font: 'Luckiest Guy',
+      size: '39px',
+      color: '#ff0000',
+
+      stroke: {
+        size: 3,
+        color: '#333'
+      },
+
+      position: {
+        x: 159,
+        y: 122,
+      }
+    })
+
     this.children = [
       Easel.createSprite('miscSprite', 'submit-text', { x: 152, y: 53 }),
+      this.powerUpText.container
     ]
   },
 
@@ -27,6 +45,8 @@ var SubmitScoreView = View.extend({
   render: function () {
     this._super()
     this.returnData()
+
+    this.powerUpText.setText( "Nice Work!  You scored " + this.appModel.get( 'score' ) + " points" )
 
     this.$form = $('<div id="submit-score" />').appendTo('#game-canvas')
 
