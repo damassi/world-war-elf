@@ -1,9 +1,8 @@
 /**
- * Session
+ * Session model stores data pertaining to individual game sessions
  *
- * @module      :: Model
- * @description :: A short summary of how this model works and what it represents.
- * @docs		:: http://sailsjs.org/#!documentation/models
+ * @author Christopher Pappas
+ * @date   12.1.13
  */
 
 module.exports = {
