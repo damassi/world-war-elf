@@ -1,8 +1,8 @@
 /**
- * ApiController
+ * Primary endpoints for synching client, server and mobile together within a game
  *
- * @module      :: Controller
- * @description	:: A set of functions called `actions`.
+ * @author ChristopherPappas
+ * @date   12.1.13
  */
 
 var SocketEvent = require('../../shared/events/SocketEvent')
@@ -145,17 +145,12 @@ module.exports = {
 
         var orientation = JSON.parse( req.param( 'orientation' ))
 
-
-        // TODO: Remove debug
-
         socket.broadcast.to(sessionId).emit( SocketEvent.ORIENTATION, {
-          orientation: orientation,
-          mouse: false
+          orientation: orientation
         })
 
         res.json({
-          orientation: orientation,
-          mouse: false
+          orientation: orientation
         })
       })
   },
