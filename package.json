@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "dependencies": {
-    "sails": "git://github.com/damassi/sails.git",
+
     "grunt": "0.4.1",
     "sails-disk": "~0.9.0",
     "ejs": "0.8.4",
