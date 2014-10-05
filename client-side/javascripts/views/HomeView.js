@@ -33,7 +33,7 @@ var HomeView = View.extend({
 
     'scoreBtn mouseover' : 'onBtnOver',
     'scoreBtn rollout'   : 'onBtnOut',
-    'scoreBtn click'     : 'onScoreBtnClick',
+    // 'scoreBtn click'     : 'onScoreBtnClick',
   },
 
 

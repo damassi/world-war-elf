@@ -32,30 +32,14 @@ $(function siteInitialized () {
     'interpolate': /{{([\s\S]+?)}}/g
   }
 
-  // Check if canvas is supported
-  if (! $('html').hasClass('canvas')) {
-    $gameCanvas.remove()
-    $gamePlay.css("visibility", 'visible').show()
-    $gameWrapper.html('<div class="no-canvas-error"/>')
-  }
+  new PreloaderView().on( 'loadComplete', function( scoreboard ) {
 
-  // Mobile trying to access desktop
-  else if (Easel.isMobile()) {
-    $gameCanvas.remove()
-    $body.html('<div class="mobile-detect-error" />')
-  }
-
-  // Prerequisites met and Canvas supported, preload site
-  else {
-    new PreloaderView().on( 'loadComplete', function( scoreboard ) {
-
-      AppController.initialize({
-        scoreboard: scoreboard
-      })
-
-      Backbone.history.start({
-        pushState: false
-      })
+    AppController.initialize({
+      scoreboard: scoreboard
     })
-  }
+
+    Backbone.history.start({
+      pushState: false
+    })
+  })
 })

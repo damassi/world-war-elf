@@ -47,7 +47,7 @@ module.exports = function( grunt ) {
           bundle.transform( handleify )
         },
 
-        debug: true
+        debug: false
       },
 
       mobile: {
@@ -58,7 +58,7 @@ module.exports = function( grunt ) {
           bundle.transform( handleify )
         },
 
-        debug: true
+        debug: false
       },
 
       dist: {
@@ -315,7 +315,7 @@ module.exports = function( grunt ) {
         options: {
           compass: false,
           style: "expanded",
-          debugInfo: true
+          sourcemap: false
         },
 
         files: [{
@@ -330,7 +330,7 @@ module.exports = function( grunt ) {
         options: {
           compass: false,
           style: "expanded",
-          debugInfo: false
+          // sourcemap: 'inline'
         },
 
         files: [{
@@ -343,8 +343,8 @@ module.exports = function( grunt ) {
 
       dist: {
         options: {
-          debugInfo: false,
           style: "compressed",
+          // sourcemap: 'inline'
         },
 
         files: [{

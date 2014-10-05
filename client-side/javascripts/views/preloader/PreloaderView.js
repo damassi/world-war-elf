@@ -25,7 +25,6 @@ var PreloaderView = Backbone.View.extend({
   template: template,
 
 
-
   initialize: function () {
     _.bindAll(this)
 
@@ -33,7 +32,6 @@ var PreloaderView = Backbone.View.extend({
 
     return this
   },
-
 
 
   render: function () {
@@ -52,7 +50,6 @@ var PreloaderView = Backbone.View.extend({
       onComplete: this.loadSite
     })
   },
-
 
 
   loadSite: function() {
@@ -83,17 +80,14 @@ var PreloaderView = Backbone.View.extend({
   },
 
 
-
   onLoadError: function (error) {
      console.error('LoadError: ', error)
   },
 
 
-
   onLoadProgress: function (event) {
     var progress = Math.round( event.progress * 100 ) + '%'
   },
-
 
 
   onLoadComplete: function () {
@@ -118,6 +112,21 @@ var PreloaderView = Backbone.View.extend({
 
 
   loadScoreboardData: function () {
+
+    var scoreboard = {
+      organizations: [{ Name: 'A', Id: 1 }],
+      scores: [{ Score: '12345', Name: 'Chris', Organization: 'POP'}]
+    }
+
+    this.trigger('loadComplete', scoreboard)
+    this.remove()
+
+    return
+
+
+    // Organization and scoreboard data is no longer
+    // functional.  Using dummy above
+
     var orgData = {}
 
     // Load Organization data
