@@ -5,6 +5,8 @@ Mobile-controlled zombie shooting gallery game utilizing Sails.js + WebSockets o
 
 No longer live, but can still be played if you pull the repo down!
 
+(To use your phone, make sure that it's on the same local network as `localhost` then browse to `your-ip-address:3000`; you can also play with the mouse)
+
 
 Project Setup
 -------------
