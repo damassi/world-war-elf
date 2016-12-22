@@ -11,13 +11,11 @@ var View  = require('../../supers/View')
 
 var MuteBtn = View.extend({
 
-
   /**
    * Ref to main appModel
    * @type {AppModel}
    */
   appModel: null,
-
 
   /**
    * Reference to the gameplay view located on AppController
@@ -25,23 +23,17 @@ var MuteBtn = View.extend({
    */
   gamePlayView: null,
 
-
   /**
    * The mute icon gfx
    * @type {c.Sprite}
    */
   muteBtn: null,
 
-
-
-
   canvasEvents: {
     'muteBtn mouseover' : 'onMuteOver',
     'muteBtn mouseout'  : 'onMuteOut',
     'muteBtn click'     : 'onMuteClick'
   },
-
-
 
   initialize: function (options) {
     this._super(options)
@@ -55,8 +47,6 @@ var MuteBtn = View.extend({
     this.muteBtn.gotoAndStop(1)
   },
 
-
-
   onMuteOver: function (event) {
     if (this.gamePlayView.crossHairs)
       this.gamePlayView.hideCrossHairs()
@@ -69,8 +59,6 @@ var MuteBtn = View.extend({
     })
   },
 
-
-
   onMuteOut: function (event) {
     if (this.gamePlayView.crossHairs)
       this.gamePlayView.showCrossHairs()
@@ -79,8 +67,6 @@ var MuteBtn = View.extend({
       opacity: 1
     })
   },
-
-
 
   onMuteClick: function (event) {
     if (this.gamePlayView.crossHairs)
@@ -93,15 +79,12 @@ var MuteBtn = View.extend({
     })
   },
 
-
-
   onMuteChange: function (model) {
     var mute = model.changed.mute
       , frame = mute ? 0 : 1
 
     this.muteBtn.gotoAndStop( frame )
-  },
-
+  }
 })
 
 module.exports = MuteBtn

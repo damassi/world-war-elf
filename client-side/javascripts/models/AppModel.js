@@ -10,7 +10,6 @@ var AppConfig = require('../config/AppConfig')
 
 var AppModel = Backbone.Model.extend({
 
-
   defaults: {
 
     /**
@@ -28,13 +27,11 @@ var AppModel = Backbone.Model.extend({
       sessionId: ''
     },
 
-
     /**
      * Flag set when connection is established
      * @type {Boolean}
      */
     connected: false,
-
 
     /**
      * If the user opts to play with a mouse instead
@@ -42,13 +39,11 @@ var AppModel = Backbone.Model.extend({
      */
     mouseMode: false,
 
-
     /**
      * Globally mute or unmute sound
      * @type {Boolean}
      */
     mute: false,
-
 
     /**
      * The current view being displayed
@@ -56,13 +51,11 @@ var AppModel = Backbone.Model.extend({
      */
     view : null,
 
-
     /**
      * The current score (gifts?)
      * @type {Number}
      */
     score: 0,
-
 
     /**
      * Number of targets hit, both good and bad
@@ -70,29 +63,22 @@ var AppModel = Backbone.Model.extend({
      */
     hits: 0,
 
-
     /**
      * The number of shots the player has made
      * @type {Number}
      */
     shots: 0,
 
-
     /**
      * Sends gameplay into supermode
      * @type {Boolean}
      */
     supermode: false,
-
   },
-
-
 
   initialize: function () {
     _.bindAll(this)
   },
-
-
 
   enableSupermode: function () {
     this.set( 'supermode', this._postModeToMobile( true ))
@@ -106,8 +92,6 @@ var AppModel = Backbone.Model.extend({
       AppConfig.SUPERMODE_TIME
     )
   },
-
-
 
   _postModeToMobile: function (mode) {
     if (!this.get('connected'))

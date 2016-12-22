@@ -6,9 +6,7 @@
 
 var Easel = require('./Easel')
 
-
 var Snowflakes = {
-
 
   /**
    * window reference

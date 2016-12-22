@@ -16,7 +16,6 @@ var SocketEvent = require('../../../shared/events/SocketEvent')
 
 var CalibrateView = View.extend({
 
-
   initialize: function (options) {
     this._super(options)
 
@@ -26,10 +25,7 @@ var CalibrateView = View.extend({
       Easel.createSprite('miscSprite', 'calibrate-target', { x: AppConfig.DIMENSIONS.width * .5, y: AppConfig.DIMENSIONS.height * .5 }, { center: true }),
       this.crossHairs = Easel.createSprite('gameplaySprite', 'game-crosshairs', { x: AppConfig.DIMENSIONS.width * .5, y: AppConfig.DIMENSIONS.height * .5 }, { center: true })
     ]
-
   },
-
-
 
   render: function () {
     this._super()
@@ -44,8 +40,6 @@ var CalibrateView = View.extend({
     return this
   },
 
-
-
   show: function() {
     this._super()
 
@@ -56,14 +50,10 @@ var CalibrateView = View.extend({
     }, 1000 )
   },
 
-
-
   addEventListeners: function () {
     window.socket.on( SocketEvent.ORIENTATION, this.onOrientationUpdate )
     window.socket.on( SocketEvent.START_GAME, this.onStartGame )
   },
-
-
 
   removeEventListeners: function () {
     window.socket.removeListener( SocketEvent.ORIENTATION, this.onOrientationUpdate )
@@ -72,16 +62,12 @@ var CalibrateView = View.extend({
     PubSub.off( AppEvent.TICK, this.onTick )
   },
 
-
-
   onOrientationUpdate: function (message) {
     this.phoneOrientation = {
       x: message.orientation.x * 2,
       y: message.orientation.y * 2
     }
   },
-
-
 
   /**
    * Socket event received from the backend
@@ -91,8 +77,6 @@ var CalibrateView = View.extend({
   onStartGame: function (message) {
     window.location.href = '#/play'
   },
-
-
 
   onTick: function() {
     if (! this.appModel.get('connected'))
@@ -116,8 +100,6 @@ var CalibrateView = View.extend({
       this.crossHairs.y = dimensions.height
   },
 
-
-
   moveCroshairs: function (position) {
     T.to( this.crossHairs, .2, {
       x: position.x,
@@ -125,7 +107,6 @@ var CalibrateView = View.extend({
       ease: Expo.easeOut
     })
   }
-
 })
 
 module.exports = CalibrateView

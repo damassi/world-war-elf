@@ -2,7 +2,7 @@
  * Events related specifically to GamePlay, generally dispatched as changes to the model occur
  *
  * @author Christopher Pappas
- * @date   11.27.14
+ * @date   11.27.13
  */
 
 
@@ -13,7 +13,6 @@ var GameEvent = {
   SCORE     : 'change:score',
   SHOOT     : 'change:shots',
   SUPERMODE : 'change:supermode',
-
 
   // PubSub updates
 

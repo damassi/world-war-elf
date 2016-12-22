@@ -12,16 +12,13 @@ var PubSub      = require('../../utils/PubSub')
 var Easel       = require('../../utils/Easel')
 var MobileView  = require('./supers/MobileView')
 
-
 var MobileGamePlayView = MobileView.extend({
-
 
   /**
    * Amount of scale to be applied to the snowball on render
    * @type {Number}
    */
   DEFAULT_SNOWBALL_SCALE: .8,
-
 
   /**
    * Shoot animation time
@@ -35,26 +32,22 @@ var MobileGamePlayView = MobileView.extend({
    */
   sessionId: null,
 
-
   /**
    * Flag to prevent repeat animations
    * @type {Boolean}
    */
   isThrowing: false,
 
-
   /**
    * @type {$}
    */
   $body: null,
-
 
   /**
    * Keep track of our current orientation for tweening
    * @type {Object}
    */
   curOrientation: { x: 0, y: 0 },
-
 
 
   render: function () {
@@ -87,8 +80,6 @@ var MobileGamePlayView = MobileView.extend({
     return this
   },
 
-
-
   addEventListeners: function () {
     this.$body.on('touchend', this.fireBall )
 
@@ -97,8 +88,6 @@ var MobileGamePlayView = MobileView.extend({
     window.socket.on( SocketEvent.GAME_OVER, this.onGameOver )
   },
 
-
-
   removeEventListeners: function () {
     this.$body.off('touchend', this.fireBall )
 
@@ -106,8 +95,6 @@ var MobileGamePlayView = MobileView.extend({
     window.socket.removeListener( SocketEvent.TOGGLE_MODE, this.onToggleMode )
     window.socket.removeListener( SocketEvent.GAME_OVER, this.onGameOver )
   },
-
-
 
   fireBall: function () {
     this.sendFireRequestToDesktop()
@@ -128,11 +115,8 @@ var MobileGamePlayView = MobileView.extend({
   },
 
 
-
-
-  //+ EVENT HANDLERS
-  // ------------------------------------------------------------
-
+  // Event handlers
+  // --------------
 
   onDeviceMotion: function (event) {
     var self = this
@@ -168,8 +152,6 @@ var MobileGamePlayView = MobileView.extend({
     })
   },
 
-
-
   /**
    * Received from API service which tells the mobile client to
    * update view to super snowball
@@ -180,19 +162,9 @@ var MobileGamePlayView = MobileView.extend({
     this.toggleBall()
   },
 
-
-
   onGameOver: function (message) {
     this.trigger( AppEvent.STOP_GAMEPLAY )
   },
-
-
-
-
-  //+ EVENT HANDLERS
-  // ------------------------------------------------------------
-
-
 
   sendFireRequestToDesktop: function () {
     window.socket.post( AppConfig.ENDPOINTS.fire, {
@@ -201,8 +173,6 @@ var MobileGamePlayView = MobileView.extend({
 
       function onResponse (response) {})
   },
-
-
 
   resetBall: function () {
     TweenMax.set( this.$balls, {
@@ -227,8 +197,6 @@ var MobileGamePlayView = MobileView.extend({
       }
     })
   },
-
-
 
   toggleBall: function () {
     var self = this

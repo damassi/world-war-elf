@@ -13,9 +13,7 @@ var MobileSyncView      = require('./views/MobileSyncView')
 var MobileCalibrateView = require('./views/MobileCalibrateView')
 var MobileGamePlayView  = require('./views/MobileGamePlayView')
 
-
 var MobileController = {
-
 
     initialize: function () {
       _.bindAll(this)
@@ -45,27 +43,19 @@ var MobileController = {
       this.mobileGamePlayView.on( AppEvent.STOP_GAMEPLAY, this.stopGameplay )
     },
 
-
-
     showSyncView: function () {
       this.mobileSyncView.render()
     },
-
-
 
     showCalibrateView: function () {
       this.mobileSyncView.hide()
       this.mobileCalibrateView.render()
     },
 
-
-
     showGamePlayView: function () {
       this.mobileCalibrateView.hide()
       this.mobileGamePlayView.render()
     },
-
-
 
     stopGameplay: function () {
       this.mobileGamePlayView.hide()
@@ -92,7 +82,6 @@ var MobileController = {
         }
       })
     }
-
 }
 
 module.exports = MobileController

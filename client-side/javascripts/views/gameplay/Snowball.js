@@ -16,16 +16,12 @@ var AppConfig = require('../../config/AppConfig')
 
 var Snowball = View.extend({
 
-
   parentContainer: null,
-
 
   types: {
     normal: 'snowball-plain',
     supermode: 'snowball-candycane'
   },
-
-
 
   initialize: function (options) {
     this._super(options)
@@ -46,8 +42,6 @@ var Snowball = View.extend({
     this.render()
   },
 
-
-
   render: function () {
     this._super()
 
@@ -57,16 +51,12 @@ var Snowball = View.extend({
     return this
   },
 
-
-
   remove: function () {
     this.container.removeChild( this.snowball )
     this.parentContainer.removeChild( this.container )
     this.stage.removeChild( this.container )
     this.snowball = null
   },
-
-
 
   throwSnowball: function (params) {
     this.occupiedPositions = params.occupiedPositions
@@ -124,8 +114,6 @@ var Snowball = View.extend({
     Sound.play({ soundId: _.sample(['audio-throw-1', 'audio-throw-2']) })
   },
 
-
-
   checkHit: function() {
     var i = 0
       , len = this.occupiedPositions.length
@@ -161,8 +149,6 @@ var Snowball = View.extend({
     return false
   },
 
-
-
   addSplat: function (params) {
     var splat = Easel.createSprite('splat', 0, { x: this.snowball.x, y: this.snowball.y + 30 }, { center: true })
 
@@ -188,7 +174,6 @@ var Snowball = View.extend({
       }
     })
   }
-
 })
 
 module.exports = Snowball

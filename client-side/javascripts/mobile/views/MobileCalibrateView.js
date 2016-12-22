@@ -13,17 +13,13 @@ var PubSub      = require('../../utils/PubSub')
 var Easel       = require('../../utils/Easel')
 var MobileView = require('./supers/MobileView')
 
-
 var MobileCalibrateView = MobileView.extend({
-
 
   /**
    * Stores a tweenable position which is pushed over the socket
    * @type {Object}
    */
   curOrientation: { x: 0, y: 0 },
-
-
 
   render: function () {
     _.bindAll(this)
@@ -42,21 +38,15 @@ var MobileCalibrateView = MobileView.extend({
     })
   },
 
-
-
   addEventListeners: function() {
     this.$body.on('touchend', this.onStartBtnClick )
     window.addEventListener( 'devicemotion', this.onDeviceMotion )
   },
 
-
-
   removeEventListeners: function() {
     this.$body.off('touchend', this.onStartBtnClick )
     window.removeEventListener( 'devicemotion', this.onDeviceMotion )
   },
-
-
 
   onDeviceMotion: function (event) {
     var orientation = {
@@ -87,8 +77,6 @@ var MobileCalibrateView = MobileView.extend({
 
       function onResponse (response) {})
   },
-
-
 
   onStartBtnClick: function (event) {
     var self = this

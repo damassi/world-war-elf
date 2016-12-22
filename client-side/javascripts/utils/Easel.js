@@ -8,9 +8,7 @@
 
 var assets = require('../config/Assets').manifest;
 
-
 var Easel = {
-
 
   /**
    * Set the default search key for asset queries
@@ -18,15 +16,11 @@ var Easel = {
    */
   DEFAULT_KEY: 'name',
 
-
-
-
   /**
    * Cache the bitmap for transformations
    * @param  {c.DisplayObject} displayObject
    * @return {void}
    */
-
   cache: function (displayObject) {
     var bounds
 
@@ -43,15 +37,12 @@ var Easel = {
     displayObject.cache( bounds.x, bounds.y, bounds.width, bounds.height )
   },
 
-
-
   /**
    * Creates a bitmap
    * @param  {String} value the value-pair of the asset
    * @param  {Object} params to set on the bitmap after initialization
    * @return {c.Bitmap}  The bitmap
    */
-
   createBitmap: function (name, params) {
     var bitmap = new c.Bitmap( this.returnAssetImage( name ));
 
@@ -62,8 +53,6 @@ var Easel = {
     return bitmap
   },
 
-
-
   /**
    * Creates a spritesheet and returns c.Sprite object
    * @param  {String} The name of the asset
@@ -71,7 +60,6 @@ var Easel = {
    * @param {Object} params to set on the sprite
    * @return {c.Sprite}  The animated spritesheet
    */
-
   createSprite: function (name, gotoFrameName, params, registration) {
     var sprite = new c.Sprite( new c.SpriteSheet( this.returnAssetSpriteSheet( name )));
 
@@ -89,8 +77,6 @@ var Easel = {
     return sprite
   },
 
-
-
   /**
    * TODO: Abstract this out into seperate Text class and rewrite for
    * extensibility
@@ -103,7 +89,6 @@ var Easel = {
    * @param  {Object} strokeParams Stroke parameters
    * @return {Class}               A new text object witha few
    */
-
   Text: function (textProps) {
     var container = new c.Container()
     var text = new c.Text( textProps.text, textProps.size + ' ' + textProps.font, textProps.color )
@@ -160,15 +145,12 @@ var Easel = {
     }
   },
 
-
-
   /**
    * Creates a hit area for DisplayObjects
    * @param  {DisplayObject} parent
    * @param  {Number} width
    * @param  {Number} height
    */
-
   createHitArea: function (parent, width, height) {
     width = width || 0;
     height = height || 0;
@@ -176,14 +158,11 @@ var Easel = {
     parent.hitArea = new c.Shape( new c.Graphics().beginFill("#f00").drawRect( 0, 0, width, height ));
   },
 
-
-
   /**
    * Returns a game asset
    * @param  {String} name the asset name
    * @return {Object}   the asset
    */
-
   returnAsset: function (value) {
     var lookupKey = this.DEFAULT_KEY;
 
@@ -200,15 +179,12 @@ var Easel = {
     return new Error('Asset not found');
   },
 
-
-
   /**
    * Returns an image url
    * // TODO: Merge image and spritesheet into one returnAsset method
    * @param  {String} value the asset value-pair
    * @return {String}   the asset url
    */
-
   returnAssetImage: function (value) {
     var lookupKey = this.DEFAULT_KEY;
 
@@ -225,15 +201,12 @@ var Easel = {
     return false;
   },
 
-
-
   /**
    * Returns a spritesheet object
    * // TODO: Merge image and spritesheet into one returnAsset method
    * @param  {String} value the asset value
    * @return {Object}   the asset spritesheet
    */
-
   returnAssetSpriteSheet: function (value) {
     var lookupKey = this.DEFAULT_KEY;
 
@@ -250,15 +223,12 @@ var Easel = {
     return false;
   },
 
-
-
   /**
    * Returns the gfx object under the current grid coord
    * @param  {Array} matrixCoord the current position on the grid
    * @return {Object}      an object has consisting of the name, id
    *                       and location of the object under the current grid coord
    */
-
   returnObjectUnderMatrixCoord: function (matrixCoord) {
     var gfxLayout = GameConfig.BOARD().gfxLayout;
     var gfxId = gfxLayout[matrixCoord[1]][matrixCoord[0]]
@@ -273,15 +243,12 @@ var Easel = {
     return false;
   },
 
-
-
   /**
    * Finds real-world coordinates from 2d array-maps
    * @param  {Array} path  The path to translate
    * @param  {Array} gridItems An array of items in the grid, with 2d and rw attributes
    * @return {Array}
    */
-
   matrixRouteToCoordinates: function (path, gridItems) {
     var posArray = _.map( path, function( node, index ) {
       var foundItem = _.find( gridItems, function( item ) {
@@ -317,14 +284,11 @@ var Easel = {
     return posArray;
   },
 
-
-
   /**
    * Moves all frame reg-points to the center.
    * USE WITH CAUTION:  Adjusting the internals invalidates pixel-snapping
    * @param  {Sprite} bitmapAnimation
    */
-
   centerSpriteSheetRegPoint: function (sprite) {
     _.each( sprite.spriteSheet._frames, function( frame ) {
       frame.regX = frame.rect.width * .5
@@ -332,14 +296,11 @@ var Easel = {
     });
   },
 
-
-
   /**
    * Animates a spritesheet once and then returns to old position
    * @param  {c.Sprite} spritesheet
    * @param  {String} frameLabel the frame label
    */
-
   animateOnce: function (spritesheet, frameLabel, callback) {
     spritesheet.on('animationend', function() {
       if(callback)
@@ -350,14 +311,11 @@ var Easel = {
     spritesheet.gotoAndPlay( frameLabel );
   },
 
-
-
   /**
    * Centers a sprite or displayobject around a registration point
    * @param  {DisplayObjectContainer|Array} displayObject A DO or array of DO's to
    * center registration point around
    */
-
   centerRegistrationPoint: function (displayObject) {
     if (typeof displayObject === 'undefined')
       return
@@ -377,14 +335,11 @@ var Easel = {
     displayObject.regY = Math.floor( bounds.height * .5 )
   },
 
-
-
   /**
    * Util for dragging display objects to aproximate positioning
    * @param  {Array} objArr An array of display objects to drag
    *
    */
-
   dragObject: function (objects) {
     if (! (objects instanceof Array))
       objects = [objects]
@@ -422,21 +377,16 @@ var Easel = {
     });
   },
 
-
-
   /**
    * Check to see if we're a supported mobile device
    * @return {Boolean} true if mobile, false if not
    */
-
   isMobile: function () {
     if (navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iPhone|iPad|iPod/i) || navigator.userAgent.match(/IEMobile/i))
       return true;
 
     return false;
   },
-
-
 
   isIOS: function () {
     if (navigator.userAgent.match(/iPhone|iPad|iPod/i))
@@ -445,8 +395,6 @@ var Easel = {
     return false;
   },
 
-
-
   isAndroid: function () {
     if (navigator.userAgent.match(/Android/i))
       return true
@@ -454,17 +402,12 @@ var Easel = {
     return false
   },
 
-
-
   isIE: function (){
     if (navigator.userAgent.match(/IE/i))
       return true
 
     return false
   },
-
-
-
 
   isWithinBounds: function (point, bounds) {
     if (!bounds.width || !bounds.height )
@@ -476,8 +419,6 @@ var Easel = {
 
     return false
   },
-
-
 
   returnPointsBetweenPoints: function (point1, point2, num) {
     var d0 = (point2.x - point1.x) / (num + 1)
@@ -493,25 +434,19 @@ var Easel = {
     return points
   },
 
-
-
   /**
    * Returns a random nunber within two ranges
    * @param {Number} min
    * @param {Number} max
    */
-
   randRange: function (min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   },
-
-
 
   /**
    * Returns a random hex color
    *
    */
-
   returnRandomHexColor: function() {
     var letters = '0123456789ABCDEF'.split('');
     var color = '#';
@@ -522,27 +457,21 @@ var Easel = {
     return color;
   },
 
-
-
   /**
    * convert our score to a 4 digit number
    * @param  {int} $scoreInt an int holding our current score
    * @return {string} a 4 digit string
    */
-
   convertScore: function (scoreInt) {
     var scoreStr = scoreInt+"";
       while (scoreStr.length < 4) { scoreStr = "0" + scoreStr; }
       return scoreStr;
   },
 
-
-
   /**
    * Rotates a 2-Dimensional array to the right
    * @param  {Array} array
    */
-
   rotateArrayRight: function (array) {
     var transformedArray = new Array();
     var aLen = array[0].length;
@@ -561,13 +490,10 @@ var Easel = {
     return transformedArray;
   },
 
-
-
   /**
    * Rotates a 2-Dimensional array to the left
    * @param  {Array} array
    */
-
   rotateArrayLeft: function (array)  {
     var transformedArray = new Array();
 
@@ -586,9 +512,6 @@ var Easel = {
     return transformedArray;
   },
 
-
-
-
   truncateText: function (str, len) {
     str = str.substr(0, len)
 
@@ -598,9 +521,6 @@ var Easel = {
     return str
   },
 
-
-
-
   bounceScreen: function ($el) {
     TweenMax.to($el, .1, {
       scale: 1.1,
@@ -608,9 +528,6 @@ var Easel = {
       repeat: 3
     })
   },
-
-
-
 
   rattleScreen: function ($el) {
     TweenMax.to($el, .1, {
@@ -628,8 +545,6 @@ var Easel = {
     })
   },
 
-
-
   /**
    * Takes a string of the format `path.mp3|path.ogg' and returns a fully qualified
    * url for AudioJS to load
@@ -637,7 +552,6 @@ var Easel = {
    * @param  {String} basePath the base url path
    * @return {String}
    */
-
   returnFullAudioPath: function (fileName, basePath) {
     var fileTypes = fileName.split('|')
     fileName = _.map(fileTypes, function (file) {

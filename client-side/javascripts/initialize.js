@@ -10,10 +10,8 @@ var Touch         = require('./utils/Touch')
   , AppController = require('./AppController')
   , Easel         = require('./utils/Easel')
 
-
 c = createjs
 T = TweenMax
-
 
 $(function siteInitialized () {
 
@@ -25,7 +23,6 @@ $(function siteInitialized () {
 
   Touch.translateTouchEvents()
   PointerEventsPolyfill.initialize({})
-
 
   // Mustache regex for micro templates
   _.templateSettings = {
