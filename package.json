@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "dependencies": {
-    "sails": "0.10.0-rc8",
+    "sails": "git+https://github.com/balderdashy/sails.git#92a7d87b2ba5d69ddb44f017a913717d8e54a745",
     "grunt": "0.4.1",
     "sails-disk": "0.9.0",
     "ejs": "0.8.4",
