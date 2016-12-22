@@ -448,7 +448,7 @@ module.exports = function( grunt ) {
   ])
 
   grunt.registerTask( 'compileAssets', [
-    'clean:output',
+    // 'clean:output',
     'copy:images',
     'copy:audio',
     'copy:sails',
