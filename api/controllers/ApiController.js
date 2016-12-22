@@ -11,7 +11,6 @@ var ErrorEvent  = require('../../shared/events/ErrorEvent')
 
 module.exports = {
 
-
   /**
    * Async socket.io GET request which generates a random code for connecting
    * to a mobile client.  Additionally, it creates a shared client-server
@@ -44,8 +43,6 @@ module.exports = {
       })
     })
   },
-
-
 
   /**
    * Async socket.io POST request sends a previously generated tracking code in order
@@ -92,8 +89,6 @@ module.exports = {
       })
   },
 
-
-
   'start-game': function (req, res, next) {
     var sessionId = req.param('sessionId')
       , socket = req.socket
@@ -120,8 +115,6 @@ module.exports = {
 
       })
   },
-
-
 
   /**
    * The orientation endpoint receives a websocket POST request which then dispatches
@@ -155,8 +148,6 @@ module.exports = {
       })
   },
 
-
-
   fire: function (req, res, next) {
     var sessionId = req.param('sessionId')
       , socket    = req.socket
@@ -179,8 +170,6 @@ module.exports = {
         next()
       })
   },
-
-
 
   'toggle-mode': function (req, res, next) {
     var sessionId = req.param('sessionId')
@@ -206,8 +195,6 @@ module.exports = {
       })
   },
 
-
-
   'game-over': function (req, res, next) {
     var sessionId = req.param('sessionId')
       , socket    = req.socket
@@ -232,6 +219,5 @@ module.exports = {
         })
       })
   }
-
 
 };

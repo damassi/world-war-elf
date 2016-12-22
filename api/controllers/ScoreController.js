@@ -22,14 +22,11 @@ var urls = {
   topScores     : '/zombieelves/view.ashx'
 }
 
-
 _.templateSettings = {
   'interpolate': /{{([\s\S]+?)}}/g
 }
 
-
 module.exports = {
-
 
   organizations: function (req, res, next) {
     client.get( urls.organization, function (error, response, body) {
@@ -42,8 +39,6 @@ module.exports = {
       })
     })
   },
-
-
 
   'post-score': function (req, res, next) {
     var name           = req.param('name')
@@ -71,8 +66,6 @@ module.exports = {
     })
   },
 
-
-
   'top-by-org': function (req, res, next) {
     client.get( urls.topByOrg, function (error, response, body) {
       if (error) return res.json({
@@ -84,8 +77,6 @@ module.exports = {
       })
     })
   },
-
-
 
   'top-scores': function (req, res, next) {
     client.get( urls.topScores, function (error, response, body) {
