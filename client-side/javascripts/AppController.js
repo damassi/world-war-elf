@@ -27,24 +27,20 @@ var AppConfig          = require('./config/AppConfig')
 
 var AppController = {
 
-
   /**
    * @type {AppModel}
    */
   appModel: null,
-
 
   /**
    * @type {AppRouter}
    */
   appRouter: null,
 
-
   /**
    * @type {Array}
    */
   views: null,
-
 
 
   initialize: function (options) {
@@ -140,10 +136,7 @@ var AppController = {
     Sound.play({ soundId: 'audio-bg', loop: -1, volume: 0.5 })
 
     c.Ticker.addEventListener( 'tick', this.tick )
-    //this.appModel.set( 'mute', true )
   },
-
-
 
   delegateEvents: function () {
     PubSub.on( AppEvent.SOCKET_IO_CONNECTED, this.onSocketIOConnected )
@@ -153,19 +146,13 @@ var AppController = {
   },
 
 
-
-
-  //+ PUBLIC METHODS / GETTERS / SETTERS
-  // ------------------------------------------------------------
-
-
+  // Public
+  // ------
 
   tick: function (event) {
     PubSub.trigger( AppEvent.TICK )
     this.stage.update()
   },
-
-
 
   cleanUpViews: function (view) {
     if (_.isUndefined( view ) || _.isNull( view ))
@@ -178,16 +165,10 @@ var AppController = {
   },
 
 
-
-
-  //+ EVENT HANDLERS
-  // ------------------------------------------------------------
-
-
+  // Event handlers
+  // --------------
 
   onSocketIOConnected: function (message) {},
-
-
 
   onDesktopClientSynched: function () {
     var sessionId = window.socket.socket.sessionid
@@ -197,8 +178,6 @@ var AppController = {
 
     window.location.href = '#/calibrate'
   },
-
-
 
   onViewChange: function (appModel) {
     var view         = appModel.changed.view
@@ -212,11 +191,8 @@ var AppController = {
   },
 
 
-
-
-  //+ PRIVATE METHODS
-  // ------------------------------------------------------------
-
+  // Private
+  // -------
 
   addGround: function () {
     this.ground = [
@@ -231,12 +207,9 @@ var AppController = {
     }
   },
 
-
-
   animateIn: function () {
     TweenMax.to( this.$contentContainer, .5, { autoAlpha: 1, ease: Linear.easeNone })
-  },
-
+  }
 
 }
 

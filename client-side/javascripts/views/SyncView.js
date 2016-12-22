@@ -14,25 +14,21 @@ var AppConfig = require('../config/AppConfig')
 
 var SyncView = View.extend({
 
-
   /**
    * The default text that will be rendered to the message on API sync
    * @type {String}
    */
   syncLabel: 'Visit {{url}} on your \nsmartphone and enter {{code}} or scan the \nQR code to the right!',
 
-
   /**
    * @type {$}
    */
   syncMsg: null,
 
-
   /**
    * @type {$}
    */
   clientMsg: null,
-
 
   /**
    * The move pos of the playbtn on rollover
@@ -41,14 +37,11 @@ var SyncView = View.extend({
   btnPositions: { backY : 509 },
 
 
-
   canvasEvents: {
     'backBtn mouseover' : 'onBtnOver',
     'backBtn rollout'   : 'onBtnOut',
     'backBtn click'     : 'onPlayBtnClick'
   },
-
-
 
   initialize: function (options) {
     this._super(options)
@@ -80,10 +73,7 @@ var SyncView = View.extend({
 
       this.syncText.container
     ]
-
   },
-
-
 
   render: function (options) {
     this._super()
@@ -125,13 +115,9 @@ var SyncView = View.extend({
     return this
   },
 
-
-
   show: function () {
     this._super()
   },
-
-
 
   hide: function() {
     this._super()
@@ -144,13 +130,9 @@ var SyncView = View.extend({
     })
   },
 
-
-
   addEventListeners: function () {
     PubSub.on( AppEvent.DESKTOP_CLIENT_SYNCED, this._onDesktopClientSynched )
   },
-
-
 
   requestSyncId: function (callback) {
     var self = this
@@ -164,11 +146,7 @@ var SyncView = View.extend({
       })
   },
 
-
-
   _onDesktopClientSynched: function (message) {},
-
-
 
   onBtnOver: function (event) {
     var target = event.currentTarget
@@ -196,8 +174,6 @@ var SyncView = View.extend({
     })
   },
 
-
-
   onBtnOut: function (event) {
     var target = event.currentTarget
 
@@ -210,12 +186,9 @@ var SyncView = View.extend({
     })
   },
 
-
-
   onPlayBtnClick: function (event) {
     window.location.href ='#/instructions'
-  },
-
+  }
 
 })
 

@@ -10,9 +10,7 @@ var AppConfig    = require('../../config/AppConfig')
   , Easel        = require('../../utils/Easel')
   , formTemplate = require('./submit-form-template.hbs')
 
-
 var SubmitScoreView = View.extend({
-
 
   initialize: function (options) {
     this._super(options)
@@ -21,8 +19,6 @@ var SubmitScoreView = View.extend({
       Easel.createSprite('miscSprite', 'submit-text', { x: 152, y: 53 }),
     ]
   },
-
-
 
   render: function () {
     this.powerUpText = new Easel.Text({
@@ -66,8 +62,6 @@ var SubmitScoreView = View.extend({
     return this
   },
 
-
-
   returnData: function () {
     var req = $.ajax({
       url: AppConfig.SCOREBOARD_ENDPOINTS.organizations,
@@ -85,21 +79,15 @@ var SubmitScoreView = View.extend({
     })
   },
 
-
-
   addEventListeners: function() {
     this.$submitBtn.on('touchend', this.onSubmitForm)
     this.$skipBtn.on('touchend', this.onSkipBtnClick)
   },
 
-
-
   removeEventListeners: function() {
     this.$submitBtn.off('touchend', this.onSubmitForm)
     this.$skipBtn.off('touchend', this.onSkipBtnClick)
   },
-
-
 
   show: function () {
     this._super()
@@ -110,10 +98,7 @@ var SubmitScoreView = View.extend({
       ease: Linear.easeNone,
       delay: AppConfig.TRANSITION_TIME + .4
     })
-
   },
-
-
 
   hide: function () {
     this._super({ remove: true })
@@ -124,14 +109,10 @@ var SubmitScoreView = View.extend({
     })
   },
 
-
-
   remove: function() {
     this.$form.remove()
     this._super()
   },
-
-
 
   onSubmitForm: function (event) {
     var postReq = $.ajax({
@@ -153,14 +134,9 @@ var SubmitScoreView = View.extend({
     })
   },
 
-
-
   onSkipBtnClick: function (event) {
     window.location.href = '#/high-scores'
   }
-
-
-
 })
 
 module.exports = SubmitScoreView

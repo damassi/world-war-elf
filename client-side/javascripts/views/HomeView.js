@@ -14,7 +14,6 @@ var AppConfig  = require('../config/AppConfig')
 
 var HomeView = View.extend({
 
-
   /**
    * The move pos of the playbtn on rollover
    * @type {Number}
@@ -24,18 +23,14 @@ var HomeView = View.extend({
     highScoreY : 510
   },
 
-
-
   canvasEvents: {
     'playBtn mouseover' : 'onBtnOver',
     'playBtn rollout'   : 'onBtnOut',
     'playBtn click'     : 'onPlayBtnClick',
 
     'scoreBtn mouseover' : 'onBtnOver',
-    'scoreBtn rollout'   : 'onBtnOut',
-    // 'scoreBtn click'     : 'onScoreBtnClick',
+    'scoreBtn rollout'   : 'onBtnOut'
   },
-
 
 
   initialize: function (options) {
@@ -63,12 +58,7 @@ var HomeView = View.extend({
       this.elf          = Easel.createSprite('homeSprite', 'home-good-elf', { x: 660, y: 179 }),
       this.elfShadow    = Easel.createSprite('homeSprite', 'home-btn-scores-shadow', { x: 633, y: 546 }),
     ]
-
-    //Easel.dragObject( this.children )
-
   },
-
-
 
   render: function (options) {
     this.lElf.x = 40
@@ -91,8 +81,6 @@ var HomeView = View.extend({
 
     return this
   },
-
-
 
   show: function () {
     this._super()
@@ -128,19 +116,13 @@ var HomeView = View.extend({
     })
   },
 
-
-
   hide: function (options) {
     this._super({ remove: true })
   },
 
 
-
-
-  //+ EVENT HANDLERS
-  //--------------------------------------
-
-
+  // Event handlers
+  // --------------
 
   onBtnOver: function (event) {
     var target = event.currentTarget
@@ -168,8 +150,6 @@ var HomeView = View.extend({
     })
   },
 
-
-
   onBtnOut: function (event) {
     var target = event.currentTarget
 
@@ -182,19 +162,13 @@ var HomeView = View.extend({
     })
   },
 
-
-
   onPlayBtnClick: function (event) {
     window.location.href ='#/instructions'
   },
 
-
-
   onScoreBtnClick: function (event) {
     window.location.href ='#/high-scores'
   }
-
-
 })
 
 module.exports = HomeView

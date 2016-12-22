@@ -7,15 +7,12 @@
 
 var Sound = {
 
-
   initialize: function (options) {
     _.bindAll(this)
 
     this.appModel = options.appModel
     this.appModel.on( 'change:mute', this.onMuteChange )
   },
-
-
 
   play: function (props) {
     var delay  = props.delay  || 0
@@ -26,22 +23,17 @@ var Sound = {
     return c.Sound.play( props.soundId, c.Sound.INTERRUPT_ANY, delay, offset, loop, volume )
   },
 
-
-
   mute: function (doMute) {
     var volume = doMute ? 0 : 1
 
     createjs.Sound.setVolume( volume )
   },
 
-
-
   onMuteChange: function (model) {
     var muted = model.changed.mute
 
     this.mute( muted )
   }
-
 }
 
 module.exports = Sound

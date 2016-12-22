@@ -16,7 +16,6 @@ var MobileView  = require('./supers/MobileView')
 
 var MobileSyncView = MobileView.extend({
 
-
   render: function (options) {
     this.$el             = $('.syncing')
     this.$syncingMessage = $('.syncing-wait')
@@ -26,7 +25,6 @@ var MobileSyncView = MobileView.extend({
     this.$syncBtn.on('touchstart', this._onSubmitBtnClick )
 
     this.show()
-
 
     // Check if sync code is being passed into the url bar and
     // then auto-forward user
@@ -49,8 +47,6 @@ var MobileSyncView = MobileView.extend({
     return this
   },
 
-
-
   hide: function() {
     var self = this
 
@@ -66,12 +62,8 @@ var MobileSyncView = MobileView.extend({
   },
 
 
-
-
-  //+ EVENT HANDLERS
-  // ------------------------------------------------------------
-
-
+  // Event handlers
+  // --------------
 
   _onSubmitBtnClick: function (event) {
     event.preventDefault()
@@ -93,8 +85,6 @@ var MobileSyncView = MobileView.extend({
     return false
   },
 
-
-
   _onServerResponse: function (response) {
     if (response.status === 200) {
       this.trigger( SocketEvent.SYNCED )
@@ -114,12 +104,8 @@ var MobileSyncView = MobileView.extend({
   },
 
 
-
-
-  //+ PRIVATE METHODS
-  // ------------------------------------------------------------
-
-
+  //+ Private
+  // --------
 
   _showSyncingMessage: function (callback) {
     var self = this
@@ -145,8 +131,6 @@ var MobileSyncView = MobileView.extend({
     })
   },
 
-
-
   _hideSyncingMessage: function () {
     var self = this
 
@@ -169,7 +153,6 @@ var MobileSyncView = MobileView.extend({
       }
     })
   }
-
 })
 
 module.exports = MobileSyncView

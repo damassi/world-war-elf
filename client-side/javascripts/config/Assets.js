@@ -6,9 +6,7 @@
 var path  = require('./AppConfig').IMAGE_PATH
 var audioPath = require('./AppConfig').AUDIO_PATH
 
-
 var Assets = {
-
 
   manifest: [
 
@@ -18,47 +16,38 @@ var Assets = {
         audioId: 'audio-bg',
         src: audioPath + 'bg-carolbells.mp3'
     },
-
     {
         audioId: 'audio-throw-1',
         src: audioPath + 'whoosh.mp3'
     },
-
     {
         audioId: 'audio-throw-2',
         src: audioPath + 'whoosh2.mp3'
     },
-
     {
         audioId: 'bonus-hit-candycane',
         src: audioPath + 'bonus-hit.mp3'
     },
-
     {
         audioId: 'snowball-hit-1',
         src: audioPath + 'hit-1.mp3'
     },
-
     {
         audioId: 'zombie-hit-1',
         src: audioPath + 'grunt-1.mp3'
     },
-
     {
         audioId: 'zombie-hit-2',
         src: audioPath + 'grunt-2.mp3'
     },
-
     {
         audioId: 'zombie-hit-3',
         src: audioPath + 'grunt-3.mp3'
     },
-
     {
         audioId: 'zombie-hit-4',
         src: audioPath + 'grunt-4.mp3'
     },
-
 
 
     // Visual assets
@@ -67,42 +56,34 @@ var Assets = {
       name: 'placeholder-home',
       src: path + 'placeholder-home.jpg',
     },
-
     {
       name: 'placeholder-highscores',
       src: path + 'placeholder-highscores.jpg',
     },
-
     {
       name: 'placeholder-instructions',
       src: path + 'placeholder-instructions.jpg',
     },
-
     {
       name: 'placeholder-sync',
       src: path + 'placeholder-sync.jpg',
     },
-
     {
       name: 'placeholder-calibrate',
       src: path + 'placeholder-calibrate.jpg',
     },
-
     {
       name: 'placeholder-gameplay',
       src: path + 'placeholder-gameplay.jpg',
     },
-
     {
       name: 'placeholder-submit-score',
       src: path + 'placeholder-submit-score.jpg',
     },
-
     {
       name: 'frame-background',
       src: path + 'frame-background.jpg',
     },
-
     {
       name: 'snowballs',
       src: path + 'spritesheets/snowballs.png',
@@ -119,17 +100,14 @@ var Assets = {
         },
       }
     },
-
     {
       name: 'txt-game-over',
       src: path + 'txt-game-over.png',
     },
-
     {
       name: 'frame-background',
       src: path + 'frame-background.jpg',
     },
-
     {
         name: 'mute',
         src: path + 'spritesheets/mute.png',
@@ -147,7 +125,6 @@ var Assets = {
             },
         }
     },
-
     {
         name: 'splat',
         src: path + 'spritesheets/splat.png',
@@ -159,7 +136,6 @@ var Assets = {
           "animations": {"hit": {"frames": [0, 1, 2, 3, 4, 5, 6]}, "all": {"frames": [6]}}
         }
     },
-
     {
       name: 'sign-gift',
       src: path + 'spritesheets/sign-gift.png',
@@ -214,7 +190,6 @@ var Assets = {
         ]
       }
     },
-
     {
       name: 'sign-candycane',
       src: path + 'spritesheets/sign-candycane.png',
@@ -269,7 +244,6 @@ var Assets = {
         ]
       }
     },
-
     {
         name: 'elf1',
         src: path + 'spritesheets/elf-1.png',
@@ -303,7 +277,6 @@ var Assets = {
             ]
         }
     },
-
     {
         name: 'elf2',
         src: path + 'spritesheets/elf-2.png',
@@ -337,7 +310,6 @@ var Assets = {
             ]
         }
     },
-
     {
         name: 'elf3',
         src: path + 'spritesheets/elf-3.png',
@@ -372,8 +344,6 @@ var Assets = {
             "animations": {"all": {"frames": [0]}, "start": {"frames": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, "throw": {"frames": [19, 19, 19, 19, 19, 19, 19, 19, 19]}, "hit": {"frames": [20]}}
         }
     },
-
-
 
     // GAMEPLAY Spritesheets
 
@@ -412,8 +382,6 @@ var Assets = {
       }
     },
 
-
-
     // INSTRUCTIONS Spritesheet
 
     {
@@ -448,8 +416,6 @@ var Assets = {
             },
         }
     },
-
-
 
     // HOME Spritesheet
 
@@ -495,8 +461,6 @@ var Assets = {
         }
         }
     },
-
-
 
     // MISC Spritesheets
 

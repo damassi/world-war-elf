@@ -12,12 +12,10 @@ var AppConfig = require('../../config/AppConfig')
 
 var PreloaderView = Backbone.View.extend({
 
-
   /**
    * @type {String}
    */
   id: 'preloader',
-
 
   /**
    * @type {Function}
@@ -32,7 +30,6 @@ var PreloaderView = Backbone.View.extend({
 
     return this
   },
-
 
   render: function () {
     $('body').append( this.$el.html( this.template() ))
@@ -50,7 +47,6 @@ var PreloaderView = Backbone.View.extend({
       onComplete: this.loadSite
     })
   },
-
 
   loadSite: function() {
     var loadQueue = new c.LoadQueue()
@@ -79,16 +75,13 @@ var PreloaderView = Backbone.View.extend({
     loadQueue.loadManifest( manifest )
   },
 
-
   onLoadError: function (error) {
      console.error('LoadError: ', error)
   },
 
-
   onLoadProgress: function (event) {
     var progress = Math.round( event.progress * 100 ) + '%'
   },
-
 
   onLoadComplete: function () {
     var self = this
@@ -109,10 +102,7 @@ var PreloaderView = Backbone.View.extend({
     })
   },
 
-
-
   loadScoreboardData: function () {
-
     var scoreboard = {
       organizations: [{ Name: 'A', Id: 1 }],
       scores: [{ Score: '12345', Name: 'Chris', Organization: 'POP'}]
@@ -122,7 +112,6 @@ var PreloaderView = Backbone.View.extend({
     this.remove()
 
     return
-
 
     // Organization and scoreboard data is no longer
     // functional.  Using dummy above
@@ -142,7 +131,6 @@ var PreloaderView = Backbone.View.extend({
     req.done( function (data) {
       orgData = data
     })
-
 
     // Load Top Scores
     req = $.ajax({
@@ -165,7 +153,6 @@ var PreloaderView = Backbone.View.extend({
       self.trigger('loadComplete', scoreboard)
       self.remove()
     })
-
 
     // Scoreboard has loaded.  Kick off the app
     // and pass the data into the AppController for use

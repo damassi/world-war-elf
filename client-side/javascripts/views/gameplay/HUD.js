@@ -14,30 +14,21 @@ var Timer       = require('time-counter')
   , View        = require('../../supers/View')
   , Easel       = require('../../utils/Easel')
 
-
 var HUD = View.extend({
-
 
   TEXT_POS: {
     time: { x: 945, y: 20 },
     presents: { x: 945, y: 78 }
   },
 
-
   /**
    * @type {Timer}
    */
   timer: null,
 
-
-
   initialize: function (options) {
     this._super(options)
-
-
   },
-
-
 
   render: function (options) {
     this.timeText = new Easel.Text({
@@ -56,7 +47,6 @@ var HUD = View.extend({
         color: '#333'
       }
     })
-
 
     this.pointsText = new Easel.Text({
       text: '0',
@@ -99,21 +89,15 @@ var HUD = View.extend({
     return this
   },
 
-
-
   addEventListeners: function () {
     this.timer.on( 'change', this.onTimerUpdate )
     this.listenTo( this.appModel, GameEvent.SCORE, this.onChangeScore )
   },
 
-
-
   removeEventListeners: function () {
     this.timer.off( 'change', this.onTimerUpdate )
     this.stopListening()
   },
-
-
 
   show: function () {
     T.to( this.container, .6, {
@@ -123,8 +107,6 @@ var HUD = View.extend({
       delay: 1
     })
   },
-
-
 
   hide: function (options) {
     this.stopTimer()
@@ -141,25 +123,18 @@ var HUD = View.extend({
     })
   },
 
-
-
   startTimer: function (time) {
     this.timer.start()
   },
-
-
 
   stopTimer: function (time) {
     this.timer.stop()
   },
 
-
-
   /**
    * Update the HUD timer and, when at certain points, dispatch events to the GameController
    * @param  {String} time the current time
    */
-
   onTimerUpdate: function (time) {
     this.timeText.setText( time )
 
@@ -171,8 +146,6 @@ var HUD = View.extend({
     if (time === '0:00')
       PubSub.trigger( AppEvent.STOP_GAMEPLAY )
   },
-
-
 
   onChangeScore: function (model) {
     var score = model.changed.score
@@ -191,11 +164,7 @@ var HUD = View.extend({
         self.pointsText.setText( ~~this.target.start )
       }
     })
-
-
   }
-
-
 })
 
 module.exports = HUD

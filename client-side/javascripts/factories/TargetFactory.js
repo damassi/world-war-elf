@@ -11,9 +11,7 @@ var PubSub     = require('../utils/PubSub')
 var GameEvent  = require('../events/GameEvent')
 var Target     = require('../views/gameplay/Target')
 
-
 var TargetFactory = Backbone.View.extend({
-
 
   /**
    * Defines placements for enemies and bonuses
@@ -37,7 +35,6 @@ var TargetFactory = Backbone.View.extend({
     }
   ],
 
-
   /**
    * Possible types for popup targets
    * @type {Object}
@@ -47,7 +44,6 @@ var TargetFactory = Backbone.View.extend({
     bad: 'bad'
   },
 
-
   /**
    * Reference to the gameplay view for pushing targets
    * into the proper containers
@@ -55,14 +51,11 @@ var TargetFactory = Backbone.View.extend({
    */
   gamePlayView: null,
 
-
   /**
    * Internal reference for all currently occupied positions
    * @type {Array}
    */
   occupiedPositions: null,
-
-
 
 
   initialize: function (options) {
@@ -80,28 +73,20 @@ var TargetFactory = Backbone.View.extend({
     this.addEventListeners()
   },
 
-
-
   cleanup: function() {
     this.removeEventListeners()
     this.occupiedPositions = []
   },
-
-
 
   addEventListeners: function ()  {
     PubSub.on( GameEvent.TARGET_HIT, this.onTargetHit )
     PubSub.on( GameEvent.KILL_ALL_TARGETS, this.onKillAllTargets )
   },
 
-
-
   removeEventListeners: function () {
     PubSub.off( GameEvent.TARGET_HIT, this.onTargetHit )
     PubSub.off( GameEvent.KILL_ALL_TARGETS, this.onKillAllTargets )
   },
-
-
 
   createTarget: function () {
     var orientation = this.returnOrientation()
@@ -141,8 +126,6 @@ var TargetFactory = Backbone.View.extend({
     return target
   },
 
-
-
   /**
    * Ensure that there can only be one 'good' target in the array at any given point
    * @return {String} The target type, 'good|bad'
@@ -164,8 +147,6 @@ var TargetFactory = Backbone.View.extend({
 
     return type
   },
-
-
 
   /**
    * Returns a position based upon the playMatrix defined above
@@ -197,12 +178,8 @@ var TargetFactory = Backbone.View.extend({
   },
 
 
-
-
-  //+ EVENT HANDLERS
-  // ------------------------------------------------------------
-
-
+  // Event handlers
+  // --------------
 
   onTargetHit: function (params) {
     var target = params.targetView
@@ -211,8 +188,6 @@ var TargetFactory = Backbone.View.extend({
 
     this.createTarget()
   },
-
-
 
   onKillAllTargets: function (params) {
     params = params || {}
@@ -243,9 +218,6 @@ var TargetFactory = Backbone.View.extend({
 
     Easel.bounceScreen($('#game-play'))
   }
-
-
-
 })
 
 module.exports = TargetFactory

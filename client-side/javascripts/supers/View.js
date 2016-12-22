@@ -8,9 +8,7 @@
 
 var AppConfig = require('../config/AppConfig')
 
-
 var View = Backbone.View.extend({
-
 
   /**
    * A ref to the primary AppController, passed in during view
@@ -19,13 +17,11 @@ var View = Backbone.View.extend({
    */
   appController: null,
 
-
   /**
    * A ref to the primary AppModel
    * @type {AppModel}
    */
   appModel: null,
-
 
   /**
    * A ref to the primary stage located on AppController
@@ -33,20 +29,17 @@ var View = Backbone.View.extend({
    */
   stage: null,
 
-
   /**
    * The views display object container
    * @type {c.Container}
    */
   container: null,
 
-
   /**
    * An array of all child display objects contained within `container`
    * @type {Array}
    */
   children: [],
-
 
 
   initialize: function (options) {
@@ -60,8 +53,6 @@ var View = Backbone.View.extend({
       this.appModel = this.appModel
   },
 
-
-
   render: function (data) {
     data = data || this.data || {}
 
@@ -73,12 +64,8 @@ var View = Backbone.View.extend({
     return this
   },
 
-
-
-  //+ PUBLIC METHODS
-  // ------------------------------------------------------------
-
-
+  // Public
+  // ------
 
   show: function (options) {
     options = options || {}
@@ -98,8 +85,6 @@ var View = Backbone.View.extend({
     })
   },
 
-
-
   hide: function (options) {
     options = options || {}
 
@@ -114,8 +99,6 @@ var View = Backbone.View.extend({
       }
     })
   },
-
-
 
   remove: function (options) {
     if (!this.stage)
@@ -133,9 +116,6 @@ var View = Backbone.View.extend({
     this.removeEventListeners()
   },
 
-
-
-
   addChildren: function (children) {
     if (!this.stage)
       return
@@ -145,24 +125,17 @@ var View = Backbone.View.extend({
 
   },
 
-
-
   addEventListeners: function () {},
-
-
 
   removeEventListeners: function () {},
 
 
 
-  //+ EVENT HANDLERS
-  // ------------------------------------------------------------
+  //+ Event handlers
+  // ---------------
 
-
-
-  //+ PRIVATE METHODS
-  // ------------------------------------------------------------
-
+  //+ Private
+  // --------
 
   _bindCanvasEvents: function() {
     var self = this
@@ -182,8 +155,6 @@ var View = Backbone.View.extend({
       }
     })
   }
-
 })
 
 module.exports = View
-

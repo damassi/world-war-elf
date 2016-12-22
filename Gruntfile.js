@@ -9,16 +9,12 @@
  *   build  :  Minify all sources and zip for distribution
  */
 
-
 module.exports = function( grunt ) {
-
 
   var handleify = require('handleify');
   var uglify    = require("uglify-js");
 
-
   grunt.initConfig({
-
 
     // + ---------------------------------------------
 
@@ -29,9 +25,7 @@ module.exports = function( grunt ) {
     dist     : '<%= basePath %>/dist',
     port     : 3001,
 
-
     // + ---------------------------------------
-
 
     //
     // Compile JavaScript using browserify
@@ -146,7 +140,6 @@ module.exports = function( grunt ) {
     },
 
 
-
     //
     // Copy asset and vendor files to public
     //
@@ -214,7 +207,6 @@ module.exports = function( grunt ) {
     },
 
 
-
     //
     // Clean client-facing directories
     //
@@ -263,7 +255,6 @@ module.exports = function( grunt ) {
     },
 
 
-
     //
     // Add the livereload server
     //
@@ -271,7 +262,6 @@ module.exports = function( grunt ) {
     'livereload': {
       port: 35727
     },
-
 
 
     //
@@ -302,7 +292,6 @@ module.exports = function( grunt ) {
         }
       }
     },
-
 
 
     //
@@ -430,13 +419,9 @@ module.exports = function( grunt ) {
     'revgithash': {
       files: ['<%= dist %>/wordfly-holiday-dist.zip']
     }
-
-
   })
 
-
   // + ---------------------------------------
-
 
   grunt.registerTask( 'run', [
     'concurrent'
@@ -448,7 +433,6 @@ module.exports = function( grunt ) {
   ])
 
   grunt.registerTask( 'compileAssets', [
-    'clean:output',
     'copy:images',
     'copy:audio',
     'copy:sails',
@@ -476,19 +460,14 @@ module.exports = function( grunt ) {
     'revgithash'
   ])
 
-
   // + ---------------------------------------
-
 
   // Load task dependencies via 'load-grunt-tasks'
   require('load-grunt-tasks')( grunt )
-
 
   // + ---------------------------------------
 
 
   grunt.option( 'stack', true );
   grunt.option( 'force', true );
-
-
 }

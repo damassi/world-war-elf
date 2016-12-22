@@ -17,9 +17,7 @@ var SocketEvent        = require('../../../../shared/events/SocketEvent')
   , HUD                = require('./HUD')
   , Snowball           = require('./Snowball')
 
-
 var GamePlayView = View.extend({
-
 
   /**
    * Handles creation and management of targets
@@ -33,13 +31,11 @@ var GamePlayView = View.extend({
    */
   backContainer: null,
 
-
   /**
    * Container to hold middle enemies
    * @type {c.Container}
    */
   middleContainer: null,
-
 
   /**
    * Container to hold front enemies
@@ -47,13 +43,11 @@ var GamePlayView = View.extend({
    */
   frontContainer: null,
 
-
   /**
    * The user-controlled crosshairs
    * @type {c.Container}
    */
   crossHairs: null,
-
 
   /**
    * An array which stores all of the currently displayed snowballs
@@ -61,21 +55,17 @@ var GamePlayView = View.extend({
    */
   snowballs: null,
 
-
   /**
    * Model reference property to check for socket connection
    * @type {Boolean}
    */
   connected: false,
 
-
   /**
    * Updated when the socket sends back a new phone orientation
    * @type {Object}
    */
   phoneOrientation: null,
-
-
 
 
   initialize: function (options) {
@@ -114,10 +104,7 @@ var GamePlayView = View.extend({
         y: child.y
       }
     })
-
   },
-
-
 
   render: function () {
     this._super()
@@ -135,8 +122,6 @@ var GamePlayView = View.extend({
 
     return this
   },
-
-
 
   addEventListeners: function () {
     window.socket.on( SocketEvent.ORIENTATION, this.onOrientationUpdate )
@@ -157,10 +142,7 @@ var GamePlayView = View.extend({
     }
 
     $('#canvas').on( 'mousemove', this.onMouseMove )
-
   },
-
-
 
   removeEventListeners: function () {
     window.socket.removeListener( SocketEvent.ORIENTATION, this.onOrientationUpdate )
@@ -181,16 +163,12 @@ var GamePlayView = View.extend({
     $('#canvas').off( 'mousemove', this.onMouseMove )
   },
 
-
-
   remove: function() {
     this.hud.hide()
     this.removeEventListeners()
     this.targetFactory.cleanup()
     this._super()
   },
-
-
 
   show: function (options) {
     var delay = 1
@@ -240,8 +218,6 @@ var GamePlayView = View.extend({
     PubSub.trigger( AppEvent.START_GAMEPLAY )
   },
 
-
-
   hide: function (options) {
     var delay = 0
       , tweenTime = .4
@@ -283,16 +259,12 @@ var GamePlayView = View.extend({
     })
   },
 
-
-
   hideCrossHairs: function () {
     T.to(this.crossHairs, .3, {
       alpha: 0,
       ease: Expo.easeOut
     })
   },
-
-
 
   hideTargets: function () {
     for (var i = 0, len = this.targetFactory.occupiedPositions.length; i < len; ++i) {
@@ -315,8 +287,6 @@ var GamePlayView = View.extend({
     }
   },
 
-
-
   showCrossHairs: function () {
     T.to(this.crossHairs, .3, {
       alpha: 1,
@@ -324,13 +294,10 @@ var GamePlayView = View.extend({
     })
   },
 
-
-
   /**
    * Remove our game over popup text and move us on
    * @param  {c.Bitmap} bitmap the bitmap text to remove
    */
-
   removeGameOver: function(bitmap) {
       var self = this
 
@@ -348,11 +315,8 @@ var GamePlayView = View.extend({
   },
 
 
-
-
-  //+ EVENT HANDLERS
-  // ------------------------------------------------------------
-
+  // Event handlers
+  // --------------
 
   onStartGamePlay: function () {
     var array = AppConfig.DEFAULT_GAMEPLAY_TIME.split(':')
@@ -373,8 +337,6 @@ var GamePlayView = View.extend({
       PubSub.on( AppEvent.TICK, self.onTick )
     }, 1000 )
   },
-
-
 
   onStopGamePlay: function () {
     this.hideCrossHairs()
@@ -435,7 +397,6 @@ var GamePlayView = View.extend({
       }
     })
 
-
     // If playing with a mobile device, send a
     // gameover notice
 
@@ -447,9 +408,7 @@ var GamePlayView = View.extend({
 
         function onResponse (response) {})
     }
-
   },
-
 
   onPrepareTarget: function (event) {
     var fireTweenTime = .4
@@ -465,8 +424,6 @@ var GamePlayView = View.extend({
       ease: Back.easeOut
     })
   },
-
-
 
   onShoot: function (event) {
     if (this.crossHairs.alpha !== 1)
@@ -488,8 +445,6 @@ var GamePlayView = View.extend({
     this.throwSnowball()
   },
 
-
-
   onTargetHit: function (params) {
     var target = params.target
 
@@ -500,8 +455,6 @@ var GamePlayView = View.extend({
 
     var self = this
   },
-
-
 
   onPlayerHit: function (params) {
     T.killTweensOf(this.redHitArea)
@@ -516,8 +469,6 @@ var GamePlayView = View.extend({
     Easel.rattleScreen($('#game-play'))
   },
 
-
-
   onMouseMove: function (event) {
     var x = (event.offsetX || event.clientX - $(event.target).offset().left)
       , y = (event.offsetY || event.clientY - $(event.target).offset().top)
@@ -528,16 +479,12 @@ var GamePlayView = View.extend({
     })
   },
 
-
-
   onOrientationUpdate: function (message) {
     this.phoneOrientation = {
       x: message.orientation.x * 2,
       y: message.orientation.y * 2
     }
   },
-
-
 
   onTick: function() {
     if (!this.connected)
@@ -560,8 +507,6 @@ var GamePlayView = View.extend({
     if (this.crossHairs.y > dimensions.height)
       this.crossHairs.y = dimensions.height
   },
-
-
 
   onSuperModeChange: function (model) {
     var supermode = model.changed.supermode
@@ -607,15 +552,10 @@ var GamePlayView = View.extend({
         })
       }
     })
-
   },
 
-
-
-  //+ PRIVATE METHODS
-  // ------------------------------------------------------------
-
-
+  // Private
+  // -------
 
   moveCroshairs: function (position) {
     T.to( this.crossHairs, .2, {
@@ -624,8 +564,6 @@ var GamePlayView = View.extend({
       ease: Expo.easeOut
     })
   },
-
-
 
   throwSnowball: function () {
     var snowballType = this.appModel.get('supermode') ? 'supermode' : 'normal'
@@ -648,8 +586,7 @@ var GamePlayView = View.extend({
 
     // Add listeners to trigger hit animations
     snowball.on( GameEvent.TARGET_HIT, this.onTargetHit )
-
-  },
+  }
 
 })
 

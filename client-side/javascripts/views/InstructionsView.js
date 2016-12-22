@@ -14,7 +14,6 @@ var AppConfig  = require('../config/AppConfig')
 
 var InstructionsView = View.extend({
 
-
   /**
    * The move pos of the playbtn on rollover
    * @type {Number}
@@ -23,8 +22,6 @@ var InstructionsView = View.extend({
     phoneY : 469,
     mouseY : 461
   },
-
-
 
   canvasEvents: {
     'mouseBtn mouseover' : 'onBtnOver',
@@ -35,8 +32,6 @@ var InstructionsView = View.extend({
     'phoneBtn rollout'   : 'onBtnOut',
     'phoneBtn click'     : 'onPhoneBtnClick',
   },
-
-
 
   initialize: function (options) {
     this._super(options)
@@ -57,16 +52,10 @@ var InstructionsView = View.extend({
       Easel.createSprite('instructionsSprite', 'instructions-btn-phone-snow', { x: 204, y: 532 }),
       Easel.createSprite('homeSprite', 'home-grass-sprouts', { x: -140, y: 502 }),
     ]
-
   },
 
-
-
-
-  //+ EVENT HANDLERS
-  // ------------------------------------------------------------
-
-
+  // Event handlers
+  // --------------
 
   onBtnOver: function (event) {
     var target = event.currentTarget
@@ -95,8 +84,6 @@ var InstructionsView = View.extend({
     })
   },
 
-
-
   onBtnOut: function (event) {
     var target = event.currentTarget
 
@@ -109,8 +96,6 @@ var InstructionsView = View.extend({
     })
   },
 
-
-
   onMouseBtnClick: function (event) {
     this.appModel.set({
       mouseMode: true,
@@ -120,12 +105,9 @@ var InstructionsView = View.extend({
     window.location.href = '#/play'
   },
 
-
-
   onPhoneBtnClick: function (event) {
     window.location.href = '#/sync'
-  },
-
+  }
 
 })
 

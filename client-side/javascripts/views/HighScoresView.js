@@ -12,20 +12,17 @@ var View      = require('../supers/View')
 
 var HighScoresView = View.extend({
 
-
   /**
    * Start pos for back btn
    * @type {Number}
    */
   BACK_POS_Y: 519,
 
-
   /**
    * Number of items displayed from the scoreboard backend
    * @type {Number}
    */
   SCOREBOARD_LENGTH: 7,
-
 
   /**
    * Scoreboard data as returned from the backend
@@ -34,13 +31,11 @@ var HighScoresView = View.extend({
   scoreboard: null,
 
 
-
   canvasEvents: {
     'backBtn mouseover' : 'onBtnOver',
     'backBtn rollout'   : 'onBtnOut',
     'backBtn click'     : 'onBackBtnClick'
   },
-
 
 
   initialize: function (options) {
@@ -57,10 +52,7 @@ var HighScoresView = View.extend({
 
     this.scoresContainer.x = 154
     this.scoresContainer.y = 176
-
   },
-
-
 
   render: function() {
     this._super()
@@ -69,8 +61,6 @@ var HighScoresView = View.extend({
 
     return this
   },
-
-
 
   returnData: function () {
     var req = $.ajax({
@@ -101,8 +91,6 @@ var HighScoresView = View.extend({
       self.scoreboard.organizations = data.Scores
     })
   },
-
-
 
   buildScoreboard: function () {
     var scores = this.scoreboard.scores
@@ -187,7 +175,6 @@ var HighScoresView = View.extend({
         this.scoresContainer.addChild( score.container, name.container, playerOrg.container )
       }
 
-
       // Set up organization high scores
       org  = organizations[i]
 
@@ -227,11 +214,8 @@ var HighScoresView = View.extend({
         // Add organization to canvas
         this.scoresContainer.addChild( orgName.container, orgScore.container )
       }
-
     }
   },
-
-
 
   onBtnOver: function (event) {
     var target = event.currentTarget
@@ -260,8 +244,6 @@ var HighScoresView = View.extend({
     })
   },
 
-
-
   onBtnOut: function (event) {
     var target = event.currentTarget
 
@@ -274,12 +256,9 @@ var HighScoresView = View.extend({
     })
   },
 
-
-
   onBackBtnClick: function (event) {
     window.location.href ='#/home'
   },
-
 })
 
 module.exports = HighScoresView

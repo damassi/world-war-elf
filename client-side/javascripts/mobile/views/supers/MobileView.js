@@ -8,15 +8,13 @@
 
 var MobileView = Backbone.View.extend({
 
-
   initialize: function (options) {
     _.bindAll(this)
 
-    for (var option in options)
+    for (var option in options) {
       this[option] = options[option]
+    }
   },
-
-
 
   show: function () {
     this.$el.removeClass('hidden')
@@ -27,8 +25,6 @@ var MobileView = Backbone.View.extend({
       ease: Expo.easeOut
     })
   },
-
-
 
   hide: function() {
     var self = this
@@ -42,17 +38,12 @@ var MobileView = Backbone.View.extend({
     })
   },
 
-
-
   remove: function() {
     this.removeEventListeners()
     this._super()
   },
 
-
-
   removeEventListeners: function() {}
-
 })
 
 module.exports = MobileView

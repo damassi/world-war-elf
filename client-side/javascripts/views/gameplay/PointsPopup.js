@@ -11,7 +11,6 @@ var View  = require('../../supers/View')
 
 var PointsPopup = View.extend({
 
-
   initialize: function (options) {
     this._super(options)
 
@@ -37,15 +36,11 @@ var PointsPopup = View.extend({
     return this
   },
 
-
-
   render: function() {
     this.stage.addChild(this.pointText.container)
 
     return this
   },
-
-
 
   show: function() {
     var self = this
@@ -75,7 +70,6 @@ var PointsPopup = View.extend({
       }
     })
   }
-
 })
 
 module.exports = PointsPopup

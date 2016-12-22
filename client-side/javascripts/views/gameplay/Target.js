@@ -18,13 +18,11 @@ var GameEvent   = require('../../events/GameEvent')
 
 var Target = View.extend({
 
-
   /**
    * The delay before the fat little elf throws his ball
    * @type {Number}
    */
   SNOWBALL_ATTACK_DELAY: 2,
-
 
   /**
    * What time should we release the medium/hard targets, (in seconds)
@@ -32,20 +30,17 @@ var Target = View.extend({
    */
   MEDIUM_TARGET_TIME: 70,
 
-
   /**
    * Time, in seconds, to release the hard targets
    * @type {Number}
    */
   HARD_TARGET_TIME: 50,
 
-
   /**
    * The distance that good targets move to avoid hits
    * @type {Number}
    */
   TARGET_AVOID_DISTANCE: 150,
-
 
   /**
    * Array of target ids pulled from the Asset manifest to be loaded
@@ -89,13 +84,11 @@ var Target = View.extend({
     ]
   },
 
-
   /**
    * Ref to the EaselJS canvas element
    * @type {c.Sprite}
    */
   instance: null,
-
 
   /**
    * Is the target a good target or a bad target?
@@ -103,13 +96,11 @@ var Target = View.extend({
    */
   type: null,
 
-
   /**
    * Has the target already been hit - prevents multiple strikes
    * @type {Boolean}
    */
   beenHit: false,
-
 
   /**
    * have our points been triggered? Should only fired once
@@ -117,21 +108,17 @@ var Target = View.extend({
    */
   pointsTriggered: false,
 
-
   /**
    * If enemy has attack powers this property is populated
    * @type {c.Sprite}
    */
   attackSnowball: null,
 
-
   /**
    * Initial starting position for paning "good" targets
    * @type {Number}
    */
   startX: null,
-
-
 
 
   initialize: function (options) {
@@ -165,8 +152,6 @@ var Target = View.extend({
     this.show()
   },
 
-
-
   remove: function() {
     T.killTweensOf( this.instance )
 
@@ -180,8 +165,6 @@ var Target = View.extend({
     this.stage.removeChild( this.container )
     this._super()
   },
-
-
 
   show: function() {
     var self = this
@@ -210,8 +193,6 @@ var Target = View.extend({
     })
   },
 
-
-
   hide: function() {
     var self = this
 
@@ -226,8 +207,6 @@ var Target = View.extend({
 
     })
   },
-
-
 
   attackPlayer: function () {
     if (this.beenHit)
@@ -267,8 +246,6 @@ var Target = View.extend({
       }
     })
   },
-
-
 
   hit: function (options) {
     options = options || {}
@@ -315,7 +292,6 @@ var Target = View.extend({
       }
     }
 
-
     // Good target hit.  Enable supermode or dispatch
     // event to TargetFactory to clear all targets and refresh
 
@@ -340,17 +316,13 @@ var Target = View.extend({
       }
     }
 
-
-
     // Kill Sequence
     // ------------------------------------------
-
 
     // Animate target off the screen and dispatch
     // to TargetFactory
 
     Easel.animateOnce( this.instance, 'hit' )
-
 
     if (this.type === 'bad') {
 
@@ -384,7 +356,6 @@ var Target = View.extend({
       this.pointsTriggered = true
     }
 
-
     // Hit target and animate him out.  Once animation completes
     // trigger a PubSub back to AppController and TargetFactory
     // with the target which was hit.
@@ -417,10 +388,7 @@ var Target = View.extend({
     if (!this.beenHit) {
       this.beenHit = true
     }
-
   },
-
-
 
   scurryAway: function () {
     var moveTo = Easel.randRange( -1000, 1000 )
@@ -439,8 +407,6 @@ var Target = View.extend({
       }
     })
   },
-
-
 
   panTarget: function () {
     var self = this
@@ -463,8 +429,6 @@ var Target = View.extend({
       }
     })
   },
-
-
 
   updatePoints: function (points) {
     this.appModel.set({

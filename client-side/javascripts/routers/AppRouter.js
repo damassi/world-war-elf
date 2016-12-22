@@ -5,9 +5,7 @@
  * @since  11.18.13
  */
 
-
 var AppRouter = Backbone.Router.extend({
-
 
   /**
    * Ref to primary Application controller
@@ -15,20 +13,16 @@ var AppRouter = Backbone.Router.extend({
    */
   appController: null,
 
-
   /**
    * @type {AppModel}
    */
   appModel: null,
-
 
   /**
    * Array of primary views
    * @type {Array}
    */
   views: null,
-
-
 
 
   routes: {
@@ -42,8 +36,6 @@ var AppRouter = Backbone.Router.extend({
     'high-scores'   : 'highScoresRoute'
   },
 
-
-
   initialize: function (options) {
     _.bindAll( this )
 
@@ -51,8 +43,6 @@ var AppRouter = Backbone.Router.extend({
     this.appModel      = this.appController.appModel
     this.views         = this.appController.views
   },
-
-
 
   homeRoute: function () {
     var view = this.appController.homeView
@@ -63,8 +53,6 @@ var AppRouter = Backbone.Router.extend({
 
   },
 
-
-
   instructionsRoute: function () {
     var view = this.appController.instructionsView
 
@@ -72,8 +60,6 @@ var AppRouter = Backbone.Router.extend({
       view: view
     })
   },
-
-
 
   syncRoute: function () {
     var view = this.appController.syncView
@@ -83,8 +69,6 @@ var AppRouter = Backbone.Router.extend({
     })
   },
 
-
-
   calibrateRoute: function () {
     var view = this.appController.calibrateView
 
@@ -92,8 +76,6 @@ var AppRouter = Backbone.Router.extend({
       view: view
     })
   },
-
-
 
   gamePlayRoute: function () {
     var view = this.appController.gamePlayView
@@ -103,8 +85,6 @@ var AppRouter = Backbone.Router.extend({
     })
   },
 
-
-
   submitScoreRoute: function () {
     var view = this.appController.submitScoreView
 
@@ -113,8 +93,6 @@ var AppRouter = Backbone.Router.extend({
     })
   },
 
-
-
   highScoresRoute: function () {
     var view = this.appController.highScoresView
 
@@ -122,8 +100,6 @@ var AppRouter = Backbone.Router.extend({
       view: view
     })
   }
-
-
 })
 
 module.exports = AppRouter
