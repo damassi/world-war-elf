@@ -22,7 +22,7 @@
  *
  */
 
-module.exports.cors = {
+module.exports = {
 
 	// Allow CORS on all routes by default?  If not, you must enable CORS on a
 	// per-route basis by either adding a "cors" configuration object
